@@ -1,0 +1,58 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<cpfw>
+    <invokes>
+        <invoker name="volume"></invoker>
+        <invoker name="fade"></invoker>
+        <invoker name="equalizer"></invoker>
+        <invoker name="duck"></invoker>
+        <invoker name="loudness"></invoker>
+    </invokes>
+
+    <invokeChains>
+        <parent name="volume">
+            <child name="loudness" condition="check volume before loudness"></child>
+            <child name="duck" condition="check volume before duck"></child>
+        </parent>
+    </invokeChains>
+
+    <contions>
+        <condition name="check volume before loudness" when="default@volume:equal:20"</condition>
+        <condition name="check volume before duck" when="default@volume:in_range:1,20"</condition>
+    </contions>
+
+    <profiles>
+        <profile name="volume">
+            <elememt min="1" max="20" current="5" type="1">default</element>
+        </profile>
+
+        <profile name="fade">
+            <elememt min="1" max="20" current="5" type="1">fade</element>
+        </profile>
+
+        <profile name="equalizer">
+            <elememt min="1" max="20" current="5" type="1">gain_100hz</element>
+            <elememt min="5" max="20" current="10" type="1">gain_200hz</element>
+            <elememt min="20" max="30" current="25" type="1">gain_400hz</element>
+            <elememt min="50" max="200" current="100" type="1">gain_800hz</element>
+        </profile>
+
+        <profile name="duck">
+            <elememt min="10" max="20" current="5" type="1">default</element>
+        </profile>
+
+        <profile name="loudness">
+            <elememt min="10" max="20" current="5" type="1">default</element>
+        </profile>
+    <profiles>
+
+    <converts>
+        <context name="volume">
+            <element origin="5" target="111111"></element>
+        </context>
+        <context name="fade">
+            <element origin="1" target="22222"></element>
+            <element origin="2" target="3333"></element>
+        </context>
+    </converts>
+
+</cpfw>

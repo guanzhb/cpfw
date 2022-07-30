@@ -21,7 +21,7 @@
 #include <string>
 #include <vector>
 
-#include "cpfw/base/include/DataStore.hpp"
+#include "cpfw/base/include/DataStore.h"
 
 namespace cpfw {
 
@@ -43,49 +43,6 @@ struct Element {
 struct Profile {
     std::map<std::string, Element> elements;
     std::map<std::string, Profile> profile;
-};
-
-using TINTERFACE = std::function<int32_t(void)>;
-
-class WidgetBase {
- public:
-     WidgetBase() : mName("") {
-     }
-
-     explicit WidgetBase(const std::string &name)
-        : mName(name) {
-     }
-
-     WidgetBase(std::shared_ptr<DataStore> &store, const std::string &name)
-        : mName(name), mStore(store) {
-     }
-
-     virtual std::string getName() const {
-         return mName;
-     }
-
-     virtual std::shared_ptr<DataStore> getDataStore() const {
-         return mStore;
-     }
-
-     virtual ~WidgetBase() {
-     }
-
-     virtual int32_t check() {
-         return 0;
-     }
-
-     virtual int32_t action() {
-         return 0;
-     }
-
-     virtual int32_t swipe() {
-         return 0;
-     }
-
- private:
-    const std::string mName;
-    std::shared_ptr<DataStore> mStore;
 };
 
 }  // namespace cpfw

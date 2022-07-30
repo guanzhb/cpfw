@@ -24,7 +24,8 @@
 
 namespace cpfw {
 
-static int32_t handle(const std::string &funcName, const std::vector<int32_t> &values) {
+static int32_t handle(
+        DataStore *store, const std::string &funcName, const std::vector<int32_t> &values) {
     std::cout << funcName;
     std::for_each(values.begin(), values.end(), [](auto d) -> void {
         std::cout << " " << d;
@@ -33,128 +34,83 @@ static int32_t handle(const std::string &funcName, const std::vector<int32_t> &v
     return 0;
 }
 
-class VolumeWidget : public WidgetBase {
+class StubWidget : public Widget {
  public:
-    VolumeWidget(std::shared_ptr<DataStore> store, const std::string &name)
-        : WidgetBase(store, name) {
-    }
-
-    ~VolumeWidget() {}
-
-    int32_t check() override {
-        std::cout << getName() << " " << __func__ << std::endl;
-        return 0;
+    StubWidget(std::string name, std::shared_ptr<DataStore> store)
+        : Widget(name, store) {
     }
 
     int32_t action() override {
         uint32_t type = static_cast<uint32_t>(ElementType::PUBLIC);
         auto values = parseProfile(
-            getDataStore()->getProfile(getName()), type, "volume", getDataStore());
-        return handle(getName() + " action ", values);
-    }
-
-    int32_t swipe() override {
-        std::cout << getName() << " " << __func__ << std::endl;
-        return 0;
-    }
-};
-
-class LoudnessWidget : public WidgetBase {
- public:
-    LoudnessWidget(std::shared_ptr<DataStore> store, std::string name)
-        : WidgetBase(store, name) {
-    }
-
-    ~LoudnessWidget() {}
-
-    int32_t check() override {
-        std::cout << getName() << " " << __func__ << std::endl;
-        return 0;
-    }
-
-    int32_t action() override {
-        uint32_t type = static_cast<uint32_t>(ElementType::PUBLIC)
-                            | static_cast<uint32_t>(ElementType::NEED_CONVERT);
-        auto values = parseProfile(
-            getDataStore()->getProfile(getName()), type, "loudnessWidget", getDataStore());
-        return handle(getName() + " action ", values);
-    }
-
-    int32_t swipe() override {
-        std::cout << getName() << " " << __func__ << std::endl;
-        return 0;
+            getDataStore()->getProfile(getName()), type, getName(), getDataStore());
+        return handle(getDataStore().get(), getName() + " override action ", values);
     }
 };
 
 ExampleChain::ExampleChain() {
     mStore = std::make_shared<DataStore>();
 
-    mStore->addInterface("handleVolume", std::bind(&ExampleChain::handleVolume, this));
-    mStore->addInterface("handleFade", std::bind(&ExampleChain::handleFade, this));
-    mStore->addInterface("handleEq", std::bind(&ExampleChain::handleEq, this));
-    mStore->addInterface("handleDuck", std::bind(&ExampleChain::handleDuck, this));
+    auto sv = std::make_shared<Widget>("volume", mStore);
+    mStore->addWidget("volume", sv);
+    auto sl = std::make_shared<Widget>("loudness", mStore);
+    mStore->addWidget("loudness", sl);
+    auto sf = std::make_shared<Widget>("fade", mStore);
+    mStore->addWidget("fade", sf);
+    auto se = std::make_shared<Widget>("equalizer", mStore);
+    mStore->addWidget("equalizer", se);
+    auto sd = std::make_shared<Widget>("duck", mStore);
+    mStore->addWidget("duck", sd);
 
-    mStore->addWidget("volumeWidget", std::make_shared<VolumeWidget>(mStore, "volumeWidget"));
-    mStore->addWidget("loudnessWidget", std::make_shared<LoudnessWidget>(mStore, "loudnessWidget"));
+    auto ss = std::make_shared<StubWidget>("stub", mStore);
+    mStore->addWidget("stub", ss);
 
-    mStore->initializeInvokeChain("handleVolume", {"handleEq", "handleDuck"});
-    mStore->initializeInvokeChain("handleEq", {"handleFade"});
-    mStore->initializeInvokeChain("volumeWidget", {"handleVolume"});
-    mStore->initializeInvokeChain("loudnessWidget", {"volumeWidget"});
+    mStore->addInvokeChain("volume", {"equalizer", "duck"});
+    mStore->addInvokeChain("equalizer", {"fade", "stub"});
+    mStore->addInvokeChain("loudness", {"volume"});
 
-    mStore->initializeDataConvertTable("loudnessWidget", 22, 99999);
+    mStore->addDataConvert("loudness", 22, 99999);
 
     Element ele;
     ele.current = 3;
     ele.type = static_cast<uint32_t>(ElementType::PUBLIC);
     Profile vol;
     vol.elements.emplace("default", ele);
-    mStore->initializeProfile("handleVolume", vol);
-
-    Profile eq;
-    ele.current = 4;
-    eq.elements.emplace("default", ele);
-    mStore->initializeProfile("handleFade", eq);
+    mStore->addProfile("volume", vol);
 
     Profile fade;
+    ele.current = 4;
+    fade.elements.emplace("default", ele);
+    mStore->addProfile("fade", fade);
+
+    Profile equalizer;
     ele.current = 5;
-    fade.elements.emplace("band", ele);
-    ele.current = 6;
-    fade.elements.emplace("db", ele);
-    mStore->initializeProfile("handleEq", fade);
+    equalizer.elements.emplace("gain_100hz", ele);
+    ele.current = 30;
+    equalizer.elements.emplace("gain_200hz", ele);
+    mStore->addProfile("equalizer", equalizer);
 
     Profile duck;
     ele.current = 323;
     duck.elements.emplace("default", ele);
-    mStore->initializeProfile("handleDuck", duck);
+    mStore->addProfile("duck", duck);
 
-    ele.current = 2121;
-    Profile vw;
-    vw.elements.emplace("default", ele);
-    ele.current = 32;
-    vw.elements.emplace("a", ele);
-    ele.current = 21;
-    vw.elements.emplace("d", ele);
-    ele.current = 4444;
-    vw.elements.emplace("de", ele);
-    ele.current = 555;
-    vw.elements.emplace("dult", ele);
-    mStore->initializeProfile("volumeWidget", vw);
-
-    ele.current = 2121;
     ele.type = static_cast<uint32_t>(ElementType::PUBLIC)
         | static_cast<uint32_t>(ElementType::NEED_CONVERT);
+
     Profile lw;
+    ele.current = 22;
     lw.elements.emplace("default", ele);
-    ele.current = 22;
-    lw.elements.emplace("a", ele);
-    ele.current = 33;
-    lw.elements.emplace("d", ele);
-    ele.current = 22;
-    lw.elements.emplace("de", ele);
+    mStore->addProfile("loudness", lw);
+
+    Profile stub;
     ele.current = 555;
-    lw.elements.emplace("dult", ele);
-    mStore->initializeProfile("loudnessWidget", lw);
+    stub.elements.emplace("default", ele);
+    mStore->addProfile("stub", stub);
+
+    Condition condition1 = Condition("duck", "in_range", "volume", "default", 0, 40);
+    Condition condition2 = Condition("duck", "out_range", "equalizer", "gain_100hz", 0, 40);
+    mStore->addCondition("duck", {{"and", condition1}, {"or", condition2}});
 
     mResponsibilityChain = std::make_shared<ResponsibilityChain>(mStore);
 }
@@ -162,68 +118,29 @@ ExampleChain::ExampleChain() {
 ExampleChain::~ExampleChain() {
 }
 
-int32_t ExampleChain::setVolume(int32_t data) {
-    auto volume = mStore->getProfile("handleVolume");
-    volume->elements["default"].current  = data;
-
-    return mResponsibilityChain->invokeChain("handleVolume");
+int32_t ExampleChain::setVolume(int32_t volume) {
+    mStore->setProfile("volume", volume);
+    return mResponsibilityChain->invokeChain("volume");
 }
 
-int32_t ExampleChain::setFade(int32_t data) {
-    auto effect = mStore->getProfile("handleFade");
-    effect->elements["default"].current = data;
-
-    return mResponsibilityChain->invokeChain("handleFade");
+int32_t ExampleChain::setFade(int32_t fade) {
+    mStore->setProfile("fade", fade);
+    return mResponsibilityChain->invokeChain("fade");
 }
 
-int32_t ExampleChain::setEq(int32_t band, int32_t db) {
-    auto eq = mStore->getProfile("handleEq");
-    eq->elements["band"].current  = band;
-    eq->elements["db"].current  = db;
-
-    return mResponsibilityChain->invokeChain("handleEq");
+int32_t ExampleChain::setEq(std::string band, int32_t db) {
+    mStore->setProfile("equalizer", band, db);
+    return mResponsibilityChain->invokeChain("equalizer");
 }
 
-int32_t ExampleChain::setVolumeWidget(int32_t data) {
-    auto volume = mStore->getProfile("volumeWidget");
-    volume->elements["default"].current  = data;
-
-    return mResponsibilityChain->invokeChain("volumeWidget");
+int32_t ExampleChain::setLoudness(int32_t loudness) {
+    mStore->setProfile("loudness", loudness);
+    return mResponsibilityChain->invokeChain("loudness");
 }
 
-int32_t ExampleChain::setLoudnessWidget(int32_t data) {
-    auto volume = mStore->getProfile("loudnessWidget");
-    volume->elements["default"].current  = data;
-
-    return mResponsibilityChain->invokeChain("loudnessWidget");
-}
-
-int32_t ExampleChain::handleVolume() {
-    uint32_t type = static_cast<uint32_t>(ElementType::PUBLIC);
-    auto values = parseProfile(
-        mStore->getProfile("handleVolume"), type, "volume", mStore);
-    return handle(__func__, values);
-}
-
-int32_t ExampleChain::handleFade() {
-    uint32_t type = static_cast<uint32_t>(ElementType::PUBLIC);
-    auto values = parseProfile(
-        mStore->getProfile("handleFade"), type, "handleFade", mStore);
-    return handle(__func__, values);
-}
-
-int32_t ExampleChain::handleEq() {
-    uint32_t type = static_cast<uint32_t>(ElementType::PUBLIC);
-    auto values = parseProfile(
-        mStore->getProfile("handleEq"), type, "handleEq", mStore);
-    return handle(__func__, values);
-}
-
-int32_t ExampleChain::handleDuck() {
-    uint32_t type = static_cast<uint32_t>(ElementType::PUBLIC);
-    auto values = parseProfile(
-        mStore->getProfile("handleDuck"), type, "handleDuck", mStore);
-    return handle(__func__, values);
+int32_t ExampleChain::setStub(int32_t stub) {
+    mStore->setProfile("stub", stub);
+    return mResponsibilityChain->invokeChain("stub");
 }
 
 }  // namespace cpfw

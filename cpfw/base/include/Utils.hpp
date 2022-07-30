@@ -21,10 +21,9 @@
 #include <algorithm>
 
 #include "cpfw/base/include/Base.h"
-#include "cpfw/base/include/DataStore.hpp"
+#include "cpfw/base/include/DataStore.h"
 
 namespace cpfw {
-
 
 /**
  * @brief parse data from prifile.

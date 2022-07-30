@@ -22,19 +22,37 @@ int main() {
     std::shared_ptr<cpfw::ExampleChain> example = std::make_shared<cpfw::ExampleChain>();
     std::cout << "start " << std::endl;
 
+    std::cout << std::endl;
     example->setVolume(30);
+    std::cout << "volume success" << std::endl;
 
     std::cout << std::endl;
     example->setFade(50);
+    std::cout << "fade success" << std::endl;
 
     std::cout << std::endl;
-    example->setEq(90, 100);
+    example->setEq("gain_100hz", 100);
+    std::cout << "eq success" << std::endl;
 
     std::cout << std::endl;
-    example->setVolumeWidget(90);
+    example->setLoudness(120);
+    std::cout << "loudness success" << std::endl;
 
     std::cout << std::endl;
-    example->setLoudnessWidget(120);
+    example->setVolume(300);
+    std::cout << "volume success" << std::endl;
+
+    std::cout << std::endl;
+    example->setEq("gain_100hz", 100);
+    std::cout << "eq success" << std::endl;
+
+    std::cout << std::endl;
+    example->setLoudness(10);
+    std::cout << "loudness success" << std::endl;
+
+    std::cout << std::endl;
+    example->setStub(10);
+    std::cout << "stub success" << std::endl;
 
     return 0;
 }

@@ -14,37 +14,41 @@
  * limitations under the License.
  */
 
-#ifndef EXAMPLES_INCLUDE_EXAMPLECHAIN_H_
-#define EXAMPLES_INCLUDE_EXAMPLECHAIN_H_
+#ifndef CPFW_BASE_INCLUDE_RESPONSIBILITYCHAIN_H_
+#define CPFW_BASE_INCLUDE_RESPONSIBILITYCHAIN_H_
 
+#include <string>
 #include <functional>
 #include <memory>
+#include <algorithm>
 
 #include "cpfw/base/include/DataStore.h"
-#include "cpfw/base/include/ResponsibilityChain.h"
 
 namespace cpfw {
-class ExampleChain {
+
+class ResponsibilityChain {
  public:
-    ExampleChain();
-    ~ExampleChain();
+    ResponsibilityChain();
+    explicit ResponsibilityChain(std::shared_ptr<DataStore> store);
 
-    int32_t setVolume(int32_t volume);
+    ~ResponsibilityChain();
 
-    int32_t setFade(int32_t data);
+    /**
+     * @brief invoke widget chain with name
+     *
+     * @param widgetName
+     * @return int32_t 0 if success, else errno
+     */
+    int32_t invokeChain(std::string widgetName) const;
 
-    int32_t setEq(std::string band, int32_t db);
-
-    int32_t setLoudness(int32_t loudness);
-
-    int32_t setStub(int32_t stub);
+ private:
+    int32_t invokeWidget(std::string widgetName) const;
 
  private:
     std::shared_ptr<DataStore> mStore;
-    std::shared_ptr<ResponsibilityChain> mResponsibilityChain;
 };
 
 }  // namespace cpfw
 
-#endif  // EXAMPLES_INCLUDE_EXAMPLECHAIN_H_
+#endif  // CPFW_BASE_INCLUDE_RESPONSIBILITYCHAIN_H_
 

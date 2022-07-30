@@ -102,7 +102,9 @@ CONFIG_CLEAN_FILES =
 CONFIG_CLEAN_VPATH_FILES =
 am__installdirs = "$(DESTDIR)$(bindir)"
 PROGRAMS = $(bin_PROGRAMS)
-am_exampleChain_OBJECTS = main.$(OBJEXT) ExampleChain.$(OBJEXT)
+am_exampleChain_OBJECTS = main.$(OBJEXT) ExampleChain.$(OBJEXT) \
+	Condition.$(OBJEXT) Widget.$(OBJEXT) \
+	ResponsibilityChain.$(OBJEXT) DataStore.$(OBJEXT)
 exampleChain_OBJECTS = $(am_exampleChain_OBJECTS)
 exampleChain_LDADD = $(LDADD)
 AM_V_P = $(am__v_P_$(V))
@@ -120,7 +122,10 @@ am__v_at_1 =
 DEFAULT_INCLUDES = -I.
 depcomp = $(SHELL) $(top_srcdir)/depcomp
 am__maybe_remake_depfiles = depfiles
-am__depfiles_remade = ./$(DEPDIR)/ExampleChain.Po ./$(DEPDIR)/main.Po
+am__depfiles_remade = ./$(DEPDIR)/Condition.Po \
+	./$(DEPDIR)/DataStore.Po ./$(DEPDIR)/ExampleChain.Po \
+	./$(DEPDIR)/ResponsibilityChain.Po ./$(DEPDIR)/Widget.Po \
+	./$(DEPDIR)/main.Po
 am__mv = mv -f
 AM_V_lt = $(am__v_lt_$(V))
 am__v_lt_ = $(am__v_lt_$(AM_DEFAULT_VERBOSITY))
@@ -201,7 +206,7 @@ CPP = gcc -E
 CPPFLAGS = 
 CXX = g++
 CXXDEPMODE = depmode=gcc3
-CXXFLAGS = -g -O2 --std=c++1z
+CXXFLAGS = -g -O2
 CYGPATH_W = echo
 DEFS = -DHAVE_CONFIG_H
 DEPDIR = .deps
@@ -280,7 +285,7 @@ top_build_prefix =
 top_builddir = .
 top_srcdir = .
 AUTOMAKE_OPTIONS = foreign
-exampleChain_SOURCES = examples/src/main.cpp examples/src/ExampleChain.cpp
+exampleChain_SOURCES = examples/src/main.cpp examples/src/ExampleChain.cpp cpfw/base/src/Condition.cpp cpfw/base/src/Widget.cpp cpfw/base/src/ResponsibilityChain.cpp cpfw/base/src/DataStore.cpp
 all: config.h
 	$(MAKE) $(AM_MAKEFLAGS) all-am
 
@@ -387,7 +392,11 @@ mostlyclean-compile:
 distclean-compile:
 	-rm -f *.tab.c
 
+include ./$(DEPDIR)/Condition.Po # am--include-marker
+include ./$(DEPDIR)/DataStore.Po # am--include-marker
 include ./$(DEPDIR)/ExampleChain.Po # am--include-marker
+include ./$(DEPDIR)/ResponsibilityChain.Po # am--include-marker
+include ./$(DEPDIR)/Widget.Po # am--include-marker
 include ./$(DEPDIR)/main.Po # am--include-marker
 
 $(am__depfiles_remade):
@@ -437,6 +446,62 @@ ExampleChain.obj: examples/src/ExampleChain.cpp
 #	$(AM_V_CXX)source='examples/src/ExampleChain.cpp' object='ExampleChain.obj' libtool=no \
 #	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
 #	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o ExampleChain.obj `if test -f 'examples/src/ExampleChain.cpp'; then $(CYGPATH_W) 'examples/src/ExampleChain.cpp'; else $(CYGPATH_W) '$(srcdir)/examples/src/ExampleChain.cpp'; fi`
+
+Condition.o: cpfw/base/src/Condition.cpp
+	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT Condition.o -MD -MP -MF $(DEPDIR)/Condition.Tpo -c -o Condition.o `test -f 'cpfw/base/src/Condition.cpp' || echo '$(srcdir)/'`cpfw/base/src/Condition.cpp
+	$(AM_V_at)$(am__mv) $(DEPDIR)/Condition.Tpo $(DEPDIR)/Condition.Po
+#	$(AM_V_CXX)source='cpfw/base/src/Condition.cpp' object='Condition.o' libtool=no \
+#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
+#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o Condition.o `test -f 'cpfw/base/src/Condition.cpp' || echo '$(srcdir)/'`cpfw/base/src/Condition.cpp
+
+Condition.obj: cpfw/base/src/Condition.cpp
+	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT Condition.obj -MD -MP -MF $(DEPDIR)/Condition.Tpo -c -o Condition.obj `if test -f 'cpfw/base/src/Condition.cpp'; then $(CYGPATH_W) 'cpfw/base/src/Condition.cpp'; else $(CYGPATH_W) '$(srcdir)/cpfw/base/src/Condition.cpp'; fi`
+	$(AM_V_at)$(am__mv) $(DEPDIR)/Condition.Tpo $(DEPDIR)/Condition.Po
+#	$(AM_V_CXX)source='cpfw/base/src/Condition.cpp' object='Condition.obj' libtool=no \
+#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
+#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o Condition.obj `if test -f 'cpfw/base/src/Condition.cpp'; then $(CYGPATH_W) 'cpfw/base/src/Condition.cpp'; else $(CYGPATH_W) '$(srcdir)/cpfw/base/src/Condition.cpp'; fi`
+
+Widget.o: cpfw/base/src/Widget.cpp
+	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT Widget.o -MD -MP -MF $(DEPDIR)/Widget.Tpo -c -o Widget.o `test -f 'cpfw/base/src/Widget.cpp' || echo '$(srcdir)/'`cpfw/base/src/Widget.cpp
+	$(AM_V_at)$(am__mv) $(DEPDIR)/Widget.Tpo $(DEPDIR)/Widget.Po
+#	$(AM_V_CXX)source='cpfw/base/src/Widget.cpp' object='Widget.o' libtool=no \
+#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
+#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o Widget.o `test -f 'cpfw/base/src/Widget.cpp' || echo '$(srcdir)/'`cpfw/base/src/Widget.cpp
+
+Widget.obj: cpfw/base/src/Widget.cpp
+	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT Widget.obj -MD -MP -MF $(DEPDIR)/Widget.Tpo -c -o Widget.obj `if test -f 'cpfw/base/src/Widget.cpp'; then $(CYGPATH_W) 'cpfw/base/src/Widget.cpp'; else $(CYGPATH_W) '$(srcdir)/cpfw/base/src/Widget.cpp'; fi`
+	$(AM_V_at)$(am__mv) $(DEPDIR)/Widget.Tpo $(DEPDIR)/Widget.Po
+#	$(AM_V_CXX)source='cpfw/base/src/Widget.cpp' object='Widget.obj' libtool=no \
+#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
+#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o Widget.obj `if test -f 'cpfw/base/src/Widget.cpp'; then $(CYGPATH_W) 'cpfw/base/src/Widget.cpp'; else $(CYGPATH_W) '$(srcdir)/cpfw/base/src/Widget.cpp'; fi`
+
+ResponsibilityChain.o: cpfw/base/src/ResponsibilityChain.cpp
+	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT ResponsibilityChain.o -MD -MP -MF $(DEPDIR)/ResponsibilityChain.Tpo -c -o ResponsibilityChain.o `test -f 'cpfw/base/src/ResponsibilityChain.cpp' || echo '$(srcdir)/'`cpfw/base/src/ResponsibilityChain.cpp
+	$(AM_V_at)$(am__mv) $(DEPDIR)/ResponsibilityChain.Tpo $(DEPDIR)/ResponsibilityChain.Po
+#	$(AM_V_CXX)source='cpfw/base/src/ResponsibilityChain.cpp' object='ResponsibilityChain.o' libtool=no \
+#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
+#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o ResponsibilityChain.o `test -f 'cpfw/base/src/ResponsibilityChain.cpp' || echo '$(srcdir)/'`cpfw/base/src/ResponsibilityChain.cpp
+
+ResponsibilityChain.obj: cpfw/base/src/ResponsibilityChain.cpp
+	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT ResponsibilityChain.obj -MD -MP -MF $(DEPDIR)/ResponsibilityChain.Tpo -c -o ResponsibilityChain.obj `if test -f 'cpfw/base/src/ResponsibilityChain.cpp'; then $(CYGPATH_W) 'cpfw/base/src/ResponsibilityChain.cpp'; else $(CYGPATH_W) '$(srcdir)/cpfw/base/src/ResponsibilityChain.cpp'; fi`
+	$(AM_V_at)$(am__mv) $(DEPDIR)/ResponsibilityChain.Tpo $(DEPDIR)/ResponsibilityChain.Po
+#	$(AM_V_CXX)source='cpfw/base/src/ResponsibilityChain.cpp' object='ResponsibilityChain.obj' libtool=no \
+#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
+#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o ResponsibilityChain.obj `if test -f 'cpfw/base/src/ResponsibilityChain.cpp'; then $(CYGPATH_W) 'cpfw/base/src/ResponsibilityChain.cpp'; else $(CYGPATH_W) '$(srcdir)/cpfw/base/src/ResponsibilityChain.cpp'; fi`
+
+DataStore.o: cpfw/base/src/DataStore.cpp
+	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT DataStore.o -MD -MP -MF $(DEPDIR)/DataStore.Tpo -c -o DataStore.o `test -f 'cpfw/base/src/DataStore.cpp' || echo '$(srcdir)/'`cpfw/base/src/DataStore.cpp
+	$(AM_V_at)$(am__mv) $(DEPDIR)/DataStore.Tpo $(DEPDIR)/DataStore.Po
+#	$(AM_V_CXX)source='cpfw/base/src/DataStore.cpp' object='DataStore.o' libtool=no \
+#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
+#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o DataStore.o `test -f 'cpfw/base/src/DataStore.cpp' || echo '$(srcdir)/'`cpfw/base/src/DataStore.cpp
+
+DataStore.obj: cpfw/base/src/DataStore.cpp
+	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT DataStore.obj -MD -MP -MF $(DEPDIR)/DataStore.Tpo -c -o DataStore.obj `if test -f 'cpfw/base/src/DataStore.cpp'; then $(CYGPATH_W) 'cpfw/base/src/DataStore.cpp'; else $(CYGPATH_W) '$(srcdir)/cpfw/base/src/DataStore.cpp'; fi`
+	$(AM_V_at)$(am__mv) $(DEPDIR)/DataStore.Tpo $(DEPDIR)/DataStore.Po
+#	$(AM_V_CXX)source='cpfw/base/src/DataStore.cpp' object='DataStore.obj' libtool=no \
+#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
+#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o DataStore.obj `if test -f 'cpfw/base/src/DataStore.cpp'; then $(CYGPATH_W) 'cpfw/base/src/DataStore.cpp'; else $(CYGPATH_W) '$(srcdir)/cpfw/base/src/DataStore.cpp'; fi`
 
 ID: $(am__tagged_files)
 	$(am__define_uniq_tagged_files); mkid -fID $$unique
@@ -706,7 +771,11 @@ clean-am: clean-binPROGRAMS clean-generic mostlyclean-am
 
 distclean: distclean-am
 	-rm -f $(am__CONFIG_DISTCLEAN_FILES)
-		-rm -f ./$(DEPDIR)/ExampleChain.Po
+		-rm -f ./$(DEPDIR)/Condition.Po
+	-rm -f ./$(DEPDIR)/DataStore.Po
+	-rm -f ./$(DEPDIR)/ExampleChain.Po
+	-rm -f ./$(DEPDIR)/ResponsibilityChain.Po
+	-rm -f ./$(DEPDIR)/Widget.Po
 	-rm -f ./$(DEPDIR)/main.Po
 	-rm -f Makefile
 distclean-am: clean-am distclean-compile distclean-generic \
@@ -755,7 +824,11 @@ installcheck-am:
 maintainer-clean: maintainer-clean-am
 	-rm -f $(am__CONFIG_DISTCLEAN_FILES)
 	-rm -rf $(top_srcdir)/autom4te.cache
-		-rm -f ./$(DEPDIR)/ExampleChain.Po
+		-rm -f ./$(DEPDIR)/Condition.Po
+	-rm -f ./$(DEPDIR)/DataStore.Po
+	-rm -f ./$(DEPDIR)/ExampleChain.Po
+	-rm -f ./$(DEPDIR)/ResponsibilityChain.Po
+	-rm -f ./$(DEPDIR)/Widget.Po
 	-rm -f ./$(DEPDIR)/main.Po
 	-rm -f Makefile
 maintainer-clean-am: distclean-am maintainer-clean-generic

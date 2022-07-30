@@ -1,0 +1,819 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_OUTPUT_MODE	u-ctags	/u-ctags or e-ctags/
+!_TAG_PROGRAM_AUTHOR	Universal Ctags Team	//
+!_TAG_PROGRAM_NAME	Universal Ctags	/Derived from Exuberant Ctags/
+!_TAG_PROGRAM_URL	https://ctags.io/	/official site/
+!_TAG_PROGRAM_VERSION	0.0.0	//
+$(ACLOCAL_M4)	Makefile	/^$(ACLOCAL_M4):  $(am__aclocal_m4_deps)$/;"	t
+$(ACLOCAL_M4)	Makefile.in	/^$(ACLOCAL_M4):  $(am__aclocal_m4_deps)$/;"	t
+$(am__aclocal_m4_deps)	Makefile	/^$(am__aclocal_m4_deps):$/;"	t
+$(am__aclocal_m4_deps)	Makefile.in	/^$(am__aclocal_m4_deps):$/;"	t
+$(am__depfiles_remade)	Makefile	/^$(am__depfiles_remade):$/;"	t
+$(am__depfiles_remade)	Makefile.in	/^$(am__depfiles_remade):$/;"	t
+$(srcdir)/Makefile.in	Makefile	/^$(srcdir)\/Makefile.in:  $(srcdir)\/Makefile.am  $(am__configure_deps)$/;"	t
+$(srcdir)/Makefile.in	Makefile.in	/^$(srcdir)\/Makefile.in:  $(srcdir)\/Makefile.am  $(am__configure_deps)$/;"	t
+$(srcdir)/config.h.in	Makefile	/^$(srcdir)\/config.h.in:  $(am__configure_deps) $/;"	t
+$(srcdir)/config.h.in	Makefile.in	/^$(srcdir)\/config.h.in:  $(am__configure_deps) $/;"	t
+$(top_builddir)/config.status	Makefile	/^$(top_builddir)\/config.status: $(top_srcdir)\/configure $(CONFIG_STATUS_DEPENDENCIES)$/;"	t
+$(top_builddir)/config.status	Makefile.in	/^$(top_builddir)\/config.status: $(top_srcdir)\/configure $(CONFIG_STATUS_DEPENDENCIES)$/;"	t
+$(top_srcdir)/configure	Makefile	/^$(top_srcdir)\/configure:  $(am__configure_deps)$/;"	t
+$(top_srcdir)/configure	Makefile.in	/^$(top_srcdir)\/configure:  $(am__configure_deps)$/;"	t
+-g	config.status	/^  alias -g '${1+"$@"}'='"$@"'$/;"	a
+-g	configure	/^  alias -g '${1+"$@"}'='"$@"'$/;"	a
+-g	configure	/^  alias -g '\\${1+\\"\\$@\\"}'='\\"\\$@\\"'$/;"	a
+.cpp.o	Makefile	/^.cpp.o:$/;"	t
+.cpp.o	Makefile.in	/^.cpp.o:$/;"	t
+.cpp.obj	Makefile	/^.cpp.obj:$/;"	t
+.cpp.obj	Makefile.in	/^.cpp.obj:$/;"	t
+ACLOCAL	Makefile	/^ACLOCAL = ${SHELL} \/home\/guanzhb\/workspace\/codes\/cpfw\/missing aclocal-1.16$/;"	m
+ACLOCAL	Makefile.in	/^ACLOCAL = @ACLOCAL@$/;"	m
+ACLOCAL_M4	Makefile	/^ACLOCAL_M4 = $(top_srcdir)\/aclocal.m4$/;"	m
+ACLOCAL_M4	Makefile.in	/^ACLOCAL_M4 = $(top_srcdir)\/aclocal.m4$/;"	m
+AC_PROG_CC	aclocal.m4	/^m4_define([AC_PROG_CC],$/;"	d
+AMTAR	Makefile	/^AMTAR = $${TAR-tar}$/;"	m
+AMTAR	Makefile.in	/^AMTAR = @AMTAR@$/;"	m
+AM_AUTOMAKE_VERSION	aclocal.m4	/^AC_DEFUN([AM_AUTOMAKE_VERSION],$/;"	m
+AM_AUX_DIR_EXPAND	aclocal.m4	/^AC_DEFUN([AM_AUX_DIR_EXPAND],$/;"	m
+AM_CONDITIONAL	aclocal.m4	/^AC_DEFUN([AM_CONDITIONAL],$/;"	m
+AM_DEFAULT_VERBOSITY	Makefile	/^AM_DEFAULT_VERBOSITY = 1$/;"	m
+AM_DEFAULT_VERBOSITY	Makefile.in	/^AM_DEFAULT_VERBOSITY = @AM_DEFAULT_VERBOSITY@$/;"	m
+AM_DEP_TRACK	aclocal.m4	/^AC_DEFUN([AM_DEP_TRACK],$/;"	m
+AM_INIT_AUTOMAKE	aclocal.m4	/^AC_DEFUN([AM_INIT_AUTOMAKE],$/;"	m
+AM_MAKE_INCLUDE	aclocal.m4	/^AC_DEFUN([AM_MAKE_INCLUDE],$/;"	m
+AM_MISSING_HAS_RUN	aclocal.m4	/^AC_DEFUN([AM_MISSING_HAS_RUN],$/;"	m
+AM_MISSING_PROG	aclocal.m4	/^AC_DEFUN([AM_MISSING_PROG],$/;"	m
+AM_OUTPUT_DEPENDENCY_COMMANDS	aclocal.m4	/^AC_DEFUN([AM_OUTPUT_DEPENDENCY_COMMANDS],$/;"	m
+AM_PROG_CC_C_O	aclocal.m4	/^AC_DEFUN_ONCE([AM_PROG_CC_C_O], [AC_REQUIRE([AC_PROG_CC])])$/;"	m
+AM_PROG_INSTALL_SH	aclocal.m4	/^AC_DEFUN([AM_PROG_INSTALL_SH],$/;"	m
+AM_PROG_INSTALL_STRIP	aclocal.m4	/^AC_DEFUN([AM_PROG_INSTALL_STRIP],$/;"	m
+AM_RECURSIVE_TARGETS	Makefile	/^AM_RECURSIVE_TARGETS = cscope$/;"	m
+AM_RECURSIVE_TARGETS	Makefile.in	/^AM_RECURSIVE_TARGETS = cscope$/;"	m
+AM_RUN_LOG	aclocal.m4	/^AC_DEFUN([AM_RUN_LOG],$/;"	m
+AM_SANITY_CHECK	aclocal.m4	/^AC_DEFUN([AM_SANITY_CHECK],$/;"	m
+AM_SET_CURRENT_AUTOMAKE_VERSION	aclocal.m4	/^AC_DEFUN([AM_SET_CURRENT_AUTOMAKE_VERSION],$/;"	m
+AM_SET_DEPDIR	aclocal.m4	/^AC_DEFUN([AM_SET_DEPDIR],$/;"	m
+AM_SET_LEADING_DOT	aclocal.m4	/^AC_DEFUN([AM_SET_LEADING_DOT],$/;"	m
+AM_SILENT_RULES	aclocal.m4	/^AC_DEFUN([AM_SILENT_RULES],$/;"	m
+AM_SUBST_NOTMAKE	aclocal.m4	/^AC_DEFUN([AM_SUBST_NOTMAKE], [_AM_SUBST_NOTMAKE($@)])$/;"	m
+AM_V_CXX	Makefile	/^AM_V_CXX = $(am__v_CXX_$(V))$/;"	m
+AM_V_CXX	Makefile.in	/^AM_V_CXX = $(am__v_CXX_@AM_V@)$/;"	m
+AM_V_CXXLD	Makefile	/^AM_V_CXXLD = $(am__v_CXXLD_$(V))$/;"	m
+AM_V_CXXLD	Makefile.in	/^AM_V_CXXLD = $(am__v_CXXLD_@AM_V@)$/;"	m
+AM_V_GEN	Makefile	/^AM_V_GEN = $(am__v_GEN_$(V))$/;"	m
+AM_V_GEN	Makefile.in	/^AM_V_GEN = $(am__v_GEN_@AM_V@)$/;"	m
+AM_V_P	Makefile	/^AM_V_P = $(am__v_P_$(V))$/;"	m
+AM_V_P	Makefile.in	/^AM_V_P = $(am__v_P_@AM_V@)$/;"	m
+AM_V_at	Makefile	/^AM_V_at = $(am__v_at_$(V))$/;"	m
+AM_V_at	Makefile.in	/^AM_V_at = $(am__v_at_@AM_V@)$/;"	m
+AM_V_lt	Makefile	/^AM_V_lt = $(am__v_lt_$(V))$/;"	m
+AM_V_lt	Makefile.in	/^AM_V_lt = $(am__v_lt_@AM_V@)$/;"	m
+AUTOCONF	Makefile	/^AUTOCONF = ${SHELL} \/home\/guanzhb\/workspace\/codes\/cpfw\/missing autoconf$/;"	m
+AUTOCONF	Makefile.in	/^AUTOCONF = @AUTOCONF@$/;"	m
+AUTOHEADER	Makefile	/^AUTOHEADER = ${SHELL} \/home\/guanzhb\/workspace\/codes\/cpfw\/missing autoheader$/;"	m
+AUTOHEADER	Makefile.in	/^AUTOHEADER = @AUTOHEADER@$/;"	m
+AUTOMAKE	Makefile	/^AUTOMAKE = ${SHELL} \/home\/guanzhb\/workspace\/codes\/cpfw\/missing automake-1.16$/;"	m
+AUTOMAKE	Makefile.in	/^AUTOMAKE = @AUTOMAKE@$/;"	m
+AUTOMAKE_OPTIONS	Makefile	/^AUTOMAKE_OPTIONS = foreign$/;"	m
+AUTOMAKE_OPTIONS	Makefile.am	/^AUTOMAKE_OPTIONS=foreign$/;"	m
+AUTOMAKE_OPTIONS	Makefile.in	/^AUTOMAKE_OPTIONS = foreign$/;"	m
+AWK	Makefile	/^AWK = mawk$/;"	m
+AWK	Makefile.in	/^AWK = @AWK@$/;"	m
+CC	Makefile	/^CC = gcc$/;"	m
+CC	Makefile.in	/^CC = @CC@$/;"	m
+CCDEPMODE	Makefile	/^CCDEPMODE = depmode=gcc3$/;"	m
+CCDEPMODE	Makefile.in	/^CCDEPMODE = @CCDEPMODE@$/;"	m
+CFLAGS	Makefile	/^CFLAGS = -g -O2$/;"	m
+CFLAGS	Makefile.in	/^CFLAGS = @CFLAGS@$/;"	m
+CONFIG_CLEAN_FILES	Makefile	/^CONFIG_CLEAN_FILES =$/;"	m
+CONFIG_CLEAN_FILES	Makefile.in	/^CONFIG_CLEAN_FILES =$/;"	m
+CONFIG_CLEAN_VPATH_FILES	Makefile	/^CONFIG_CLEAN_VPATH_FILES =$/;"	m
+CONFIG_CLEAN_VPATH_FILES	Makefile.in	/^CONFIG_CLEAN_VPATH_FILES =$/;"	m
+CONFIG_HEADER	Makefile	/^CONFIG_HEADER = config.h$/;"	m
+CONFIG_HEADER	Makefile.in	/^CONFIG_HEADER = config.h$/;"	m
+CPFW_BASE_INCLUDE_BASE_H__	cpfw/base/include/Base.h	/^#define CPFW_BASE_INCLUDE_BASE_H__$/;"	d
+CPFW_BASE_INCLUDE_CONDITION_H_	cpfw/base/include/Condition.h	/^#define CPFW_BASE_INCLUDE_CONDITION_H_$/;"	d
+CPFW_BASE_INCLUDE_DATASTORE_H_	cpfw/base/include/DataStore.h	/^#define CPFW_BASE_INCLUDE_DATASTORE_H_$/;"	d
+CPFW_BASE_INCLUDE_RESPONSIBILITYCHAIN_H_	cpfw/base/include/ResponsibilityChain.h	/^#define CPFW_BASE_INCLUDE_RESPONSIBILITYCHAIN_H_$/;"	d
+CPFW_BASE_INCLUDE_UTILS_HPP_	cpfw/base/include/Utils.hpp	/^#define CPFW_BASE_INCLUDE_UTILS_HPP_$/;"	d
+CPFW_BASE_INCLUDE_WIDGET_H_	cpfw/base/include/Widget.h	/^#define CPFW_BASE_INCLUDE_WIDGET_H_$/;"	d
+CPP	Makefile	/^CPP = gcc -E$/;"	m
+CPP	Makefile.in	/^CPP = @CPP@$/;"	m
+CPPFLAGS	Makefile	/^CPPFLAGS = $/;"	m
+CPPFLAGS	Makefile.in	/^CPPFLAGS = @CPPFLAGS@$/;"	m
+CSCOPE	Makefile	/^CSCOPE = cscope$/;"	m
+CSCOPE	Makefile.in	/^CSCOPE = cscope$/;"	m
+CTAGS	Makefile	/^CTAGS = ctags$/;"	m
+CTAGS	Makefile	/^CTAGS: ctags$/;"	t
+CTAGS	Makefile.in	/^CTAGS = ctags$/;"	m
+CTAGS	Makefile.in	/^CTAGS: ctags$/;"	t
+CXX	Makefile	/^CXX = g++$/;"	m
+CXX	Makefile.in	/^CXX = @CXX@$/;"	m
+CXXCOMPILE	Makefile	/^CXXCOMPILE = $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) \\$/;"	m
+CXXCOMPILE	Makefile.in	/^CXXCOMPILE = $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) \\$/;"	m
+CXXDEPMODE	Makefile.in	/^CXXDEPMODE = @CXXDEPMODE@$/;"	m
+CXXFLAGS	Makefile	/^CXXFLAGS = -g -O2$/;"	m
+CXXFLAGS	Makefile.in	/^CXXFLAGS = @CXXFLAGS@$/;"	m
+CXXLD	Makefile	/^CXXLD = $(CXX)$/;"	m
+CXXLD	Makefile.in	/^CXXLD = $(CXX)$/;"	m
+CXXLINK	Makefile	/^CXXLINK = $(CXXLD) $(AM_CXXFLAGS) $(CXXFLAGS) $(AM_LDFLAGS) $(LDFLAGS) \\$/;"	m
+CXXLINK	Makefile.in	/^CXXLINK = $(CXXLD) $(AM_CXXFLAGS) $(CXXFLAGS) $(AM_LDFLAGS) $(LDFLAGS) \\$/;"	m
+CYGPATH_W	Makefile	/^CYGPATH_W = echo$/;"	m
+CYGPATH_W	Makefile.in	/^CYGPATH_W = @CYGPATH_W@$/;"	m
+Condition	cpfw/base/include/Condition.h	/^class Condition {$/;"	c	namespace:cpfw
+Condition	cpfw/base/src/Condition.cpp	/^Condition::Condition($/;"	f	class:cpfw::Condition
+Condition	cpfw/base/src/Condition.cpp	/^Condition::Condition() : Condition("", "", "", "", 0, 0) {$/;"	f	class:cpfw::Condition
+Condition.o	Makefile	/^Condition.o: cpfw\/base\/src\/Condition.cpp$/;"	t
+Condition.o	Makefile.in	/^Condition.o: cpfw\/base\/src\/Condition.cpp$/;"	t
+Condition.obj	Makefile	/^Condition.obj: cpfw\/base\/src\/Condition.cpp$/;"	t
+Condition.obj	Makefile.in	/^Condition.obj: cpfw\/base\/src\/Condition.cpp$/;"	t
+DEFAULT_INCLUDES	Makefile	/^DEFAULT_INCLUDES = -I.$/;"	m
+DEFAULT_INCLUDES	Makefile.in	/^DEFAULT_INCLUDES = -I.@am__isrc@$/;"	m
+DEFS	Makefile	/^DEFS = -DHAVE_CONFIG_H$/;"	m
+DEFS	Makefile.in	/^DEFS = @DEFS@$/;"	m
+DEPDIR	Makefile	/^DEPDIR = .deps$/;"	m
+DEPDIR	Makefile.in	/^DEPDIR = @DEPDIR@$/;"	m
+DISTFILES	Makefile	/^DISTFILES = $(DIST_COMMON) $(DIST_SOURCES) $(TEXINFOS) $(EXTRA_DIST)$/;"	m
+DISTFILES	Makefile.in	/^DISTFILES = $(DIST_COMMON) $(DIST_SOURCES) $(TEXINFOS) $(EXTRA_DIST)$/;"	m
+DIST_ARCHIVES	Makefile	/^DIST_ARCHIVES = $(distdir).tar.gz$/;"	m
+DIST_ARCHIVES	Makefile.in	/^DIST_ARCHIVES = $(distdir).tar.gz$/;"	m
+DIST_COMMON	Makefile	/^DIST_COMMON = $(srcdir)\/Makefile.am $(top_srcdir)\/configure \\$/;"	m
+DIST_COMMON	Makefile.in	/^DIST_COMMON = $(srcdir)\/Makefile.am $(top_srcdir)\/configure \\$/;"	m
+DIST_SOURCES	Makefile	/^DIST_SOURCES = $(exampleChain_SOURCES)$/;"	m
+DIST_SOURCES	Makefile.in	/^DIST_SOURCES = $(exampleChain_SOURCES)$/;"	m
+DIST_TARGETS	Makefile	/^DIST_TARGETS = dist-gzip$/;"	m
+DIST_TARGETS	Makefile.in	/^DIST_TARGETS = dist-gzip$/;"	m
+DataStore	cpfw/base/include/DataStore.h	/^class DataStore {$/;"	c	namespace:cpfw
+DataStore	cpfw/base/src/DataStore.cpp	/^DataStore::DataStore() {$/;"	f	class:cpfw::DataStore
+DataStore.o	Makefile	/^DataStore.o: cpfw\/base\/src\/DataStore.cpp$/;"	t
+DataStore.o	Makefile.in	/^DataStore.o: cpfw\/base\/src\/DataStore.cpp$/;"	t
+DataStore.obj	Makefile	/^DataStore.obj: cpfw\/base\/src\/DataStore.cpp$/;"	t
+DataStore.obj	Makefile.in	/^DataStore.obj: cpfw\/base\/src\/DataStore.cpp$/;"	t
+ECHO_C	Makefile	/^ECHO_C = $/;"	m
+ECHO_C	Makefile.in	/^ECHO_C = @ECHO_C@$/;"	m
+ECHO_N	Makefile	/^ECHO_N = -n$/;"	m
+ECHO_N	Makefile.in	/^ECHO_N = @ECHO_N@$/;"	m
+ECHO_T	Makefile	/^ECHO_T = $/;"	m
+ECHO_T	Makefile.in	/^ECHO_T = @ECHO_T@$/;"	m
+EGREP	Makefile	/^EGREP = \/usr\/bin\/grep -E$/;"	m
+EGREP	Makefile.in	/^EGREP = @EGREP@$/;"	m
+END	configure	/^    cat >&2 <<'END'$/;"	h
+END	configure	/^  cat >&2 <<'END'$/;"	h
+END	configure	/^cat > confinc.mk << 'END'$/;"	h
+ETAGS	Makefile	/^ETAGS = etags$/;"	m
+ETAGS	Makefile.in	/^ETAGS = etags$/;"	m
+EXAMPLES_INCLUDE_EXAMPLECHAIN_H_	examples/include/ExampleChain.h	/^#define EXAMPLES_INCLUDE_EXAMPLECHAIN_H_$/;"	d
+EXEEXT	Makefile	/^EXEEXT = $/;"	m
+EXEEXT	Makefile.in	/^EXEEXT = @EXEEXT@$/;"	m
+EXPRESSION_EQ	cpfw/base/src/Widget.cpp	/^std::string const EXPRESSION_EQ = "eq";$/;"	v	namespace:cpfw	typeref:typename:std::string const
+EXPRESSION_IN_RANGE	cpfw/base/src/Widget.cpp	/^std::string const EXPRESSION_IN_RANGE = "in_range";$/;"	v	namespace:cpfw	typeref:typename:std::string const
+EXPRESSION_NOT_EQ	cpfw/base/src/Widget.cpp	/^std::string const EXPRESSION_NOT_EQ = "not_eq";$/;"	v	namespace:cpfw	typeref:typename:std::string const
+EXPRESSION_OUT_RANGE	cpfw/base/src/Widget.cpp	/^std::string const EXPRESSION_OUT_RANGE = "out_range";$/;"	v	namespace:cpfw	typeref:typename:std::string const
+Element	cpfw/base/include/Base.h	/^struct Element {$/;"	s	namespace:cpfw
+ElementType	cpfw/base/include/Base.h	/^enum class ElementType : uint32_t {$/;"	g	namespace:cpfw	typeref:typename:uint32_t
+ExampleChain	examples/include/ExampleChain.h	/^class ExampleChain {$/;"	c	namespace:cpfw
+ExampleChain	examples/src/ExampleChain.cpp	/^ExampleChain::ExampleChain() {$/;"	f	class:cpfw::ExampleChain
+ExampleChain.o	Makefile	/^ExampleChain.o: examples\/src\/ExampleChain.cpp$/;"	t
+ExampleChain.o	Makefile.in	/^ExampleChain.o: examples\/src\/ExampleChain.cpp$/;"	t
+ExampleChain.obj	Makefile	/^ExampleChain.obj: examples\/src\/ExampleChain.cpp$/;"	t
+ExampleChain.obj	Makefile.in	/^ExampleChain.obj: examples\/src\/ExampleChain.cpp$/;"	t
+GREP	Makefile	/^GREP = \/usr\/bin\/grep$/;"	m
+GREP	Makefile.in	/^GREP = @GREP@$/;"	m
+GTAGS	Makefile	/^GTAGS:$/;"	t
+GTAGS	Makefile.in	/^GTAGS:$/;"	t
+GZIP_ENV	Makefile	/^GZIP_ENV = --best$/;"	m
+GZIP_ENV	Makefile.in	/^GZIP_ENV = --best$/;"	m
+HAVE_INTTYPES_H	config.h	/^#define HAVE_INTTYPES_H /;"	d
+HAVE_MEMORY_H	config.h	/^#define HAVE_MEMORY_H /;"	d
+HAVE_STDINT_H	config.h	/^#define HAVE_STDINT_H /;"	d
+HAVE_STDLIB_H	config.h	/^#define HAVE_STDLIB_H /;"	d
+HAVE_STRINGS_H	config.h	/^#define HAVE_STRINGS_H /;"	d
+HAVE_STRING_H	config.h	/^#define HAVE_STRING_H /;"	d
+HAVE_SYS_STAT_H	config.h	/^#define HAVE_SYS_STAT_H /;"	d
+HAVE_SYS_TYPES_H	config.h	/^#define HAVE_SYS_TYPES_H /;"	d
+HAVE_UNISTD_H	config.h	/^#define HAVE_UNISTD_H /;"	d
+ID	Makefile	/^ID: $(am__tagged_files)$/;"	t
+ID	Makefile.in	/^ID: $(am__tagged_files)$/;"	t
+INSTALL	Makefile	/^INSTALL = \/usr\/bin\/install -c$/;"	m
+INSTALL	Makefile.in	/^INSTALL = @INSTALL@$/;"	m
+INSTALL_DATA	Makefile	/^INSTALL_DATA = ${INSTALL} -m 644$/;"	m
+INSTALL_DATA	Makefile.in	/^INSTALL_DATA = @INSTALL_DATA@$/;"	m
+INSTALL_HEADER	Makefile	/^INSTALL_HEADER = $(INSTALL_DATA)$/;"	m
+INSTALL_HEADER	Makefile.in	/^INSTALL_HEADER = $(INSTALL_DATA)$/;"	m
+INSTALL_PROGRAM	Makefile	/^INSTALL_PROGRAM = ${INSTALL}$/;"	m
+INSTALL_PROGRAM	Makefile.in	/^INSTALL_PROGRAM = @INSTALL_PROGRAM@$/;"	m
+INSTALL_SCRIPT	Makefile	/^INSTALL_SCRIPT = ${INSTALL}$/;"	m
+INSTALL_SCRIPT	Makefile.in	/^INSTALL_SCRIPT = @INSTALL_SCRIPT@$/;"	m
+INSTALL_STRIP_PROGRAM	Makefile	/^INSTALL_STRIP_PROGRAM = $(install_sh) -c -s$/;"	m
+INSTALL_STRIP_PROGRAM	Makefile.in	/^INSTALL_STRIP_PROGRAM = @INSTALL_STRIP_PROGRAM@$/;"	m
+LDFLAGS	Makefile	/^LDFLAGS = $/;"	m
+LDFLAGS	Makefile.in	/^LDFLAGS = @LDFLAGS@$/;"	m
+LIBOBJS	Makefile	/^LIBOBJS = $/;"	m
+LIBOBJS	Makefile.in	/^LIBOBJS = @LIBOBJS@$/;"	m
+LIBS	Makefile	/^LIBS = $/;"	m
+LIBS	Makefile.in	/^LIBS = @LIBS@$/;"	m
+LTLIBOBJS	Makefile	/^LTLIBOBJS = $/;"	m
+LTLIBOBJS	Makefile.in	/^LTLIBOBJS = @LTLIBOBJS@$/;"	m
+MAKEINFO	Makefile	/^MAKEINFO = ${SHELL} \/home\/guanzhb\/workspace\/codes\/cpfw\/missing makeinfo$/;"	m
+MAKEINFO	Makefile.in	/^MAKEINFO = @MAKEINFO@$/;"	m
+MKDIR_P	Makefile	/^MKDIR_P = \/usr\/bin\/mkdir -p$/;"	m
+MKDIR_P	Makefile.in	/^MKDIR_P = @MKDIR_P@$/;"	m
+Makefile	Makefile	/^Makefile: $(srcdir)\/Makefile.in $(top_builddir)\/config.status$/;"	t
+Makefile	Makefile.in	/^Makefile: $(srcdir)\/Makefile.in $(top_builddir)\/config.status$/;"	t
+NEED_CONVERT	cpfw/base/include/Base.h	/^    NEED_CONVERT = 0x02,$/;"	e	enum:cpfw::ElementType
+NORMAL_INSTALL	Makefile	/^NORMAL_INSTALL = :$/;"	m
+NORMAL_INSTALL	Makefile.in	/^NORMAL_INSTALL = :$/;"	m
+NORMAL_UNINSTALL	Makefile	/^NORMAL_UNINSTALL = :$/;"	m
+NORMAL_UNINSTALL	Makefile.in	/^NORMAL_UNINSTALL = :$/;"	m
+OBJEXT	Makefile	/^OBJEXT = o$/;"	m
+OBJEXT	Makefile.in	/^OBJEXT = @OBJEXT@$/;"	m
+PACKAGE	Makefile	/^PACKAGE = exampleChain$/;"	m
+PACKAGE	Makefile.in	/^PACKAGE = @PACKAGE@$/;"	m
+PACKAGE	config.h	/^#define PACKAGE /;"	d
+PACKAGE_BUGREPORT	Makefile	/^PACKAGE_BUGREPORT = 1127254428@qq.com$/;"	m
+PACKAGE_BUGREPORT	Makefile.in	/^PACKAGE_BUGREPORT = @PACKAGE_BUGREPORT@$/;"	m
+PACKAGE_BUGREPORT	config.h	/^#define PACKAGE_BUGREPORT /;"	d
+PACKAGE_NAME	Makefile	/^PACKAGE_NAME = exampleChain$/;"	m
+PACKAGE_NAME	Makefile.in	/^PACKAGE_NAME = @PACKAGE_NAME@$/;"	m
+PACKAGE_NAME	config.h	/^#define PACKAGE_NAME /;"	d
+PACKAGE_STRING	Makefile	/^PACKAGE_STRING = exampleChain 0.1$/;"	m
+PACKAGE_STRING	Makefile.in	/^PACKAGE_STRING = @PACKAGE_STRING@$/;"	m
+PACKAGE_STRING	config.h	/^#define PACKAGE_STRING /;"	d
+PACKAGE_TARNAME	Makefile	/^PACKAGE_TARNAME = examplechain$/;"	m
+PACKAGE_TARNAME	Makefile.in	/^PACKAGE_TARNAME = @PACKAGE_TARNAME@$/;"	m
+PACKAGE_TARNAME	config.h	/^#define PACKAGE_TARNAME /;"	d
+PACKAGE_URL	Makefile	/^PACKAGE_URL = $/;"	m
+PACKAGE_URL	Makefile.in	/^PACKAGE_URL = @PACKAGE_URL@$/;"	m
+PACKAGE_URL	config.h	/^#define PACKAGE_URL /;"	d
+PACKAGE_VERSION	Makefile	/^PACKAGE_VERSION = 0.1$/;"	m
+PACKAGE_VERSION	Makefile.in	/^PACKAGE_VERSION = @PACKAGE_VERSION@$/;"	m
+PACKAGE_VERSION	config.h	/^#define PACKAGE_VERSION /;"	d
+PATH_SEPARATOR	Makefile	/^PATH_SEPARATOR = :$/;"	m
+PATH_SEPARATOR	Makefile.in	/^PATH_SEPARATOR = @PATH_SEPARATOR@$/;"	m
+POST_INSTALL	Makefile	/^POST_INSTALL = :$/;"	m
+POST_INSTALL	Makefile.in	/^POST_INSTALL = :$/;"	m
+POST_UNINSTALL	Makefile	/^POST_UNINSTALL = :$/;"	m
+POST_UNINSTALL	Makefile.in	/^POST_UNINSTALL = :$/;"	m
+PRE_INSTALL	Makefile	/^PRE_INSTALL = :$/;"	m
+PRE_INSTALL	Makefile.in	/^PRE_INSTALL = :$/;"	m
+PRE_UNINSTALL	Makefile	/^PRE_UNINSTALL = :$/;"	m
+PRE_UNINSTALL	Makefile.in	/^PRE_UNINSTALL = :$/;"	m
+PROGRAMS	Makefile	/^PROGRAMS = $(bin_PROGRAMS)$/;"	m
+PROGRAMS	Makefile.in	/^PROGRAMS = $(bin_PROGRAMS)$/;"	m
+PUBLIC	cpfw/base/include/Base.h	/^    PUBLIC = 0x01,$/;"	e	enum:cpfw::ElementType
+Profile	cpfw/base/include/Base.h	/^struct Profile {$/;"	s	namespace:cpfw
+ResponsibilityChain	cpfw/base/include/ResponsibilityChain.h	/^class ResponsibilityChain {$/;"	c	namespace:cpfw
+ResponsibilityChain	cpfw/base/src/ResponsibilityChain.cpp	/^ResponsibilityChain::ResponsibilityChain() {$/;"	f	class:cpfw::ResponsibilityChain
+ResponsibilityChain	cpfw/base/src/ResponsibilityChain.cpp	/^ResponsibilityChain::ResponsibilityChain(std::shared_ptr<DataStore> store)$/;"	f	class:cpfw::ResponsibilityChain
+ResponsibilityChain.o	Makefile	/^ResponsibilityChain.o: cpfw\/base\/src\/ResponsibilityChain.cpp$/;"	t
+ResponsibilityChain.o	Makefile.in	/^ResponsibilityChain.o: cpfw\/base\/src\/ResponsibilityChain.cpp$/;"	t
+ResponsibilityChain.obj	Makefile	/^ResponsibilityChain.obj: cpfw\/base\/src\/ResponsibilityChain.cpp$/;"	t
+ResponsibilityChain.obj	Makefile.in	/^ResponsibilityChain.obj: cpfw\/base\/src\/ResponsibilityChain.cpp$/;"	t
+SET_MAKE	Makefile	/^SET_MAKE = $/;"	m
+SET_MAKE	Makefile.in	/^SET_MAKE = @SET_MAKE@$/;"	m
+SHELL	Makefile	/^SHELL = \/bin\/bash$/;"	m
+SHELL	Makefile.in	/^SHELL = @SHELL@$/;"	m
+SOURCES	Makefile	/^SOURCES = $(exampleChain_SOURCES)$/;"	m
+SOURCES	Makefile.in	/^SOURCES = $(exampleChain_SOURCES)$/;"	m
+STDC_HEADERS	config.h	/^#define STDC_HEADERS /;"	d
+STRIP	Makefile	/^STRIP = $/;"	m
+STRIP	Makefile.in	/^STRIP = @STRIP@$/;"	m
+TAGS	Makefile	/^TAGS: tags$/;"	t
+TAGS	Makefile.in	/^TAGS: tags$/;"	t
+VERSION	Makefile	/^VERSION = 0.1$/;"	m
+VERSION	Makefile.in	/^VERSION = @VERSION@$/;"	m
+VERSION	config.h	/^#define VERSION /;"	d
+VPATH	Makefile.in	/^VPATH = @srcdir@$/;"	m
+Widget	cpfw/base/include/Widget.h	/^class Widget {$/;"	c	namespace:cpfw
+Widget	cpfw/base/src/Widget.cpp	/^Widget::Widget() : Widget("") {$/;"	f	class:cpfw::Widget
+Widget	cpfw/base/src/Widget.cpp	/^Widget::Widget(const std::string &name) : mName(name) {$/;"	f	class:cpfw::Widget
+Widget	cpfw/base/src/Widget.cpp	/^Widget::Widget(const std::string &name, std::shared_ptr<DataStore> &store)$/;"	f	class:cpfw::Widget
+Widget.o	Makefile	/^Widget.o: cpfw\/base\/src\/Widget.cpp$/;"	t
+Widget.o	Makefile.in	/^Widget.o: cpfw\/base\/src\/Widget.cpp$/;"	t
+Widget.obj	Makefile	/^Widget.obj: cpfw\/base\/src\/Widget.cpp$/;"	t
+Widget.obj	Makefile.in	/^Widget.obj: cpfw\/base\/src\/Widget.cpp$/;"	t
+[^	configure	/^s\/^ \\('"$ac_word_re"'\\)\\(([^()]*)\\)[	 ]*\\(.*\\)\/P["\\1"]="\\2"\\$/;"	f
+_ACAWK	config.status	/^cat >>"$ac_tmp\/subs1.awk" <<_ACAWK &&$/;"	h
+_ACEOF	configure	/^	 cat confdefs.h - <<_ACEOF >conftest.$ac_ext$/;"	h
+_ACEOF	configure	/^       cat confdefs.h - <<_ACEOF >conftest.$ac_ext$/;"	h
+_ACEOF	configure	/^      cat confdefs.h - <<_ACEOF >conftest.$ac_ext$/;"	h
+_ACEOF	configure	/^    cat >>confdefs.h <<_ACEOF$/;"	h
+_ACEOF	configure	/^   cat confdefs.h - <<_ACEOF >conftest.$ac_ext$/;"	h
+_ACEOF	configure	/^  cat <<_ACEOF$/;"	h
+_ACEOF	configure	/^  cat >>confdefs.h <<_ACEOF$/;"	h
+_ACEOF	configure	/^  cat confdefs.h - <<_ACEOF >conftest.$ac_ext$/;"	h
+_ACEOF	configure	/^cat >&5 <<_ACEOF$/;"	h
+_ACEOF	configure	/^cat >>$CONFIG_STATUS <<_ACEOF || ac_write_fail=1$/;"	h
+_ACEOF	configure	/^cat >>confdefs.h <<_ACEOF$/;"	h
+_ACEOF	configure	/^cat >config.log <<_ACEOF$/;"	h
+_ACEOF	configure	/^cat confdefs.h - <<_ACEOF >conftest.$ac_ext$/;"	h
+_AC_AM_CONFIG_HEADER_HOOK	aclocal.m4	/^AC_DEFUN([_AC_AM_CONFIG_HEADER_HOOK],$/;"	m
+_AC_COMPILER_EXEEXT	aclocal.m4	/^m4_define([_AC_COMPILER_EXEEXT],$/;"	d
+_AM_AUTOCONF_VERSION	aclocal.m4	/^m4_define([_AM_AUTOCONF_VERSION], [])$/;"	d
+_AM_DEPENDENCIES	aclocal.m4	/^AC_DEFUN([_AM_DEPENDENCIES],$/;"	m
+_AM_IF_OPTION	aclocal.m4	/^AC_DEFUN([_AM_IF_OPTION],$/;"	m
+_AM_MANGLE_OPTION	aclocal.m4	/^AC_DEFUN([_AM_MANGLE_OPTION],$/;"	m
+_AM_OUTPUT_DEPENDENCY_COMMANDS	aclocal.m4	/^AC_DEFUN([_AM_OUTPUT_DEPENDENCY_COMMANDS],$/;"	m
+_AM_PROG_CC_C_O	aclocal.m4	/^AC_DEFUN([_AM_PROG_CC_C_O],$/;"	m
+_AM_PROG_TAR	aclocal.m4	/^AC_DEFUN([_AM_PROG_TAR],$/;"	m
+_AM_SET_OPTION	aclocal.m4	/^AC_DEFUN([_AM_SET_OPTION],$/;"	m
+_AM_SET_OPTIONS	aclocal.m4	/^AC_DEFUN([_AM_SET_OPTIONS],$/;"	m
+_AM_SUBST_NOTMAKE	aclocal.m4	/^AC_DEFUN([_AM_SUBST_NOTMAKE])$/;"	m
+_ASBOX	config.status	/^  sed 'h;s\/.\/-\/g;s\/^...\/## \/;s\/...$\/ ##\/;p;x;p;x' <<_ASBOX$/;"	h
+_ASBOX	configure	/^  sed 'h;s\/.\/-\/g;s\/^...\/## \/;s\/...$\/ ##\/;p;x;p;x' <<_ASBOX$/;"	h
+_ASEOF	configure	/^cat >$CONFIG_STATUS <<_ASEOF || as_write_fail=1$/;"	h
+_ASUNAME	configure	/^cat <<_ASUNAME$/;"	h
+__anon3a175c3a0102	cpfw/base/src/Widget.cpp	/^    std::for_each(values.begin(), values.end(), [](auto d) -> void {$/;"	f	function:cpfw::handle	typeref:typename:void	file:
+__anon80a679e80102	cpfw/base/include/Utils.hpp	/^        [&](auto &data) -> void {$/;"	f	function:cpfw::parseProfile	typeref:typename:void	file:
+__anon8d4c9c790102	cpfw/base/src/ResponsibilityChain.cpp	/^       [&] (auto &childwidgetName) -> void {$/;"	f	function:cpfw::ResponsibilityChain::invokeWidget	typeref:typename:void	file:
+abs_builddir	Makefile	/^abs_builddir = \/home\/guanzhb\/workspace\/codes\/cpfw$/;"	m
+abs_builddir	Makefile.in	/^abs_builddir = @abs_builddir@$/;"	m
+abs_srcdir	Makefile	/^abs_srcdir = \/home\/guanzhb\/workspace\/codes\/cpfw$/;"	m
+abs_srcdir	Makefile.in	/^abs_srcdir = @abs_srcdir@$/;"	m
+abs_top_builddir	Makefile	/^abs_top_builddir = \/home\/guanzhb\/workspace\/codes\/cpfw$/;"	m
+abs_top_builddir	Makefile.in	/^abs_top_builddir = @abs_top_builddir@$/;"	m
+abs_top_srcdir	Makefile	/^abs_top_srcdir = \/home\/guanzhb\/workspace\/codes\/cpfw$/;"	m
+abs_top_srcdir	Makefile.in	/^abs_top_srcdir = @abs_top_srcdir@$/;"	m
+ac_ct_CC	Makefile	/^ac_ct_CC = gcc$/;"	m
+ac_ct_CC	Makefile.in	/^ac_ct_CC = @ac_ct_CC@$/;"	m
+ac_ct_CXX	Makefile	/^ac_ct_CXX = g++$/;"	m
+ac_ct_CXX	Makefile.in	/^ac_ct_CXX = @ac_ct_CXX@$/;"	m
+ac_fn_c_check_header_compile	configure	/^ac_fn_c_check_header_compile ()$/;"	f
+ac_fn_c_check_header_mongrel	configure	/^ac_fn_c_check_header_mongrel ()$/;"	f
+ac_fn_c_find_intX_t	configure	/^ac_fn_c_find_intX_t ()$/;"	f
+ac_fn_c_find_uintX_t	configure	/^ac_fn_c_find_uintX_t ()$/;"	f
+ac_fn_c_try_compile	configure	/^ac_fn_c_try_compile ()$/;"	f
+ac_fn_c_try_cpp	configure	/^ac_fn_c_try_cpp ()$/;"	f
+ac_fn_c_try_run	configure	/^ac_fn_c_try_run ()$/;"	f
+ac_fn_cxx_try_compile	configure	/^ac_fn_cxx_try_compile ()$/;"	f
+action	cpfw/base/src/Widget.cpp	/^int32_t Widget::action() {$/;"	f	class:cpfw::Widget	typeref:typename:int32_t
+addCondition	cpfw/base/src/DataStore.cpp	/^void DataStore::addCondition($/;"	f	class:cpfw::DataStore	typeref:typename:void
+addDataConvert	cpfw/base/src/DataStore.cpp	/^void DataStore::addDataConvert($/;"	f	class:cpfw::DataStore	typeref:typename:void
+addInvokeChain	cpfw/base/src/DataStore.cpp	/^void DataStore::addInvokeChain($/;"	f	class:cpfw::DataStore	typeref:typename:void
+addProfile	cpfw/base/src/DataStore.cpp	/^void DataStore::addProfile($/;"	f	class:cpfw::DataStore	typeref:typename:void
+addWidget	cpfw/base/src/DataStore.cpp	/^void DataStore::addWidget($/;"	f	class:cpfw::DataStore	typeref:typename:void
+aix_post_process_depfile	depcomp	/^aix_post_process_depfile ()$/;"	f
+all	Makefile	/^all: config.h$/;"	t
+all	Makefile.in	/^all: config.h$/;"	t
+all-am	Makefile	/^all-am: Makefile $(PROGRAMS) config.h$/;"	t
+all-am	Makefile.in	/^all-am: Makefile $(PROGRAMS) config.h$/;"	t
+am--depfiles	Makefile	/^am--depfiles: $(am__depfiles_remade)$/;"	t
+am--depfiles	Makefile.in	/^am--depfiles: $(am__depfiles_remade)$/;"	t
+am--refresh	Makefile	/^am--refresh: Makefile$/;"	t
+am--refresh	Makefile.in	/^am--refresh: Makefile$/;"	t
+am__CONFIG_DISTCLEAN_FILES	Makefile	/^am__CONFIG_DISTCLEAN_FILES = config.status config.cache config.log \\$/;"	m
+am__CONFIG_DISTCLEAN_FILES	Makefile.in	/^am__CONFIG_DISTCLEAN_FILES = config.status config.cache config.log \\$/;"	m
+am__DIST_COMMON	Makefile	/^am__DIST_COMMON = $(srcdir)\/Makefile.in $(srcdir)\/config.h.in NEWS \\$/;"	m
+am__DIST_COMMON	Makefile.in	/^am__DIST_COMMON = $(srcdir)\/Makefile.in $(srcdir)\/config.h.in NEWS \\$/;"	m
+am__aclocal_m4_deps	Makefile	/^am__aclocal_m4_deps = $(top_srcdir)\/configure.ac$/;"	m
+am__aclocal_m4_deps	Makefile.in	/^am__aclocal_m4_deps = $(top_srcdir)\/configure.ac$/;"	m
+am__can_run_installinfo	Makefile	/^am__can_run_installinfo = \\$/;"	m
+am__can_run_installinfo	Makefile.in	/^am__can_run_installinfo = \\$/;"	m
+am__cd	Makefile	/^am__cd = CDPATH="$${ZSH_VERSION+.}$(PATH_SEPARATOR)" && cd$/;"	m
+am__cd	Makefile.in	/^am__cd = CDPATH="$${ZSH_VERSION+.}$(PATH_SEPARATOR)" && cd$/;"	m
+am__configure_deps	Makefile	/^am__configure_deps = $(am__aclocal_m4_deps) $(CONFIGURE_DEPENDENCIES) \\$/;"	m
+am__configure_deps	Makefile.in	/^am__configure_deps = $(am__aclocal_m4_deps) $(CONFIGURE_DEPENDENCIES) \\$/;"	m
+am__define_uniq_tagged_files	Makefile	/^am__define_uniq_tagged_files = \\$/;"	m
+am__define_uniq_tagged_files	Makefile.in	/^am__define_uniq_tagged_files = \\$/;"	m
+am__depfiles_remade	Makefile	/^am__depfiles_remade = .\/$(DEPDIR)\/Condition.Po \\$/;"	m
+am__depfiles_remade	Makefile.in	/^am__depfiles_remade = .\/$(DEPDIR)\/Condition.Po \\$/;"	m
+am__distuninstallcheck_listfiles	Makefile	/^am__distuninstallcheck_listfiles = $(distuninstallcheck_listfiles) \\$/;"	m
+am__distuninstallcheck_listfiles	Makefile.in	/^am__distuninstallcheck_listfiles = $(distuninstallcheck_listfiles) \\$/;"	m
+am__include	Makefile.in	/^am__include = @am__include@$/;"	m
+am__installdirs	Makefile	/^am__installdirs = "$(DESTDIR)$(bindir)"$/;"	m
+am__installdirs	Makefile.in	/^am__installdirs = "$(DESTDIR)$(bindir)"$/;"	m
+am__is_gnu_make	Makefile	/^am__is_gnu_make = { \\$/;"	m
+am__is_gnu_make	Makefile.in	/^am__is_gnu_make = { \\$/;"	m
+am__leading_dot	Makefile	/^am__leading_dot = .$/;"	m
+am__leading_dot	Makefile.in	/^am__leading_dot = @am__leading_dot@$/;"	m
+am__make_dryrun	Makefile	/^am__make_dryrun = (target_option=n; $(am__make_running_with_option))$/;"	m
+am__make_dryrun	Makefile.in	/^am__make_dryrun = (target_option=n; $(am__make_running_with_option))$/;"	m
+am__make_keepgoing	Makefile	/^am__make_keepgoing = (target_option=k; $(am__make_running_with_option))$/;"	m
+am__make_keepgoing	Makefile.in	/^am__make_keepgoing = (target_option=k; $(am__make_running_with_option))$/;"	m
+am__make_running_with_option	Makefile	/^am__make_running_with_option = \\$/;"	m
+am__make_running_with_option	Makefile.in	/^am__make_running_with_option = \\$/;"	m
+am__maybe_remake_depfiles	Makefile	/^am__maybe_remake_depfiles = depfiles$/;"	m
+am__maybe_remake_depfiles	Makefile.in	/^am__maybe_remake_depfiles = depfiles$/;"	m
+am__mv	Makefile	/^am__mv = mv -f$/;"	m
+am__mv	Makefile.in	/^am__mv = mv -f$/;"	m
+am__post_remove_distdir	Makefile	/^am__post_remove_distdir = $(am__remove_distdir)$/;"	m
+am__post_remove_distdir	Makefile.in	/^am__post_remove_distdir = $(am__remove_distdir)$/;"	m
+am__quote	Makefile	/^am__quote = $/;"	m
+am__quote	Makefile.in	/^am__quote = @am__quote@$/;"	m
+am__quote	aclocal.m4	/^AC_SUBST([am__quote])])$/;"	s
+am__remove_distdir	Makefile	/^am__remove_distdir = \\$/;"	m
+am__remove_distdir	Makefile.in	/^am__remove_distdir = \\$/;"	m
+am__tagged_files	Makefile	/^am__tagged_files = $(HEADERS) $(SOURCES) $(TAGS_FILES) \\$/;"	m
+am__tagged_files	Makefile.in	/^am__tagged_files = $(HEADERS) $(SOURCES) $(TAGS_FILES) \\$/;"	m
+am__tar	Makefile	/^am__tar = $${TAR-tar} chof - "$$tardir"$/;"	m
+am__tar	Makefile.in	/^am__tar = @am__tar@$/;"	m
+am__uniquify_input	Makefile	/^am__uniquify_input = $(AWK) '\\$/;"	m
+am__uniquify_input	Makefile.in	/^am__uniquify_input = $(AWK) '\\$/;"	m
+am__untar	Makefile	/^am__untar = $${TAR-tar} xf -$/;"	m
+am__untar	Makefile.in	/^am__untar = @am__untar@$/;"	m
+am__v_CXXLD_	Makefile	/^am__v_CXXLD_ = $(am__v_CXXLD_$(AM_DEFAULT_VERBOSITY))$/;"	m
+am__v_CXXLD_	Makefile.in	/^am__v_CXXLD_ = $(am__v_CXXLD_@AM_DEFAULT_V@)$/;"	m
+am__v_CXXLD_0	Makefile	/^am__v_CXXLD_0 = @echo "  CXXLD   " $@;$/;"	m
+am__v_CXXLD_0	Makefile.in	/^am__v_CXXLD_0 = @echo "  CXXLD   " $@;$/;"	m
+am__v_CXXLD_1	Makefile	/^am__v_CXXLD_1 = $/;"	m
+am__v_CXXLD_1	Makefile.in	/^am__v_CXXLD_1 = $/;"	m
+am__v_CXX_	Makefile	/^am__v_CXX_ = $(am__v_CXX_$(AM_DEFAULT_VERBOSITY))$/;"	m
+am__v_CXX_	Makefile.in	/^am__v_CXX_ = $(am__v_CXX_@AM_DEFAULT_V@)$/;"	m
+am__v_CXX_0	Makefile	/^am__v_CXX_0 = @echo "  CXX     " $@;$/;"	m
+am__v_CXX_0	Makefile.in	/^am__v_CXX_0 = @echo "  CXX     " $@;$/;"	m
+am__v_CXX_1	Makefile	/^am__v_CXX_1 = $/;"	m
+am__v_CXX_1	Makefile.in	/^am__v_CXX_1 = $/;"	m
+am__v_GEN_	Makefile	/^am__v_GEN_ = $(am__v_GEN_$(AM_DEFAULT_VERBOSITY))$/;"	m
+am__v_GEN_	Makefile.in	/^am__v_GEN_ = $(am__v_GEN_@AM_DEFAULT_V@)$/;"	m
+am__v_GEN_0	Makefile	/^am__v_GEN_0 = @echo "  GEN     " $@;$/;"	m
+am__v_GEN_0	Makefile.in	/^am__v_GEN_0 = @echo "  GEN     " $@;$/;"	m
+am__v_GEN_1	Makefile	/^am__v_GEN_1 = $/;"	m
+am__v_GEN_1	Makefile.in	/^am__v_GEN_1 = $/;"	m
+am__v_P_	Makefile	/^am__v_P_ = $(am__v_P_$(AM_DEFAULT_VERBOSITY))$/;"	m
+am__v_P_	Makefile.in	/^am__v_P_ = $(am__v_P_@AM_DEFAULT_V@)$/;"	m
+am__v_P_0	Makefile	/^am__v_P_0 = false$/;"	m
+am__v_P_0	Makefile.in	/^am__v_P_0 = false$/;"	m
+am__v_P_1	Makefile	/^am__v_P_1 = :$/;"	m
+am__v_P_1	Makefile.in	/^am__v_P_1 = :$/;"	m
+am__v_at_	Makefile	/^am__v_at_ = $(am__v_at_$(AM_DEFAULT_VERBOSITY))$/;"	m
+am__v_at_	Makefile.in	/^am__v_at_ = $(am__v_at_@AM_DEFAULT_V@)$/;"	m
+am__v_at_0	Makefile	/^am__v_at_0 = @$/;"	m
+am__v_at_0	Makefile.in	/^am__v_at_0 = @$/;"	m
+am__v_at_1	Makefile	/^am__v_at_1 = $/;"	m
+am__v_at_1	Makefile.in	/^am__v_at_1 = $/;"	m
+am__v_lt_	Makefile	/^am__v_lt_ = $(am__v_lt_$(AM_DEFAULT_VERBOSITY))$/;"	m
+am__v_lt_	Makefile.in	/^am__v_lt_ = $(am__v_lt_@AM_DEFAULT_V@)$/;"	m
+am__v_lt_0	Makefile	/^am__v_lt_0 = --silent$/;"	m
+am__v_lt_0	Makefile.in	/^am__v_lt_0 = --silent$/;"	m
+am__v_lt_1	Makefile	/^am__v_lt_1 = $/;"	m
+am__v_lt_1	Makefile.in	/^am__v_lt_1 = $/;"	m
+am_exampleChain_OBJECTS	Makefile	/^am_exampleChain_OBJECTS = main.$(OBJEXT) ExampleChain.$(OBJEXT) \\$/;"	m
+am_exampleChain_OBJECTS	Makefile.in	/^am_exampleChain_OBJECTS = main.$(OBJEXT) ExampleChain.$(OBJEXT) \\$/;"	m
+as_fn_append	config.status	/^  as_fn_append ()$/;"	f
+as_fn_append	configure	/^  as_fn_append ()$/;"	f
+as_fn_arith	config.status	/^  as_fn_arith ()$/;"	f
+as_fn_arith	configure	/^  as_fn_arith ()$/;"	f
+as_fn_error	config.status	/^as_fn_error ()$/;"	f
+as_fn_error	configure	/^as_fn_error ()$/;"	f
+as_fn_executable_p	config.status	/^as_fn_executable_p ()$/;"	f
+as_fn_executable_p	configure	/^as_fn_executable_p ()$/;"	f
+as_fn_exit	config.status	/^as_fn_exit ()$/;"	f
+as_fn_exit	configure	/^as_fn_exit ()$/;"	f
+as_fn_failure	configure	/^as_fn_failure () { as_fn_return 1; }$/;"	f
+as_fn_mkdir_p	config.status	/^as_fn_mkdir_p ()$/;"	f
+as_fn_mkdir_p	configure	/^as_fn_mkdir_p ()$/;"	f
+as_fn_ret_failure	configure	/^as_fn_ret_failure () { return 1; }$/;"	f
+as_fn_ret_success	configure	/^as_fn_ret_success () { return 0; }$/;"	f
+as_fn_set_status	config.status	/^as_fn_set_status ()$/;"	f
+as_fn_set_status	configure	/^as_fn_set_status ()$/;"	f
+as_fn_success	configure	/^as_fn_success () { as_fn_return 0; }$/;"	f
+as_fn_unset	config.status	/^as_fn_unset ()$/;"	f
+as_fn_unset	configure	/^as_fn_unset ()$/;"	f
+backup	cpfw/base/include/Base.h	/^    int32_t backup;$/;"	m	struct:cpfw::Element	typeref:typename:int32_t
+bin_PROGRAMS	Makefile	/^bin_PROGRAMS = exampleChain$(EXEEXT)$/;"	m
+bin_PROGRAMS	Makefile.am	/^bin_PROGRAMS=exampleChain$/;"	m
+bin_PROGRAMS	Makefile.in	/^bin_PROGRAMS = exampleChain$(EXEEXT)$/;"	m
+bindir	Makefile	/^bindir = ${exec_prefix}\/bin$/;"	m
+bindir	Makefile.in	/^bindir = @bindir@$/;"	m
+build_alias	Makefile	/^build_alias = $/;"	m
+build_alias	Makefile.in	/^build_alias = @build_alias@$/;"	m
+builddir	Makefile	/^builddir = .$/;"	m
+builddir	Makefile.in	/^builddir = @builddir@$/;"	m
+check	Makefile	/^check: check-am$/;"	t
+check	Makefile.in	/^check: check-am$/;"	t
+check	cpfw/base/src/Widget.cpp	/^int32_t Widget::check() {$/;"	f	class:cpfw::Widget	typeref:typename:int32_t
+check-am	Makefile	/^check-am: all-am$/;"	t
+check-am	Makefile.in	/^check-am: all-am$/;"	t
+clean	Makefile	/^clean: clean-am$/;"	t
+clean	Makefile.in	/^clean: clean-am$/;"	t
+clean-am	Makefile	/^clean-am: clean-binPROGRAMS clean-generic mostlyclean-am$/;"	t
+clean-am	Makefile.in	/^clean-am: clean-binPROGRAMS clean-generic mostlyclean-am$/;"	t
+clean-binPROGRAMS	Makefile	/^clean-binPROGRAMS:$/;"	t
+clean-binPROGRAMS	Makefile.in	/^clean-binPROGRAMS:$/;"	t
+clean-cscope	Makefile	/^clean-cscope:$/;"	t
+clean-cscope	Makefile.in	/^clean-cscope:$/;"	t
+clean-generic	Makefile	/^clean-generic:$/;"	t
+clean-generic	Makefile.in	/^clean-generic:$/;"	t
+config.h	Makefile	/^config.h: stamp-h1$/;"	t
+config.h	Makefile.in	/^config.h: stamp-h1$/;"	t
+cpfw	README.md	/^# cpfw$/;"	c
+cpfw	cpfw/base/include/Base.h	/^namespace cpfw {$/;"	n
+cpfw	cpfw/base/include/Condition.h	/^namespace cpfw {$/;"	n
+cpfw	cpfw/base/include/DataStore.h	/^namespace cpfw {$/;"	n
+cpfw	cpfw/base/include/ResponsibilityChain.h	/^namespace cpfw {$/;"	n
+cpfw	cpfw/base/include/Utils.hpp	/^namespace cpfw {$/;"	n
+cpfw	cpfw/base/include/Widget.h	/^namespace cpfw {$/;"	n
+cpfw	cpfw/base/src/Condition.cpp	/^namespace cpfw {$/;"	n	file:
+cpfw	cpfw/base/src/DataStore.cpp	/^namespace cpfw {$/;"	n	file:
+cpfw	cpfw/base/src/ResponsibilityChain.cpp	/^namespace cpfw {$/;"	n	file:
+cpfw	cpfw/base/src/Widget.cpp	/^namespace cpfw {$/;"	n	file:
+cpfw	examples/include/ExampleChain.h	/^namespace cpfw {$/;"	n
+cpfw	examples/src/ExampleChain.cpp	/^namespace cpfw {$/;"	n	file:
+cscope	Makefile	/^cscope: cscope.files$/;"	t
+cscope	Makefile.in	/^cscope: cscope.files$/;"	t
+cscope.files	Makefile	/^cscope.files: clean-cscope cscopelist$/;"	t
+cscope.files	Makefile.in	/^cscope.files: clean-cscope cscopelist$/;"	t
+cscopelist	Makefile	/^cscopelist: cscopelist-am$/;"	t
+cscopelist	Makefile.in	/^cscopelist: cscopelist-am$/;"	t
+cscopelist-am	Makefile	/^cscopelist-am: $(am__tagged_files)$/;"	t
+cscopelist-am	Makefile.in	/^cscopelist-am: $(am__tagged_files)$/;"	t
+ctags	Makefile	/^ctags: ctags-am$/;"	t
+ctags	Makefile.in	/^ctags: ctags-am$/;"	t
+ctags-am	Makefile	/^ctags-am: $(TAGS_DEPENDENCIES) $(am__tagged_files)$/;"	t
+ctags-am	Makefile.in	/^ctags-am: $(TAGS_DEPENDENCIES) $(am__tagged_files)$/;"	t
+current	cpfw/base/include/Base.h	/^    int32_t current;$/;"	m	struct:cpfw::Element	typeref:typename:int32_t
+datadir	Makefile	/^datadir = ${datarootdir}$/;"	m
+datadir	Makefile.in	/^datadir = @datadir@$/;"	m
+datarootdir	Makefile	/^datarootdir = ${prefix}\/share$/;"	m
+datarootdir	Makefile.in	/^datarootdir = @datarootdir@$/;"	m
+depcomp	Makefile	/^depcomp = $(SHELL) $(top_srcdir)\/depcomp$/;"	m
+depcomp	Makefile.in	/^depcomp = $(SHELL) $(top_srcdir)\/depcomp$/;"	m
+dist	Makefile	/^dist dist-all:$/;"	t
+dist	Makefile.in	/^dist dist-all:$/;"	t
+dist-all	Makefile	/^dist dist-all:$/;"	t
+dist-all	Makefile.in	/^dist dist-all:$/;"	t
+dist-bzip2	Makefile	/^dist-bzip2: distdir$/;"	t
+dist-bzip2	Makefile.in	/^dist-bzip2: distdir$/;"	t
+dist-gzip	Makefile	/^dist-gzip: distdir$/;"	t
+dist-gzip	Makefile.in	/^dist-gzip: distdir$/;"	t
+dist-lzip	Makefile	/^dist-lzip: distdir$/;"	t
+dist-lzip	Makefile.in	/^dist-lzip: distdir$/;"	t
+dist-shar	Makefile	/^dist-shar: distdir$/;"	t
+dist-shar	Makefile.in	/^dist-shar: distdir$/;"	t
+dist-tarZ	Makefile	/^dist-tarZ: distdir$/;"	t
+dist-tarZ	Makefile.in	/^dist-tarZ: distdir$/;"	t
+dist-xz	Makefile	/^dist-xz: distdir$/;"	t
+dist-xz	Makefile.in	/^dist-xz: distdir$/;"	t
+dist-zip	Makefile	/^dist-zip: distdir$/;"	t
+dist-zip	Makefile.in	/^dist-zip: distdir$/;"	t
+distcheck	Makefile	/^distcheck: dist$/;"	t
+distcheck	Makefile.in	/^distcheck: dist$/;"	t
+distclean	Makefile	/^distclean: distclean-am$/;"	t
+distclean	Makefile.in	/^distclean: distclean-am$/;"	t
+distclean-am	Makefile	/^distclean-am: clean-am distclean-compile distclean-generic \\$/;"	t
+distclean-am	Makefile.in	/^distclean-am: clean-am distclean-compile distclean-generic \\$/;"	t
+distclean-compile	Makefile	/^distclean-compile:$/;"	t
+distclean-compile	Makefile.in	/^distclean-compile:$/;"	t
+distclean-generic	Makefile	/^distclean-generic:$/;"	t
+distclean-generic	Makefile.in	/^distclean-generic:$/;"	t
+distclean-hdr	Makefile	/^distclean-hdr:$/;"	t
+distclean-hdr	Makefile.in	/^distclean-hdr:$/;"	t
+distclean-tags	Makefile	/^distclean-tags:$/;"	t
+distclean-tags	Makefile.in	/^distclean-tags:$/;"	t
+distcleancheck	Makefile	/^distcleancheck: distclean$/;"	t
+distcleancheck	Makefile.in	/^distcleancheck: distclean$/;"	t
+distcleancheck_listfiles	Makefile	/^distcleancheck_listfiles = find . -type f -print$/;"	m
+distcleancheck_listfiles	Makefile.in	/^distcleancheck_listfiles = find . -type f -print$/;"	m
+distdir	Makefile	/^distdir = $(PACKAGE)-$(VERSION)$/;"	m
+distdir	Makefile	/^distdir: $(BUILT_SOURCES)$/;"	t
+distdir	Makefile.in	/^distdir = $(PACKAGE)-$(VERSION)$/;"	m
+distdir	Makefile.in	/^distdir: $(BUILT_SOURCES)$/;"	t
+distdir-am	Makefile	/^distdir-am: $(DISTFILES)$/;"	t
+distdir-am	Makefile.in	/^distdir-am: $(DISTFILES)$/;"	t
+distuninstallcheck	Makefile	/^distuninstallcheck:$/;"	t
+distuninstallcheck	Makefile.in	/^distuninstallcheck:$/;"	t
+distuninstallcheck_listfiles	Makefile	/^distuninstallcheck_listfiles = find . -type f -print$/;"	m
+distuninstallcheck_listfiles	Makefile.in	/^distuninstallcheck_listfiles = find . -type f -print$/;"	m
+docdir	Makefile	/^docdir = ${datarootdir}\/doc\/${PACKAGE_TARNAME}$/;"	m
+docdir	Makefile.in	/^docdir = @docdir@$/;"	m
+dvi	Makefile	/^dvi: dvi-am$/;"	t
+dvi	Makefile.in	/^dvi: dvi-am$/;"	t
+dvi-am	Makefile	/^dvi-am:$/;"	t
+dvi-am	Makefile.in	/^dvi-am:$/;"	t
+dvidir	Makefile	/^dvidir = ${docdir}$/;"	m
+dvidir	Makefile.in	/^dvidir = @dvidir@$/;"	m
+elements	cpfw/base/include/Base.h	/^    std::map<std::string, Element> elements;$/;"	m	struct:cpfw::Profile	typeref:typename:std::map<std::string,Element>
+exampleChain	Makefile.am	/^bin_PROGRAMS=exampleChain$/;"	P	directory:bin
+exampleChain	configure.ac	/^AC_INIT(exampleChain, 0.1, [1127254428@qq.com])$/;"	p
+exampleChain$(EXEEXT)	Makefile	/^exampleChain$(EXEEXT): $(exampleChain_OBJECTS) $(exampleChain_DEPENDENCIES) $(EXTRA_exampleChain/;"	t
+exampleChain$(EXEEXT)	Makefile.in	/^exampleChain$(EXEEXT): $(exampleChain_OBJECTS) $(exampleChain_DEPENDENCIES) $(EXTRA_exampleChain/;"	t
+exampleChain_LDADD	Makefile	/^exampleChain_LDADD = $(LDADD)$/;"	m
+exampleChain_LDADD	Makefile.in	/^exampleChain_LDADD = $(LDADD)$/;"	m
+exampleChain_OBJECTS	Makefile	/^exampleChain_OBJECTS = $(am_exampleChain_OBJECTS)$/;"	m
+exampleChain_OBJECTS	Makefile.in	/^exampleChain_OBJECTS = $(am_exampleChain_OBJECTS)$/;"	m
+exampleChain_SOURCES	Makefile	/^exampleChain_SOURCES = examples\/src\/main.cpp examples\/src\/ExampleChain.cpp cpfw\/base\/src\//;"	m
+exampleChain_SOURCES	Makefile.am	/^exampleChain_SOURCES=examples\/src\/main.cpp examples\/src\/ExampleChain.cpp cpfw\/base\/src\/Co/;"	m
+exampleChain_SOURCES	Makefile.in	/^exampleChain_SOURCES = examples\/src\/main.cpp examples\/src\/ExampleChain.cpp cpfw\/base\/src\//;"	m
+exec_prefix	Makefile	/^exec_prefix = ${prefix}$/;"	m
+exec_prefix	Makefile.in	/^exec_prefix = @exec_prefix@$/;"	m
+func_cl_dashL	compile	/^func_cl_dashL ()$/;"	f
+func_cl_dashl	compile	/^func_cl_dashl ()$/;"	f
+func_cl_wrapper	compile	/^func_cl_wrapper ()$/;"	f
+func_file_conv	compile	/^func_file_conv ()$/;"	f
+getChain	cpfw/base/src/DataStore.cpp	/^std::vector<std::string> DataStore::getChain(const std::string &parentName) {$/;"	f	class:cpfw::DataStore	typeref:typename:std::vector<std::string>
+getCondition	cpfw/base/src/DataStore.cpp	/^std::vector<Condition> DataStore::getCondition(const std::string context) {$/;"	f	class:cpfw::DataStore	typeref:typename:std::vector<Condition>
+getConvertedData	cpfw/base/src/DataStore.cpp	/^int32_t DataStore::getConvertedData(std::string context, int32_t origin) {$/;"	f	class:cpfw::DataStore	typeref:typename:int32_t
+getDataStore	cpfw/base/src/Widget.cpp	/^std::shared_ptr<DataStore> Widget::getDataStore() const {$/;"	f	class:cpfw::Widget	typeref:typename:std::shared_ptr<DataStore>
+getDefault	cpfw/base/src/Condition.cpp	/^int32_t Condition::getDefault() const {$/;"	f	class:cpfw::Condition	typeref:typename:int32_t
+getElementName	cpfw/base/src/Condition.cpp	/^std::string Condition::getElementName() const {$/;"	f	class:cpfw::Condition	typeref:typename:std::string
+getExpression	cpfw/base/src/Condition.cpp	/^std::string Condition::getExpression() const {$/;"	f	class:cpfw::Condition	typeref:typename:std::string
+getLeft	cpfw/base/src/Condition.cpp	/^int32_t Condition::getLeft() const {$/;"	f	class:cpfw::Condition	typeref:typename:int32_t
+getName	cpfw/base/src/Condition.cpp	/^std::string Condition::getName() const {$/;"	f	class:cpfw::Condition	typeref:typename:std::string
+getName	cpfw/base/src/Widget.cpp	/^const std::string& Widget::getName() const {$/;"	f	class:cpfw::Widget	typeref:typename:const std::string &
+getProfile	cpfw/base/src/DataStore.cpp	/^Profile* DataStore::getProfile(const std::string &name) {$/;"	f	class:cpfw::DataStore	typeref:typename:Profile *
+getProfileName	cpfw/base/src/Condition.cpp	/^std::string Condition::getProfileName() const {$/;"	f	class:cpfw::Condition	typeref:typename:std::string
+getRight	cpfw/base/src/Condition.cpp	/^int32_t Condition::getRight() const {$/;"	f	class:cpfw::Condition	typeref:typename:int32_t
+getWidget	cpfw/base/src/DataStore.cpp	/^std::shared_ptr<Widget> DataStore::getWidget(const std::string &name) {$/;"	f	class:cpfw::DataStore	typeref:typename:std::shared_ptr<Widget>
+give_advice	missing	/^give_advice ()$/;"	f
+handle	cpfw/base/src/Widget.cpp	/^static int32_t handle($/;"	f	namespace:cpfw	typeref:typename:int32_t	file:
+host_alias	Makefile	/^host_alias = $/;"	m
+host_alias	Makefile.in	/^host_alias = @host_alias@$/;"	m
+html	Makefile	/^html: html-am$/;"	t
+html	Makefile.in	/^html: html-am$/;"	t
+html-am	Makefile	/^html-am:$/;"	t
+html-am	Makefile.in	/^html-am:$/;"	t
+htmldir	Makefile	/^htmldir = ${docdir}$/;"	m
+htmldir	Makefile.in	/^htmldir = @htmldir@$/;"	m
+in	configure	/^  alias in your environment" "$LINENO" 5$/;"	a
+includedir	Makefile	/^includedir = ${prefix}\/include$/;"	m
+includedir	Makefile.in	/^includedir = @includedir@$/;"	m
+info	Makefile	/^info: info-am$/;"	t
+info	Makefile.in	/^info: info-am$/;"	t
+info-am	Makefile	/^info-am:$/;"	t
+info-am	Makefile.in	/^info-am:$/;"	t
+infodir	Makefile	/^infodir = ${datarootdir}\/info$/;"	m
+infodir	Makefile.in	/^infodir = @infodir@$/;"	m
+install	Makefile	/^install: install-am$/;"	t
+install	Makefile.in	/^install: install-am$/;"	t
+install-am	Makefile	/^install-am: all-am$/;"	t
+install-am	Makefile.in	/^install-am: all-am$/;"	t
+install-binPROGRAMS	Makefile	/^install-binPROGRAMS: $(bin_PROGRAMS)$/;"	t
+install-binPROGRAMS	Makefile.in	/^install-binPROGRAMS: $(bin_PROGRAMS)$/;"	t
+install-data	Makefile	/^install-data: install-data-am$/;"	t
+install-data	Makefile.in	/^install-data: install-data-am$/;"	t
+install-data-am	Makefile	/^install-data-am:$/;"	t
+install-data-am	Makefile.in	/^install-data-am:$/;"	t
+install-dvi	Makefile	/^install-dvi: install-dvi-am$/;"	t
+install-dvi	Makefile.in	/^install-dvi: install-dvi-am$/;"	t
+install-dvi-am	Makefile	/^install-dvi-am:$/;"	t
+install-dvi-am	Makefile.in	/^install-dvi-am:$/;"	t
+install-exec	Makefile	/^install-exec: install-exec-am$/;"	t
+install-exec	Makefile.in	/^install-exec: install-exec-am$/;"	t
+install-exec-am	Makefile	/^install-exec-am: install-binPROGRAMS$/;"	t
+install-exec-am	Makefile.in	/^install-exec-am: install-binPROGRAMS$/;"	t
+install-html	Makefile	/^install-html: install-html-am$/;"	t
+install-html	Makefile.in	/^install-html: install-html-am$/;"	t
+install-html-am	Makefile	/^install-html-am:$/;"	t
+install-html-am	Makefile.in	/^install-html-am:$/;"	t
+install-info	Makefile	/^install-info: install-info-am$/;"	t
+install-info	Makefile.in	/^install-info: install-info-am$/;"	t
+install-info-am	Makefile	/^install-info-am:$/;"	t
+install-info-am	Makefile.in	/^install-info-am:$/;"	t
+install-man	Makefile	/^install-man:$/;"	t
+install-man	Makefile.in	/^install-man:$/;"	t
+install-pdf	Makefile	/^install-pdf: install-pdf-am$/;"	t
+install-pdf	Makefile.in	/^install-pdf: install-pdf-am$/;"	t
+install-pdf-am	Makefile	/^install-pdf-am:$/;"	t
+install-pdf-am	Makefile.in	/^install-pdf-am:$/;"	t
+install-ps	Makefile	/^install-ps: install-ps-am$/;"	t
+install-ps	Makefile.in	/^install-ps: install-ps-am$/;"	t
+install-ps-am	Makefile	/^install-ps-am:$/;"	t
+install-ps-am	Makefile.in	/^install-ps-am:$/;"	t
+install-strip	Makefile	/^install-strip:$/;"	t
+install-strip	Makefile.in	/^install-strip:$/;"	t
+install_sh	Makefile	/^install_sh = ${SHELL} \/home\/guanzhb\/workspace\/codes\/cpfw\/install-sh$/;"	m
+install_sh	Makefile.in	/^install_sh = @install_sh@$/;"	m
+install_sh_DATA	Makefile	/^install_sh_DATA = $(install_sh) -c -m 644$/;"	m
+install_sh_DATA	Makefile.in	/^install_sh_DATA = $(install_sh) -c -m 644$/;"	m
+install_sh_PROGRAM	Makefile	/^install_sh_PROGRAM = $(install_sh) -c$/;"	m
+install_sh_PROGRAM	Makefile.in	/^install_sh_PROGRAM = $(install_sh) -c$/;"	m
+install_sh_SCRIPT	Makefile	/^install_sh_SCRIPT = $(install_sh) -c$/;"	m
+install_sh_SCRIPT	Makefile.in	/^install_sh_SCRIPT = $(install_sh) -c$/;"	m
+installcheck	Makefile	/^installcheck: installcheck-am$/;"	t
+installcheck	Makefile.in	/^installcheck: installcheck-am$/;"	t
+installcheck-am	Makefile	/^installcheck-am:$/;"	t
+installcheck-am	Makefile.in	/^installcheck-am:$/;"	t
+installdirs	Makefile	/^installdirs:$/;"	t
+installdirs	Makefile.in	/^installdirs:$/;"	t
+invokeChain	cpfw/base/src/ResponsibilityChain.cpp	/^int32_t ResponsibilityChain::invokeChain(std::string widgetName) const {$/;"	f	class:cpfw::ResponsibilityChain	typeref:typename:int32_t
+invokeWidget	cpfw/base/src/ResponsibilityChain.cpp	/^int32_t ResponsibilityChain::invokeWidget(std::string widgetName) const {$/;"	f	class:cpfw::ResponsibilityChain	typeref:typename:int32_t
+libdir	Makefile	/^libdir = ${exec_prefix}\/lib$/;"	m
+libdir	Makefile.in	/^libdir = @libdir@$/;"	m
+libexecdir	Makefile	/^libexecdir = ${exec_prefix}\/libexec$/;"	m
+libexecdir	Makefile.in	/^libexecdir = @libexecdir@$/;"	m
+localedir	Makefile	/^localedir = ${datarootdir}\/locale$/;"	m
+localedir	Makefile.in	/^localedir = @localedir@$/;"	m
+localstatedir	Makefile	/^localstatedir = ${prefix}\/var$/;"	m
+localstatedir	Makefile.in	/^localstatedir = @localstatedir@$/;"	m
+mConditionTable	cpfw/base/include/DataStore.h	/^    std::map<std::string\/*context*\/, std::vector<Condition>> mConditionTable;$/;"	m	class:cpfw::DataStore	typeref:typename:std::map<std::string,std::vector<Condition>>
+mDataConvertTable	cpfw/base/include/DataStore.h	/^    std::map<std::string\/*context*\/, std::map<int32_t, int32_t>> mDataConvertTable;$/;"	m	class:cpfw::DataStore	typeref:typename:std::map<std::string,std::map<int32_t,int32_t>>
+mElementName	cpfw/base/include/Condition.h	/^    const std::string mElementName;$/;"	m	class:cpfw::Condition	typeref:typename:const std::string
+mExpression	cpfw/base/include/Condition.h	/^    const std::string mExpression;$/;"	m	class:cpfw::Condition	typeref:typename:const std::string
+mInvokeChainTable	cpfw/base/include/DataStore.h	/^        std::vector<std::string\/*children name*\/>> mInvokeChainTable;$/;"	m	class:cpfw::DataStore	typeref:typename:std::map<std::string,std::vector<std::string>>
+mLeft	cpfw/base/include/Condition.h	/^    const int32_t mLeft;$/;"	m	class:cpfw::Condition	typeref:typename:const int32_t
+mName	cpfw/base/include/Condition.h	/^    const std::string mName;$/;"	m	class:cpfw::Condition	typeref:typename:const std::string
+mName	cpfw/base/include/Widget.h	/^    const std::string& mName;$/;"	m	class:cpfw::Widget	typeref:typename:const std::string &
+mProfileName	cpfw/base/include/Condition.h	/^    const std::string mProfileName;$/;"	m	class:cpfw::Condition	typeref:typename:const std::string
+mProfileTable	cpfw/base/include/DataStore.h	/^    std::map<std::string\/*widget name*\/, Profile> mProfileTable;$/;"	m	class:cpfw::DataStore	typeref:typename:std::map<std::string,Profile>
+mResponsibilityChain	examples/include/ExampleChain.h	/^    std::shared_ptr<ResponsibilityChain> mResponsibilityChain;$/;"	m	class:cpfw::ExampleChain	typeref:typename:std::shared_ptr<ResponsibilityChain>
+mRight	cpfw/base/include/Condition.h	/^    const int32_t mRight;$/;"	m	class:cpfw::Condition	typeref:typename:const int32_t
+mStore	cpfw/base/include/ResponsibilityChain.h	/^    std::shared_ptr<DataStore> mStore;$/;"	m	class:cpfw::ResponsibilityChain	typeref:typename:std::shared_ptr<DataStore>
+mStore	cpfw/base/include/Widget.h	/^    std::shared_ptr<DataStore> mStore;$/;"	m	class:cpfw::Widget	typeref:typename:std::shared_ptr<DataStore>
+mStore	examples/include/ExampleChain.h	/^    std::shared_ptr<DataStore> mStore;$/;"	m	class:cpfw::ExampleChain	typeref:typename:std::shared_ptr<DataStore>
+mWidgetTable	cpfw/base/include/DataStore.h	/^    std::map<std::string\/*unique name*\/, std::shared_ptr<Widget>> mWidgetTable;$/;"	m	class:cpfw::DataStore	typeref:typename:std::map<std::string,std::shared_ptr<Widget>>
+main	examples/src/main.cpp	/^int main() {$/;"	f	typeref:typename:int
+main.o	Makefile	/^main.o: examples\/src\/main.cpp$/;"	t
+main.o	Makefile.in	/^main.o: examples\/src\/main.cpp$/;"	t
+main.obj	Makefile	/^main.obj: examples\/src\/main.cpp$/;"	t
+main.obj	Makefile.in	/^main.obj: examples\/src\/main.cpp$/;"	t
+maintainer-clean	Makefile	/^maintainer-clean: maintainer-clean-am$/;"	t
+maintainer-clean	Makefile.in	/^maintainer-clean: maintainer-clean-am$/;"	t
+maintainer-clean-am	Makefile	/^maintainer-clean-am: distclean-am maintainer-clean-generic$/;"	t
+maintainer-clean-am	Makefile.in	/^maintainer-clean-am: distclean-am maintainer-clean-generic$/;"	t
+maintainer-clean-generic	Makefile	/^maintainer-clean-generic:$/;"	t
+maintainer-clean-generic	Makefile.in	/^maintainer-clean-generic:$/;"	t
+make_dummy_depfile	depcomp	/^make_dummy_depfile ()$/;"	f
+mandir	Makefile	/^mandir = ${datarootdir}\/man$/;"	m
+mandir	Makefile.in	/^mandir = @mandir@$/;"	m
+max	cpfw/base/include/Base.h	/^    int32_t max;$/;"	m	struct:cpfw::Element	typeref:typename:int32_t
+min	cpfw/base/include/Base.h	/^    int32_t min;$/;"	m	struct:cpfw::Element	typeref:typename:int32_t
+mkdir_p	Makefile	/^mkdir_p = $(MKDIR_P)$/;"	m
+mkdir_p	Makefile.in	/^mkdir_p = @mkdir_p@$/;"	m
+mkinstalldirs	Makefile	/^mkinstalldirs = $(install_sh) -d$/;"	m
+mkinstalldirs	Makefile.in	/^mkinstalldirs = $(install_sh) -d$/;"	m
+mostlyclean	Makefile	/^mostlyclean: mostlyclean-am$/;"	t
+mostlyclean	Makefile.in	/^mostlyclean: mostlyclean-am$/;"	t
+mostlyclean-am	Makefile	/^mostlyclean-am: mostlyclean-compile mostlyclean-generic$/;"	t
+mostlyclean-am	Makefile.in	/^mostlyclean-am: mostlyclean-compile mostlyclean-generic$/;"	t
+mostlyclean-compile	Makefile	/^mostlyclean-compile:$/;"	t
+mostlyclean-compile	Makefile.in	/^mostlyclean-compile:$/;"	t
+mostlyclean-generic	Makefile	/^mostlyclean-generic:$/;"	t
+mostlyclean-generic	Makefile.in	/^mostlyclean-generic:$/;"	t
+oldincludedir	Makefile	/^oldincludedir = \/usr\/include$/;"	m
+oldincludedir	Makefile.in	/^oldincludedir = @oldincludedir@$/;"	m
+parseProfile	cpfw/base/include/Utils.hpp	/^inline std::vector<int32_t> parseProfile($/;"	f	namespace:cpfw	typeref:typename:std::vector<int32_t>
+pdf	Makefile	/^pdf: pdf-am$/;"	t
+pdf	Makefile.in	/^pdf: pdf-am$/;"	t
+pdf-am	Makefile	/^pdf-am:$/;"	t
+pdf-am	Makefile.in	/^pdf-am:$/;"	t
+pdfdir	Makefile	/^pdfdir = ${docdir}$/;"	m
+pdfdir	Makefile.in	/^pdfdir = @pdfdir@$/;"	m
+pkgdatadir	Makefile	/^pkgdatadir = $(datadir)\/exampleChain$/;"	m
+pkgdatadir	Makefile.in	/^pkgdatadir = $(datadir)\/@PACKAGE@$/;"	m
+pkgincludedir	Makefile	/^pkgincludedir = $(includedir)\/exampleChain$/;"	m
+pkgincludedir	Makefile.in	/^pkgincludedir = $(includedir)\/@PACKAGE@$/;"	m
+pkglibdir	Makefile	/^pkglibdir = $(libdir)\/exampleChain$/;"	m
+pkglibdir	Makefile.in	/^pkglibdir = $(libdir)\/@PACKAGE@$/;"	m
+pkglibexecdir	Makefile	/^pkglibexecdir = $(libexecdir)\/exampleChain$/;"	m
+pkglibexecdir	Makefile.in	/^pkglibexecdir = $(libexecdir)\/@PACKAGE@$/;"	m
+prefix	Makefile	/^prefix = \/usr\/local$/;"	m
+prefix	Makefile.in	/^prefix = @prefix@$/;"	m
+profile	cpfw/base/include/Base.h	/^    std::map<std::string, Profile> profile;$/;"	m	struct:cpfw::Profile	typeref:typename:std::map<std::string,Profile>
+program_details	missing	/^program_details ()$/;"	f
+program_transform_name	Makefile	/^program_transform_name = s,x,x,$/;"	m
+program_transform_name	Makefile.in	/^program_transform_name = @program_transform_name@$/;"	m
+ps	Makefile	/^ps: ps-am$/;"	t
+ps	Makefile.in	/^ps: ps-am$/;"	t
+ps-am	Makefile	/^ps-am:$/;"	t
+ps-am	Makefile.in	/^ps-am:$/;"	t
+psdir	Makefile	/^psdir = ${docdir}$/;"	m
+psdir	Makefile.in	/^psdir = @psdir@$/;"	m
+runstatedir	Makefile	/^runstatedir = ${localstatedir}\/run$/;"	m
+runstatedir	Makefile.in	/^runstatedir = @runstatedir@$/;"	m
+sbindir	Makefile	/^sbindir = ${exec_prefix}\/sbin$/;"	m
+sbindir	Makefile.in	/^sbindir = @sbindir@$/;"	m
+setEq	examples/src/ExampleChain.cpp	/^int32_t ExampleChain::setEq(std::string band, int32_t db) {$/;"	f	class:cpfw::ExampleChain	typeref:typename:int32_t
+setFade	examples/src/ExampleChain.cpp	/^int32_t ExampleChain::setFade(int32_t fade) {$/;"	f	class:cpfw::ExampleChain	typeref:typename:int32_t
+setLoudness	examples/src/ExampleChain.cpp	/^int32_t ExampleChain::setLoudness(int32_t loudness) {$/;"	f	class:cpfw::ExampleChain	typeref:typename:int32_t
+setVolume	examples/src/ExampleChain.cpp	/^int32_t ExampleChain::setVolume(int32_t volume) {$/;"	f	class:cpfw::ExampleChain	typeref:typename:int32_t
+set_base_from	depcomp	/^set_base_from ()$/;"	f
+set_dir_from	depcomp	/^set_dir_from ()$/;"	f
+sharedstatedir	Makefile	/^sharedstatedir = ${prefix}\/com$/;"	m
+sharedstatedir	Makefile.in	/^sharedstatedir = @sharedstatedir@$/;"	m
+srcdir	Makefile	/^srcdir = .$/;"	m
+srcdir	Makefile.in	/^srcdir = @srcdir@$/;"	m
+stamp-h1	Makefile	/^stamp-h1: $(srcdir)\/config.h.in $(top_builddir)\/config.status$/;"	t
+stamp-h1	Makefile.in	/^stamp-h1: $(srcdir)\/config.h.in $(top_builddir)\/config.status$/;"	t
+subdir	Makefile	/^subdir = .$/;"	m
+subdir	Makefile.in	/^subdir = .$/;"	m
+swipe	cpfw/base/src/Widget.cpp	/^int32_t Widget::swipe() {$/;"	f	class:cpfw::Widget	typeref:typename:int32_t
+sysconfdir	Makefile	/^sysconfdir = ${prefix}\/etc$/;"	m
+sysconfdir	Makefile.in	/^sysconfdir = @sysconfdir@$/;"	m
+tags	Makefile	/^tags: tags-am$/;"	t
+tags	Makefile.in	/^tags: tags-am$/;"	t
+tags-am	Makefile	/^tags-am: $(TAGS_DEPENDENCIES) $(am__tagged_files)$/;"	t
+tags-am	Makefile.in	/^tags-am: $(TAGS_DEPENDENCIES) $(am__tagged_files)$/;"	t
+target_alias	Makefile	/^target_alias = $/;"	m
+target_alias	Makefile.in	/^target_alias = @target_alias@$/;"	m
+top_build_prefix	Makefile	/^top_build_prefix = $/;"	m
+top_build_prefix	Makefile.in	/^top_build_prefix = @top_build_prefix@$/;"	m
+top_builddir	Makefile	/^top_builddir = .$/;"	m
+top_builddir	Makefile.in	/^top_builddir = @top_builddir@$/;"	m
+top_distdir	Makefile	/^top_distdir = $(distdir)$/;"	m
+top_distdir	Makefile.in	/^top_distdir = $(distdir)$/;"	m
+top_srcdir	Makefile	/^top_srcdir = .$/;"	m
+top_srcdir	Makefile.in	/^top_srcdir = @top_srcdir@$/;"	m
+transform	Makefile	/^transform = $(program_transform_name)$/;"	m
+transform	Makefile.in	/^transform = $(program_transform_name)$/;"	m
+type	cpfw/base/include/Base.h	/^    uint32_t type;  \/\/ relate to ElementType$/;"	m	struct:cpfw::Element	typeref:typename:uint32_t
+uninstall	Makefile	/^uninstall: uninstall-am$/;"	t
+uninstall	Makefile.in	/^uninstall: uninstall-am$/;"	t
+uninstall-am	Makefile	/^uninstall-am: uninstall-binPROGRAMS$/;"	t
+uninstall-am	Makefile.in	/^uninstall-am: uninstall-binPROGRAMS$/;"	t
+uninstall-binPROGRAMS	Makefile	/^uninstall-binPROGRAMS:$/;"	t
+uninstall-binPROGRAMS	Makefile.in	/^uninstall-binPROGRAMS:$/;"	t
+~Condition	cpfw/base/src/Condition.cpp	/^Condition::~Condition() {$/;"	f	class:cpfw::Condition
+~DataStore	cpfw/base/src/DataStore.cpp	/^DataStore::~DataStore() {$/;"	f	class:cpfw::DataStore
+~ExampleChain	examples/src/ExampleChain.cpp	/^ExampleChain::~ExampleChain() {$/;"	f	class:cpfw::ExampleChain
+~ResponsibilityChain	cpfw/base/src/ResponsibilityChain.cpp	/^ResponsibilityChain::~ResponsibilityChain() {$/;"	f	class:cpfw::ResponsibilityChain
+~Widget	cpfw/base/src/Widget.cpp	/^Widget::~Widget() {$/;"	f	class:cpfw::Widget
