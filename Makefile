@@ -102,10 +102,10 @@ CONFIG_CLEAN_FILES =
 CONFIG_CLEAN_VPATH_FILES =
 am__installdirs = "$(DESTDIR)$(bindir)"
 PROGRAMS = $(bin_PROGRAMS)
-am_exampleChain_OBJECTS = main.$(OBJEXT) ExampleChain.$(OBJEXT) \
-	Condition.$(OBJEXT) Widget.$(OBJEXT) \
-	ResponsibilityChain.$(OBJEXT) DataStore.$(OBJEXT) \
-	Logic.$(OBJEXT) DataParser.$(OBJEXT) tinyxml2.$(OBJEXT)
+am_exampleChain_OBJECTS = ExampleChain.$(OBJEXT) Condition.$(OBJEXT) \
+	Widget.$(OBJEXT) ResponsibilityChain.$(OBJEXT) \
+	DataStore.$(OBJEXT) Logic.$(OBJEXT) DataParser.$(OBJEXT) \
+	tinyxml2.$(OBJEXT)
 exampleChain_OBJECTS = $(am_exampleChain_OBJECTS)
 exampleChain_LDADD = $(LDADD)
 AM_V_P = $(am__v_P_$(V))
@@ -127,7 +127,7 @@ am__depfiles_remade = ./$(DEPDIR)/Condition.Po \
 	./$(DEPDIR)/DataParser.Po ./$(DEPDIR)/DataStore.Po \
 	./$(DEPDIR)/ExampleChain.Po ./$(DEPDIR)/Logic.Po \
 	./$(DEPDIR)/ResponsibilityChain.Po ./$(DEPDIR)/Widget.Po \
-	./$(DEPDIR)/main.Po ./$(DEPDIR)/tinyxml2.Po
+	./$(DEPDIR)/tinyxml2.Po
 am__mv = mv -f
 AM_V_lt = $(am__v_lt_$(V))
 am__v_lt_ = $(am__v_lt_$(AM_DEFAULT_VERBOSITY))
@@ -286,15 +286,14 @@ top_build_prefix =
 top_builddir = .
 top_srcdir = .
 AUTOMAKE_OPTIONS = foreign
-exampleChain_SOURCES = examples/src/main.cpp \
-                     examples/src/ExampleChain.cpp \
-                     cpfw/base/src/Condition.cpp \
-                     cpfw/base/src/Widget.cpp \
-                     cpfw/base/src/ResponsibilityChain.cpp \
-                     cpfw/base/src/DataStore.cpp \
-                     cpfw/core/src/Logic.cpp \
-                     cpfw/core/src/DataParser.cpp \
-                     external/tinyxml2/tinyxml2.cpp
+exampleChain_SOURCES = examples/src/ExampleChain.cpp \
+                      cpfw/base/src/Condition.cpp \
+                      cpfw/base/src/Widget.cpp \
+                      cpfw/base/src/ResponsibilityChain.cpp \
+                      cpfw/base/src/DataStore.cpp \
+                      cpfw/core/src/Logic.cpp \
+                      cpfw/core/src/DataParser.cpp \
+                      external/tinyxml2/tinyxml2.cpp
 
 all: config.h
 	$(MAKE) $(AM_MAKEFLAGS) all-am
@@ -409,7 +408,6 @@ include ./$(DEPDIR)/ExampleChain.Po # am--include-marker
 include ./$(DEPDIR)/Logic.Po # am--include-marker
 include ./$(DEPDIR)/ResponsibilityChain.Po # am--include-marker
 include ./$(DEPDIR)/Widget.Po # am--include-marker
-include ./$(DEPDIR)/main.Po # am--include-marker
 include ./$(DEPDIR)/tinyxml2.Po # am--include-marker
 
 $(am__depfiles_remade):
@@ -431,20 +429,6 @@ am--depfiles: $(am__depfiles_remade)
 #	$(AM_V_CXX)source='$<' object='$@' libtool=no \
 #	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
 #	$(AM_V_CXX_no)$(CXXCOMPILE) -c -o $@ `$(CYGPATH_W) '$<'`
-
-main.o: examples/src/main.cpp
-	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT main.o -MD -MP -MF $(DEPDIR)/main.Tpo -c -o main.o `test -f 'examples/src/main.cpp' || echo '$(srcdir)/'`examples/src/main.cpp
-	$(AM_V_at)$(am__mv) $(DEPDIR)/main.Tpo $(DEPDIR)/main.Po
-#	$(AM_V_CXX)source='examples/src/main.cpp' object='main.o' libtool=no \
-#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
-#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o main.o `test -f 'examples/src/main.cpp' || echo '$(srcdir)/'`examples/src/main.cpp
-
-main.obj: examples/src/main.cpp
-	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT main.obj -MD -MP -MF $(DEPDIR)/main.Tpo -c -o main.obj `if test -f 'examples/src/main.cpp'; then $(CYGPATH_W) 'examples/src/main.cpp'; else $(CYGPATH_W) '$(srcdir)/examples/src/main.cpp'; fi`
-	$(AM_V_at)$(am__mv) $(DEPDIR)/main.Tpo $(DEPDIR)/main.Po
-#	$(AM_V_CXX)source='examples/src/main.cpp' object='main.obj' libtool=no \
-#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
-#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o main.obj `if test -f 'examples/src/main.cpp'; then $(CYGPATH_W) 'examples/src/main.cpp'; else $(CYGPATH_W) '$(srcdir)/examples/src/main.cpp'; fi`
 
 ExampleChain.o: examples/src/ExampleChain.cpp
 	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT ExampleChain.o -MD -MP -MF $(DEPDIR)/ExampleChain.Tpo -c -o ExampleChain.o `test -f 'examples/src/ExampleChain.cpp' || echo '$(srcdir)/'`examples/src/ExampleChain.cpp
@@ -838,7 +822,6 @@ distclean: distclean-am
 	-rm -f ./$(DEPDIR)/Logic.Po
 	-rm -f ./$(DEPDIR)/ResponsibilityChain.Po
 	-rm -f ./$(DEPDIR)/Widget.Po
-	-rm -f ./$(DEPDIR)/main.Po
 	-rm -f ./$(DEPDIR)/tinyxml2.Po
 	-rm -f Makefile
 distclean-am: clean-am distclean-compile distclean-generic \
@@ -894,7 +877,6 @@ maintainer-clean: maintainer-clean-am
 	-rm -f ./$(DEPDIR)/Logic.Po
 	-rm -f ./$(DEPDIR)/ResponsibilityChain.Po
 	-rm -f ./$(DEPDIR)/Widget.Po
-	-rm -f ./$(DEPDIR)/main.Po
 	-rm -f ./$(DEPDIR)/tinyxml2.Po
 	-rm -f Makefile
 maintainer-clean-am: distclean-am maintainer-clean-generic
