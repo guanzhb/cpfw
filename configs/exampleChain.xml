@@ -1,58 +1,55 @@
-﻿<?xml version="1.0" encoding="UTF-8"?>
-<cpfw>
-    <invokes>
-        <invoker name="volume"></invoker>
-        <invoker name="fade"></invoker>
-        <invoker name="equalizer"></invoker>
-        <invoker name="duck"></invoker>
-        <invoker name="loudness"></invoker>
-    </invokes>
-
+<?xml version="1.0" encoding="UTF-8"?>
+<exampleChain>
     <invokeChains>
-        <parent name="volume">
-            <child name="loudness" condition="check volume before loudness"></child>
-            <child name="duck" condition="check volume before duck"></child>
+        <parent widget="volume">
+            <child widget="loudness"></child>
+            <child widget="duck"></child>
         </parent>
     </invokeChains>
 
-    <contions>
-        <condition name="check volume before loudness" when="default@volume:equal:20"</condition>
-        <condition name="check volume before duck" when="default@volume:in_range:1,20"</condition>
-    </contions>
+    <conditions>
+        <condition widget="loudness" logic="and">
+            <element when="default@volume;equal:20"></element>
+            <element when="default@fade;equal:5"></element>
+            <element when="gain_400hz@equalizer;equal:5"></element>
+        </condition>
+        <condition widget="duck" logic="or">
+            <element when="default@volume;in_range:1,20"></element>
+        </condition>
+    </conditions>
 
     <profiles>
-        <profile name="volume">
-            <elememt min="1" max="20" current="5" type="1">default</element>
+        <profile widget="volume">
+            <element name="default" min="1" max="20" current="5" type="1">rest</element>
+            <element name="vol" min="1" max="20" current="5" type="1">default</element>
         </profile>
-
-        <profile name="fade">
-            <elememt min="1" max="20" current="5" type="1">fade</element>
+        <profile widget="fade">
+            <element name="default" min="1" max="20" current="5" type="1">fade</element>
         </profile>
-
-        <profile name="equalizer">
-            <elememt min="1" max="20" current="5" type="1">gain_100hz</element>
-            <elememt min="5" max="20" current="10" type="1">gain_200hz</element>
-            <elememt min="20" max="30" current="25" type="1">gain_400hz</element>
-            <elememt min="50" max="200" current="100" type="1">gain_800hz</element>
+        <profile widget="equalizer">
+            <element name="gain_100hz" min="1" max="20" current="5" type="1"></element>
+            <element name="gain_200hz" min="5" max="20" current="10" type="1"></element>
+            <element name="gain_400hz" min="20" max="30" current="25" type="1"></element>
+            <element name="gain_800hz" min="50" max="200" current="100" type="1"></element>
         </profile>
-
-        <profile name="duck">
-            <elememt min="10" max="20" current="5" type="1">default</element>
+        <profile widget="duck">
+            <element name="default" min="10" max="20" current="5" type="1">default</element>
         </profile>
-
-        <profile name="loudness">
-            <elememt min="10" max="20" current="5" type="1">default</element>
+        <profile widget="loudness">
+            <element name="default" min="10" max="20" current="5" type="1">default</element>
         </profile>
-    <profiles>
+        <profile widget="stub">
+            <element name="default" min="10" max="20" current="5" type="1">default</element>
+        </profile>
+    </profiles>
 
     <converts>
-        <context name="volume">
+        <context widget="volume">
             <element origin="5" target="111111"></element>
         </context>
-        <context name="fade">
+        <context widget="fade">
             <element origin="1" target="22222"></element>
             <element origin="2" target="3333"></element>
         </context>
     </converts>
-
-</cpfw>
+</exampleChain>

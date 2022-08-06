@@ -22,8 +22,8 @@ Condition::Condition() : Condition("", "", "", "", 0, 0) {
 }
 
 Condition::Condition(
-        std::string name, std::string expression,
-        std::string profileName, std::string elementName,
+        std::string name, std::string elementName,
+        std::string profileName, std::string expression,
         int32_t left, int32_t right)
     : mName(name), mExpression(expression),
       mProfileName(profileName), mElementName(elementName),
@@ -33,19 +33,19 @@ Condition::Condition(
 Condition::~Condition() {
 }
 
-std::string Condition::getName() const {
+const std::string& Condition::getName() const {
     return mName;
 }
 
-std::string Condition::getExpression() const {
+const std::string& Condition::getExpression() const {
     return mExpression;
 }
 
-std::string Condition::getProfileName() const {
+const std::string& Condition::getProfileName() const {
     return mProfileName;
 }
 
-std::string Condition::getElementName() const {
+const std::string& Condition::getElementName() const {
     return mElementName;
 }
 

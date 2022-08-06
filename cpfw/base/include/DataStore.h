@@ -22,6 +22,8 @@
 #include <vector>
 #include <functional>
 #include <memory>
+#include <optional>
+#include <utility>
 
 #include "cpfw/base/include/Base.h"
 #include "cpfw/base/include/Widget.h"
@@ -31,38 +33,43 @@ namespace cpfw {
 
 class Widget;
 
+using TINVOKE_CHAIN = std::vector<std::string/*child name*/>;
+using TINVOKE_CONDITION = std::pair<std::string/*and, or*/, std::vector<Condition>>;
+
 /**
  * @brief database of framework, who is configuried by file or user.
  * no logic here, only data.
  */
-class DataStore {
+class DataStore : public std::enable_shared_from_this<DataStore>{
  public:
+    static const TINVOKE_CHAIN EMPTY_INVOKE_CHAIN;
+    static const TINVOKE_CONDITION EMPTY_CONDITION;
+    static Profile EMPTY_PROFILE;
     DataStore();
 
     ~DataStore();
 
-    std::shared_ptr<Widget> getWidget(const std::string &name);
+    std::optional<std::shared_ptr<Widget>> getWidget(const std::string &name);
 
-    std::vector<std::string> getChain(const std::string &parentName);
+    const TINVOKE_CHAIN& getChain(const std::string &parentName);
 
-    Profile* getProfile(const std::string &name);
+    Profile& getProfile(const std::string &name);
     void setProfile(const std::string &profileName, int32_t value);
     void setProfile(const std::string &profileName,
             const std::string &elementName, int32_t value);
 
     int32_t getConvertedData(std::string context, int32_t origin);
 
-    std::vector<std::pair<std::string, Condition>> getCondition(const std::string context);
+    const TINVOKE_CONDITION& getCondition(const std::string widgetName);
 
  public:
     /**
      * @brief bind every widget to it's unique name.
      * invoke in constructor.
      *
-     * @param widgetName widget name
      * @param widget the widget who can be invoked.
      */
-    void addWidget(const std::string widgetName, std::shared_ptr<Widget> widget);
+    void addWidget(std::shared_ptr<Widget> widget);
 
     /**
      * @brief add invoke chain.
@@ -72,8 +79,7 @@ class DataStore {
      * @param parent parent widget name
      * @param children children widget name follow the parent
      */
-    void addInvokeChain(
-            std::string parent, const std::vector<std::string> children);
+    void addInvokeChain(std::string parent, const TINVOKE_CHAIN children);
 
     /**
      * @brief add profile which binds to it's unique wifget
@@ -97,25 +103,23 @@ class DataStore {
     /**
      * @brief add condition data.
      *
-     * @param contxt data context
+     * @param widgetName
      * @param condition check data and expression(or, and)
      */
-    void addCondition(const std::string context,
-            const std::vector<std::pair<std::string, Condition>> condition);
+    void addCondition(const std::string widgetName, TINVOKE_CONDITION condition);
 
  private:
+
     // every widget binds to a unique name
     std::map<std::string/*unique name*/, std::shared_ptr<Widget>> mWidgetTable;
     // every invoker can invoke multiple invokers
-    std::map<std::string/*parent name*/,
-        std::vector<std::string/*children name*/>> mInvokeChainTable;
+    std::map<std::string/*parent name*/, TINVOKE_CHAIN> mInvokeChainTable;
     // every widget binds to a profile, which have multi elements
     std::map<std::string/*widget name*/, Profile> mProfileTable;
     // original data can be converted to the target data for different context
     std::map<std::string/*context*/, std::map<int32_t, int32_t>> mDataConvertTable;
     // used to check before action
-    std::map<std::string/*context*/,
-        std::vector<std::pair<std::string/*or, and?*/, Condition>>> mConditionTable;
+    std::map<std::string/*condition name*/, TINVOKE_CONDITION> mConditionTable;
 };
 
 }  // namespace cpfw

@@ -36,14 +36,14 @@ Widget::Widget() : Widget("") {
 Widget::Widget(std::string name) : mName(name) {
 }
 
-Widget::Widget(std::string name, std::shared_ptr<DataStore> store)
-        : mName(name), mStore(store) {
-}
-
 Widget::~Widget() {
 }
 
-std::string Widget::getName() const {
+void Widget::linkDataStore(std::shared_ptr<DataStore> store) {
+    mStore = store;
+}
+
+const std::string& Widget::getName() const {
     return mName;
 }
 
@@ -52,39 +52,43 @@ std::shared_ptr<DataStore> Widget::getDataStore() const {
 }
 
 int32_t Widget::check() {
+    std::cout << "Widget[" << mName << "] check" << std::endl;
     int32_t ret = 0;
     if (!mStore) {
         return ret;
     }
-    auto conditionPair = mStore->getCondition(mName);
-    for (auto &itor : conditionPair) {
-        auto &c = itor.second;
-        const std::string &profileName = c.getProfileName();
-        const std::string &elementName = c.getElementName();
-        const std::string &expressionIn = c.getExpression();
-        Profile* profile = mStore->getProfile(profileName);
-        int32_t current = profile->elements[elementName].current;
+    auto &conditionPair = mStore->getCondition(mName);
+    if (&DataStore::EMPTY_CONDITION == &conditionPair) {
+        std::cout << "Widget[" << mName << "] no check" << std::endl;
+        return 0;
+    }
+    std::string logic = conditionPair.first;
+    for (auto itor : conditionPair.second) {
+        std::cout << "Widget[" << mName << "] check elementName "
+            << itor.getElementName() << std::endl;
+        Profile &profile = mStore->getProfile(itor.getProfileName());
+        int32_t current = profile.elements[itor.getElementName()].current;
+        const std::string &expressionIn = itor.getExpression();
         if (0 == EXPRESSION_EQ.compare(expressionIn)) {
-             if (current != c.getDefault()) {
+             if (current != itor.getDefault()) {
                  ret = EINVAL;  // TODO(guanzhb) LOGI
              }
         } else if (0 == EXPRESSION_NOT_EQ.compare(expressionIn)) {
-             if (current == c.getDefault()) {
+             if (current == itor.getDefault()) {
                  ret = EINVAL;  // TODO(guanzhb) LOGI
              }
         } else if (0 == EXPRESSION_IN_RANGE.compare(expressionIn)) {
-             if (current < c.getLeft() || current > c.getRight()) {
+             if (current < itor.getLeft() || current > itor.getRight()) {
                  ret = EINVAL;  // TODO(guanzhb) LOGI
              }
         } else if (0 == EXPRESSION_OUT_RANGE.compare(expressionIn)) {
-             if (current > c.getLeft() && current < c.getRight()) {
+             if (current > itor.getLeft() && current < itor.getRight()) {
                  ret = EINVAL;  // TODO(guanzhb) LOGI
              }
         }
-        const std::string &expressionBetween = itor.first;
-        if (0 == EXPRESSION_OR.compare(expressionBetween)) {
+        if (0 == EXPRESSION_OR.compare(logic)) {
             break;
-        } else if (0 == EXPRESSION_AND.compare(expressionBetween)) {
+        } else if (0 == EXPRESSION_AND.compare(logic)) {
 
         }
         if (0 != ret) {

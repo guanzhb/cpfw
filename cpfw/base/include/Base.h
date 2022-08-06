@@ -20,12 +20,9 @@
 #include <stdint.h>
 #include <string>
 #include <vector>
-
-#include "cpfw/base/include/DataStore.h"
+#include <map>
 
 namespace cpfw {
-
-class DataStore;
 
 enum class ElementType : uint32_t {
     PUBLIC = 0x01,

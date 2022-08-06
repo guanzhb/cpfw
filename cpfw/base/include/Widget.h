@@ -23,6 +23,8 @@
 
 namespace cpfw {
 
+class DataStore;
+
 class Widget {
  public:
     static const std::string EXPRESSION_EQ;
@@ -37,11 +39,11 @@ class Widget {
 
      explicit Widget(std::string name);
 
-     Widget(std::string name, std::shared_ptr<DataStore> store);
-
      virtual ~Widget();
 
-     virtual std::string getName() const;
+     virtual void linkDataStore(std::shared_ptr<DataStore> dataStore);
+
+     virtual const std::string& getName() const;
 
      virtual std::shared_ptr<DataStore> getDataStore() const;
 

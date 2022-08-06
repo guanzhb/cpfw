@@ -39,21 +39,25 @@ int32_t ResponsibilityChain::invokeChain(std::string widgetName) const {
 }
 
 int32_t ResponsibilityChain::invokeWidget(std::string widgetName) const {
-    std::shared_ptr<Widget> widget = mStore->getWidget(widgetName);
-    if (widget == nullptr) {
+    std::cout << "ResponsibilityChain " << __func__ << " -> " << widgetName << std::endl;
+    std::optional<std::shared_ptr<Widget>> widget = mStore->getWidget(widgetName);
+    if (!widget) {
         return EINVAL;  // TODO(guanzhb) LOGE
     }
 
     int32_t ret = 0;
-    if (ret = widget->check() != 0) {
+    if (ret = widget->get()->check() != 0) {
         return ret;  // TODO(guanzhb) LOGE
     }
-    if (ret = widget->action() != 0) {
+    if (ret = widget->get()->action() != 0) {
         return ret;  // TODO(guanzhb) LOGE
     }
-    widget->swipe();
+    widget->get()->swipe();
 
     auto childrenChain = mStore->getChain(widgetName);
+    if (childrenChain == DataStore::EMPTY_INVOKE_CHAIN) {
+        return ret;
+    }
     std::for_each(childrenChain.begin(), childrenChain.end(),
         [&] (auto &childwidgetName) -> void {
             ret = invokeChain(childwidgetName);

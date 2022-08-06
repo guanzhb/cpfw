@@ -17,11 +17,9 @@
 #ifndef EXAMPLES_INCLUDE_EXAMPLECHAIN_H_
 #define EXAMPLES_INCLUDE_EXAMPLECHAIN_H_
 
-#include <functional>
 #include <memory>
 
-#include "cpfw/base/include/DataStore.h"
-#include "cpfw/base/include/ResponsibilityChain.h"
+#include "cpfw/core/include/Logic.h"
 
 namespace cpfw {
 class ExampleChain {
@@ -40,8 +38,7 @@ class ExampleChain {
     int32_t setStub(int32_t stub);
 
  private:
-    std::shared_ptr<DataStore> mStore;
-    std::shared_ptr<ResponsibilityChain> mResponsibilityChain;
+    std::shared_ptr<Logic> mLogic;
 };
 
 }  // namespace cpfw

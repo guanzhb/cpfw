@@ -25,23 +25,22 @@ class Condition {
  public:
     Condition();
 
-    Condition(std::string conditionName,
-              std::string expression,
-              std::string profileName,
+    Condition(std::string name,
               std::string elementName,
+              std::string profileName,
+              std::string expression,
               int32_t left,
               int32_t right);
 
     ~Condition();
 
-    std::string getName() const;
+    const std::string& getName() const;
 
-    std::string getExpression() const;
+    const std::string& getExpression() const;
 
-    std::string getProfileName() const;
+    const std::string& getProfileName() const;
 
-    std::string getElementName() const;
-
+    const std::string& getElementName() const;
     int32_t getDefault() const;
 
     int32_t getLeft() const;
@@ -49,10 +48,10 @@ class Condition {
     int32_t getRight() const;
 
  private:
-    std::string mName;
-    std::string mExpression;
-    std::string mProfileName;
-    std::string mElementName;
+    const std::string mName;
+    const std::string mExpression;
+    const std::string mProfileName;
+    const std::string mElementName;
     int32_t mLeft;
     int32_t mRight;
 };

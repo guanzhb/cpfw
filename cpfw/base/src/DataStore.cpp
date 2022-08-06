@@ -20,34 +20,34 @@
 
 namespace cpfw {
 
+const TINVOKE_CHAIN DataStore::EMPTY_INVOKE_CHAIN = {};
+const TINVOKE_CONDITION DataStore::EMPTY_CONDITION = std::make_pair("", std::vector<Condition>());
+Profile DataStore::EMPTY_PROFILE = Profile();
+
 DataStore::DataStore() {
+    std::cout << "ctor DataStore " << std::endl;
 }
 
 DataStore::~DataStore() {
 }
 
-std::shared_ptr<Widget> DataStore::getWidget(const std::string &name) {
-    std::shared_ptr<Widget> ret = std::make_shared<Widget>();
+std::optional<std::shared_ptr<Widget>>
+        DataStore::getWidget(const std::string &name) {
+    std::optional<std::shared_ptr<Widget>> ret = std::nullopt;
     if (mWidgetTable.find(name) != mWidgetTable.end()) {
         ret = mWidgetTable[name];
     }
     return ret;
 }
 
-std::vector<std::string> DataStore::getChain(const std::string &parentName) {
-    std::vector<std::string> ret;
-    if (mInvokeChainTable.find(parentName) != mInvokeChainTable.end()) {
-        ret = mInvokeChainTable[parentName];
-    }
-    return ret;
+const TINVOKE_CHAIN& DataStore::getChain(const std::string &parentName) {
+    return  mInvokeChainTable.find(parentName) != mInvokeChainTable.end()
+        ? mInvokeChainTable[parentName] : EMPTY_INVOKE_CHAIN;
 }
 
-Profile* DataStore::getProfile(const std::string &name) {
-    Profile* ret = nullptr;
-    if (mProfileTable.find(name) != mProfileTable.end()) {
-        ret = &mProfileTable[name];
-    }
-    return ret;
+Profile& DataStore::getProfile(const std::string &name) {
+    return mProfileTable.find(name) != mProfileTable.end()
+        ? mProfileTable[name] : EMPTY_PROFILE;
 }
 
 void DataStore::setProfile(const std::string &profileName, int32_t value) {
@@ -55,13 +55,16 @@ void DataStore::setProfile(const std::string &profileName, int32_t value) {
 }
 
 void DataStore::setProfile(
-        const std::string &profileName, const std::string &elementName, int32_t value) {
-    Profile *profile = getProfile(profileName);
-    if (nullptr == profile) {
+        const std::string &profileName, const std::string &elementName,
+        int32_t value) {
+    std::cout << "DataStore[" << __func__ << "] " << profileName
+        << " -> " << elementName << std::endl;
+    Profile &profile = getProfile(profileName);
+    if (&EMPTY_PROFILE == &profile) {
         return;
     }
-    auto elementItor = profile->elements.find(elementName);
-    if (elementItor == profile->elements.end()) {
+    auto elementItor = profile.elements.find(elementName);
+    if (elementItor == profile.elements.end()) {
         return;
     }
     elementItor->second.current = value;
@@ -79,23 +82,17 @@ int32_t DataStore::getConvertedData(std::string context, int32_t origin) {
     return data->second;
 }
 
-std::vector<std::pair<std::string, Condition>>
-        DataStore::getCondition(const std::string context) {
-    std::vector<std::pair<std::string, Condition>> ret;
-    auto conditionItor = mConditionTable.find(context);
-    if (conditionItor != mConditionTable.end()) {
-        ret = mConditionTable[context];
-    }
-    return ret;
+const TINVOKE_CONDITION& DataStore::getCondition(const std::string widgetName) {
+    return mConditionTable.find(widgetName) != mConditionTable.end()
+        ? mConditionTable[widgetName] : EMPTY_CONDITION;
 }
 
-void DataStore::addWidget(
-        const std::string widgetName, std::shared_ptr<Widget> widget) {
-    mWidgetTable.emplace(widgetName, widget);
+void DataStore::addWidget(std::shared_ptr<Widget> widget) {
+    widget->linkDataStore(shared_from_this());
+    mWidgetTable.emplace(widget->getName(), widget);
 }
 
-void DataStore::addInvokeChain(
-        std::string parent, const std::vector<std::string> children) {
+void DataStore::addInvokeChain(std::string parent, TINVOKE_CHAIN children) {
     mInvokeChainTable.emplace(parent, children);
 }
 
@@ -111,9 +108,8 @@ void DataStore::addDataConvert(
     mDataConvertTable.emplace(context, convert);
 }
 
-void DataStore::addCondition(std::string context,
-        const std::vector<std::pair<std::string, Condition>> condition) {
-    mConditionTable.emplace(context, condition);
+void DataStore::addCondition(std::string widgetName, TINVOKE_CONDITION condition) {
+    mConditionTable.emplace(widgetName, condition);
 }
 
 }  // namespace cpfw

@@ -36,10 +36,10 @@ namespace cpfw {
  * @return data parsed from profil
  */
 inline std::vector<int32_t> parseProfile(
-        const Profile *profile, uint32_t type,
+        const Profile &profile, uint32_t type,
         std::string context, std::shared_ptr<DataStore> store) {
     std::vector<int32_t> ret;
-    auto &elements = profile->elements;
+    auto &elements = profile.elements;
     std::for_each(elements.begin(), elements.end(),
         [&](auto &data) -> void {
             int32_t current = 0;
@@ -49,7 +49,8 @@ inline std::vector<int32_t> parseProfile(
             }
             if (store
                     && 0 != (type & static_cast<uint32_t>(ElementType::NEED_CONVERT))
-                    && 0 != (data.second.type & static_cast<uint32_t>(ElementType::NEED_CONVERT))) {
+                    && 0 != (data.second.type
+                             & static_cast<uint32_t>(ElementType::NEED_CONVERT))) {
                 current = store->getConvertedData(context, current);
             }
             ret.push_back(current);

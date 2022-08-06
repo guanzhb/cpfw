@@ -19,8 +19,8 @@
 #include <string>
 #include <vector>
 
-#include "cpfw/base/include/Utils.hpp"
 #include "cpfw/base/include/Base.h"
+#include "cpfw/base/include/Utils.hpp"
 
 namespace cpfw {
 
@@ -34,10 +34,9 @@ static int32_t handle(
     return 0;
 }
 
-class StubWidget : public Widget {
+class WidgetStub : public Widget {
  public:
-    StubWidget(std::string name, std::shared_ptr<DataStore> store)
-        : Widget(name, store) {
+    WidgetStub(std::string name) : Widget(name) {
     }
 
     int32_t action() override {
@@ -49,98 +48,43 @@ class StubWidget : public Widget {
 };
 
 ExampleChain::ExampleChain() {
-    mStore = std::make_shared<DataStore>();
+    mLogic = std::make_shared<Logic>("./configs/exampleChain.xml");
 
-    auto sv = std::make_shared<Widget>("volume", mStore);
-    mStore->addWidget("volume", sv);
-    auto sl = std::make_shared<Widget>("loudness", mStore);
-    mStore->addWidget("loudness", sl);
-    auto sf = std::make_shared<Widget>("fade", mStore);
-    mStore->addWidget("fade", sf);
-    auto se = std::make_shared<Widget>("equalizer", mStore);
-    mStore->addWidget("equalizer", se);
-    auto sd = std::make_shared<Widget>("duck", mStore);
-    mStore->addWidget("duck", sd);
-
-    auto ss = std::make_shared<StubWidget>("stub", mStore);
-    mStore->addWidget("stub", ss);
-
-    mStore->addInvokeChain("volume", {"equalizer", "duck"});
-    mStore->addInvokeChain("equalizer", {"fade", "stub"});
-    mStore->addInvokeChain("loudness", {"volume"});
-
-    mStore->addDataConvert("loudness", 22, 99999);
-
-    Element ele;
-    ele.current = 3;
-    ele.type = static_cast<uint32_t>(ElementType::PUBLIC);
-    Profile vol;
-    vol.elements.emplace("default", ele);
-    mStore->addProfile("volume", vol);
-
-    Profile fade;
-    ele.current = 4;
-    fade.elements.emplace("default", ele);
-    mStore->addProfile("fade", fade);
-
-    Profile equalizer;
-    ele.current = 5;
-    equalizer.elements.emplace("gain_100hz", ele);
-    ele.current = 30;
-    equalizer.elements.emplace("gain_200hz", ele);
-    mStore->addProfile("equalizer", equalizer);
-
-    Profile duck;
-    ele.current = 323;
-    duck.elements.emplace("default", ele);
-    mStore->addProfile("duck", duck);
-
-    ele.type = static_cast<uint32_t>(ElementType::PUBLIC)
-        | static_cast<uint32_t>(ElementType::NEED_CONVERT);
-
-    Profile lw;
-    ele.current = 22;
-    lw.elements.emplace("default", ele);
-    mStore->addProfile("loudness", lw);
-
-    Profile stub;
-    ele.current = 555;
-    stub.elements.emplace("default", ele);
-    mStore->addProfile("stub", stub);
-
-    Condition condition1 = Condition("duck", "in_range", "volume", "default", 0, 40);
-    Condition condition2 = Condition("duck", "out_range", "equalizer", "gain_100hz", 0, 40);
-    mStore->addCondition("duck", {{"and", condition1}, {"or", condition2}});
-
-    mResponsibilityChain = std::make_shared<ResponsibilityChain>(mStore);
+    auto sv = std::make_shared<WidgetStub>("volume");
+    mLogic->addWidget(sv);
+    auto sl = std::make_shared<WidgetStub>("loudness");
+    mLogic->addWidget(sl);
+    auto sf = std::make_shared<WidgetStub>("fade");
+    mLogic->addWidget(sf);
+    auto se = std::make_shared<WidgetStub>("equalizer");
+    mLogic->addWidget(se);
+    auto sd = std::make_shared<WidgetStub>("duck");
+    mLogic->addWidget(sd);
+    auto ss = std::make_shared<WidgetStub>("stub");
+    mLogic->addWidget(ss);
 }
 
 ExampleChain::~ExampleChain() {
 }
 
 int32_t ExampleChain::setVolume(int32_t volume) {
-    mStore->setProfile("volume", volume);
-    return mResponsibilityChain->invokeChain("volume");
+    return mLogic->setProfile("volume", volume);
 }
 
 int32_t ExampleChain::setFade(int32_t fade) {
-    mStore->setProfile("fade", fade);
-    return mResponsibilityChain->invokeChain("fade");
+    return mLogic->setProfile("fade", fade);
 }
 
 int32_t ExampleChain::setEq(std::string band, int32_t db) {
-    mStore->setProfile("equalizer", band, db);
-    return mResponsibilityChain->invokeChain("equalizer");
+    return mLogic->setProfile("equalizer", band, db);
 }
 
 int32_t ExampleChain::setLoudness(int32_t loudness) {
-    mStore->setProfile("loudness", loudness);
-    return mResponsibilityChain->invokeChain("loudness");
+    return mLogic->setProfile("loudness", loudness);
 }
 
 int32_t ExampleChain::setStub(int32_t stub) {
-    mStore->setProfile("stub", stub);
-    return mResponsibilityChain->invokeChain("stub");
+    return mLogic->setProfile("stub", stub);
 }
 
 }  // namespace cpfw
