@@ -14,34 +14,36 @@
  * limitations under the License.
  */
 
-#ifndef EXAMPLES_INCLUDE_EXAMPLECHAIN_H_
-#define EXAMPLES_INCLUDE_EXAMPLECHAIN_H_
+#ifndef CPFW_BASE_INCLUDE_MESSAGE_H__
+#define CPFW_BASE_INCLUDE_MESSAGE_H__
 
+#include <functional>
 #include <memory>
+#include <string>
 
-#include "cpfw/core/include/Logic.h"
+#include "cpfw/base/include/Bundle.h"
 
 namespace cpfw {
-class ExampleChain {
+
+class Message {
  public:
-    ExampleChain();
-    ~ExampleChain();
+//    Message() {}
+//    ~Message() {}
 
-    int32_t setVolume(int32_t volume);
+    uint64_t mWhat;
+    int32_t mArg1;
+    int32_t mArg2;
 
-    int32_t setFade(int32_t data);
+    std::string mWidgetName;
+    std::string mElementName;
+    int32_t mValue;
 
-    int32_t setEq(std::string band, int32_t db);
+//    std::unique_ptr<Bundle> mBundle;
 
-    int32_t setLoudness(int32_t loudness);
-
-    int32_t setStub(int32_t stub);
-
- private:
-    std::shared_ptr<Logic> mLogic;
+    std::function<void(int32_t/*status*/)> mCallback;
 };
 
-}  // namespace cpfw
+}  // namesapce cpfw
 
-#endif  // EXAMPLES_INCLUDE_EXAMPLECHAIN_H_
+#endif  // CPFW_BASE_INCLUDE_MESSAGE_H__
 

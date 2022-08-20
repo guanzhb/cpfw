@@ -1,5 +1,5 @@
 /**
- * Copyright (C) 2020 The Cross Platform Framework Project
+ * Copyright (C) 2022 The Cross Platform Framework Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -24,8 +24,10 @@
 #include "cpfw/base/include/DataStore.h"
 #include "cpfw/base/include/Widget.h"
 #include "cpfw/base/include/ResponsibilityChain.h"
+#include "cpfw/base/include/Handler.h"
 
 namespace cpfw {
+
 
 class Logic {
  public:
@@ -35,19 +37,42 @@ class Logic {
 
     ~Logic();
 
+    void initialize();
+
     void addWidget(std::shared_ptr<Widget> widget);
 
-    int32_t setProfile(const std::string &widgetName, int32_t value);
     int32_t setProfile(const std::string &widgetName,
-            const std::string &elementName, int32_t value);
+                int32_t value, const PostFlag flag = PostFlag::NONE);
+    int32_t setProfile(const std::string &widgetName, const std::string &elementName,
+                int32_t value, const PostFlag flag = PostFlag::NONE);
+
+    int32_t setProfileDelay(const std::string &widgetName,
+                int32_t value, uint64_t delayTimeMs,
+                const PostFlag flag = PostFlag::NONE);
+    int32_t setProfileDelay(const std::string &widgetName,
+                const std::string &elementName, int32_t value,
+                uint64_t delayTimeMs, const PostFlag flag = PostFlag::NONE);
 
     int32_t getProfile(const std::string &widgetName);
     int32_t getProfile(const std::string &widgeteName,
-            const std::string &elementName);
+                const std::string &elementName);
 
  private:
+    class LogicHandler : public Handler {
+     public:
+         LogicHandler(Logic* logic);
+         ~LogicHandler();
+
+         int32_t onInvoke(const Message &message) override;
+
+     private:
+         Logic* mLogic;
+    };
+
+ private:
+    std::unique_ptr<Handler> mHandler;
     std::shared_ptr<DataStore> mStore;
-    std::shared_ptr<ResponsibilityChain> mResponsibilityChain;
+    std::unique_ptr<ResponsibilityChain> mResponsibilityChain;
 };
 
 }  // namespace cpfw

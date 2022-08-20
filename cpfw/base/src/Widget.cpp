@@ -1,5 +1,5 @@
 /**
- * Copyright (C) 2020 The Cross Platform Framework Project
+ * Copyright (C) 2022 The Cross Platform Framework Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,7 +19,7 @@
 #include <iostream>
 
 #include "cpfw/base/include/Condition.h"
-#include "cpfw/base/include/Utils.hpp"
+#include "cpfw/base/include/Utils.h"
 
 namespace cpfw {
 
@@ -52,7 +52,6 @@ std::shared_ptr<DataStore> Widget::getDataStore() const {
 }
 
 int32_t Widget::check() {
-    std::cout << "Widget[" << mName << "] check" << std::endl;
     int32_t ret = 0;
     if (!mStore) {
         return ret;
@@ -64,8 +63,6 @@ int32_t Widget::check() {
     }
     std::string logic = conditionPair.first;
     for (auto itor : conditionPair.second) {
-        std::cout << "Widget[" << mName << "] check elementName "
-            << itor.getElementName() << std::endl;
         Profile &profile = mStore->getProfile(itor.getProfileName());
         int32_t current = profile.elements[itor.getElementName()].current;
         const std::string &expressionIn = itor.getExpression();

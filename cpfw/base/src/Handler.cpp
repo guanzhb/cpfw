@@ -1,0 +1,107 @@
+/**
+ * Copyright (C) 2022 The Cross Platform Framework Project
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+#include "cpfw/base/include/Handler.h"
+
+#include <chrono>
+#include <iostream>
+
+#include "cpfw/base/include/Utils.h"
+
+namespace cpfw {
+
+Handler::Handler() {
+    mMsgPool = std::make_unique<MessagePool>();
+    mRunning.store(false);
+}
+
+Handler::~Handler() {
+    std::cout << "dtor" << std::endl;
+    mRunning.store(false);
+    Message msg;
+    post(msg, PostFlag::NONE);
+    mWorkingThread.join();
+}
+
+void Handler::initialize() {
+    std::cout << "initialize" << std::endl;
+    mRunning.store(true);
+    mWorkingThread = std::thread(&Handler::handleMessage, this);
+}
+
+void Handler::post(const Message &msg, const PostFlag flag) {
+    postDelay(msg, 0, flag);
+}
+
+void Handler::postDelay(const Message &msg, uint64_t delayMs, const PostFlag flag) {
+    std::cout << "postDelay, widget: " << msg.mWidgetName
+        << ", element: " << msg.mElementName << std::endl;
+    uint64_t whenMs = getCurrentTimeMs() + delayMs;
+    switch (flag) {
+        case PostFlag::DELETE_FORMER:
+            mMsgPool->postAndDeleteFormers(whenMs, msg, msg.mWhat);
+            break;
+        case PostFlag::OMIT_IF_EXIST:
+            mMsgPool->postButOmitIfExist(whenMs, msg, msg.mWhat);
+            break;
+        [[likely]] case PostFlag::NONE:
+        default:
+            mMsgPool->post(whenMs, msg, msg.mWhat);
+            break;
+    }
+}
+
+void Handler::postWhen(const Message &msg, uint64_t whenMs, const PostFlag flag) {
+    uint64_t currentTimeMs = getCurrentTimeMs();
+    if (currentTimeMs > whenMs) {
+        return;  // The task is planned to do at a past time. Ignore it.
+    }
+
+    postDelay(msg, whenMs - currentTimeMs, flag);
+}
+
+void Handler::handleMessage() {
+    std::cout << "handleMessage" << std::endl;
+    while (mRunning.load()) {
+        uint64_t currentTimeMs = getCurrentTimeMs();
+        auto itor = mMsgPool->front();
+        std::cout << "handleMessage widgetName: " << itor->second.mWidgetName
+            << ", elementName:"<< itor->second.mElementName << std::endl;
+        if (itor->first > currentTimeMs) {
+            if (std::cv_status::no_timeout
+                    == mMsgPool->waitFor(itor->first-currentTimeMs)) {
+                continue;
+            }
+        }
+        if (!mRunning.load()) {
+            break;
+        }
+
+        int32_t status = onInvoke(itor->second);
+        mMsgPool->popFront();
+        std::cout << "handleMessage invoke over" << std::endl;
+        reply(itor->second, status);
+    }
+}
+
+void Handler::reply(const Message &msg, int32_t status) {
+    if (nullptr != msg.mCallback) {
+        msg.mCallback(status);
+    }
+}
+
+}  // namesapce cpfw
+

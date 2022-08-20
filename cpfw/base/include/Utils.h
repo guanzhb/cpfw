@@ -14,41 +14,34 @@
  * limitations under the License.
  */
 
-#ifndef CPFW_BASE_INCLUDE_RESPONSIBILITYCHAIN_H_
-#define CPFW_BASE_INCLUDE_RESPONSIBILITYCHAIN_H_
+#ifndef CPFW_BASE_INCLUDE_UTILS_HPP_
+#define CPFW_BASE_INCLUDE_UTILS_HPP_
 
-#include <string>
-#include <functional>
-#include <memory>
 #include <algorithm>
+#include <vector>
 
+#include "cpfw/base/include/Base.h"
 #include "cpfw/base/include/DataStore.h"
 
 namespace cpfw {
 
-class ResponsibilityChain {
- public:
-    ResponsibilityChain();
-    explicit ResponsibilityChain(std::shared_ptr<DataStore> store);
+/**
+ * @brief parse data from prifile.
+ *
+ * @param profile where to parse
+ * @param type how to parse @see ElementType
+ * @param context get context
+ * @param store data store, used when convert data
+ *
+ * @return data parsed from profil
+ */
+std::vector<int32_t> parseProfile(
+        const Profile &profile, uint32_t type,
+        std::string context, std::shared_ptr<DataStore> store);
 
-    ~ResponsibilityChain();
-
-    /**
-     * @brief invoke widget chain with name
-     *
-     * @param widgetName
-     * @return int32_t 0 if success, else errno
-     */
-    int32_t invokeChain(std::string widgetName) const;
-
- private:
-    int32_t invokeWidget(std::string widgetName) const;
-
- private:
-    std::shared_ptr<DataStore> mStore;
-};
+uint64_t getCurrentTimeMs();
 
 }  // namespace cpfw
 
-#endif  // CPFW_BASE_INCLUDE_RESPONSIBILITYCHAIN_H_
+#endif  // CPFW_BASE_INCLUDE_UTILS_HPP_
 

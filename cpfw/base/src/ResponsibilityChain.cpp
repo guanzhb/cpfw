@@ -1,5 +1,5 @@
 /**
- * Copyright (C) 2020 The Cross Platform Framework Project
+ * Copyright (C) 2022 The Cross Platform Framework Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -39,7 +39,6 @@ int32_t ResponsibilityChain::invokeChain(std::string widgetName) const {
 }
 
 int32_t ResponsibilityChain::invokeWidget(std::string widgetName) const {
-    std::cout << "ResponsibilityChain " << __func__ << " -> " << widgetName << std::endl;
     std::optional<std::shared_ptr<Widget>> widget = mStore->getWidget(widgetName);
     if (!widget) {
         return EINVAL;  // TODO(guanzhb) LOGE
@@ -65,7 +64,7 @@ int32_t ResponsibilityChain::invokeWidget(std::string widgetName) const {
                 //  TODO(guanzhb) LOGE
             }
         });
-
+    std::cout << "ResponsibilityChain " << __func__ << " -> " << widgetName << "success" << std::endl;
     return ret;
 }
 
