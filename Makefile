@@ -103,7 +103,8 @@ CONFIG_CLEAN_VPATH_FILES =
 am__installdirs = "$(DESTDIR)$(bindir)"
 PROGRAMS = $(bin_PROGRAMS)
 am_exampleChain_OBJECTS = ExampleChain.$(OBJEXT) Condition.$(OBJEXT) \
-	Widget.$(OBJEXT) ResponsibilityChain.$(OBJEXT) \
+	Widget.$(OBJEXT) Handler.$(OBJEXT) Utils.$(OBJEXT) \
+	MessagePool.$(OBJEXT) ResponsibilityChain.$(OBJEXT) \
 	DataStore.$(OBJEXT) Logic.$(OBJEXT) DataParser.$(OBJEXT) \
 	tinyxml2.$(OBJEXT)
 exampleChain_OBJECTS = $(am_exampleChain_OBJECTS)
@@ -125,9 +126,10 @@ depcomp = $(SHELL) $(top_srcdir)/depcomp
 am__maybe_remake_depfiles = depfiles
 am__depfiles_remade = ./$(DEPDIR)/Condition.Po \
 	./$(DEPDIR)/DataParser.Po ./$(DEPDIR)/DataStore.Po \
-	./$(DEPDIR)/ExampleChain.Po ./$(DEPDIR)/Logic.Po \
-	./$(DEPDIR)/ResponsibilityChain.Po ./$(DEPDIR)/Widget.Po \
-	./$(DEPDIR)/tinyxml2.Po
+	./$(DEPDIR)/ExampleChain.Po ./$(DEPDIR)/Handler.Po \
+	./$(DEPDIR)/Logic.Po ./$(DEPDIR)/MessagePool.Po \
+	./$(DEPDIR)/ResponsibilityChain.Po ./$(DEPDIR)/Utils.Po \
+	./$(DEPDIR)/Widget.Po ./$(DEPDIR)/tinyxml2.Po
 am__mv = mv -f
 AM_V_lt = $(am__v_lt_$(V))
 am__v_lt_ = $(am__v_lt_$(AM_DEFAULT_VERBOSITY))
@@ -289,6 +291,9 @@ AUTOMAKE_OPTIONS = foreign
 exampleChain_SOURCES = examples/src/ExampleChain.cpp \
                       cpfw/base/src/Condition.cpp \
                       cpfw/base/src/Widget.cpp \
+                      cpfw/base/src/Handler.cpp \
+                      cpfw/base/src/Utils.cpp \
+                      cpfw/base/src/MessagePool.cpp \
                       cpfw/base/src/ResponsibilityChain.cpp \
                       cpfw/base/src/DataStore.cpp \
                       cpfw/core/src/Logic.cpp \
@@ -405,8 +410,11 @@ include ./$(DEPDIR)/Condition.Po # am--include-marker
 include ./$(DEPDIR)/DataParser.Po # am--include-marker
 include ./$(DEPDIR)/DataStore.Po # am--include-marker
 include ./$(DEPDIR)/ExampleChain.Po # am--include-marker
+include ./$(DEPDIR)/Handler.Po # am--include-marker
 include ./$(DEPDIR)/Logic.Po # am--include-marker
+include ./$(DEPDIR)/MessagePool.Po # am--include-marker
 include ./$(DEPDIR)/ResponsibilityChain.Po # am--include-marker
+include ./$(DEPDIR)/Utils.Po # am--include-marker
 include ./$(DEPDIR)/Widget.Po # am--include-marker
 include ./$(DEPDIR)/tinyxml2.Po # am--include-marker
 
@@ -471,6 +479,48 @@ Widget.obj: cpfw/base/src/Widget.cpp
 #	$(AM_V_CXX)source='cpfw/base/src/Widget.cpp' object='Widget.obj' libtool=no \
 #	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
 #	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o Widget.obj `if test -f 'cpfw/base/src/Widget.cpp'; then $(CYGPATH_W) 'cpfw/base/src/Widget.cpp'; else $(CYGPATH_W) '$(srcdir)/cpfw/base/src/Widget.cpp'; fi`
+
+Handler.o: cpfw/base/src/Handler.cpp
+	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT Handler.o -MD -MP -MF $(DEPDIR)/Handler.Tpo -c -o Handler.o `test -f 'cpfw/base/src/Handler.cpp' || echo '$(srcdir)/'`cpfw/base/src/Handler.cpp
+	$(AM_V_at)$(am__mv) $(DEPDIR)/Handler.Tpo $(DEPDIR)/Handler.Po
+#	$(AM_V_CXX)source='cpfw/base/src/Handler.cpp' object='Handler.o' libtool=no \
+#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
+#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o Handler.o `test -f 'cpfw/base/src/Handler.cpp' || echo '$(srcdir)/'`cpfw/base/src/Handler.cpp
+
+Handler.obj: cpfw/base/src/Handler.cpp
+	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT Handler.obj -MD -MP -MF $(DEPDIR)/Handler.Tpo -c -o Handler.obj `if test -f 'cpfw/base/src/Handler.cpp'; then $(CYGPATH_W) 'cpfw/base/src/Handler.cpp'; else $(CYGPATH_W) '$(srcdir)/cpfw/base/src/Handler.cpp'; fi`
+	$(AM_V_at)$(am__mv) $(DEPDIR)/Handler.Tpo $(DEPDIR)/Handler.Po
+#	$(AM_V_CXX)source='cpfw/base/src/Handler.cpp' object='Handler.obj' libtool=no \
+#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
+#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o Handler.obj `if test -f 'cpfw/base/src/Handler.cpp'; then $(CYGPATH_W) 'cpfw/base/src/Handler.cpp'; else $(CYGPATH_W) '$(srcdir)/cpfw/base/src/Handler.cpp'; fi`
+
+Utils.o: cpfw/base/src/Utils.cpp
+	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT Utils.o -MD -MP -MF $(DEPDIR)/Utils.Tpo -c -o Utils.o `test -f 'cpfw/base/src/Utils.cpp' || echo '$(srcdir)/'`cpfw/base/src/Utils.cpp
+	$(AM_V_at)$(am__mv) $(DEPDIR)/Utils.Tpo $(DEPDIR)/Utils.Po
+#	$(AM_V_CXX)source='cpfw/base/src/Utils.cpp' object='Utils.o' libtool=no \
+#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
+#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o Utils.o `test -f 'cpfw/base/src/Utils.cpp' || echo '$(srcdir)/'`cpfw/base/src/Utils.cpp
+
+Utils.obj: cpfw/base/src/Utils.cpp
+	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT Utils.obj -MD -MP -MF $(DEPDIR)/Utils.Tpo -c -o Utils.obj `if test -f 'cpfw/base/src/Utils.cpp'; then $(CYGPATH_W) 'cpfw/base/src/Utils.cpp'; else $(CYGPATH_W) '$(srcdir)/cpfw/base/src/Utils.cpp'; fi`
+	$(AM_V_at)$(am__mv) $(DEPDIR)/Utils.Tpo $(DEPDIR)/Utils.Po
+#	$(AM_V_CXX)source='cpfw/base/src/Utils.cpp' object='Utils.obj' libtool=no \
+#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
+#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o Utils.obj `if test -f 'cpfw/base/src/Utils.cpp'; then $(CYGPATH_W) 'cpfw/base/src/Utils.cpp'; else $(CYGPATH_W) '$(srcdir)/cpfw/base/src/Utils.cpp'; fi`
+
+MessagePool.o: cpfw/base/src/MessagePool.cpp
+	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT MessagePool.o -MD -MP -MF $(DEPDIR)/MessagePool.Tpo -c -o MessagePool.o `test -f 'cpfw/base/src/MessagePool.cpp' || echo '$(srcdir)/'`cpfw/base/src/MessagePool.cpp
+	$(AM_V_at)$(am__mv) $(DEPDIR)/MessagePool.Tpo $(DEPDIR)/MessagePool.Po
+#	$(AM_V_CXX)source='cpfw/base/src/MessagePool.cpp' object='MessagePool.o' libtool=no \
+#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
+#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o MessagePool.o `test -f 'cpfw/base/src/MessagePool.cpp' || echo '$(srcdir)/'`cpfw/base/src/MessagePool.cpp
+
+MessagePool.obj: cpfw/base/src/MessagePool.cpp
+	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT MessagePool.obj -MD -MP -MF $(DEPDIR)/MessagePool.Tpo -c -o MessagePool.obj `if test -f 'cpfw/base/src/MessagePool.cpp'; then $(CYGPATH_W) 'cpfw/base/src/MessagePool.cpp'; else $(CYGPATH_W) '$(srcdir)/cpfw/base/src/MessagePool.cpp'; fi`
+	$(AM_V_at)$(am__mv) $(DEPDIR)/MessagePool.Tpo $(DEPDIR)/MessagePool.Po
+#	$(AM_V_CXX)source='cpfw/base/src/MessagePool.cpp' object='MessagePool.obj' libtool=no \
+#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
+#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o MessagePool.obj `if test -f 'cpfw/base/src/MessagePool.cpp'; then $(CYGPATH_W) 'cpfw/base/src/MessagePool.cpp'; else $(CYGPATH_W) '$(srcdir)/cpfw/base/src/MessagePool.cpp'; fi`
 
 ResponsibilityChain.o: cpfw/base/src/ResponsibilityChain.cpp
 	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT ResponsibilityChain.o -MD -MP -MF $(DEPDIR)/ResponsibilityChain.Tpo -c -o ResponsibilityChain.o `test -f 'cpfw/base/src/ResponsibilityChain.cpp' || echo '$(srcdir)/'`cpfw/base/src/ResponsibilityChain.cpp
@@ -819,8 +869,11 @@ distclean: distclean-am
 	-rm -f ./$(DEPDIR)/DataParser.Po
 	-rm -f ./$(DEPDIR)/DataStore.Po
 	-rm -f ./$(DEPDIR)/ExampleChain.Po
+	-rm -f ./$(DEPDIR)/Handler.Po
 	-rm -f ./$(DEPDIR)/Logic.Po
+	-rm -f ./$(DEPDIR)/MessagePool.Po
 	-rm -f ./$(DEPDIR)/ResponsibilityChain.Po
+	-rm -f ./$(DEPDIR)/Utils.Po
 	-rm -f ./$(DEPDIR)/Widget.Po
 	-rm -f ./$(DEPDIR)/tinyxml2.Po
 	-rm -f Makefile
@@ -874,8 +927,11 @@ maintainer-clean: maintainer-clean-am
 	-rm -f ./$(DEPDIR)/DataParser.Po
 	-rm -f ./$(DEPDIR)/DataStore.Po
 	-rm -f ./$(DEPDIR)/ExampleChain.Po
+	-rm -f ./$(DEPDIR)/Handler.Po
 	-rm -f ./$(DEPDIR)/Logic.Po
+	-rm -f ./$(DEPDIR)/MessagePool.Po
 	-rm -f ./$(DEPDIR)/ResponsibilityChain.Po
+	-rm -f ./$(DEPDIR)/Utils.Po
 	-rm -f ./$(DEPDIR)/Widget.Po
 	-rm -f ./$(DEPDIR)/tinyxml2.Po
 	-rm -f Makefile

@@ -1,5 +1,5 @@
 /**
- * Copyright (C) 2020 The Cross Platform Framework Project
+ * Copyright (C) 2022 The Cross Platform Framework Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,7 +21,7 @@
 #include <memory>
 
 #include "cpfw/base/include/Base.h"
-#include "cpfw/base/include/Utils.hpp"
+#include "cpfw/base/include/Utils.h"
 
 namespace cpfw {
 
@@ -41,6 +41,8 @@ class WidgetStub : public Widget {
     }
 
     int32_t action() override {
+        std::cout << "widget " << getName()
+            << " action time: " << cpfw::getCurrentTimeMs() << std::endl;
         uint32_t type = static_cast<uint32_t>(ElementType::PUBLIC);
         auto values = parseProfile(
             getDataStore()->getProfile(getName()), type, getName(), getDataStore());
@@ -63,6 +65,8 @@ ExampleChain::ExampleChain() {
     mLogic->addWidget(sd);
     auto ss = std::make_shared<WidgetStub>("stub");
     mLogic->addWidget(ss);
+
+    mLogic->initialize();
 }
 
 ExampleChain::~ExampleChain() {
@@ -85,7 +89,8 @@ int32_t ExampleChain::setLoudness(int32_t loudness) {
 }
 
 int32_t ExampleChain::setStub(int32_t stub) {
-    return mLogic->setProfile("stub", stub);
+    std::cout << "stub call time: " << cpfw::getCurrentTimeMs() << std::endl;
+    return mLogic->setProfileDelay("stub", stub, 10, PostFlag::OMIT_IF_EXIST);
 }
 
 }  // namespace cpfw
@@ -93,6 +98,10 @@ int32_t ExampleChain::setStub(int32_t stub) {
 int main() {
     std::shared_ptr<cpfw::ExampleChain> example = std::make_shared<cpfw::ExampleChain>();
     std::cout << "start " << std::endl;
+
+    std::cout << std::endl;
+    example->setStub(10);
+    std::cout << "stub success" << std::endl;
 
     std::cout << std::endl;
     example->setVolume(30);
@@ -123,8 +132,13 @@ int main() {
     std::cout << "loudness success" << std::endl;
 
     std::cout << std::endl;
-    example->setStub(10);
+    example->setStub(40);
     std::cout << "stub success" << std::endl;
+
+    std::cout << "start time: " << cpfw::getCurrentTimeMs() << std::endl;
+    std::this_thread::sleep_for(std::chrono::milliseconds(20));
+    std::cout << "ExampleChain exit" << std::endl;
+    std::cout << "end time: " << cpfw::getCurrentTimeMs() << std::endl;
 
     return 0;
 }

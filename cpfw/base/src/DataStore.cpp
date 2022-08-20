@@ -1,5 +1,5 @@
 /**
- * Copyright (C) 2020 The Cross Platform Framework Project
+ * Copyright (C) 2022 The Cross Platform Framework Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,7 +20,7 @@
 
 namespace cpfw {
 
-const TINVOKE_CHAIN DataStore::EMPTY_INVOKE_CHAIN = {};
+const TINVOKE_CHAIN DataStore::EMPTY_INVOKE_CHAIN = {""};
 const TINVOKE_CONDITION DataStore::EMPTY_CONDITION = std::make_pair("", std::vector<Condition>());
 Profile DataStore::EMPTY_PROFILE = Profile();
 
@@ -33,6 +33,7 @@ DataStore::~DataStore() {
 
 std::optional<std::shared_ptr<Widget>>
         DataStore::getWidget(const std::string &name) {
+    std::cout << "DataStore getWidget: " << name << std::endl;
     std::optional<std::shared_ptr<Widget>> ret = std::nullopt;
     if (mWidgetTable.find(name) != mWidgetTable.end()) {
         ret = mWidgetTable[name];
@@ -41,8 +42,14 @@ std::optional<std::shared_ptr<Widget>>
 }
 
 const TINVOKE_CHAIN& DataStore::getChain(const std::string &parentName) {
-    return  mInvokeChainTable.find(parentName) != mInvokeChainTable.end()
-        ? mInvokeChainTable[parentName] : EMPTY_INVOKE_CHAIN;
+    std::cout << "DataStore getChain for widget: " << parentName << std::endl;
+    //return  mInvokeChainTable.find(parentName) != mInvokeChainTable.end()
+     //   ? mInvokeChainTable[parentName] : EMPTY_INVOKE_CHAIN;
+    if (mInvokeChainTable.find(parentName) != mInvokeChainTable.end()) {
+        std::cout << "DataStore getChain success for widget: " << parentName << std::endl;
+        return mInvokeChainTable[parentName];
+    }
+    return EMPTY_INVOKE_CHAIN;
 }
 
 Profile& DataStore::getProfile(const std::string &name) {

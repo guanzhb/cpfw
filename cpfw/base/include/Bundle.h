@@ -14,34 +14,14 @@
  * limitations under the License.
  */
 
-#ifndef EXAMPLES_INCLUDE_EXAMPLECHAIN_H_
-#define EXAMPLES_INCLUDE_EXAMPLECHAIN_H_
+#ifndef CPFW_BASE_INCLUDE_BUNDLE_H__
+#define CPFW_BASE_INCLUDE_BUNDLE_H__
 
-#include <memory>
-
-#include "cpfw/core/include/Logic.h"
-
-namespace cpfw {
-class ExampleChain {
+class Bundle {
  public:
-    ExampleChain();
-    ~ExampleChain();
-
-    int32_t setVolume(int32_t volume);
-
-    int32_t setFade(int32_t data);
-
-    int32_t setEq(std::string band, int32_t db);
-
-    int32_t setLoudness(int32_t loudness);
-
-    int32_t setStub(int32_t stub);
-
- private:
-    std::shared_ptr<Logic> mLogic;
+    Bundle() {}
+    ~Bundle() {}
 };
 
-}  // namespace cpfw
-
-#endif  // EXAMPLES_INCLUDE_EXAMPLECHAIN_H_
+#endif  // CPFW_BASE_INCLUDE_BUNDLE_H__
 
