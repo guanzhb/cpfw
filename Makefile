@@ -103,10 +103,10 @@ CONFIG_CLEAN_VPATH_FILES =
 am__installdirs = "$(DESTDIR)$(bindir)"
 PROGRAMS = $(bin_PROGRAMS)
 am_exampleChain_OBJECTS = ExampleChain.$(OBJEXT) Condition.$(OBJEXT) \
-	Widget.$(OBJEXT) Handler.$(OBJEXT) Utils.$(OBJEXT) \
-	MessagePool.$(OBJEXT) ResponsibilityChain.$(OBJEXT) \
-	DataStore.$(OBJEXT) Logic.$(OBJEXT) DataParser.$(OBJEXT) \
-	tinyxml2.$(OBJEXT)
+	ExpressionStrategy.$(OBJEXT) Widget.$(OBJEXT) \
+	Handler.$(OBJEXT) Utils.$(OBJEXT) MessagePool.$(OBJEXT) \
+	ResponsibilityChain.$(OBJEXT) DataStore.$(OBJEXT) \
+	Logic.$(OBJEXT) DataParser.$(OBJEXT) tinyxml2.$(OBJEXT)
 exampleChain_OBJECTS = $(am_exampleChain_OBJECTS)
 exampleChain_LDADD = $(LDADD)
 AM_V_P = $(am__v_P_$(V))
@@ -126,10 +126,11 @@ depcomp = $(SHELL) $(top_srcdir)/depcomp
 am__maybe_remake_depfiles = depfiles
 am__depfiles_remade = ./$(DEPDIR)/Condition.Po \
 	./$(DEPDIR)/DataParser.Po ./$(DEPDIR)/DataStore.Po \
-	./$(DEPDIR)/ExampleChain.Po ./$(DEPDIR)/Handler.Po \
-	./$(DEPDIR)/Logic.Po ./$(DEPDIR)/MessagePool.Po \
-	./$(DEPDIR)/ResponsibilityChain.Po ./$(DEPDIR)/Utils.Po \
-	./$(DEPDIR)/Widget.Po ./$(DEPDIR)/tinyxml2.Po
+	./$(DEPDIR)/ExampleChain.Po ./$(DEPDIR)/ExpressionStrategy.Po \
+	./$(DEPDIR)/Handler.Po ./$(DEPDIR)/Logic.Po \
+	./$(DEPDIR)/MessagePool.Po ./$(DEPDIR)/ResponsibilityChain.Po \
+	./$(DEPDIR)/Utils.Po ./$(DEPDIR)/Widget.Po \
+	./$(DEPDIR)/tinyxml2.Po
 am__mv = mv -f
 AM_V_lt = $(am__v_lt_$(V))
 am__v_lt_ = $(am__v_lt_$(AM_DEFAULT_VERBOSITY))
@@ -290,6 +291,7 @@ top_srcdir = .
 AUTOMAKE_OPTIONS = foreign
 exampleChain_SOURCES = examples/src/ExampleChain.cpp \
                       cpfw/base/src/Condition.cpp \
+                      cpfw/base/src/ExpressionStrategy.cpp \
                       cpfw/base/src/Widget.cpp \
                       cpfw/base/src/Handler.cpp \
                       cpfw/base/src/Utils.cpp \
@@ -411,6 +413,7 @@ include ./$(DEPDIR)/Condition.Po # am--include-marker
 include ./$(DEPDIR)/DataParser.Po # am--include-marker
 include ./$(DEPDIR)/DataStore.Po # am--include-marker
 include ./$(DEPDIR)/ExampleChain.Po # am--include-marker
+include ./$(DEPDIR)/ExpressionStrategy.Po # am--include-marker
 include ./$(DEPDIR)/Handler.Po # am--include-marker
 include ./$(DEPDIR)/Logic.Po # am--include-marker
 include ./$(DEPDIR)/MessagePool.Po # am--include-marker
@@ -466,6 +469,20 @@ Condition.obj: cpfw/base/src/Condition.cpp
 #	$(AM_V_CXX)source='cpfw/base/src/Condition.cpp' object='Condition.obj' libtool=no \
 #	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
 #	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o Condition.obj `if test -f 'cpfw/base/src/Condition.cpp'; then $(CYGPATH_W) 'cpfw/base/src/Condition.cpp'; else $(CYGPATH_W) '$(srcdir)/cpfw/base/src/Condition.cpp'; fi`
+
+ExpressionStrategy.o: cpfw/base/src/ExpressionStrategy.cpp
+	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT ExpressionStrategy.o -MD -MP -MF $(DEPDIR)/ExpressionStrategy.Tpo -c -o ExpressionStrategy.o `test -f 'cpfw/base/src/ExpressionStrategy.cpp' || echo '$(srcdir)/'`cpfw/base/src/ExpressionStrategy.cpp
+	$(AM_V_at)$(am__mv) $(DEPDIR)/ExpressionStrategy.Tpo $(DEPDIR)/ExpressionStrategy.Po
+#	$(AM_V_CXX)source='cpfw/base/src/ExpressionStrategy.cpp' object='ExpressionStrategy.o' libtool=no \
+#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
+#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o ExpressionStrategy.o `test -f 'cpfw/base/src/ExpressionStrategy.cpp' || echo '$(srcdir)/'`cpfw/base/src/ExpressionStrategy.cpp
+
+ExpressionStrategy.obj: cpfw/base/src/ExpressionStrategy.cpp
+	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT ExpressionStrategy.obj -MD -MP -MF $(DEPDIR)/ExpressionStrategy.Tpo -c -o ExpressionStrategy.obj `if test -f 'cpfw/base/src/ExpressionStrategy.cpp'; then $(CYGPATH_W) 'cpfw/base/src/ExpressionStrategy.cpp'; else $(CYGPATH_W) '$(srcdir)/cpfw/base/src/ExpressionStrategy.cpp'; fi`
+	$(AM_V_at)$(am__mv) $(DEPDIR)/ExpressionStrategy.Tpo $(DEPDIR)/ExpressionStrategy.Po
+#	$(AM_V_CXX)source='cpfw/base/src/ExpressionStrategy.cpp' object='ExpressionStrategy.obj' libtool=no \
+#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
+#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o ExpressionStrategy.obj `if test -f 'cpfw/base/src/ExpressionStrategy.cpp'; then $(CYGPATH_W) 'cpfw/base/src/ExpressionStrategy.cpp'; else $(CYGPATH_W) '$(srcdir)/cpfw/base/src/ExpressionStrategy.cpp'; fi`
 
 Widget.o: cpfw/base/src/Widget.cpp
 	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT Widget.o -MD -MP -MF $(DEPDIR)/Widget.Tpo -c -o Widget.o `test -f 'cpfw/base/src/Widget.cpp' || echo '$(srcdir)/'`cpfw/base/src/Widget.cpp
@@ -870,6 +887,7 @@ distclean: distclean-am
 	-rm -f ./$(DEPDIR)/DataParser.Po
 	-rm -f ./$(DEPDIR)/DataStore.Po
 	-rm -f ./$(DEPDIR)/ExampleChain.Po
+	-rm -f ./$(DEPDIR)/ExpressionStrategy.Po
 	-rm -f ./$(DEPDIR)/Handler.Po
 	-rm -f ./$(DEPDIR)/Logic.Po
 	-rm -f ./$(DEPDIR)/MessagePool.Po
@@ -928,6 +946,7 @@ maintainer-clean: maintainer-clean-am
 	-rm -f ./$(DEPDIR)/DataParser.Po
 	-rm -f ./$(DEPDIR)/DataStore.Po
 	-rm -f ./$(DEPDIR)/ExampleChain.Po
+	-rm -f ./$(DEPDIR)/ExpressionStrategy.Po
 	-rm -f ./$(DEPDIR)/Handler.Po
 	-rm -f ./$(DEPDIR)/Logic.Po
 	-rm -f ./$(DEPDIR)/MessagePool.Po

@@ -218,9 +218,9 @@ Logic.o: cpfw/core/src/Logic.cpp /usr/include/stdc-predef.h \
  /usr/include/c++/11/bits/hashtable_policy.h \
  /usr/include/c++/11/bits/enable_special_members.h \
  /usr/include/c++/11/bits/unordered_map.h /usr/include/c++/11/optional \
- cpfw/base/include/Widget.h cpfw/base/include/Condition.h \
- cpfw/base/include/ResponsibilityChain.h /usr/include/c++/11/algorithm \
- /usr/include/c++/11/bits/ranges_algo.h \
+ cpfw/base/include/Widget.h cpfw/base/include/ExpressionStrategy.h \
+ cpfw/base/include/Condition.h cpfw/base/include/ResponsibilityChain.h \
+ /usr/include/c++/11/algorithm /usr/include/c++/11/bits/ranges_algo.h \
  /usr/include/c++/11/bits/ranges_util.h \
  /usr/include/c++/11/pstl/glue_algorithm_defs.h \
  cpfw/base/include/Handler.h /usr/include/c++/11/atomic \
@@ -513,6 +513,7 @@ cpfw/base/include/DataStore.h:
 /usr/include/c++/11/bits/unordered_map.h:
 /usr/include/c++/11/optional:
 cpfw/base/include/Widget.h:
+cpfw/base/include/ExpressionStrategy.h:
 cpfw/base/include/Condition.h:
 cpfw/base/include/ResponsibilityChain.h:
 /usr/include/c++/11/algorithm:

@@ -221,8 +221,9 @@ DataStore.o: cpfw/base/src/DataStore.cpp /usr/include/stdc-predef.h \
  /usr/include/c++/11/pstl/glue_memory_defs.h \
  /usr/include/c++/11/pstl/execution_defs.h /usr/include/c++/11/optional \
  cpfw/base/include/Base.h cpfw/base/include/Widget.h \
- cpfw/base/include/Condition.h /usr/include/c++/11/iostream \
- /usr/include/c++/11/istream /usr/include/c++/11/bits/istream.tcc
+ cpfw/base/include/ExpressionStrategy.h cpfw/base/include/Condition.h \
+ /usr/include/c++/11/iostream /usr/include/c++/11/istream \
+ /usr/include/c++/11/bits/istream.tcc
 /usr/include/stdc-predef.h:
 cpfw/base/include/DataStore.h:
 /usr/include/c++/11/map:
@@ -493,6 +494,7 @@ cpfw/base/include/DataStore.h:
 /usr/include/c++/11/optional:
 cpfw/base/include/Base.h:
 cpfw/base/include/Widget.h:
+cpfw/base/include/ExpressionStrategy.h:
 cpfw/base/include/Condition.h:
 /usr/include/c++/11/iostream:
 /usr/include/c++/11/istream:

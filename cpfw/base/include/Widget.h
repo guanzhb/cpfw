@@ -17,13 +17,16 @@
 #ifndef CPFW_BASE_INCLUDE_WIDGET_H_
 #define CPFW_BASE_INCLUDE_WIDGET_H_
 
-#include "cpfw/base/include/DataStore.h"
-
 #include <memory>
+#include <map>
+
+#include "cpfw/base/include/DataStore.h"
+#include "cpfw/base/include/ExpressionStrategy.h"
 
 namespace cpfw {
 
 class DataStore;
+class IExpressionStrategy;
 
 class Widget {
  public:
@@ -59,6 +62,7 @@ class Widget {
  private:
     const std::string mName;
     std::shared_ptr<DataStore> mStore;
+    static std::map<const std::string, std::shared_ptr<IExpressionStrategy>> mStrategy;
 };
 
 }  // namespace cpfw

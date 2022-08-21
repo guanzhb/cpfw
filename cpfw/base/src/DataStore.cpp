@@ -73,10 +73,6 @@ void DataStore::setProfile(const std::string &profileName,
         element.flag = true;
         element.backup = element.current;
         element.current = std::clamp(value, element.min, element.max);
-        std::cout << "setProfile: " << elementName << "@" << profileName << "val: " << value << std::endl;
-        std::cout << "setProfile: " << elementName << "@" << profileName << "min: " << element.min << std::endl;
-        std::cout << "setProfile: " << elementName << "@" << profileName << "max: " << element.max << std::endl;
-        std::cout << "setProfile: " << elementName << "@" << profileName << "cur" << element.current << std::endl;
     }
 }
 
