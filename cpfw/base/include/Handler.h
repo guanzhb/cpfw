@@ -31,6 +31,7 @@ enum class PostFlag : uint8_t {
     NONE = 0x0,
     DELETE_FORMER = 0x1,
     OMIT_IF_EXIST = 0x2,
+    SYNC = 0x3,
 };
 
 class Handler {
@@ -40,12 +41,12 @@ class Handler {
 
     void initialize();
 
-    void post(const Message &msg, const PostFlag flag = PostFlag::NONE);
+    int32_t post(const Message &msg, const PostFlag flag = PostFlag::NONE);
 
-    void postDelay(const Message &msg, uint64_t delayMs,
+    int32_t postDelay(const Message &msg, uint64_t delayMs,
              const PostFlag flag = PostFlag::NONE);
 
-    void postWhen(const Message &msg, uint64_t whenMs,
+    int32_t postWhen(const Message &msg, uint64_t whenMs,
              const PostFlag flag = PostFlag::NONE);
 
     /**
@@ -56,6 +57,8 @@ class Handler {
      * @return int32_t 0 if success, else errno
      */
     virtual int32_t onInvoke(const Message &msg) = 0;
+
+    virtual void onReply(const Message &msg, const int32_t status) = 0;
  private:
     void handleMessage();
 

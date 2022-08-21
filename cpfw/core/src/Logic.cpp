@@ -42,6 +42,14 @@ void Logic::initialize() {
     mHandler->initialize();
 }
 
+void Logic::registerCallback(TCallback callback) {
+    mCallback = callback;
+}
+
+void Logic::unregisterCallback(TCallback callback) {
+    mCallback = nullptr;
+}
+
 void Logic::addWidget(std::shared_ptr<Widget> widget) {
     mStore->addWidget(widget);
 }
@@ -93,6 +101,12 @@ int32_t Logic::getProfile(const std::string &widgetName,
     return 0;
 }
 
+void Logic::onReply(const Message &message, const int32_t status) {
+    if (nullptr != mCallback) {
+        mCallback(message.mWidgetName, message.mElementName, message.mValue, status);
+    }
+}
+
 Logic::LogicHandler::LogicHandler(Logic* logic) : mLogic(logic) {
     std::cout << "LogicHandler ctor" << std::endl;
 }
@@ -101,11 +115,15 @@ Logic::LogicHandler::~LogicHandler() {
 }
 
 int32_t Logic::LogicHandler::onInvoke(const Message &message) {
-//    std::cout << "Logic[" << __func__ << "] " << message.mWidgetName
-//        << " -> " << message.mElementName << std::endl;
+    std::cout << "Logic[" << __func__ << "] " << message.mWidgetName
+        << " -> " << message.mElementName << std::endl;
     mLogic->mStore->setProfile(
         message.mWidgetName, message.mElementName, message.mValue);
     return mLogic->mResponsibilityChain->invokeChain(message.mWidgetName);
+}
+
+void Logic::LogicHandler::onReply(const Message &message, const int32_t status) {
+    mLogic->onReply(message, status);
 }
 
 }  // namespace cpfw

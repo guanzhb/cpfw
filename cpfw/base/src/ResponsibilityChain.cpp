@@ -45,10 +45,12 @@ int32_t ResponsibilityChain::invokeWidget(std::string widgetName) const {
     }
 
     int32_t ret = 0;
-    if (ret = widget->get()->check() != 0) {
+    if ((ret = widget->get()->check()) != 0) {
         return ret;  // TODO(guanzhb) LOGE
     }
-    if (ret = widget->get()->action() != 0) {
+    if ((ret = widget->get()->action()) != 0) {
+        widget->get()->reset();
+        std::cout << "invokeWidget status: " << ret << std::endl;
         return ret;  // TODO(guanzhb) LOGE
     }
     widget->get()->swipe();

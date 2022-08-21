@@ -53,6 +53,8 @@ class Widget {
 
      virtual int32_t swipe();
 
+     virtual int32_t reset();
+
  private:
     const std::string mName;
     std::shared_ptr<DataStore> mStore;

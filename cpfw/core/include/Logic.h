@@ -28,6 +28,9 @@
 
 namespace cpfw {
 
+using TCallback = std::function<void(const std::string widgetName,
+                         const std::string elementName, const int32_t value,
+                         const int32_t status)>;
 
 class Logic {
  public:
@@ -38,6 +41,9 @@ class Logic {
     ~Logic();
 
     void initialize();
+
+    void registerCallback(TCallback callback);
+    void unregisterCallback(TCallback callback);
 
     void addWidget(std::shared_ptr<Widget> widget);
 
@@ -57,6 +63,8 @@ class Logic {
     int32_t getProfile(const std::string &widgeteName,
                 const std::string &elementName);
 
+    void onReply(const Message &message, const int32_t status);
+
  private:
     class LogicHandler : public Handler {
      public:
@@ -65,11 +73,14 @@ class Logic {
 
          int32_t onInvoke(const Message &message) override;
 
+         void onReply(const Message &message, const int32_t status) override;
+
      private:
          Logic* mLogic;
     };
 
  private:
+    TCallback mCallback;
     std::unique_ptr<Handler> mHandler;
     std::shared_ptr<DataStore> mStore;
     std::unique_ptr<ResponsibilityChain> mResponsibilityChain;

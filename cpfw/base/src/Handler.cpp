@@ -29,7 +29,6 @@ Handler::Handler() {
 }
 
 Handler::~Handler() {
-    std::cout << "dtor" << std::endl;
     mRunning.store(false);
     Message msg;
     post(msg, PostFlag::NONE);
@@ -42,14 +41,20 @@ void Handler::initialize() {
     mWorkingThread = std::thread(&Handler::handleMessage, this);
 }
 
-void Handler::post(const Message &msg, const PostFlag flag) {
-    postDelay(msg, 0, flag);
+int32_t Handler::post(const Message &msg, const PostFlag flag) {
+    return postDelay(msg, 0, flag);
 }
 
-void Handler::postDelay(const Message &msg, uint64_t delayMs, const PostFlag flag) {
+int32_t Handler::postDelay(const Message &msg, uint64_t delayMs, const PostFlag flag) {
     std::cout << "postDelay, widget: " << msg.mWidgetName
         << ", element: " << msg.mElementName << std::endl;
+
+    if (flag == PostFlag::SYNC) {
+        return onInvoke(msg);
+    }
+
     uint64_t whenMs = getCurrentTimeMs() + delayMs;
+    int32_t ret = 0;
     switch (flag) {
         case PostFlag::DELETE_FORMER:
             mMsgPool->postAndDeleteFormers(whenMs, msg, msg.mWhat);
@@ -62,15 +67,16 @@ void Handler::postDelay(const Message &msg, uint64_t delayMs, const PostFlag fla
             mMsgPool->post(whenMs, msg, msg.mWhat);
             break;
     }
+    return 0;
 }
 
-void Handler::postWhen(const Message &msg, uint64_t whenMs, const PostFlag flag) {
+int32_t Handler::postWhen(const Message &msg, uint64_t whenMs, const PostFlag flag) {
     uint64_t currentTimeMs = getCurrentTimeMs();
     if (currentTimeMs > whenMs) {
-        return;  // The task is planned to do at a past time. Ignore it.
+        return 0;  // The task is planned to do at a past time. Ignore it.
     }
 
-    postDelay(msg, whenMs - currentTimeMs, flag);
+    return postDelay(msg, whenMs - currentTimeMs, flag);
 }
 
 void Handler::handleMessage() {
@@ -92,14 +98,18 @@ void Handler::handleMessage() {
 
         int32_t status = onInvoke(itor->second);
         mMsgPool->popFront();
-        std::cout << "handleMessage invoke over" << std::endl;
+        std::cout << "handleMessage invoke over status: " << status << std::endl;
         reply(itor->second, status);
     }
 }
 
 void Handler::reply(const Message &msg, int32_t status) {
     if (nullptr != msg.mCallback) {
+        std::cout << "reply to widget" << std::endl;
         msg.mCallback(status);
+    } else {
+        std::cout << "reply to Handler status: " << status << std::endl;
+        onReply(msg, status);
     }
 }
 

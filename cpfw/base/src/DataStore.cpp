@@ -33,7 +33,6 @@ DataStore::~DataStore() {
 
 std::optional<std::shared_ptr<Widget>>
         DataStore::getWidget(const std::string &name) {
-    std::cout << "DataStore getWidget: " << name << std::endl;
     std::optional<std::shared_ptr<Widget>> ret = std::nullopt;
     if (mWidgetTable.find(name) != mWidgetTable.end()) {
         ret = mWidgetTable[name];
@@ -42,13 +41,8 @@ std::optional<std::shared_ptr<Widget>>
 }
 
 const TINVOKE_CHAIN& DataStore::getChain(const std::string &parentName) {
-    std::cout << "DataStore getChain for widget: " << parentName << std::endl;
-    //return  mInvokeChainTable.find(parentName) != mInvokeChainTable.end()
-     //   ? mInvokeChainTable[parentName] : EMPTY_INVOKE_CHAIN;
-    if (mInvokeChainTable.find(parentName) != mInvokeChainTable.end()) {
-        std::cout << "DataStore getChain success for widget: " << parentName << std::endl;
-        return mInvokeChainTable[parentName];
-    }
+    return  mInvokeChainTable.find(parentName) != mInvokeChainTable.end()
+        ? mInvokeChainTable[parentName] : EMPTY_INVOKE_CHAIN;
     return EMPTY_INVOKE_CHAIN;
 }
 
@@ -74,6 +68,7 @@ void DataStore::setProfile(
     if (elementItor == profile.elements.end()) {
         return;
     }
+    elementItor->second.backup = elementItor->second.current;
     elementItor->second.current = value;
 }
 

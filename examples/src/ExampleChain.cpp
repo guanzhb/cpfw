@@ -32,7 +32,13 @@ static int32_t handle(
         std::cout << " " << d;
     });
     std::cout << std::endl;
-    return 0;
+    return -22;
+}
+
+static void onReply(const std::string &widgetName, const std::string &elementName,
+             const int32_t value, const int32_t status) {
+    std::cout << "reply: widget:" << widgetName << ", element:" << elementName
+        << ", value:" << value << ", status:" << status << std::endl;
 }
 
 class WidgetStub : public Widget {
@@ -46,7 +52,9 @@ class WidgetStub : public Widget {
         uint32_t type = static_cast<uint32_t>(ElementType::PUBLIC);
         auto values = parseProfile(
             getDataStore()->getProfile(getName()), type, getName(), getDataStore());
-        return handle(getDataStore().get(), getName() + " override action ", values);
+        int32_t ret = handle(getDataStore().get(), getName() + " override action ", values);
+        std::cout << "WidgetStub action status: " << ret << std::endl;
+        return ret;
     }
 };
 
@@ -67,6 +75,7 @@ ExampleChain::ExampleChain() {
     mLogic->addWidget(ss);
 
     mLogic->initialize();
+    mLogic->registerCallback(onReply);
 }
 
 ExampleChain::~ExampleChain() {
@@ -90,7 +99,7 @@ int32_t ExampleChain::setLoudness(int32_t loudness) {
 
 int32_t ExampleChain::setStub(int32_t stub) {
     std::cout << "stub call time: " << cpfw::getCurrentTimeMs() << std::endl;
-    return mLogic->setProfileDelay("stub", stub, 10, PostFlag::OMIT_IF_EXIST);
+    return mLogic->setProfileDelay("stub", stub, 10, PostFlag::SYNC);
 }
 
 }  // namespace cpfw

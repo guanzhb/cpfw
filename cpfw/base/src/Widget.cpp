@@ -104,5 +104,13 @@ int32_t Widget::swipe() {
     return 0;
 }
 
+int32_t Widget::reset() {
+    Profile &profile = mStore->getProfile(getName());
+    for (auto &itor : profile.elements) {
+        itor.second.current = itor.second.backup;
+    }
+    return 0;
+}
+
 }  // namespace cpfw
 
