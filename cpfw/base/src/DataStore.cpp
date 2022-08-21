@@ -55,9 +55,8 @@ void DataStore::setProfile(const std::string &profileName, int32_t value) {
     setProfile(profileName, "default", value);
 }
 
-void DataStore::setProfile(
-        const std::string &profileName, const std::string &elementName,
-        int32_t value) {
+void DataStore::setProfile(const std::string &profileName,
+        const std::string &elementName, int32_t value) {
     std::cout << "DataStore[" << __func__ << "] " << profileName
         << " -> " << elementName << std::endl;
     Profile &profile = getProfile(profileName);
@@ -68,8 +67,17 @@ void DataStore::setProfile(
     if (elementItor == profile.elements.end()) {
         return;
     }
-    elementItor->second.backup = elementItor->second.current;
-    elementItor->second.current = value;
+    auto &element = elementItor->second;
+    element.flag = false;
+    if (value != element.current) {
+        element.flag = true;
+        element.backup = element.current;
+        element.current = std::clamp(value, element.min, element.max);
+        std::cout << "setProfile: " << elementName << "@" << profileName << "val: " << value << std::endl;
+        std::cout << "setProfile: " << elementName << "@" << profileName << "min: " << element.min << std::endl;
+        std::cout << "setProfile: " << elementName << "@" << profileName << "max: " << element.max << std::endl;
+        std::cout << "setProfile: " << elementName << "@" << profileName << "cur" << element.current << std::endl;
+    }
 }
 
 int32_t DataStore::getConvertedData(std::string context, int32_t origin) {

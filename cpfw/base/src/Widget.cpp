@@ -27,6 +27,7 @@ const std::string Widget::EXPRESSION_EQ = "eq";
 const std::string Widget::EXPRESSION_NOT_EQ = "not_eq";
 const std::string Widget::EXPRESSION_IN_RANGE = "in_range";
 const std::string Widget::EXPRESSION_OUT_RANGE = "out_range";
+const std::string Widget::EXPRESSION_CHANGE = "change";
 const std::string Widget::EXPRESSION_AND = "and";
 const std::string Widget::EXPRESSION_OR = "or";
 
@@ -66,6 +67,7 @@ int32_t Widget::check() {
         Profile &profile = mStore->getProfile(itor.getProfileName());
         int32_t current = profile.elements[itor.getElementName()].current;
         const std::string &expressionIn = itor.getExpression();
+        std::cout << "Widget[" << mName << "] check" << ", expression:" << expressionIn << std::endl;
         if (0 == EXPRESSION_EQ.compare(expressionIn)) {
              if (current != itor.getDefault()) {
                  ret = EINVAL;  // TODO(guanzhb) LOGI
@@ -82,6 +84,12 @@ int32_t Widget::check() {
              if (current > itor.getLeft() && current < itor.getRight()) {
                  ret = EINVAL;  // TODO(guanzhb) LOGI
              }
+        } else if (0 == EXPRESSION_CHANGE.compare(expressionIn)) {
+            std::cout << "Widget[" << mName << "] check" << ", flag:"
+                << profile.elements[itor.getElementName()].flag << std::endl;
+            if (!profile.elements[itor.getElementName()].flag) {
+                 ret = EINVAL;  // TODO(guanzhb) LOGI
+            }
         }
         if (0 == EXPRESSION_OR.compare(logic)) {
             break;

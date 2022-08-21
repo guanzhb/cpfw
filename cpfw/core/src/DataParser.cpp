@@ -121,9 +121,12 @@ static Condition parseCondition(std::string name, std::string strs) {
         pos = strs.find(delim[i]);
     }
     ss.push_back(strs);
-    if (ss.size() == 4) {
-        return Condition(name, ss[0], ss[1], ss[2],
+    switch (ss.size()) {
+        case 4:
+            return Condition(name, ss[0], ss[1], ss[2],
                          std::atoi(ss[3].c_str()), std::atoi(ss[3].c_str()));
+        case 3:
+            return Condition(name, ss[0], ss[1], ss[2], 0, 0);
     }
     return Condition(name, ss[0], ss[1], ss[2],
                      std::atoi(ss[3].c_str()), std::atoi(ss[4].c_str()));

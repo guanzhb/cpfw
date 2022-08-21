@@ -35,6 +35,7 @@ struct Element {
     int32_t current;
     int32_t backup;
     uint32_t type;  // relate to ElementType
+    bool flag;  // change or not
 };
 
 struct Profile {

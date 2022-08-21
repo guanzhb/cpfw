@@ -16,6 +16,9 @@
         <condition widget="duck" logic="or">
             <element when="default@volume;in_range:1,20"></element>
         </condition>
+        <condition widget="equalizer" logic="or">
+            <element when="gain_400hz@equalizer;change"></element>
+        </condition>
     </conditions>
 
     <profiles>

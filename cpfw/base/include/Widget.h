@@ -30,6 +30,7 @@ class Widget {
     static const std::string EXPRESSION_EQ;
     static const std::string EXPRESSION_NOT_EQ;
     static const std::string EXPRESSION_IN_RANGE;
+    static const std::string EXPRESSION_CHANGE;
     static const std::string EXPRESSION_OUT_RANGE;
     static const std::string EXPRESSION_AND;
     static const std::string EXPRESSION_OR;
