@@ -66,7 +66,7 @@ int32_t ResponsibilityChain::invokeWidget(std::string widgetName) const {
                 //  TODO(guanzhb) LOGE
             }
         });
-    std::cout << "ResponsibilityChain " << __func__ << " -> " << widgetName << "success" << std::endl;
+    std::cout << "ResponsibilityChain " << __func__ << " -> " << widgetName << " success" << std::endl;
     return ret;
 }
 

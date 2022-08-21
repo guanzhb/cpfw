@@ -96,19 +96,11 @@ void MessagePool::postWithLock(
 }
 
 void MessagePool::deleteMessage(const uint64_t what) {
-    for (auto itor=mQueue.begin(), last=mQueue.end(); last!=itor; ) {
-        if (itor->second.mWhat == what) {
-            itor = mQueue.erase(itor);
-        } else {
-            ++itor;
-        }
-    }
-/*
     std::erase_if(mQueue, [&what](const auto& item) {
         auto const& [whenMs, message] = item;
         return message.mWhat == what;
     });
-*/
+
     mFlagTable.erase(what);
 }
 

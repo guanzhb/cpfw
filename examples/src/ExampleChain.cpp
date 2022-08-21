@@ -32,7 +32,7 @@ static int32_t handle(
         std::cout << " " << d;
     });
     std::cout << std::endl;
-    return -22;
+    return 0;
 }
 
 static void onReply(const std::string &widgetName, const std::string &elementName,
@@ -74,7 +74,6 @@ ExampleChain::ExampleChain() {
     auto ss = std::make_shared<WidgetStub>("stub");
     mLogic->addWidget(ss);
 
-    mLogic->initialize();
     mLogic->registerCallback(onReply);
 }
 
@@ -105,7 +104,7 @@ int32_t ExampleChain::setStub(int32_t stub) {
 }  // namespace cpfw
 
 int main() {
-    std::shared_ptr<cpfw::ExampleChain> example = std::make_shared<cpfw::ExampleChain>();
+    std::unique_ptr<cpfw::ExampleChain> example = std::make_unique<cpfw::ExampleChain>();
     std::cout << "start " << std::endl;
 
     std::cout << std::endl;
@@ -133,7 +132,7 @@ int main() {
     std::cout << "volume success" << std::endl;
 
     std::cout << std::endl;
-    example->setEq("gain_100hz", 100);
+    example->setEq("gain_400hz", 90);
     std::cout << "eq success" << std::endl;
 
     std::cout << std::endl;

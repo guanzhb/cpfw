@@ -40,8 +40,6 @@ class Logic {
 
     ~Logic();
 
-    void initialize();
-
     void registerCallback(TCallback callback);
     void unregisterCallback(TCallback callback);
 

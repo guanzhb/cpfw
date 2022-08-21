@@ -25,7 +25,8 @@ namespace cpfw {
 
 Handler::Handler() {
     mMsgPool = std::make_unique<MessagePool>();
-    mRunning.store(false);
+    mRunning.store(true);
+    mWorkingThread = std::thread(&Handler::handleMessage, this);
 }
 
 Handler::~Handler() {
@@ -33,12 +34,6 @@ Handler::~Handler() {
     Message msg;
     post(msg, PostFlag::NONE);
     mWorkingThread.join();
-}
-
-void Handler::initialize() {
-    std::cout << "initialize" << std::endl;
-    mRunning.store(true);
-    mWorkingThread = std::thread(&Handler::handleMessage, this);
 }
 
 int32_t Handler::post(const Message &msg, const PostFlag flag) {

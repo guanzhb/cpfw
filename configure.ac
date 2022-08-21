@@ -1,8 +1,8 @@
 #                                               -*- Autoconf -*-
 # Process this file with autoconf to produce a configure script.
 
-AC_PREREQ([2.69])
-AC_INIT(exampleChain, 0.1, [1127254428@qq.com])
+AC_PREREQ([2.71])
+AC_INIT([exampleChain],[0.1],[1127254428@qq.com])
 AC_CONFIG_SRCDIR([cpfw/base/include/Base.h])
 AC_CONFIG_HEADERS([config.h])
 
@@ -21,4 +21,5 @@ AC_TYPE_INT32_T
 AC_TYPE_UINT32_T
 
 # Checks for library functions.
-AC_OUTPUT(Makefile)
+AC_CONFIG_FILES([Makefile])
+AC_OUTPUT

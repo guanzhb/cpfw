@@ -39,8 +39,6 @@ class Handler {
     Handler();
     ~Handler();
 
-    void initialize();
-
     int32_t post(const Message &msg, const PostFlag flag = PostFlag::NONE);
 
     int32_t postDelay(const Message &msg, uint64_t delayMs,

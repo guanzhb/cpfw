@@ -11,3 +11,4 @@ exampleChain_SOURCES= examples/src/ExampleChain.cpp \
                       cpfw/core/src/Logic.cpp \
                       cpfw/core/src/DataParser.cpp \
                       external/tinyxml2/tinyxml2.cpp
+AM_CPPFLAGS=-std=c++20

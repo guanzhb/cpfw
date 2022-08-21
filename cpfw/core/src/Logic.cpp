@@ -38,10 +38,6 @@ Logic::Logic(std::string configurationFile) {
 Logic::~Logic() {
 }
 
-void Logic::initialize() {
-    mHandler->initialize();
-}
-
 void Logic::registerCallback(TCallback callback) {
     mCallback = callback;
 }

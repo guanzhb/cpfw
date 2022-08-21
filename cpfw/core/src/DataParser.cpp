@@ -107,7 +107,6 @@ void DataParser::loadInvokeChain(tinyxml2::XMLElement *root) {
 }
 
 static Condition parseCondition(std::string name, std::string strs) {
-    std::cout << __func__ << " begin" << std::endl;
     std::vector<std::string> delim = {"@", ";", ":", ","};
     std::vector<std::string> ss;
 
