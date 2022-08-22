@@ -28,13 +28,14 @@
 #include "cpfw/base/include/Base.h"
 #include "cpfw/base/include/Widget.h"
 #include "cpfw/base/include/Condition.h"
+#include "cpfw/base/include/ExpressionPool.h"
 
 namespace cpfw {
 
 class Widget;
 
 using TINVOKE_CHAIN = std::vector<std::string/*child name*/>;
-using TINVOKE_CONDITION = std::pair<std::string/*and, or*/, std::vector<Condition>>;
+using TINVOKE_CONDITION = std::pair<ExpressionEnum/*and, or*/, std::vector<Condition>>;
 
 /**
  * @brief database of framework, who is configuried by file or user.

@@ -21,7 +21,8 @@
 namespace cpfw {
 
 const TINVOKE_CHAIN DataStore::EMPTY_INVOKE_CHAIN = {""};
-const TINVOKE_CONDITION DataStore::EMPTY_CONDITION = std::make_pair("", std::vector<Condition>());
+const TINVOKE_CONDITION DataStore::EMPTY_CONDITION
+    = std::make_pair(ExpressionEnum::EMPTY, std::vector<Condition>());
 Profile DataStore::EMPTY_PROFILE = Profile();
 
 DataStore::DataStore() {

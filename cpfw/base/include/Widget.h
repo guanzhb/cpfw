@@ -22,6 +22,7 @@
 
 #include "cpfw/base/include/DataStore.h"
 #include "cpfw/base/include/ExpressionStrategy.h"
+#include "cpfw/base/include/ExpressionPool.h"
 
 namespace cpfw {
 
@@ -62,7 +63,8 @@ class Widget {
  private:
     const std::string mName;
     std::shared_ptr<DataStore> mStore;
-    static std::map<const std::string, std::shared_ptr<IExpressionStrategy>> mStrategy;
+    static std::map<ExpressionEnum,
+        std::shared_ptr<IExpressionStrategy>> mStrategy;
 };
 
 }  // namespace cpfw

@@ -235,7 +235,7 @@ Handler.o: cpfw/base/src/Handler.cpp /usr/include/stdc-predef.h \
  /usr/include/c++/11/pstl/glue_algorithm_defs.h cpfw/base/include/Base.h \
  cpfw/base/include/DataStore.h /usr/include/c++/11/optional \
  cpfw/base/include/Widget.h cpfw/base/include/ExpressionStrategy.h \
- cpfw/base/include/Condition.h
+ cpfw/base/include/Condition.h cpfw/base/include/ExpressionPool.h
 /usr/include/stdc-predef.h:
 cpfw/base/include/Handler.h:
 /usr/include/c++/11/atomic:
@@ -539,3 +539,4 @@ cpfw/base/include/DataStore.h:
 cpfw/base/include/Widget.h:
 cpfw/base/include/ExpressionStrategy.h:
 cpfw/base/include/Condition.h:
+cpfw/base/include/ExpressionPool.h:

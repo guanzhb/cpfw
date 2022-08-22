@@ -18,12 +18,12 @@
 
 namespace cpfw {
 
-Condition::Condition() : Condition("", "", "", "", 0, 0) {
+Condition::Condition() : Condition("", "", "", ExpressionEnum::EMPTY, 0, 0) {
 }
 
 Condition::Condition(
         std::string name, std::string elementName,
-        std::string profileName, std::string expression,
+        std::string profileName, ExpressionEnum expression,
         int32_t left, int32_t right)
     : mName(name), mExpression(expression),
       mProfileName(profileName), mElementName(elementName),
@@ -37,7 +37,7 @@ const std::string& Condition::getName() const {
     return mName;
 }
 
-const std::string& Condition::getExpression() const {
+const ExpressionEnum Condition::getExpression() const {
     return mExpression;
 }
 

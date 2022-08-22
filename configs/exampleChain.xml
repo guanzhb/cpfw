@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <exampleChain>
+
     <invokeChains>
         <parent widget="volume">
             <child widget="loudness"></child>

@@ -223,7 +223,8 @@ Utils.o: cpfw/base/src/Utils.cpp /usr/include/stdc-predef.h \
  /usr/include/c++/11/bits/uses_allocator_args.h \
  /usr/include/c++/11/pstl/glue_memory_defs.h /usr/include/c++/11/optional \
  cpfw/base/include/Widget.h cpfw/base/include/ExpressionStrategy.h \
- cpfw/base/include/Condition.h /usr/include/x86_64-linux-gnu/sys/time.h
+ cpfw/base/include/Condition.h cpfw/base/include/ExpressionPool.h \
+ /usr/include/x86_64-linux-gnu/sys/time.h
 /usr/include/stdc-predef.h:
 cpfw/base/include/Utils.h:
 /usr/include/c++/11/algorithm:
@@ -501,4 +502,5 @@ cpfw/base/include/DataStore.h:
 cpfw/base/include/Widget.h:
 cpfw/base/include/ExpressionStrategy.h:
 cpfw/base/include/Condition.h:
+cpfw/base/include/ExpressionPool.h:
 /usr/include/x86_64-linux-gnu/sys/time.h:

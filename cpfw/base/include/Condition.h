@@ -19,6 +19,8 @@
 
 #include <string>
 
+#include "cpfw/base/include/ExpressionPool.h"
+
 namespace cpfw {
 
 class Condition {
@@ -28,7 +30,7 @@ class Condition {
     Condition(std::string name,
               std::string elementName,
               std::string profileName,
-              std::string expression,
+              ExpressionEnum expression,
               int32_t left,
               int32_t right);
 
@@ -36,11 +38,12 @@ class Condition {
 
     const std::string& getName() const;
 
-    const std::string& getExpression() const;
+    const ExpressionEnum getExpression() const;
 
     const std::string& getProfileName() const;
 
     const std::string& getElementName() const;
+
     int32_t getDefault() const;
 
     int32_t getLeft() const;
@@ -49,7 +52,7 @@ class Condition {
 
  private:
     const std::string mName;
-    const std::string mExpression;
+    const ExpressionEnum mExpression;
     const std::string mProfileName;
     const std::string mElementName;
     int32_t mLeft;

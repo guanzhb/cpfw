@@ -218,8 +218,9 @@ ExampleChain.o: examples/src/ExampleChain.cpp /usr/include/stdc-predef.h \
  /usr/include/c++/11/bits/enable_special_members.h \
  /usr/include/c++/11/bits/unordered_map.h /usr/include/c++/11/optional \
  cpfw/base/include/Widget.h cpfw/base/include/ExpressionStrategy.h \
- cpfw/base/include/Condition.h cpfw/base/include/ResponsibilityChain.h \
- /usr/include/c++/11/algorithm /usr/include/c++/11/bits/ranges_algo.h \
+ cpfw/base/include/Condition.h cpfw/base/include/ExpressionPool.h \
+ cpfw/base/include/ResponsibilityChain.h /usr/include/c++/11/algorithm \
+ /usr/include/c++/11/bits/ranges_algo.h \
  /usr/include/c++/11/bits/ranges_util.h \
  /usr/include/c++/11/pstl/glue_algorithm_defs.h \
  cpfw/base/include/Handler.h /usr/include/c++/11/atomic \
@@ -512,6 +513,7 @@ cpfw/base/include/DataStore.h:
 cpfw/base/include/Widget.h:
 cpfw/base/include/ExpressionStrategy.h:
 cpfw/base/include/Condition.h:
+cpfw/base/include/ExpressionPool.h:
 cpfw/base/include/ResponsibilityChain.h:
 /usr/include/c++/11/algorithm:
 /usr/include/c++/11/bits/ranges_algo.h:

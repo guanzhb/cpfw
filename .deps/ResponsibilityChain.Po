@@ -225,7 +225,8 @@ ResponsibilityChain.o: cpfw/base/src/ResponsibilityChain.cpp \
  /usr/include/c++/11/bits/stl_map.h \
  /usr/include/c++/11/bits/stl_multimap.h /usr/include/c++/11/optional \
  cpfw/base/include/Base.h cpfw/base/include/Widget.h \
- cpfw/base/include/ExpressionStrategy.h cpfw/base/include/Condition.h
+ cpfw/base/include/ExpressionStrategy.h cpfw/base/include/Condition.h \
+ cpfw/base/include/ExpressionPool.h
 /usr/include/stdc-predef.h:
 /usr/include/c++/11/string:
 /usr/include/x86_64-linux-gnu/c++/11/bits/c++config.h:
@@ -506,3 +507,4 @@ cpfw/base/include/Base.h:
 cpfw/base/include/Widget.h:
 cpfw/base/include/ExpressionStrategy.h:
 cpfw/base/include/Condition.h:
+cpfw/base/include/ExpressionPool.h:

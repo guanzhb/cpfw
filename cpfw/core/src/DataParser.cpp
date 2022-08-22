@@ -18,6 +18,7 @@
 
 #include <iostream>
 
+#include "cpfw/base/include/ExpressionPool.h"
 #include "external/tinyxml2/tinyxml2.h"
 
 namespace cpfw {
@@ -123,12 +124,13 @@ static Condition parseCondition(std::string name, std::string strs) {
     ss.push_back(strs);
     switch (ss.size()) {
         case 4:
-            return Condition(name, ss[0], ss[1], ss[2],
+            return Condition(name, ss[0], ss[1], ExpressionPool::getEnum(ss[2]),
                          std::atoi(ss[3].c_str()), std::atoi(ss[3].c_str()));
         case 3:
-            return Condition(name, ss[0], ss[1], ss[2], 0, 0);
+            return Condition(name, ss[0], ss[1], ExpressionPool::getEnum(ss[2]),
+                             0, 0);
     }
-    return Condition(name, ss[0], ss[1], ss[2],
+    return Condition(name, ss[0], ss[1], ExpressionPool::getEnum(ss[2]),
                      std::atoi(ss[3].c_str()), std::atoi(ss[4].c_str()));
 }
 
@@ -150,7 +152,8 @@ void DataParser::loadConditions(tinyxml2::XMLElement *root) {
             condition.push_back(c);
             surfaceElement = surfaceElement->NextSiblingElement();
         }
-        mDataStore->addCondition(widgetName, std::make_pair(logic, condition));
+        mDataStore->addCondition(widgetName,
+                        std::make_pair(ExpressionPool::getEnum(logic), condition));
         surfaceCondition = surfaceCondition->NextSiblingElement();
     }
 }

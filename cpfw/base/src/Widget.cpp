@@ -20,23 +20,22 @@
 
 #include "cpfw/base/include/Condition.h"
 #include "cpfw/base/include/Utils.h"
+#include "cpfw/base/include/ExpressionPool.h"
 
 namespace cpfw {
 
-const std::string Widget::EXPRESSION_EQ = "equal";
-const std::string Widget::EXPRESSION_NOT_EQ = "not_equal";
-const std::string Widget::EXPRESSION_IN_RANGE = "in_range";
-const std::string Widget::EXPRESSION_OUT_RANGE = "out_range";
-const std::string Widget::EXPRESSION_CHANGE = "change";
-const std::string Widget::EXPRESSION_AND = "and";
-const std::string Widget::EXPRESSION_OR = "or";
-
-std::map<const std::string, std::shared_ptr<IExpressionStrategy>> Widget::mStrategy {
-    {EXPRESSION_EQ, std::make_shared<ExpressionStrategyEqual>()},
-    {EXPRESSION_NOT_EQ, std::make_shared<ExpressionStrategyNotEqual>()},
-    {EXPRESSION_IN_RANGE, std::make_shared<ExpressionStrategyInRange>()},
-    {EXPRESSION_OUT_RANGE, std::make_shared<ExpressionStrategyOutRange>()},
-    {EXPRESSION_CHANGE, std::make_shared<ExpressionStrategyChange>()}
+std::map<ExpressionEnum,
+    std::shared_ptr<IExpressionStrategy>> Widget::mStrategy {
+        {ExpressionEnum::EQUAL,
+            std::make_shared<ExpressionStrategyEqual>()},
+        {ExpressionEnum::NOT_EQUAL,
+            std::make_shared<ExpressionStrategyNotEqual>()},
+        {ExpressionEnum::IN_RANGE,
+            std::make_shared<ExpressionStrategyInRange>()},
+        {ExpressionEnum::OUT_RANGE,
+            std::make_shared<ExpressionStrategyOutRange>()},
+        {ExpressionEnum::CHANGE,
+            std::make_shared<ExpressionStrategyChange>()}
 };
 
 Widget::Widget() : Widget("") {
@@ -70,19 +69,17 @@ int32_t Widget::check() {
         std::cout << "Widget[" << mName << "] no check" << std::endl;
         return 0;
     }
-    std::string logic = conditionPair.first;
+    auto &logic = conditionPair.first;
     for (auto itor : conditionPair.second) {
-        Profile &profile = mStore->getProfile(itor.getProfileName());
-        int32_t current = profile.elements[itor.getElementName()].current;
-        const std::string &expressionIn = itor.getExpression();
+        const auto &expressionIn = itor.getExpression();
 
         if (mStrategy.find(expressionIn) != mStrategy.end()) {
             ret = mStrategy[expressionIn]->handle(itor, mStore);
         }
 
-        if (0 == ret && 0 == EXPRESSION_OR.compare(logic)) {
+        if (0 == ret && ExpressionEnum::OR == logic) {
             break;
-        } else if (0 != ret && 0 == EXPRESSION_AND.compare(logic)) {
+        } else if (0 != ret && ExpressionEnum::AND == logic) {
             break;
         }
     }

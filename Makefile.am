@@ -1,6 +1,7 @@
 AUTOMAKE_OPTIONS=foreign
 bin_PROGRAMS=exampleChain
 exampleChain_SOURCES= examples/src/ExampleChain.cpp \
+                      cpfw/base/src/ExpressionPool.cpp \
                       cpfw/base/src/Condition.cpp \
                       cpfw/base/src/ExpressionStrategy.cpp \
                       cpfw/base/src/Widget.cpp \

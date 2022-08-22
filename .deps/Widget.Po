@@ -217,6 +217,7 @@ Widget.o: cpfw/base/src/Widget.cpp /usr/include/stdc-predef.h \
  /usr/include/c++/11/bits/enable_special_members.h \
  /usr/include/c++/11/bits/unordered_map.h /usr/include/c++/11/optional \
  cpfw/base/include/Base.h cpfw/base/include/Condition.h \
+ cpfw/base/include/ExpressionPool.h \
  cpfw/base/include/ExpressionStrategy.h /usr/include/c++/11/iostream \
  /usr/include/c++/11/istream /usr/include/c++/11/bits/istream.tcc \
  cpfw/base/include/Utils.h /usr/include/c++/11/algorithm \
@@ -494,6 +495,7 @@ cpfw/base/include/DataStore.h:
 /usr/include/c++/11/optional:
 cpfw/base/include/Base.h:
 cpfw/base/include/Condition.h:
+cpfw/base/include/ExpressionPool.h:
 cpfw/base/include/ExpressionStrategy.h:
 /usr/include/c++/11/iostream:
 /usr/include/c++/11/istream:
