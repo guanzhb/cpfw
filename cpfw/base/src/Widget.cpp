@@ -130,9 +130,11 @@ int32_t Widget::action() {
     case 2:
         ret = std::invoke(std::any_cast<FUNCTION_2INT>(mFuncAction),
                           values[0], values[1]);
+        break;
     case 3:
         ret = std::invoke(std::any_cast<FUNCTION_3INT>(mFuncAction),
                           values[0], values[1], values[2]);
+        break;
     case 4:
         ret = std::invoke(std::any_cast<FUNCTION_4INT>(mFuncAction),
                           values[0], values[1], values[2], values[3]);
