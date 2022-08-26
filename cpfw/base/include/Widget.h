@@ -17,6 +17,7 @@
 #ifndef CPFW_BASE_INCLUDE_WIDGET_H_
 #define CPFW_BASE_INCLUDE_WIDGET_H_
 
+#include <any>
 #include <memory>
 #include <map>
 
@@ -31,18 +32,16 @@ class IExpressionStrategy;
 
 class Widget {
  public:
-    static const std::string EXPRESSION_EQ;
-    static const std::string EXPRESSION_NOT_EQ;
-    static const std::string EXPRESSION_IN_RANGE;
-    static const std::string EXPRESSION_CHANGE;
-    static const std::string EXPRESSION_OUT_RANGE;
-    static const std::string EXPRESSION_AND;
-    static const std::string EXPRESSION_OR;
-
- public:
      Widget();
 
      explicit Widget(std::string name);
+
+     Widget(std::string name, FUNCTION_0INT func);
+     Widget(std::string name, FUNCTION_1INT func);
+     Widget(std::string name, FUNCTION_2INT func);
+     Widget(std::string name, FUNCTION_3INT func);
+     Widget(std::string name, FUNCTION_4INT func);
+     Widget(std::string name, FUNCTION_5INT func);
 
      virtual ~Widget();
 
@@ -65,7 +64,9 @@ class Widget {
     std::shared_ptr<DataStore> mStore;
     static std::map<ExpressionEnum,
         std::shared_ptr<IExpressionStrategy>> mStrategy;
+    std::any mFuncAction;
 };
+
 
 }  // namespace cpfw
 

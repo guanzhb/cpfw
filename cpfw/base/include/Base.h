@@ -17,10 +17,11 @@
 #ifndef CPFW_BASE_INCLUDE_BASE_H__
 #define CPFW_BASE_INCLUDE_BASE_H__
 
+#include <functional>
+#include <map>
 #include <stdint.h>
 #include <string>
 #include <vector>
-#include <map>
 
 namespace cpfw {
 
@@ -42,6 +43,13 @@ struct Profile {
     std::map<std::string, Element> elements;
     std::map<std::string, Profile> profile;
 };
+
+using FUNCTION_0INT = std::function<int32_t()>;
+using FUNCTION_1INT = std::function<int32_t(int32_t)>;
+using FUNCTION_2INT = std::function<int32_t(int32_t, int32_t)>;
+using FUNCTION_3INT = std::function<int32_t(int32_t, int32_t, int32_t)>;
+using FUNCTION_4INT = std::function<int32_t(int32_t, int32_t, int32_t, int32_t)>;
+using FUNCTION_5INT = std::function<int32_t(int32_t, int32_t, int32_t, int32_t, int32_t)>;
 
 }  // namespace cpfw
 

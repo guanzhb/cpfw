@@ -18,9 +18,9 @@
 
 #include <iostream>
 
+#include "cpfw/base/include/Base.h"
 #include "cpfw/base/include/Condition.h"
 #include "cpfw/base/include/Utils.h"
-#include "cpfw/base/include/ExpressionPool.h"
 
 namespace cpfw {
 
@@ -38,14 +38,40 @@ std::map<ExpressionEnum,
             std::make_shared<ExpressionStrategyChange>()}
 };
 
+
 Widget::Widget() : Widget("") {
 }
 
 Widget::Widget(std::string name) : mName(name) {
 }
 
+Widget::Widget(std::string name, FUNCTION_0INT funcAction)
+    : mName(name), mFuncAction(funcAction) {
+}
+
+Widget::Widget(std::string name, FUNCTION_1INT funcAction)
+    : mName(name), mFuncAction(funcAction) {
+}
+
+Widget::Widget(std::string name, FUNCTION_2INT funcAction)
+    : mName(name), mFuncAction(funcAction) {
+}
+
+Widget::Widget(std::string name, FUNCTION_3INT funcAction)
+    : mName(name), mFuncAction(funcAction) {
+}
+
+Widget::Widget(std::string name, FUNCTION_4INT funcAction)
+    : mName(name), mFuncAction(funcAction) {
+}
+
+Widget::Widget(std::string name, FUNCTION_5INT funcAction)
+    : mName(name), mFuncAction(funcAction) {
+}
+
 Widget::~Widget() {
 }
+
 
 void Widget::linkDataStore(std::shared_ptr<DataStore> store) {
     mStore = store;
@@ -88,7 +114,38 @@ int32_t Widget::check() {
 }
 
 int32_t Widget::action() {
-    return 0;
+    std::cout << "widget " << getName()
+        << " action time: " << cpfw::getCurrentTimeMs() << std::endl;
+    uint32_t type = static_cast<uint32_t>(ElementType::PUBLIC);
+    auto values = parseProfile(
+        mStore->getProfile(getName()), type, getName(), mStore);
+    int32_t ret = 0;
+    switch (values.size()) {
+    case 0:
+        ret = std::invoke(std::any_cast<FUNCTION_0INT>(mFuncAction));
+        break;
+    case 1:
+        ret = std::invoke(std::any_cast<FUNCTION_1INT>(mFuncAction), values[0]);
+        break;
+    case 2:
+        ret = std::invoke(std::any_cast<FUNCTION_2INT>(mFuncAction),
+                          values[0], values[1]);
+    case 3:
+        ret = std::invoke(std::any_cast<FUNCTION_3INT>(mFuncAction),
+                          values[0], values[1], values[2]);
+    case 4:
+        ret = std::invoke(std::any_cast<FUNCTION_4INT>(mFuncAction),
+                          values[0], values[1], values[2], values[3]);
+        break;
+    case 5:
+        ret = std::invoke(std::any_cast<FUNCTION_5INT>(mFuncAction),
+                          values[0], values[1], values[2], values[3], values[4]);
+        break;
+    default:
+        break;
+    }
+    std::cout << "Widget action status: " << ret << std::endl;
+    return ret;
 }
 
 int32_t Widget::swipe() {

@@ -24,8 +24,7 @@
 
     <profiles>
         <profile widget="volume">
-            <element name="default" min="1" max="20" current="5" type="1">rest</element>
-            <element name="vol" min="1" max="20" current="5" type="1">default</element>
+            <element name="default" min="1" max="20" current="5" type="1">default</element>
         </profile>
         <profile widget="fade">
             <element name="default" min="1" max="20" current="5" type="1">fade</element>

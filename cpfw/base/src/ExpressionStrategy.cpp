@@ -22,7 +22,6 @@ namespace cpfw {
 
 int32_t ExpressionStrategyEqual::handle(
             const Condition &condition, std::shared_ptr<DataStore> dataStore) {
-    std::cout << "ExpressionStrategyEqual handle" << std::endl;
     Profile &profile = dataStore->getProfile(condition.getProfileName());
     int32_t current = profile.elements[condition.getElementName()].current;
     return current == condition.getDefault() ? 0 : EINVAL;
@@ -30,7 +29,6 @@ int32_t ExpressionStrategyEqual::handle(
 
 int32_t ExpressionStrategyNotEqual::handle(
             const Condition &condition, std::shared_ptr<DataStore> dataStore) {
-    std::cout << "ExpressionStrategyNotEqual handle" << std::endl;
     Profile &profile = dataStore->getProfile(condition.getProfileName());
     int32_t current = profile.elements[condition.getElementName()].current;
     return current != condition.getDefault() ? 0 : EINVAL;
@@ -38,7 +36,6 @@ int32_t ExpressionStrategyNotEqual::handle(
 
 int32_t ExpressionStrategyInRange::handle(
             const Condition &condition, std::shared_ptr<DataStore> dataStore) {
-    std::cout << "ExpressionStrategyInRange handle" << std::endl;
     Profile &profile = dataStore->getProfile(condition.getProfileName());
     int32_t current = profile.elements[condition.getElementName()].current;
     return (current >= condition.getLeft() && current <= condition.getRight())
@@ -47,7 +44,6 @@ int32_t ExpressionStrategyInRange::handle(
 
 int32_t ExpressionStrategyOutRange::handle(
             const Condition &condition, std::shared_ptr<DataStore> dataStore) {
-    std::cout << "ExpressionStrategyOutRange handle" << std::endl;
     Profile &profile = dataStore->getProfile(condition.getProfileName());
     int32_t current = profile.elements[condition.getElementName()].current;
     return (current < condition.getLeft() && current > condition.getRight())
@@ -56,7 +52,6 @@ int32_t ExpressionStrategyOutRange::handle(
 
 int32_t ExpressionStrategyChange::handle(
             const Condition &condition, std::shared_ptr<DataStore> dataStore) {
-    std::cout << "ExpressionStrategyChange handle" << std::endl;
     Profile &profile = dataStore->getProfile(condition.getProfileName());
     return (profile.elements[condition.getElementName()].flag) ? 0 : EINVAL;
 }

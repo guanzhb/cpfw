@@ -25,8 +25,30 @@
 
 namespace cpfw {
 
+static int32_t func0() {
+    std::cout << __func__ << std::endl;
+    return 0;
+}
+
+static int32_t func1(int32_t v1) {
+    std::cout << __func__ << " v1:" << v1 << std::endl;
+    return 0;
+}
+
+static int32_t func2(int32_t v1, int32_t v2) {
+    std::cout << __func__ << " v1:" << v1 << ", v2:" << v2 << std::endl;
+    return 0;
+}
+
+static int32_t func4(int32_t v1, int32_t v2, int32_t v3, int32_t v4) {
+    std::cout << __func__ << " v1:" << v1 << ", v2:" << v2 <<
+        ", v3:" << v3 << ", v4:" << v4 << std::endl;
+    return 0;
+}
+
 static int32_t handle(
-        DataStore *store, const std::string &funcName, const std::vector<int32_t> &values) {
+        DataStore *store, const std::string &funcName,
+        const std::vector<int32_t> &values) {
     std::cout << funcName;
     std::for_each(values.begin(), values.end(), [](auto d) -> void {
         std::cout << " " << d;
@@ -61,13 +83,13 @@ class WidgetStub : public Widget {
 ExampleChain::ExampleChain() {
     mLogic = std::make_shared<Logic>("./configs/exampleChain.xml");
 
-    auto sv = std::make_shared<WidgetStub>("volume");
+    auto sv = std::make_shared<Widget>("volume", func1);
     mLogic->addWidget(sv);
-    auto sl = std::make_shared<WidgetStub>("loudness");
+    auto sl = std::make_shared<Widget>("loudness", func1);
     mLogic->addWidget(sl);
-    auto sf = std::make_shared<WidgetStub>("fade");
+    auto sf = std::make_shared<Widget>("fade", func1);
     mLogic->addWidget(sf);
-    auto se = std::make_shared<WidgetStub>("equalizer");
+    auto se = std::make_shared<Widget>("equalizer", func4);
     mLogic->addWidget(se);
     auto sd = std::make_shared<WidgetStub>("duck");
     mLogic->addWidget(sd);
