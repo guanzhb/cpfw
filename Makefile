@@ -104,8 +104,9 @@ am__installdirs = "$(DESTDIR)$(bindir)"
 PROGRAMS = $(bin_PROGRAMS)
 am_exampleChain_OBJECTS = ExampleChain.$(OBJEXT) \
 	ExpressionPool.$(OBJEXT) Condition.$(OBJEXT) \
-	ExpressionStrategy.$(OBJEXT) Widget.$(OBJEXT) \
-	Handler.$(OBJEXT) Utils.$(OBJEXT) MessagePool.$(OBJEXT) \
+	StrategyLogic.$(OBJEXT) StrategyCalculate.$(OBJEXT) \
+	Widget.$(OBJEXT) Convert.$(OBJEXT) Handler.$(OBJEXT) \
+	Utils.$(OBJEXT) MessagePool.$(OBJEXT) \
 	ResponsibilityChain.$(OBJEXT) DataStore.$(OBJEXT) \
 	Logic.$(OBJEXT) DataParser.$(OBJEXT) tinyxml2.$(OBJEXT)
 exampleChain_OBJECTS = $(am_exampleChain_OBJECTS)
@@ -125,13 +126,14 @@ am__v_at_1 =
 DEFAULT_INCLUDES = -I.
 depcomp = $(SHELL) $(top_srcdir)/depcomp
 am__maybe_remake_depfiles = depfiles
-am__depfiles_remade = ./$(DEPDIR)/Condition.Po \
+am__depfiles_remade = ./$(DEPDIR)/Condition.Po ./$(DEPDIR)/Convert.Po \
 	./$(DEPDIR)/DataParser.Po ./$(DEPDIR)/DataStore.Po \
 	./$(DEPDIR)/ExampleChain.Po ./$(DEPDIR)/ExpressionPool.Po \
-	./$(DEPDIR)/ExpressionStrategy.Po ./$(DEPDIR)/Handler.Po \
-	./$(DEPDIR)/Logic.Po ./$(DEPDIR)/MessagePool.Po \
-	./$(DEPDIR)/ResponsibilityChain.Po ./$(DEPDIR)/Utils.Po \
-	./$(DEPDIR)/Widget.Po ./$(DEPDIR)/tinyxml2.Po
+	./$(DEPDIR)/Handler.Po ./$(DEPDIR)/Logic.Po \
+	./$(DEPDIR)/MessagePool.Po ./$(DEPDIR)/ResponsibilityChain.Po \
+	./$(DEPDIR)/StrategyCalculate.Po ./$(DEPDIR)/StrategyLogic.Po \
+	./$(DEPDIR)/Utils.Po ./$(DEPDIR)/Widget.Po \
+	./$(DEPDIR)/tinyxml2.Po
 am__mv = mv -f
 AM_V_lt = $(am__v_lt_$(V))
 am__v_lt_ = $(am__v_lt_$(AM_DEFAULT_VERBOSITY))
@@ -293,8 +295,10 @@ AUTOMAKE_OPTIONS = foreign
 exampleChain_SOURCES = examples/src/ExampleChain.cpp \
                       cpfw/base/src/ExpressionPool.cpp \
                       cpfw/base/src/Condition.cpp \
-                      cpfw/base/src/ExpressionStrategy.cpp \
+                      cpfw/base/src/StrategyLogic.cpp \
+                      cpfw/base/src/StrategyCalculate.cpp \
                       cpfw/base/src/Widget.cpp \
+                      cpfw/base/src/Convert.cpp \
                       cpfw/base/src/Handler.cpp \
                       cpfw/base/src/Utils.cpp \
                       cpfw/base/src/MessagePool.cpp \
@@ -412,15 +416,17 @@ distclean-compile:
 	-rm -f *.tab.c
 
 include ./$(DEPDIR)/Condition.Po # am--include-marker
+include ./$(DEPDIR)/Convert.Po # am--include-marker
 include ./$(DEPDIR)/DataParser.Po # am--include-marker
 include ./$(DEPDIR)/DataStore.Po # am--include-marker
 include ./$(DEPDIR)/ExampleChain.Po # am--include-marker
 include ./$(DEPDIR)/ExpressionPool.Po # am--include-marker
-include ./$(DEPDIR)/ExpressionStrategy.Po # am--include-marker
 include ./$(DEPDIR)/Handler.Po # am--include-marker
 include ./$(DEPDIR)/Logic.Po # am--include-marker
 include ./$(DEPDIR)/MessagePool.Po # am--include-marker
 include ./$(DEPDIR)/ResponsibilityChain.Po # am--include-marker
+include ./$(DEPDIR)/StrategyCalculate.Po # am--include-marker
+include ./$(DEPDIR)/StrategyLogic.Po # am--include-marker
 include ./$(DEPDIR)/Utils.Po # am--include-marker
 include ./$(DEPDIR)/Widget.Po # am--include-marker
 include ./$(DEPDIR)/tinyxml2.Po # am--include-marker
@@ -487,19 +493,33 @@ Condition.obj: cpfw/base/src/Condition.cpp
 #	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
 #	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o Condition.obj `if test -f 'cpfw/base/src/Condition.cpp'; then $(CYGPATH_W) 'cpfw/base/src/Condition.cpp'; else $(CYGPATH_W) '$(srcdir)/cpfw/base/src/Condition.cpp'; fi`
 
-ExpressionStrategy.o: cpfw/base/src/ExpressionStrategy.cpp
-	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT ExpressionStrategy.o -MD -MP -MF $(DEPDIR)/ExpressionStrategy.Tpo -c -o ExpressionStrategy.o `test -f 'cpfw/base/src/ExpressionStrategy.cpp' || echo '$(srcdir)/'`cpfw/base/src/ExpressionStrategy.cpp
-	$(AM_V_at)$(am__mv) $(DEPDIR)/ExpressionStrategy.Tpo $(DEPDIR)/ExpressionStrategy.Po
-#	$(AM_V_CXX)source='cpfw/base/src/ExpressionStrategy.cpp' object='ExpressionStrategy.o' libtool=no \
+StrategyLogic.o: cpfw/base/src/StrategyLogic.cpp
+	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT StrategyLogic.o -MD -MP -MF $(DEPDIR)/StrategyLogic.Tpo -c -o StrategyLogic.o `test -f 'cpfw/base/src/StrategyLogic.cpp' || echo '$(srcdir)/'`cpfw/base/src/StrategyLogic.cpp
+	$(AM_V_at)$(am__mv) $(DEPDIR)/StrategyLogic.Tpo $(DEPDIR)/StrategyLogic.Po
+#	$(AM_V_CXX)source='cpfw/base/src/StrategyLogic.cpp' object='StrategyLogic.o' libtool=no \
 #	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
-#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o ExpressionStrategy.o `test -f 'cpfw/base/src/ExpressionStrategy.cpp' || echo '$(srcdir)/'`cpfw/base/src/ExpressionStrategy.cpp
+#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o StrategyLogic.o `test -f 'cpfw/base/src/StrategyLogic.cpp' || echo '$(srcdir)/'`cpfw/base/src/StrategyLogic.cpp
 
-ExpressionStrategy.obj: cpfw/base/src/ExpressionStrategy.cpp
-	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT ExpressionStrategy.obj -MD -MP -MF $(DEPDIR)/ExpressionStrategy.Tpo -c -o ExpressionStrategy.obj `if test -f 'cpfw/base/src/ExpressionStrategy.cpp'; then $(CYGPATH_W) 'cpfw/base/src/ExpressionStrategy.cpp'; else $(CYGPATH_W) '$(srcdir)/cpfw/base/src/ExpressionStrategy.cpp'; fi`
-	$(AM_V_at)$(am__mv) $(DEPDIR)/ExpressionStrategy.Tpo $(DEPDIR)/ExpressionStrategy.Po
-#	$(AM_V_CXX)source='cpfw/base/src/ExpressionStrategy.cpp' object='ExpressionStrategy.obj' libtool=no \
+StrategyLogic.obj: cpfw/base/src/StrategyLogic.cpp
+	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT StrategyLogic.obj -MD -MP -MF $(DEPDIR)/StrategyLogic.Tpo -c -o StrategyLogic.obj `if test -f 'cpfw/base/src/StrategyLogic.cpp'; then $(CYGPATH_W) 'cpfw/base/src/StrategyLogic.cpp'; else $(CYGPATH_W) '$(srcdir)/cpfw/base/src/StrategyLogic.cpp'; fi`
+	$(AM_V_at)$(am__mv) $(DEPDIR)/StrategyLogic.Tpo $(DEPDIR)/StrategyLogic.Po
+#	$(AM_V_CXX)source='cpfw/base/src/StrategyLogic.cpp' object='StrategyLogic.obj' libtool=no \
 #	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
-#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o ExpressionStrategy.obj `if test -f 'cpfw/base/src/ExpressionStrategy.cpp'; then $(CYGPATH_W) 'cpfw/base/src/ExpressionStrategy.cpp'; else $(CYGPATH_W) '$(srcdir)/cpfw/base/src/ExpressionStrategy.cpp'; fi`
+#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o StrategyLogic.obj `if test -f 'cpfw/base/src/StrategyLogic.cpp'; then $(CYGPATH_W) 'cpfw/base/src/StrategyLogic.cpp'; else $(CYGPATH_W) '$(srcdir)/cpfw/base/src/StrategyLogic.cpp'; fi`
+
+StrategyCalculate.o: cpfw/base/src/StrategyCalculate.cpp
+	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT StrategyCalculate.o -MD -MP -MF $(DEPDIR)/StrategyCalculate.Tpo -c -o StrategyCalculate.o `test -f 'cpfw/base/src/StrategyCalculate.cpp' || echo '$(srcdir)/'`cpfw/base/src/StrategyCalculate.cpp
+	$(AM_V_at)$(am__mv) $(DEPDIR)/StrategyCalculate.Tpo $(DEPDIR)/StrategyCalculate.Po
+#	$(AM_V_CXX)source='cpfw/base/src/StrategyCalculate.cpp' object='StrategyCalculate.o' libtool=no \
+#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
+#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o StrategyCalculate.o `test -f 'cpfw/base/src/StrategyCalculate.cpp' || echo '$(srcdir)/'`cpfw/base/src/StrategyCalculate.cpp
+
+StrategyCalculate.obj: cpfw/base/src/StrategyCalculate.cpp
+	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT StrategyCalculate.obj -MD -MP -MF $(DEPDIR)/StrategyCalculate.Tpo -c -o StrategyCalculate.obj `if test -f 'cpfw/base/src/StrategyCalculate.cpp'; then $(CYGPATH_W) 'cpfw/base/src/StrategyCalculate.cpp'; else $(CYGPATH_W) '$(srcdir)/cpfw/base/src/StrategyCalculate.cpp'; fi`
+	$(AM_V_at)$(am__mv) $(DEPDIR)/StrategyCalculate.Tpo $(DEPDIR)/StrategyCalculate.Po
+#	$(AM_V_CXX)source='cpfw/base/src/StrategyCalculate.cpp' object='StrategyCalculate.obj' libtool=no \
+#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
+#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o StrategyCalculate.obj `if test -f 'cpfw/base/src/StrategyCalculate.cpp'; then $(CYGPATH_W) 'cpfw/base/src/StrategyCalculate.cpp'; else $(CYGPATH_W) '$(srcdir)/cpfw/base/src/StrategyCalculate.cpp'; fi`
 
 Widget.o: cpfw/base/src/Widget.cpp
 	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT Widget.o -MD -MP -MF $(DEPDIR)/Widget.Tpo -c -o Widget.o `test -f 'cpfw/base/src/Widget.cpp' || echo '$(srcdir)/'`cpfw/base/src/Widget.cpp
@@ -514,6 +534,20 @@ Widget.obj: cpfw/base/src/Widget.cpp
 #	$(AM_V_CXX)source='cpfw/base/src/Widget.cpp' object='Widget.obj' libtool=no \
 #	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
 #	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o Widget.obj `if test -f 'cpfw/base/src/Widget.cpp'; then $(CYGPATH_W) 'cpfw/base/src/Widget.cpp'; else $(CYGPATH_W) '$(srcdir)/cpfw/base/src/Widget.cpp'; fi`
+
+Convert.o: cpfw/base/src/Convert.cpp
+	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT Convert.o -MD -MP -MF $(DEPDIR)/Convert.Tpo -c -o Convert.o `test -f 'cpfw/base/src/Convert.cpp' || echo '$(srcdir)/'`cpfw/base/src/Convert.cpp
+	$(AM_V_at)$(am__mv) $(DEPDIR)/Convert.Tpo $(DEPDIR)/Convert.Po
+#	$(AM_V_CXX)source='cpfw/base/src/Convert.cpp' object='Convert.o' libtool=no \
+#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
+#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o Convert.o `test -f 'cpfw/base/src/Convert.cpp' || echo '$(srcdir)/'`cpfw/base/src/Convert.cpp
+
+Convert.obj: cpfw/base/src/Convert.cpp
+	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT Convert.obj -MD -MP -MF $(DEPDIR)/Convert.Tpo -c -o Convert.obj `if test -f 'cpfw/base/src/Convert.cpp'; then $(CYGPATH_W) 'cpfw/base/src/Convert.cpp'; else $(CYGPATH_W) '$(srcdir)/cpfw/base/src/Convert.cpp'; fi`
+	$(AM_V_at)$(am__mv) $(DEPDIR)/Convert.Tpo $(DEPDIR)/Convert.Po
+#	$(AM_V_CXX)source='cpfw/base/src/Convert.cpp' object='Convert.obj' libtool=no \
+#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
+#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o Convert.obj `if test -f 'cpfw/base/src/Convert.cpp'; then $(CYGPATH_W) 'cpfw/base/src/Convert.cpp'; else $(CYGPATH_W) '$(srcdir)/cpfw/base/src/Convert.cpp'; fi`
 
 Handler.o: cpfw/base/src/Handler.cpp
 	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT Handler.o -MD -MP -MF $(DEPDIR)/Handler.Tpo -c -o Handler.o `test -f 'cpfw/base/src/Handler.cpp' || echo '$(srcdir)/'`cpfw/base/src/Handler.cpp
@@ -901,15 +935,17 @@ clean-am: clean-binPROGRAMS clean-generic mostlyclean-am
 distclean: distclean-am
 	-rm -f $(am__CONFIG_DISTCLEAN_FILES)
 		-rm -f ./$(DEPDIR)/Condition.Po
+	-rm -f ./$(DEPDIR)/Convert.Po
 	-rm -f ./$(DEPDIR)/DataParser.Po
 	-rm -f ./$(DEPDIR)/DataStore.Po
 	-rm -f ./$(DEPDIR)/ExampleChain.Po
 	-rm -f ./$(DEPDIR)/ExpressionPool.Po
-	-rm -f ./$(DEPDIR)/ExpressionStrategy.Po
 	-rm -f ./$(DEPDIR)/Handler.Po
 	-rm -f ./$(DEPDIR)/Logic.Po
 	-rm -f ./$(DEPDIR)/MessagePool.Po
 	-rm -f ./$(DEPDIR)/ResponsibilityChain.Po
+	-rm -f ./$(DEPDIR)/StrategyCalculate.Po
+	-rm -f ./$(DEPDIR)/StrategyLogic.Po
 	-rm -f ./$(DEPDIR)/Utils.Po
 	-rm -f ./$(DEPDIR)/Widget.Po
 	-rm -f ./$(DEPDIR)/tinyxml2.Po
@@ -961,15 +997,17 @@ maintainer-clean: maintainer-clean-am
 	-rm -f $(am__CONFIG_DISTCLEAN_FILES)
 	-rm -rf $(top_srcdir)/autom4te.cache
 		-rm -f ./$(DEPDIR)/Condition.Po
+	-rm -f ./$(DEPDIR)/Convert.Po
 	-rm -f ./$(DEPDIR)/DataParser.Po
 	-rm -f ./$(DEPDIR)/DataStore.Po
 	-rm -f ./$(DEPDIR)/ExampleChain.Po
 	-rm -f ./$(DEPDIR)/ExpressionPool.Po
-	-rm -f ./$(DEPDIR)/ExpressionStrategy.Po
 	-rm -f ./$(DEPDIR)/Handler.Po
 	-rm -f ./$(DEPDIR)/Logic.Po
 	-rm -f ./$(DEPDIR)/MessagePool.Po
 	-rm -f ./$(DEPDIR)/ResponsibilityChain.Po
+	-rm -f ./$(DEPDIR)/StrategyCalculate.Po
+	-rm -f ./$(DEPDIR)/StrategyLogic.Po
 	-rm -f ./$(DEPDIR)/Utils.Po
 	-rm -f ./$(DEPDIR)/Widget.Po
 	-rm -f ./$(DEPDIR)/tinyxml2.Po

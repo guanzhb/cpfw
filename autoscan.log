@@ -1,5 +1,5 @@
 autoscan: warning: missing AC_CHECK_FUNCS([clock_gettime]) wanted by: 
-	cpfw/base/src/Utils.cpp:48
+	cpfw/base/src/Utils.cpp:57
 autoscan: warning: missing AC_CHECK_FUNCS([memset]) wanted by: 
 	external/tinyxml2/tinyxml2.h:408
 	external/tinyxml2/xmltest.cpp:2505
@@ -9,7 +9,7 @@ autoscan: warning: missing AC_CHECK_FUNCS([strchr]) wanted by:
 	external/tinyxml2/tinyxml2.cpp:497
 	external/tinyxml2/tinyxml2.cpp:539
 autoscan: warning: missing AC_CHECK_HEADERS([sys/time.h]) wanted by: 
-	cpfw/base/src/Utils.cpp:19
+	cpfw/base/src/Utils.cpp:20
 autoscan: warning: missing AC_CHECK_HEADER_STDBOOL wanted by: 
 	external/tinyxml2/tinyxml2.cpp:350
 	external/tinyxml2/tinyxml2.cpp:407
@@ -207,7 +207,8 @@ autoscan: warning: missing AC_CHECK_HEADER_STDBOOL wanted by:
 	external/tinyxml2/xmltest.cpp:2516
 	external/tinyxml2/contrib/html5-printer.cpp:61
 	external/tinyxml2/contrib/html5-printer.cpp:73
-	cpfw/base/src/MessagePool.cpp:115
+	cpfw/base/src/MessagePool.cpp:107
+	cpfw/base/include/Base.h:39
 	cpfw/base/include/MessagePool.h:60
 	external/tinyxml2/tinyxml2.cpp:350
 	external/tinyxml2/tinyxml2.cpp:411
@@ -380,8 +381,8 @@ autoscan: warning: missing AC_CHECK_HEADER_STDBOOL wanted by:
 	external/tinyxml2/contrib/html5-printer.cpp:61
 	external/tinyxml2/contrib/html5-printer.cpp:89
 	external/tinyxml2/contrib/html5-printer.cpp:94
-	cpfw/base/src/Handler.cpp:28
 	cpfw/base/src/Handler.cpp:33
+	cpfw/base/src/DataStore.cpp:73
 	external/tinyxml2/tinyxml2.cpp:359
 	external/tinyxml2/tinyxml2.cpp:417
 	external/tinyxml2/tinyxml2.cpp:625
@@ -627,7 +628,8 @@ autoscan: warning: missing AC_CHECK_HEADER_STDBOOL wanted by:
 	external/tinyxml2/contrib/html5-printer.cpp:85
 	external/tinyxml2/contrib/html5-printer.cpp:99
 	external/tinyxml2/contrib/html5-printer.cpp:103
-	cpfw/base/src/Handler.cpp:41
+	cpfw/base/src/Handler.cpp:28
+	cpfw/base/src/DataStore.cpp:75
 autoscan: warning: missing AC_CHECK_TYPES([ptrdiff_t]) wanted by: 
 	external/tinyxml2/tinyxml2.cpp:486
 autoscan: warning: missing AC_PROG_RANLIB wanted by: 
@@ -738,16 +740,16 @@ autoscan: warning: missing AC_TYPE_UINT64_T wanted by:
 	external/tinyxml2/xmltest.cpp:957
 	external/tinyxml2/xmltest.cpp:1077
 	external/tinyxml2/xmltest.cpp:1079
-	cpfw/core/src/Logic.cpp:68
-	cpfw/core/src/Logic.cpp:74
-	cpfw/core/include/Logic.h:50
+	cpfw/core/src/Logic.cpp:72
+	cpfw/core/src/Logic.cpp:78
 	cpfw/core/include/Logic.h:54
-	cpfw/base/src/Handler.cpp:49
-	cpfw/base/src/Handler.cpp:52
-	cpfw/base/src/Handler.cpp:67
+	cpfw/core/include/Logic.h:58
+	cpfw/base/src/Handler.cpp:43
+	cpfw/base/src/Handler.cpp:51
 	cpfw/base/src/Handler.cpp:68
-	cpfw/base/src/Handler.cpp:79
-	cpfw/base/src/Utils.cpp:46
+	cpfw/base/src/Handler.cpp:69
+	cpfw/base/src/Handler.cpp:80
+	cpfw/base/src/Utils.cpp:55
 	cpfw/base/src/MessagePool.cpp:28
 	cpfw/base/src/MessagePool.cpp:28
 	cpfw/base/src/MessagePool.cpp:35
@@ -759,9 +761,10 @@ autoscan: warning: missing AC_TYPE_UINT64_T wanted by:
 	cpfw/base/src/MessagePool.cpp:93
 	cpfw/base/src/MessagePool.cpp:93
 	cpfw/base/src/MessagePool.cpp:98
-	cpfw/base/src/MessagePool.cpp:115
-	cpfw/base/include/Handler.h:45
-	cpfw/base/include/Handler.h:48
+	cpfw/base/src/MessagePool.cpp:107
+	cpfw/base/include/Handler.h:44
+	cpfw/base/include/Handler.h:47
+	cpfw/base/include/ExpressionPool.h:24
 	cpfw/base/include/Message.h:33
 	cpfw/base/include/Utils.h:42
 	cpfw/base/include/MessagePool.h:34

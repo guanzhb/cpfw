@@ -28,6 +28,7 @@
 #include "cpfw/base/include/Base.h"
 #include "cpfw/base/include/Widget.h"
 #include "cpfw/base/include/Condition.h"
+#include "cpfw/base/include/Convert.h"
 #include "cpfw/base/include/ExpressionPool.h"
 
 namespace cpfw {
@@ -46,6 +47,7 @@ class DataStore : public std::enable_shared_from_this<DataStore>{
     static const TINVOKE_CHAIN EMPTY_INVOKE_CHAIN;
     static const TINVOKE_CONDITION EMPTY_CONDITION;
     static Profile EMPTY_PROFILE;
+    static const std::vector<Convert> EMPTY_CONVERT;
     DataStore();
 
     ~DataStore();
@@ -60,6 +62,7 @@ class DataStore : public std::enable_shared_from_this<DataStore>{
             const std::string &elementName, int32_t value);
 
     int32_t getConvertedData(std::string context, int32_t origin);
+    const std::vector<Convert>& getConvertTable(std::string &context);
 
     const TINVOKE_CONDITION& getCondition(const std::string widgetName);
 
@@ -101,6 +104,8 @@ class DataStore : public std::enable_shared_from_this<DataStore>{
     void addDataConvert(
             const std::string context, int32_t origin, int32_t target);
 
+    void addDataConvert(
+            const std::string context, std::vector<Convert> convert);
     /**
      * @brief add condition data.
      *
@@ -118,7 +123,8 @@ class DataStore : public std::enable_shared_from_this<DataStore>{
     // every widget binds to a profile, which have multi elements
     std::map<std::string/*widget name*/, Profile> mProfileTable;
     // original data can be converted to the target data for different context
-    std::map<std::string/*context*/, std::map<int32_t, int32_t>> mDataConvertTable;
+    std::map<std::string/*context*/, std::map<int32_t, int32_t>> mDataMapTable;
+    std::map<std::string/*context*/, std::vector<Convert>> mConvertTable;
     // used to check before action
     std::map<std::string/*condition name*/, TINVOKE_CONDITION> mConditionTable;
 };

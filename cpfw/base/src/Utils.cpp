@@ -15,7 +15,9 @@
  */
 
 #include "cpfw/base/include/Utils.h"
+#include "cpfw/base/include/StrategyCalculate.h"
 
+#include <iostream>
 #include <sys/time.h>
 
 namespace cpfw {
@@ -29,16 +31,22 @@ std::vector<int32_t> parseProfile(
         [&](auto &data) -> void {
             int32_t current = 0;
             if (0 != (type & static_cast<uint32_t>(ElementType::PUBLIC))
-                    && (0 != (data.second.type & static_cast<uint32_t>(ElementType::PUBLIC)))) {
+                    && (0 != (data.second.type &
+                              static_cast<uint32_t>(ElementType::PUBLIC)))) {
                 current = data.second.current;
+                if (store
+                        && 0 != (data.second.type
+                                 & static_cast<uint32_t>(ElementType::NEED_CONVERT))) {
+                    current = store->getConvertedData(context, current);
+                    auto& converts = store->getConvertTable(context);
+                    for (auto &c : converts) {
+                        current = StrategyCalculatePool::getStrategy(
+                                        c.getExpression())->handle(
+                                            context, current, c, store);
+                    }
+                }
+                ret.push_back(current);
             }
-            if (store
-                    && 0 != (type & static_cast<uint32_t>(ElementType::NEED_CONVERT))
-                    && 0 != (data.second.type
-                             & static_cast<uint32_t>(ElementType::NEED_CONVERT))) {
-                current = store->getConvertedData(context, current);
-            }
-            ret.push_back(current);
     });
     return ret;
 }

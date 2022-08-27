@@ -25,10 +25,25 @@ enum class ExpressionEnum : uint64_t {
     EQUAL = 0,
     NOT_EQUAL,
     IN_RANGE,
-    CHANGE,
     OUT_RANGE,
+    GREATER_THAN,
+    LESS_THAN,
+    CHANGE,
+
+    TO_CONST,
+    TO_VARIABLE,
+    ADD_CONST,
+    ADD_VARIABLE,
+    SUB_CONST,
+    SUB_VARIABLE,
+    MUL_CONST,
+    MUL_VARIABLE,
+    DIV_CONST,
+    DIV_VARIABLE,
+
     AND,
     OR,
+
     EMPTY,
 };
 
@@ -36,7 +51,21 @@ const std::string EXPRESSION_EQUAL = "equal";
 const std::string EXPRESSION_NOT_EQUAL = "not_equal";
 const std::string EXPRESSION_IN_RANGE = "in_range";
 const std::string EXPRESSION_OUT_RANGE = "out_range";
+const std::string EXPRESSION_GREATER_THAN = "greater_than";
+const std::string EXPRESSION_LESS_THAN = "less_than";
 const std::string EXPRESSION_CHANGE = "change";
+
+const std::string EXPRESSION_TO_CONST = "to_const";
+const std::string EXPRESSION_TO_VARIABLE = "to_variable";
+const std::string EXPRESSION_ADD_CONST = "add_const";
+const std::string EXPRESSION_ADD_VARIABLE = "add_variable";
+const std::string EXPRESSION_SUB_CONST = "sub_const";
+const std::string EXPRESSION_SUB_VARIABLE = "sub_variable";
+const std::string EXPRESSION_MUL_CONST = "mul_const";
+const std::string EXPRESSION_MUL_VARIABLE = "mul_variable";
+const std::string EXPRESSION_DIV_CONST = "div_const";
+const std::string EXPRESSION_DIV_VARIABLE = "div_variable";
+
 const std::string EXPRESSION_AND = "and";
 const std::string EXPRESSION_OR = "or";
 

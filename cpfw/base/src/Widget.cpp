@@ -24,21 +24,6 @@
 
 namespace cpfw {
 
-std::map<ExpressionEnum,
-    std::shared_ptr<IExpressionStrategy>> Widget::mStrategy {
-        {ExpressionEnum::EQUAL,
-            std::make_shared<ExpressionStrategyEqual>()},
-        {ExpressionEnum::NOT_EQUAL,
-            std::make_shared<ExpressionStrategyNotEqual>()},
-        {ExpressionEnum::IN_RANGE,
-            std::make_shared<ExpressionStrategyInRange>()},
-        {ExpressionEnum::OUT_RANGE,
-            std::make_shared<ExpressionStrategyOutRange>()},
-        {ExpressionEnum::CHANGE,
-            std::make_shared<ExpressionStrategyChange>()}
-};
-
-
 Widget::Widget() : Widget("") {
 }
 
@@ -99,9 +84,8 @@ int32_t Widget::check() {
     for (auto itor : conditionPair.second) {
         const auto &expressionIn = itor.getExpression();
 
-        if (mStrategy.find(expressionIn) != mStrategy.end()) {
-            ret = mStrategy[expressionIn]->handle(itor, mStore);
-        }
+        ret = StrategyLogicPool::getStrategy(expressionIn)
+            ->handle(itor, mStore);
 
         if (0 == ret && ExpressionEnum::OR == logic) {
             break;
@@ -122,24 +106,30 @@ int32_t Widget::action() {
     int32_t ret = 0;
     switch (values.size()) {
     case 0:
+        std::cout << "widget 0 " << getName() << std::endl;
         ret = std::invoke(std::any_cast<FUNCTION_0INT>(mFuncAction));
         break;
     case 1:
+        std::cout << "widget 1 " << getName() << std::endl;
         ret = std::invoke(std::any_cast<FUNCTION_1INT>(mFuncAction), values[0]);
         break;
     case 2:
+        std::cout << "widget 2 " << getName() << std::endl;
         ret = std::invoke(std::any_cast<FUNCTION_2INT>(mFuncAction),
                           values[0], values[1]);
         break;
     case 3:
+        std::cout << "widget 3 " << getName() << std::endl;
         ret = std::invoke(std::any_cast<FUNCTION_3INT>(mFuncAction),
                           values[0], values[1], values[2]);
         break;
     case 4:
+        std::cout << "widget 4 " << getName() << std::endl;
         ret = std::invoke(std::any_cast<FUNCTION_4INT>(mFuncAction),
                           values[0], values[1], values[2], values[3]);
         break;
     case 5:
+        std::cout << "widget 5 " << getName() << std::endl;
         ret = std::invoke(std::any_cast<FUNCTION_5INT>(mFuncAction),
                           values[0], values[1], values[2], values[3], values[4]);
         break;

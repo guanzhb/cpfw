@@ -50,6 +50,7 @@ const std::string DataParser::ATTR_TYPE = "type";
 const std::string DataParser::TAG_CONTEXT = "context";
 const std::string DataParser::TAG_CONVERTS = "converts";
 const std::string DataParser::TAG_CONVERT = "convert";
+const std::string DataParser::TAG_CALCULATE = "calculate";
 const std::string DataParser::ATTR_ORIGIN = "origin";
 const std::string DataParser::ATTR_TARGET = "target";
 
@@ -188,6 +189,36 @@ void DataParser::loadProfile(tinyxml2::XMLElement *root) {
     }
 }
 
+static std::vector<Convert> parseCalculate(std::string name, std::string strs) {
+    std::vector<Convert> ret;
+    std::string splitExpression = ";";
+    std::string splitKv = ":";
+    std::string splitVariable = "@";
+
+    strs += splitExpression;
+    size_t pos = strs.find(splitExpression);
+    while (pos != strs.npos) {
+        std::string expressionSingle = strs.substr(0, pos);
+        size_t posKv = expressionSingle.find(splitKv);
+        std::string expression = expressionSingle.substr(0, posKv);
+        std::string value = expressionSingle.substr(
+                                    posKv+1, expressionSingle.size());
+        if (expression.ends_with("const")) {
+            ret.emplace_back(Convert(name, ExpressionPool::getEnum(expression),
+                                  atof(value.c_str())));
+        } else {
+            size_t posVariable = value.find(splitVariable);
+            ret.emplace_back(Convert(
+                name, ExpressionPool::getEnum(expression),
+                value.substr(posVariable+1, value.size()),
+                value.substr(0, posVariable)));
+        }
+        strs = strs.substr(pos+1, strs.size());
+        pos = strs.find(splitExpression);
+    }
+    return ret;
+}
+
 void DataParser::loadDataConvert(tinyxml2::XMLElement *root) {
     std::cout << __func__ << " begin" << std::endl;
     tinyxml2::XMLElement *surface = root->FirstChildElement(TAG_CONVERTS.c_str());
@@ -197,7 +228,11 @@ void DataParser::loadDataConvert(tinyxml2::XMLElement *root) {
     while (surfaceContext) {
         tinyxml2::XMLElement *surfaceElement
             = surfaceContext->FirstChildElement(TAG_ELEMENT.c_str());
-        const char* widgetName = surfaceContext->Attribute(ATTR_WIDGET.c_str());
+        const char* widgetName = surfaceContext->Attribute(TAG_WIDGET.c_str());
+        const char* calculate = surfaceContext->Attribute(TAG_CALCULATE.c_str());
+        if (0 != std::string("").compare(calculate)) {
+            mDataStore->addDataConvert(widgetName, parseCalculate(widgetName, calculate));
+        }
         while (surfaceElement) {
             int origin = 0;
             surfaceElement->QueryIntAttribute(ATTR_ORIGIN.c_str(), &origin);

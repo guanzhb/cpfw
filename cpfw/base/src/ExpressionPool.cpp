@@ -22,8 +22,23 @@ std::map<std::string, ExpressionEnum> ExpressionPool::mTable {
     {EXPRESSION_NOT_EQUAL, ExpressionEnum::NOT_EQUAL},
     {EXPRESSION_IN_RANGE, ExpressionEnum::IN_RANGE},
     {EXPRESSION_OUT_RANGE, ExpressionEnum::OUT_RANGE},
-    {EXPRESSION_CHANGE, ExpressionEnum::AND},
-    {EXPRESSION_CHANGE, ExpressionEnum::OR},
+    {EXPRESSION_GREATER_THAN, ExpressionEnum::GREATER_THAN},
+    {EXPRESSION_LESS_THAN, ExpressionEnum::LESS_THAN},
+    {EXPRESSION_CHANGE, ExpressionEnum::CHANGE},
+
+    {EXPRESSION_TO_CONST, ExpressionEnum::TO_CONST},
+    {EXPRESSION_TO_VARIABLE, ExpressionEnum::TO_VARIABLE},
+    {EXPRESSION_ADD_CONST, ExpressionEnum::ADD_CONST},
+    {EXPRESSION_ADD_VARIABLE, ExpressionEnum::ADD_VARIABLE},
+    {EXPRESSION_SUB_CONST, ExpressionEnum::SUB_CONST},
+    {EXPRESSION_SUB_VARIABLE, ExpressionEnum::SUB_VARIABLE},
+    {EXPRESSION_MUL_CONST, ExpressionEnum::MUL_CONST},
+    {EXPRESSION_MUL_VARIABLE, ExpressionEnum::MUL_VARIABLE},
+    {EXPRESSION_DIV_CONST, ExpressionEnum::DIV_CONST},
+    {EXPRESSION_DIV_VARIABLE, ExpressionEnum::DIV_VARIABLE},
+
+    {EXPRESSION_AND, ExpressionEnum::AND},
+    {EXPRESSION_OR, ExpressionEnum::OR},
 };
     
 ExpressionEnum ExpressionPool::getEnum(std::string expressionStr) {

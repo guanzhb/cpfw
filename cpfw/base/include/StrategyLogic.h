@@ -13,8 +13,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-#ifndef CPFW_BASE_INCLUDE_EXPRESSIONSTRATEGY_H__
-#define CPFW_BASE_INCLUDE_EXPRESSIONSTRATEGY_H__
+#ifndef CPFW_BASE_INCLUDE_STRATEGYLOGIC_H__
+#define CPFW_BASE_INCLUDE_STRATEGYLOGIC_H__
 
 #include <memory>
 
@@ -26,42 +26,59 @@ namespace cpfw {
 class DataStore;
 class Condition;
 
-class IExpressionStrategy {
+class IStrategyLogic {
  public:
     virtual int32_t handle(const Condition &condition,
                            std::shared_ptr<DataStore> dataStore) = 0;
 };
 
-class ExpressionStrategyEqual : public IExpressionStrategy {
+class StrategyLogicDummy : public IStrategyLogic {
  public:
     int32_t handle(const Condition &condition,
                    std::shared_ptr<DataStore> dataStore) override;
 };
 
-class ExpressionStrategyNotEqual : public IExpressionStrategy {
+class StrategyLogicEqual : public IStrategyLogic {
  public:
     int32_t handle(const Condition &condition,
                    std::shared_ptr<DataStore> dataStore) override;
 };
 
-class ExpressionStrategyInRange : public IExpressionStrategy {
+class StrategyLogicNotEqual : public IStrategyLogic {
  public:
     int32_t handle(const Condition &condition,
                    std::shared_ptr<DataStore> dataStore) override;
 };
 
-class ExpressionStrategyOutRange : public IExpressionStrategy {
+class StrategyLogicInRange : public IStrategyLogic {
  public:
     int32_t handle(const Condition &condition,
                    std::shared_ptr<DataStore> dataStore) override;
 };
 
-class ExpressionStrategyChange : public IExpressionStrategy {
+class StrategyLogicOutRange : public IStrategyLogic {
  public:
     int32_t handle(const Condition &condition,
                    std::shared_ptr<DataStore> dataStore) override;
 };
+
+class StrategyLogicChange : public IStrategyLogic {
+ public:
+    int32_t handle(const Condition &condition,
+                   std::shared_ptr<DataStore> dataStore) override;
+};
+
+class StrategyLogicPool {
+ public:
+    static std::shared_ptr<IStrategyLogic>
+        getStrategy(ExpressionEnum expression);
+
+ private:
+    static std::map<ExpressionEnum,
+        std::shared_ptr<IStrategyLogic>> mStrategy;
+    static std::shared_ptr<IStrategyLogic> STRATEGY_DUMMY;
+};  // StrategyLogicPool
 
 }  // namespace cpfw
 
-#endif  // CPFW_BASE_INCLUDE_EXPRESSIONSTRATEGY_H__
+#endif  // CPFW_BASE_INCLUDE_STRATEGYLOGIC_H__

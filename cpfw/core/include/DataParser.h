@@ -53,6 +53,7 @@ class DataParser {
     static const std::string ATTR_TYPE;
     static const std::string TAG_CONVERTS;
     static const std::string TAG_CONVERT;
+    static const std::string TAG_CALCULATE;
     static const std::string ATTR_ORIGIN;
     static const std::string ATTR_TARGET;
     static const std::string TAG_CONTEXT;

@@ -22,13 +22,13 @@
 #include <map>
 
 #include "cpfw/base/include/DataStore.h"
-#include "cpfw/base/include/ExpressionStrategy.h"
+#include "cpfw/base/include/StrategyLogic.h"
 #include "cpfw/base/include/ExpressionPool.h"
 
 namespace cpfw {
 
 class DataStore;
-class IExpressionStrategy;
+class IStrategyLogic;
 
 class Widget {
  public:
@@ -63,10 +63,9 @@ class Widget {
     const std::string mName;
     std::shared_ptr<DataStore> mStore;
     static std::map<ExpressionEnum,
-        std::shared_ptr<IExpressionStrategy>> mStrategy;
+        std::shared_ptr<IStrategyLogic>> mStrategy;
     std::any mFuncAction;
 };
-
 
 }  // namespace cpfw
 

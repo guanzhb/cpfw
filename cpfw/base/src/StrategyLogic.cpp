@@ -14,27 +14,33 @@
  * limitations under the License.
  */
 
-#include "cpfw/base/include/ExpressionStrategy.h"
+#include "cpfw/base/include/StrategyLogic.h"
 
 #include <iostream>
 
 namespace cpfw {
 
-int32_t ExpressionStrategyEqual::handle(
+int32_t StrategyLogicDummy::handle(
+            const Condition &condition, std::shared_ptr<DataStore> dataStore) {
+    Profile &profile = dataStore->getProfile(condition.getProfileName());
+    return 0;
+}
+
+int32_t StrategyLogicEqual::handle(
             const Condition &condition, std::shared_ptr<DataStore> dataStore) {
     Profile &profile = dataStore->getProfile(condition.getProfileName());
     int32_t current = profile.elements[condition.getElementName()].current;
     return current == condition.getDefault() ? 0 : EINVAL;
 }
 
-int32_t ExpressionStrategyNotEqual::handle(
+int32_t StrategyLogicNotEqual::handle(
             const Condition &condition, std::shared_ptr<DataStore> dataStore) {
     Profile &profile = dataStore->getProfile(condition.getProfileName());
     int32_t current = profile.elements[condition.getElementName()].current;
     return current != condition.getDefault() ? 0 : EINVAL;
 }
 
-int32_t ExpressionStrategyInRange::handle(
+int32_t StrategyLogicInRange::handle(
             const Condition &condition, std::shared_ptr<DataStore> dataStore) {
     Profile &profile = dataStore->getProfile(condition.getProfileName());
     int32_t current = profile.elements[condition.getElementName()].current;
@@ -42,7 +48,7 @@ int32_t ExpressionStrategyInRange::handle(
         ? 0 : EINVAL;
 }
 
-int32_t ExpressionStrategyOutRange::handle(
+int32_t StrategyLogicOutRange::handle(
             const Condition &condition, std::shared_ptr<DataStore> dataStore) {
     Profile &profile = dataStore->getProfile(condition.getProfileName());
     int32_t current = profile.elements[condition.getElementName()].current;
@@ -50,10 +56,33 @@ int32_t ExpressionStrategyOutRange::handle(
         ? 0 : EINVAL;
 }
 
-int32_t ExpressionStrategyChange::handle(
+int32_t StrategyLogicChange::handle(
             const Condition &condition, std::shared_ptr<DataStore> dataStore) {
     Profile &profile = dataStore->getProfile(condition.getProfileName());
     return (profile.elements[condition.getElementName()].flag) ? 0 : EINVAL;
+}
+
+std::map<ExpressionEnum,
+    std::shared_ptr<IStrategyLogic>> StrategyLogicPool::mStrategy {
+        {ExpressionEnum::EQUAL,
+            std::make_shared<StrategyLogicEqual>()},
+        {ExpressionEnum::NOT_EQUAL,
+            std::make_shared<StrategyLogicNotEqual>()},
+        {ExpressionEnum::IN_RANGE,
+            std::make_shared<StrategyLogicInRange>()},
+        {ExpressionEnum::OUT_RANGE,
+            std::make_shared<StrategyLogicOutRange>()},
+        {ExpressionEnum::CHANGE,
+            std::make_shared<StrategyLogicChange>()}
+};
+
+std::shared_ptr<IStrategyLogic> StrategyLogicPool::STRATEGY_DUMMY
+    = std::make_shared<StrategyLogicDummy>();
+
+std::shared_ptr<IStrategyLogic>
+StrategyLogicPool::getStrategy(ExpressionEnum expression) {
+    return mStrategy.find(expression) != mStrategy.end()
+        ? mStrategy[expression] : STRATEGY_DUMMY;
 }
 
 }  // namespace cpfw
