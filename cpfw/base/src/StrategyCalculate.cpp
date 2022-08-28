@@ -32,6 +32,34 @@ int32_t StrategyCalculateAddConst::handle(const std::string &context,
     return origin + convert.getFactor();
 }
 
+int32_t StrategyCalculateAddVariable::handle(const std::string &context,
+        const int32_t origin, const Convert &convert,
+        std::shared_ptr<DataStore> dataStore) {
+    return origin
+        + dataStore->getProfile(convert.getProfileName())
+              .elements[convert.getElementName()].current;
+}
+
+int32_t StrategyCalculateSubConst::handle(const std::string &context,
+        const int32_t origin, const Convert &convert,
+        std::shared_ptr<DataStore> dataStore) {
+    return origin - convert.getFactor();
+}
+
+int32_t StrategyCalculateSubVariable::handle(const std::string &context,
+        const int32_t origin, const Convert &convert,
+        std::shared_ptr<DataStore> dataStore) {
+    return origin
+        - dataStore->getProfile(convert.getProfileName())
+              .elements[convert.getElementName()].current;
+}
+
+int32_t StrategyCalculateMulConst::handle(const std::string &context,
+        const int32_t origin, const Convert &convert,
+        std::shared_ptr<DataStore> dataStore) {
+    return origin * convert.getFactor();
+}
+
 int32_t StrategyCalculateMulVariable::handle(const std::string &context,
         const int32_t origin, const Convert &convert,
         std::shared_ptr<DataStore> dataStore) {
@@ -40,24 +68,38 @@ int32_t StrategyCalculateMulVariable::handle(const std::string &context,
               .elements[convert.getElementName()].current;
 }
 
+int32_t StrategyCalculateDivConst::handle(const std::string &context,
+        const int32_t origin, const Convert &convert,
+        std::shared_ptr<DataStore> dataStore) {
+    return origin / convert.getFactor();
+}
+
+int32_t StrategyCalculateDivVariable::handle(const std::string &context,
+        const int32_t origin, const Convert &convert,
+        std::shared_ptr<DataStore> dataStore) {
+    return origin
+        / dataStore->getProfile(convert.getProfileName())
+              .elements[convert.getElementName()].current;
+}
+
 std::map<ExpressionEnum,
     std::shared_ptr<IStrategyCalculate>> StrategyCalculatePool::mStrategy {
         {ExpressionEnum::ADD_CONST,
             std::make_shared<StrategyCalculateAddConst>()},
         {ExpressionEnum::ADD_VARIABLE,
-            std::make_shared<StrategyCalculateMulVariable>()},
+            std::make_shared<StrategyCalculateAddVariable>()},
         {ExpressionEnum::SUB_CONST,
-            std::make_shared<StrategyCalculateAddConst>()},
+            std::make_shared<StrategyCalculateSubConst>()},
         {ExpressionEnum::SUB_VARIABLE,
-            std::make_shared<StrategyCalculateMulVariable>()},
+            std::make_shared<StrategyCalculateSubVariable>()},
         {ExpressionEnum::MUL_CONST,
-            std::make_shared<StrategyCalculateAddConst>()},
+            std::make_shared<StrategyCalculateMulConst>()},
         {ExpressionEnum::MUL_VARIABLE,
             std::make_shared<StrategyCalculateMulVariable>()},
         {ExpressionEnum::DIV_CONST,
-            std::make_shared<StrategyCalculateAddConst>()},
+            std::make_shared<StrategyCalculateDivConst>()},
         {ExpressionEnum::DIV_VARIABLE,
-            std::make_shared<StrategyCalculateMulVariable>()},
+            std::make_shared<StrategyCalculateDivVariable>()},
 };
 
 std::shared_ptr<IStrategyCalculate> StrategyCalculatePool::STRATEGY_DUMMY

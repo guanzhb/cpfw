@@ -50,7 +50,7 @@
         <context widget="volume"
             calculate="add_const:3.0;mul_variable:gain_100hz@equalizer;mul_variable:gain_400hz@equalizer">
         </context>
-        <context widget="fade" calculate="mul_variable:gain_400hz@equalizer;div_const:2">
+        <context widget="fade" calculate="mul_const:20;sub_variable:gain_400hz@equalizer;div_const:2">
             <element origin="1" target="22222"></element>
             <element origin="2" target="3333"></element>
         </context>
