@@ -48,6 +48,8 @@ class DataStore : public std::enable_shared_from_this<DataStore>{
     static const TINVOKE_CONDITION EMPTY_CONDITION;
     static Profile EMPTY_PROFILE;
     static const std::vector<Convert> EMPTY_CONVERT;
+    static const std::string EMPTY_BIND;
+
     DataStore();
 
     ~DataStore();
@@ -65,6 +67,7 @@ class DataStore : public std::enable_shared_from_this<DataStore>{
     const std::vector<Convert>& getConvertTable(std::string &context);
 
     const TINVOKE_CONDITION& getCondition(const std::string widgetName);
+    const std::string& getBind(const std::string widgetName);
 
  public:
     /**
@@ -114,6 +117,8 @@ class DataStore : public std::enable_shared_from_this<DataStore>{
      */
     void addCondition(const std::string widgetName, TINVOKE_CONDITION condition);
 
+    void addBind(std::string widgetName, std::string bindName);
+
  private:
 
     // every widget binds to a unique name
@@ -122,6 +127,7 @@ class DataStore : public std::enable_shared_from_this<DataStore>{
     std::map<std::string/*parent name*/, TINVOKE_CHAIN> mInvokeChainTable;
     // every widget binds to a profile, which have multi elements
     std::map<std::string/*widget name*/, Profile> mProfileTable;
+    std::map<std::string/*widget name*/, std::string/*bind action*/> mBindTable;
     // original data can be converted to the target data for different context
     std::map<std::string/*context*/, std::map<int32_t, int32_t>> mDataMapTable;
     std::map<std::string/*context*/, std::vector<Convert>> mConvertTable;

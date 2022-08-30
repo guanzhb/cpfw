@@ -18,6 +18,7 @@
 #define CPFW_BASE_INCLUDE_UTILS_HPP_
 
 #include <algorithm>
+#include <any>
 #include <vector>
 
 #include "cpfw/base/include/Base.h"
@@ -41,7 +42,8 @@ std::vector<int32_t> parseProfile(
 
 uint64_t getCurrentTimeMs();
 
+int32_t invoke(const std::any &func, std::vector<int32_t> &value);
+
 }  // namespace cpfw
 
 #endif  // CPFW_BASE_INCLUDE_UTILS_HPP_
-

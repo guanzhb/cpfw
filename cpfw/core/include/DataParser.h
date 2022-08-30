@@ -45,6 +45,7 @@ class DataParser {
     static const std::string ATTR_CONDITION_WHEN_DELIM;
     static const std::string ATTR_CONDITION_VALUE_DELIM;
     static const std::string TAG_PROFILES;
+    static const std::string ATTR_BIND_TO;
     static const std::string TAG_PROFILE;
     static const std::string TAG_ELEMENT;
     static const std::string ATTR_MIN;

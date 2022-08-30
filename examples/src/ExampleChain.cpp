@@ -69,7 +69,7 @@ class WidgetStub : public Widget {
     }
 
     int32_t action() override {
-        std::cout << "widget " << getName()
+        std::cout << "widget override " << getName()
             << " action time: " << cpfw::getCurrentTimeMs() << std::endl;
         uint32_t type = static_cast<uint32_t>(ElementType::PUBLIC);
         auto values = parseProfile(
@@ -91,7 +91,7 @@ ExampleChain::ExampleChain() {
     mLogic->addWidget(sf);
     auto se = std::make_shared<Widget>("equalizer", func4);
     mLogic->addWidget(se);
-    auto sd = std::make_shared<WidgetStub>("duck");
+    auto sd = std::make_shared<Widget>("duck");
     mLogic->addWidget(sd);
     auto ss = std::make_shared<WidgetStub>("stub");
     mLogic->addWidget(ss);

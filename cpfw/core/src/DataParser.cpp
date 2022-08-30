@@ -42,6 +42,7 @@ const std::string DataParser::ATTR_CONDITION_WHEN_DELIM = "@";
 const std::string DataParser::ATTR_CONDITION_VALUE_DELIM = ",";
 const std::string DataParser::TAG_PROFILES = "profiles";
 const std::string DataParser::TAG_PROFILE = "profile";
+const std::string DataParser::ATTR_BIND_TO = "bindTo";
 const std::string DataParser::TAG_ELEMENT = "element";
 const std::string DataParser::ATTR_MIN = "min";
 const std::string DataParser::ATTR_MAX = "max";
@@ -166,6 +167,10 @@ void DataParser::loadProfile(tinyxml2::XMLElement *root) {
     
     while (surfaceProfile) {
         const char* widgetName = surfaceProfile->Attribute(ATTR_WIDGET.c_str());
+        const char* bindTo = surfaceProfile->Attribute(ATTR_BIND_TO.c_str());
+        if (0 != DataStore::EMPTY_BIND.compare(bindTo)) {
+             mDataStore->addBind(widgetName, bindTo);
+        }
         Profile profile;
         tinyxml2::XMLElement *surfaceElement
             = surfaceProfile->FirstChildElement(TAG_ELEMENT.c_str());

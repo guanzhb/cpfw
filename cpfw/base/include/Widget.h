@@ -32,39 +32,40 @@ class IStrategyLogic;
 
 class Widget {
  public:
-     Widget();
+    Widget();
 
-     explicit Widget(std::string name);
+    explicit Widget(std::string name);
 
-     Widget(std::string name, FUNCTION_0INT func);
-     Widget(std::string name, FUNCTION_1INT func);
-     Widget(std::string name, FUNCTION_2INT func);
-     Widget(std::string name, FUNCTION_3INT func);
-     Widget(std::string name, FUNCTION_4INT func);
-     Widget(std::string name, FUNCTION_5INT func);
+    Widget(std::string name, FUNCTION_0INT func);
+    Widget(std::string name, FUNCTION_1INT func);
+    Widget(std::string name, FUNCTION_2INT func);
+    Widget(std::string name, FUNCTION_3INT func);
+    Widget(std::string name, FUNCTION_4INT func);
+    Widget(std::string name, FUNCTION_5INT func);
 
-     virtual ~Widget();
+    virtual ~Widget();
 
-     virtual void linkDataStore(std::shared_ptr<DataStore> dataStore);
+    virtual void linkDataStore(std::shared_ptr<DataStore> dataStore);
 
-     virtual const std::string& getName() const;
+    virtual const std::string& getName() const;
 
-     virtual std::shared_ptr<DataStore> getDataStore() const;
+    virtual std::shared_ptr<DataStore> getDataStore() const;
 
-     virtual int32_t check();
+    virtual int32_t check();
 
-     virtual int32_t action();
+    virtual int32_t action();
 
-     virtual int32_t swipe();
+    virtual int32_t swipe();
 
-     virtual int32_t reset();
+    virtual int32_t reset();
 
+    virtual const std::any& getBind() const;
  private:
     const std::string mName;
     std::shared_ptr<DataStore> mStore;
     static std::map<ExpressionEnum,
         std::shared_ptr<IStrategyLogic>> mStrategy;
-    std::any mFuncAction;
+    const std::any mFunctionBind;
 };
 
 }  // namespace cpfw

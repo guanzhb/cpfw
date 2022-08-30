@@ -14,6 +14,7 @@
  * limitations under the License.
  */
 
+#include "cpfw/base/include/Base.h"
 #include "cpfw/base/include/Utils.h"
 #include "cpfw/base/include/StrategyCalculate.h"
 
@@ -55,6 +56,37 @@ uint64_t getCurrentTimeMs() {
     struct timespec stTimeSpec;
     clock_gettime(CLOCK_MONOTONIC, &stTimeSpec);
     return stTimeSpec.tv_sec * 1000 + stTimeSpec.tv_nsec / 1000000;
+}
+
+int32_t invoke(const std::any &func, std::vector<int32_t> &values) {
+    int32_t ret = 0;
+    switch (values.size()) {
+    case 0:
+        ret = std::invoke(std::any_cast<FUNCTION_0INT>(func));
+        break;
+    case 1:
+        ret = std::invoke(std::any_cast<FUNCTION_1INT>(func), values[0]);
+        break;
+    case 2:
+        ret = std::invoke(std::any_cast<FUNCTION_2INT>(func),
+                          values[0], values[1]);
+        break;
+    case 3:
+        ret = std::invoke(std::any_cast<FUNCTION_3INT>(func),
+                          values[0], values[1], values[2]);
+        break;
+    case 4:
+        ret = std::invoke(std::any_cast<FUNCTION_4INT>(func),
+                          values[0], values[1], values[2], values[3]);
+        break;
+    case 5:
+        ret = std::invoke(std::any_cast<FUNCTION_5INT>(func),
+                          values[0], values[1], values[2], values[3], values[4]);
+        break;
+    default:
+        break;
+    }
+    return ret;
 }
 
 }  // namespace cpfw

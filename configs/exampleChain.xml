@@ -15,7 +15,7 @@
             <element when="gain_400hz@equalizer;equal:5"></element>
         </condition>
         <condition widget="duck" logic="or">
-            <element when="default@volume;in_range:1,20"></element>
+            <element when="default@volume;in_range:1,200"></element>
         </condition>
         <condition widget="equalizer" logic="or">
             <element when="gain_400hz@equalizer;change"></element>
@@ -23,32 +23,32 @@
     </conditions>
 
     <profiles>
-        <profile widget="volume">
+        <profile widget="volume" bindTo="">
             <element name="default" min="1" max="50" current="5" type="3">default</element>
         </profile>
-        <profile widget="fade">
+        <profile widget="fade" bindTo="">
             <element name="default" min="1" max="20" current="5" type="3">fade</element>
         </profile>
-        <profile widget="equalizer">
+        <profile widget="equalizer" bindTo="">
             <element name="gain_100hz" min="1" max="20" current="5" type="1"></element>
             <element name="gain_200hz" min="5" max="20" current="10" type="1"></element>
             <element name="gain_400hz" min="20" max="30" current="25" type="1"></element>
             <element name="gain_800hz" min="50" max="200" current="100" type="1"></element>
         </profile>
-        <profile widget="duck">
+        <profile widget="duck" bindTo="volume">
+            <element name="default" min="0" max="100" current="80" type="3">default</element>
+        </profile>
+        <profile widget="loudness" bindTo="">
             <element name="default" min="10" max="20" current="5" type="1">default</element>
         </profile>
-        <profile widget="loudness">
-            <element name="default" min="10" max="20" current="5" type="1">default</element>
-        </profile>
-        <profile widget="stub">
+        <profile widget="stub" bindTo="">
             <element name="default" min="10" max="20" current="5" type="1">default</element>
         </profile>
     </profiles>
 
     <converts>
-        <context widget="volume"
-            calculate="add_const:3.0;mul_variable:gain_100hz@equalizer;mul_variable:gain_400hz@equalizer">
+        <context widget="duck"
+            calculate="mul_variable:default@volume;div_const:100">
         </context>
         <context widget="fade" calculate="mul_const:20;sub_variable:gain_400hz@equalizer;div_const:2">
             <element origin="1" target="22222"></element>

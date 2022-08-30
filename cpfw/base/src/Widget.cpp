@@ -31,27 +31,27 @@ Widget::Widget(std::string name) : mName(name) {
 }
 
 Widget::Widget(std::string name, FUNCTION_0INT funcAction)
-    : mName(name), mFuncAction(funcAction) {
+    : mName(name), mFunctionBind(funcAction) {
 }
 
 Widget::Widget(std::string name, FUNCTION_1INT funcAction)
-    : mName(name), mFuncAction(funcAction) {
+    : mName(name), mFunctionBind(funcAction) {
 }
 
 Widget::Widget(std::string name, FUNCTION_2INT funcAction)
-    : mName(name), mFuncAction(funcAction) {
+    : mName(name), mFunctionBind(funcAction) {
 }
 
 Widget::Widget(std::string name, FUNCTION_3INT funcAction)
-    : mName(name), mFuncAction(funcAction) {
+    : mName(name), mFunctionBind(funcAction) {
 }
 
 Widget::Widget(std::string name, FUNCTION_4INT funcAction)
-    : mName(name), mFuncAction(funcAction) {
+    : mName(name), mFunctionBind(funcAction) {
 }
 
 Widget::Widget(std::string name, FUNCTION_5INT funcAction)
-    : mName(name), mFuncAction(funcAction) {
+    : mName(name), mFunctionBind(funcAction) {
 }
 
 Widget::~Widget() {
@@ -101,43 +101,19 @@ int32_t Widget::action() {
     std::cout << "widget " << getName()
         << " action time: " << cpfw::getCurrentTimeMs() << std::endl;
     uint32_t type = static_cast<uint32_t>(ElementType::PUBLIC);
-    auto values = parseProfile(
-        mStore->getProfile(getName()), type, getName(), mStore);
-    int32_t ret = 0;
-    switch (values.size()) {
-    case 0:
-        std::cout << "widget 0 " << getName() << std::endl;
-        ret = std::invoke(std::any_cast<FUNCTION_0INT>(mFuncAction));
-        break;
-    case 1:
-        std::cout << "widget 1 " << getName() << std::endl;
-        ret = std::invoke(std::any_cast<FUNCTION_1INT>(mFuncAction), values[0]);
-        break;
-    case 2:
-        std::cout << "widget 2 " << getName() << std::endl;
-        ret = std::invoke(std::any_cast<FUNCTION_2INT>(mFuncAction),
-                          values[0], values[1]);
-        break;
-    case 3:
-        std::cout << "widget 3 " << getName() << std::endl;
-        ret = std::invoke(std::any_cast<FUNCTION_3INT>(mFuncAction),
-                          values[0], values[1], values[2]);
-        break;
-    case 4:
-        std::cout << "widget 4 " << getName() << std::endl;
-        ret = std::invoke(std::any_cast<FUNCTION_4INT>(mFuncAction),
-                          values[0], values[1], values[2], values[3]);
-        break;
-    case 5:
-        std::cout << "widget 5 " << getName() << std::endl;
-        ret = std::invoke(std::any_cast<FUNCTION_5INT>(mFuncAction),
-                          values[0], values[1], values[2], values[3], values[4]);
-        break;
-    default:
-        break;
+    auto &bindName = mStore->getBind(getName());
+    auto values = parseProfile(mStore->getProfile(getName()), type, getName(), mStore);
+    if (values.empty() && (bindName.compare(DataStore::EMPTY_BIND) != 0)) {
+        values = parseProfile(mStore->getProfile(bindName), type, getName(), mStore);
     }
-    std::cout << "Widget action status: " << ret << std::endl;
-    return ret;
+    if (mFunctionBind.has_value()) {
+        return invoke(mFunctionBind, values);
+    }
+    if (bindName.compare(DataStore::EMPTY_BIND) != 0) {
+        return invoke(mStore->getWidget(bindName)->get()->getBind(), values);
+    }
+
+    return 0;
 }
 
 int32_t Widget::swipe() {
@@ -150,6 +126,10 @@ int32_t Widget::reset() {
         itor.second.current = itor.second.backup;
     }
     return 0;
+}
+
+const std::any& Widget::getBind() const {
+    return mFunctionBind;
 }
 
 }  // namespace cpfw

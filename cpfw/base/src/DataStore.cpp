@@ -25,6 +25,7 @@ const TINVOKE_CONDITION DataStore::EMPTY_CONDITION
     = std::make_pair(ExpressionEnum::EMPTY, std::vector<Condition>());
 Profile DataStore::EMPTY_PROFILE = Profile();
 const std::vector<Convert> DataStore::EMPTY_CONVERT = {};
+const std::string DataStore::EMPTY_BIND = "";
 
 DataStore::DataStore() {
     std::cout << "ctor DataStore " << std::endl;
@@ -45,7 +46,6 @@ std::optional<std::shared_ptr<Widget>>
 const TINVOKE_CHAIN& DataStore::getChain(const std::string &parentName) {
     return  mInvokeChainTable.find(parentName) != mInvokeChainTable.end()
         ? mInvokeChainTable[parentName] : EMPTY_INVOKE_CHAIN;
-    return EMPTY_INVOKE_CHAIN;
 }
 
 Profile& DataStore::getProfile(const std::string &name) {
@@ -98,6 +98,11 @@ const TINVOKE_CONDITION& DataStore::getCondition(const std::string widgetName) {
         ? mConditionTable[widgetName] : EMPTY_CONDITION;
 }
 
+const std::string& DataStore::getBind(const std::string widgetName) {
+    return mBindTable.find(widgetName) != mBindTable.end()
+        ? mBindTable[widgetName] : EMPTY_BIND;
+}
+
 void DataStore::addWidget(std::shared_ptr<Widget> widget) {
     widget->linkDataStore(shared_from_this());
     mWidgetTable.emplace(widget->getName(), widget);
@@ -127,6 +132,10 @@ void DataStore::addDataConvert(
 
 void DataStore::addCondition(std::string widgetName, TINVOKE_CONDITION condition) {
     mConditionTable.emplace(widgetName, condition);
+}
+
+void DataStore::addBind(std::string widgetName, std::string bindName) {
+    mBindTable.emplace(widgetName, bindName);
 }
 
 }  // namespace cpfw
