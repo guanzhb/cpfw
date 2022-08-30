@@ -14,13 +14,39 @@
  * limitations under the License.
  */
 
-#ifndef CPFW_BASE_INCLUDE_BUNDLE_H__
-#define CPFW_BASE_INCLUDE_BUNDLE_H__
+#ifndef CPFW_BASE_INCLUDE_BUNDLE_HPP__
+#define CPFW_BASE_INCLUDE_BUNDLE_HPP__
+
+#include <any>
+#include <map>
+#include <string>
 
 class Bundle {
  public:
     Bundle() {}
     ~Bundle() {}
+
+    template<typename TVALUE>
+    void set(const std::string &key, const TVALUE &value) {
+        mTable[key] = value;
+    }
+
+    template<typename TVALUE>
+    TVALUE get(const std::string &key, const TVALUE &defaultValue = TVALUE()) {
+        auto &value = mTable[key];
+        return value.has_value() ? std::any_cast<TVALUE>(value) : defaultValue;
+    }
+
+    void erase(const std::string &key) {
+        mTable.erase(key);
+    }
+
+    void clean() {
+        mTable.clear();
+    }
+
+ private:
+    std::map<std::string, std::any> mTable;
 };
 
 #endif  // CPFW_BASE_INCLUDE_BUNDLE_H__

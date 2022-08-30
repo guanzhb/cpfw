@@ -96,11 +96,9 @@ void DataParser::loadInvokeChain(tinyxml2::XMLElement *root) {
         const char* parentWidgetName = surfaceParent->Attribute(ATTR_WIDGET.c_str());
         tinyxml2::XMLElement *surfaceChild
             = surfaceParent->FirstChildElement(TAG_INVOKE_CHAIN_CHILD.c_str());
-        std::cout << "parent name " << parentWidgetName << std::endl;
         TINVOKE_CHAIN chains;
         while (surfaceChild) {
             const char* childWidgetName = surfaceChild->Attribute(ATTR_WIDGET.c_str());
-            std::cout << "child name " << childWidgetName << std::endl;
             chains.push_back(childWidgetName);
             surfaceChild = surfaceChild->NextSiblingElement();
         }

@@ -112,8 +112,7 @@ void DataStore::addInvokeChain(std::string parent, TINVOKE_CHAIN children) {
     mInvokeChainTable.emplace(parent, children);
 }
 
-void DataStore::addProfile(
-        const std::string name, const Profile profile) {
+void DataStore::addProfile(const std::string name, const Profile profile) {
     mProfileTable.emplace(name, profile);
 }
 
@@ -126,7 +125,6 @@ void DataStore::addDataConvert(
 
 void DataStore::addDataConvert(
         std::string context, std::vector<Convert> convert) {
-    std::cout << "addDataConvert" << context << std::endl;
     mConvertTable.emplace(context, convert);
 }
 

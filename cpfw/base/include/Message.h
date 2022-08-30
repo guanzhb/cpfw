@@ -21,24 +21,17 @@
 #include <memory>
 #include <string>
 
-#include "cpfw/base/include/Bundle.h"
+#include "cpfw/base/include/Bundle.hpp"
 
 namespace cpfw {
 
 class Message {
  public:
-//    Message() {}
-//    ~Message() {}
-
     uint64_t mWhat;
     int32_t mArg1;
     int32_t mArg2;
 
-    std::string mWidgetName;
-    std::string mElementName;
-    int32_t mValue;
-
-//    std::unique_ptr<Bundle> mBundle;
+    Bundle mBundle;
 
     std::function<void(int32_t/*status*/)> mCallback;
 };

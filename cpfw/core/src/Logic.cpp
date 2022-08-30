@@ -59,9 +59,11 @@ int32_t Logic::setProfile(const std::string &widgetName,
         const std::string &elementName, int32_t value, const PostFlag flag) {
     Message msg;
     msg.mWhat = std::hash<std::string>{}(widgetName + elementName);
-    msg.mWidgetName = widgetName;
-    msg.mElementName = elementName;
-    msg.mValue = value;
+    Bundle bundle;
+    bundle.set<std::string>(KEY_PROFILE, widgetName);
+    bundle.set<std::string>(KEY_ELEMENT, elementName);
+    bundle.set<int32_t>(KEY_VALUE, value);
+    msg.mBundle = bundle;
 
     mHandler->post(msg, flag);
 
@@ -78,9 +80,11 @@ int32_t Logic::setProfileDelay(const std::string &widgetName,
         uint64_t delayTimeMs, const PostFlag flag) {
     Message msg;
     msg.mWhat = std::hash<std::string>{}(widgetName + elementName);
-    msg.mWidgetName = widgetName;
-    msg.mElementName = elementName;
-    msg.mValue = value;
+    Bundle bundle;
+    bundle.set<std::string>(KEY_PROFILE, widgetName);
+    bundle.set<std::string>(KEY_ELEMENT, elementName);
+    bundle.set<int32_t>(KEY_VALUE, value);
+    msg.mBundle = bundle;
 
     mHandler->postDelay(msg, delayTimeMs, flag);
 
@@ -99,7 +103,11 @@ int32_t Logic::getProfile(const std::string &widgetName,
 
 void Logic::onReply(const Message &message, const int32_t status) {
     if (nullptr != mCallback) {
-        mCallback(message.mWidgetName, message.mElementName, message.mValue, status);
+        Bundle &bundle = const_cast<Message&>(message).mBundle;
+        const auto &profileName = bundle.get<std::string>(KEY_PROFILE);
+        const auto &elementName = bundle.get<std::string>(KEY_ELEMENT);
+        const auto &value = bundle.get<int32_t>(KEY_VALUE);
+        mCallback(profileName, elementName, value, status);
     }
 }
 
@@ -111,11 +119,14 @@ Logic::LogicHandler::~LogicHandler() {
 }
 
 int32_t Logic::LogicHandler::onInvoke(const Message &message) {
-    std::cout << "Logic[" << __func__ << "] " << message.mWidgetName
-        << " -> " << message.mElementName << std::endl;
-    mLogic->mStore->setProfile(
-        message.mWidgetName, message.mElementName, message.mValue);
-    return mLogic->mResponsibilityChain->invokeChain(message.mWidgetName);
+    Bundle &bundle = const_cast<Message&>(message).mBundle;
+    const auto &profileName = bundle.get<std::string>(KEY_PROFILE);
+    const auto &elementName = bundle.get<std::string>(KEY_ELEMENT);
+    const auto &value = bundle.get<int32_t>(KEY_VALUE);
+    std::cout << "Logic[" << __func__ << "] " << profileName
+        << " -> " << elementName << std::endl;
+    mLogic->mStore->setProfile(profileName, elementName, value);
+    return mLogic->mResponsibilityChain->invokeChain(profileName);
 }
 
 void Logic::LogicHandler::onReply(const Message &message, const int32_t status) {

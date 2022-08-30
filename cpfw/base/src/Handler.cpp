@@ -41,9 +41,6 @@ int32_t Handler::post(const Message &msg, const PostFlag flag) {
 }
 
 int32_t Handler::postDelay(const Message &msg, uint64_t delayMs, const PostFlag flag) {
-    std::cout << "postDelay, widget: " << msg.mWidgetName
-        << ", element: " << msg.mElementName << std::endl;
-
     if (flag == PostFlag::SYNC) {
         return onInvoke(msg);
     }
@@ -79,8 +76,6 @@ void Handler::handleMessage() {
     while (mRunning.load()) {
         uint64_t currentTimeMs = getCurrentTimeMs();
         auto itor = mMsgPool->front();
-        std::cout << "handleMessage widgetName: " << itor->second.mWidgetName
-            << ", elementName:"<< itor->second.mElementName << std::endl;
         if (itor->first > currentTimeMs) {
             if (std::cv_status::no_timeout
                     == mMsgPool->waitFor(itor->first-currentTimeMs)) {
@@ -92,9 +87,9 @@ void Handler::handleMessage() {
         }
 
         int32_t status = onInvoke(itor->second);
-        mMsgPool->popFront();
         std::cout << "handleMessage invoke over status: " << status << std::endl;
         reply(itor->second, status);
+        mMsgPool->popFront();
     }
 }
 
