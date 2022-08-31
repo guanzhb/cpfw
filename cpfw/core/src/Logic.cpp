@@ -14,6 +14,8 @@
  * limitations under the License.
  */
 
+#define TAG "Logic"
+
 #include "cpfw/core/include/Logic.h"
 
 #include <functional>
@@ -22,6 +24,7 @@
 #include <string>
 
 #include "cpfw/core/include/DataParser.h"
+#include "cpfw/base/include/Log.hpp"
 
 namespace cpfw {
 
@@ -112,7 +115,7 @@ void Logic::onReply(const Message &message, const int32_t status) {
 }
 
 Logic::LogicHandler::LogicHandler(Logic* logic) : mLogic(logic) {
-    std::cout << "LogicHandler ctor" << std::endl;
+    LOGI(TAG, "LogicHandler ctor");
 }
 
 Logic::LogicHandler::~LogicHandler() {
@@ -123,8 +126,7 @@ int32_t Logic::LogicHandler::onInvoke(const Message &message) {
     const auto &profileName = bundle.get<std::string>(KEY_PROFILE);
     const auto &elementName = bundle.get<std::string>(KEY_ELEMENT);
     const auto &value = bundle.get<int32_t>(KEY_VALUE);
-    std::cout << "Logic[" << __func__ << "] " << profileName
-        << " -> " << elementName << std::endl;
+    LOGI(TAG, "onInvoke " + profileName + " -> " + elementName);
     mLogic->mStore->setProfile(profileName, elementName, value);
     return mLogic->mResponsibilityChain->invokeChain(profileName);
 }

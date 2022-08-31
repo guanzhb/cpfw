@@ -19,7 +19,10 @@
 #include <iostream>
 
 #include "cpfw/base/include/ExpressionPool.h"
+#include "cpfw/base/include/Log.hpp"
 #include "external/tinyxml2/tinyxml2.h"
+
+#define TAG "DataParser"
 
 namespace cpfw {
 
@@ -61,19 +64,19 @@ DataParser::DataParser() {
 DataParser::DataParser(std::string configurationFile,
         std::shared_ptr<DataStore> dataStore)
         : mDataStore(dataStore) {
-    std::cout << __func__ << " begin" << std::endl;
-    std::cout << "DataParser" << " load " << configurationFile << " begin" << std::endl;
+    LOGD(TAG, "DataParser begin");
+    LOGD(TAG, "DataParser load " + configurationFile + " begin");
     std::shared_ptr<tinyxml2::XMLDocument> doc = std::make_shared<tinyxml2::XMLDocument>();
     tinyxml2::XMLError err = doc->LoadFile(configurationFile.c_str());
     if (err != tinyxml2::XML_SUCCESS) {
-        std::cout << "read file error!" << std::endl;
+        LOGE(TAG, "read file error!");
         return;
     }
 
     tinyxml2::XMLElement *root = doc->RootElement();
     loadConfiguration(root);
 
-    std::cout << "DataParser" << " load " << configurationFile << " end" << std::endl;
+    LOGD(TAG, "DataParser load " + configurationFile + " end");
 }
 
 DataParser::~DataParser() {
@@ -87,7 +90,7 @@ void DataParser::loadConfiguration(tinyxml2::XMLElement *root) {
 }
 
 void DataParser::loadInvokeChain(tinyxml2::XMLElement *root) {
-    std::cout << __func__ << " begin" << std::endl;
+    LOGD(TAG, "loadInvokeChain begin");
     tinyxml2::XMLElement *surface = root->FirstChildElement(TAG_INVOKE_CHAIN.c_str());
     tinyxml2::XMLElement *surfaceParent
         = surface->FirstChildElement(TAG_INVOKE_CHAIN_PARENT.c_str());
@@ -135,7 +138,7 @@ static Condition parseCondition(std::string name, std::string strs) {
 }
 
 void DataParser::loadConditions(tinyxml2::XMLElement *root) {
-    std::cout << __func__ << " begin" << std::endl;
+    LOGD(TAG, "loadCondition begin");
     tinyxml2::XMLElement *surface = root->FirstChildElement(TAG_CONDITIONS.c_str());
     tinyxml2::XMLElement *surfaceCondition
         = surface->FirstChildElement(TAG_CONDITION.c_str());
@@ -159,7 +162,7 @@ void DataParser::loadConditions(tinyxml2::XMLElement *root) {
 }
 
 void DataParser::loadProfile(tinyxml2::XMLElement *root) {
-    std::cout << __func__ << " begin" << std::endl;
+    LOGD(TAG, "loadProfile begin");
     tinyxml2::XMLElement *surface = root->FirstChildElement(TAG_PROFILES.c_str());
     tinyxml2::XMLElement *surfaceProfile = surface->FirstChildElement(TAG_PROFILE.c_str());
     
@@ -223,7 +226,7 @@ static std::vector<Convert> parseCalculate(std::string name, std::string strs) {
 }
 
 void DataParser::loadDataConvert(tinyxml2::XMLElement *root) {
-    std::cout << __func__ << " begin" << std::endl;
+    LOGD(TAG, "loadDataConvert begin");
     tinyxml2::XMLElement *surface = root->FirstChildElement(TAG_CONVERTS.c_str());
     tinyxml2::XMLElement *surfaceContext
         = surface->FirstChildElement(TAG_CONTEXT.c_str());

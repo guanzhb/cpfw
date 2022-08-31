@@ -14,6 +14,8 @@
  * limitations under the License.
  */
 
+#define TAG "Widget"
+
 #include "cpfw/base/include/Widget.h"
 
 #include <iostream>
@@ -21,6 +23,7 @@
 #include "cpfw/base/include/Base.h"
 #include "cpfw/base/include/Condition.h"
 #include "cpfw/base/include/Utils.h"
+#include "cpfw/base/include/Log.hpp"
 
 namespace cpfw {
 
@@ -77,7 +80,7 @@ int32_t Widget::check() {
     }
     auto &conditionPair = mStore->getCondition(mName);
     if (&DataStore::EMPTY_CONDITION == &conditionPair) {
-        std::cout << "Widget[" << mName << "] no check" << std::endl;
+        LOGI(TAG, "widget " + mName + " no check");
         return 0;
     }
     auto &logic = conditionPair.first;
@@ -98,8 +101,8 @@ int32_t Widget::check() {
 }
 
 int32_t Widget::action() {
-    std::cout << "widget " << getName()
-        << " action time: " << cpfw::getCurrentTimeMs() << std::endl;
+    LOGI(TAG, "widget " + mName + " action time: "
+         + std::to_string(cpfw::getCurrentTimeMs()));
     uint32_t type = static_cast<uint32_t>(ElementType::PUBLIC);
     auto &bindName = mStore->getBind(getName());
     auto values = parseProfile(mStore->getProfile(getName()), type, getName(), mStore);

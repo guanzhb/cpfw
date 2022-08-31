@@ -223,7 +223,16 @@ Widget.o: cpfw/base/src/Widget.cpp /usr/include/stdc-predef.h \
  cpfw/base/include/Utils.h /usr/include/c++/11/algorithm \
  /usr/include/c++/11/bits/ranges_algo.h \
  /usr/include/c++/11/bits/ranges_util.h \
- /usr/include/c++/11/pstl/glue_algorithm_defs.h
+ /usr/include/c++/11/pstl/glue_algorithm_defs.h cpfw/base/include/Log.hpp \
+ /usr/include/c++/11/iomanip /usr/include/c++/11/locale \
+ /usr/include/c++/11/bits/locale_facets_nonio.h /usr/include/c++/11/ctime \
+ /usr/include/x86_64-linux-gnu/c++/11/bits/time_members.h \
+ /usr/include/x86_64-linux-gnu/c++/11/bits/messages_members.h \
+ /usr/include/libintl.h /usr/include/c++/11/bits/codecvt.h \
+ /usr/include/c++/11/bits/locale_facets_nonio.tcc \
+ /usr/include/c++/11/bits/locale_conv.h \
+ /usr/include/c++/11/bits/quoted_string.h /usr/include/c++/11/sstream \
+ /usr/include/c++/11/bits/sstream.tcc
 /usr/include/stdc-predef.h:
 cpfw/base/include/Widget.h:
 /usr/include/c++/11/any:
@@ -507,3 +516,17 @@ cpfw/base/include/Utils.h:
 /usr/include/c++/11/bits/ranges_algo.h:
 /usr/include/c++/11/bits/ranges_util.h:
 /usr/include/c++/11/pstl/glue_algorithm_defs.h:
+cpfw/base/include/Log.hpp:
+/usr/include/c++/11/iomanip:
+/usr/include/c++/11/locale:
+/usr/include/c++/11/bits/locale_facets_nonio.h:
+/usr/include/c++/11/ctime:
+/usr/include/x86_64-linux-gnu/c++/11/bits/time_members.h:
+/usr/include/x86_64-linux-gnu/c++/11/bits/messages_members.h:
+/usr/include/libintl.h:
+/usr/include/c++/11/bits/codecvt.h:
+/usr/include/c++/11/bits/locale_facets_nonio.tcc:
+/usr/include/c++/11/bits/locale_conv.h:
+/usr/include/c++/11/bits/quoted_string.h:
+/usr/include/c++/11/sstream:
+/usr/include/c++/11/bits/sstream.tcc:

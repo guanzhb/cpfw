@@ -13,6 +13,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+#define TAG "Example"
+
 #include "examples/include/ExampleChain.h"
 
 #include <iostream>
@@ -22,45 +24,45 @@
 
 #include "cpfw/base/include/Base.h"
 #include "cpfw/base/include/Utils.h"
+#include "cpfw/base/include/Log.hpp"
 
 namespace cpfw {
 
 static int32_t func0() {
-    std::cout << __func__ << std::endl;
+    LOGI(TAG, "func0");
     return 0;
 }
 
 static int32_t func1(int32_t v1) {
-    std::cout << __func__ << " v1:" << v1 << std::endl;
+    LOGI(TAG, "func0 v1:" + std::to_string(v1));
     return 0;
 }
 
 static int32_t func2(int32_t v1, int32_t v2) {
-    std::cout << __func__ << " v1:" << v1 << ", v2:" << v2 << std::endl;
+    LOGI(TAG, "func0 v1:" + std::to_string(v1) + ", v2:" + std::to_string(v2));
     return 0;
 }
 
 static int32_t func4(int32_t v1, int32_t v2, int32_t v3, int32_t v4) {
-    std::cout << __func__ << " v1:" << v1 << ", v2:" << v2 <<
-        ", v3:" << v3 << ", v4:" << v4 << std::endl;
+    LOGI(TAG, "func0 v1:" + std::to_string(v1) + ", v2:" + std::to_string(v2)
+         + ", v3:" + std::to_string(v3) + ", v4:" + std::to_string(v4));
     return 0;
 }
 
 static int32_t handle(
         DataStore *store, const std::string &funcName,
         const std::vector<int32_t> &values) {
-    std::cout << funcName;
+    LOGI(TAG, funcName);
     std::for_each(values.begin(), values.end(), [](auto d) -> void {
-        std::cout << " " << d;
+        LOGI(TAG, "" + std::to_string(d));
     });
-    std::cout << std::endl;
     return 0;
 }
 
 static void onReply(const std::string &widgetName, const std::string &elementName,
              const int32_t value, const int32_t status) {
-    std::cout << "reply: widget:" << widgetName << ", element:" << elementName
-        << ", value:" << value << ", status:" << status << std::endl;
+    LOGI(TAG, "reply: widget:" + widgetName + ", element:" + elementName
+        + ", value:" + std::to_string(value) + ", status:" + std::to_string(status));
 }
 
 class WidgetStub : public Widget {
@@ -69,13 +71,13 @@ class WidgetStub : public Widget {
     }
 
     int32_t action() override {
-        std::cout << "widget override " << getName()
-            << " action time: " << cpfw::getCurrentTimeMs() << std::endl;
+        LOGI(TAG, "widget override " + getName()
+             + " action time: " + std::to_string(cpfw::getCurrentTimeMs()));
         uint32_t type = static_cast<uint32_t>(ElementType::PUBLIC);
         auto values = parseProfile(
             getDataStore()->getProfile(getName()), type, getName(), getDataStore());
         int32_t ret = handle(getDataStore().get(), getName() + " override action ", values);
-        std::cout << "WidgetStub action status: " << ret << std::endl;
+        LOGI(TAG, "WidgetStub action status: " + std::to_string(ret));
         return ret;
     }
 };
@@ -119,7 +121,7 @@ int32_t ExampleChain::setLoudness(int32_t loudness) {
 }
 
 int32_t ExampleChain::setStub(int32_t stub) {
-    std::cout << "stub call time: " << cpfw::getCurrentTimeMs() << std::endl;
+    LOGI(TAG, "stub call time: " + std::to_string(cpfw::getCurrentTimeMs()));
     return mLogic->setProfileDelay("stub", stub, 10, PostFlag::SYNC);
 }
 
@@ -127,48 +129,39 @@ int32_t ExampleChain::setStub(int32_t stub) {
 
 int main() {
     std::unique_ptr<cpfw::ExampleChain> example = std::make_unique<cpfw::ExampleChain>();
-    std::cout << "start " << std::endl;
+    LOGI(TAG, "start");
 
-    std::cout << std::endl;
     example->setStub(10);
-    std::cout << "stub success" << std::endl;
+    LOGI(TAG, "stub success");
 
-    std::cout << std::endl;
     example->setVolume(30);
-    std::cout << "volume success" << std::endl;
+    LOGI(TAG, "volume success");
 
-    std::cout << std::endl;
     example->setFade(50);
-    std::cout << "fade success" << std::endl;
+    LOGI(TAG, "fade success");
 
-    std::cout << std::endl;
     example->setEq("gain_100hz", 100);
-    std::cout << "eq success" << std::endl;
+    LOGI(TAG, "eq success");
 
-    std::cout << std::endl;
     example->setLoudness(120);
-    std::cout << "loudness success" << std::endl;
+    LOGI(TAG, "loudness success");
 
-    std::cout << std::endl;
     example->setVolume(300);
-    std::cout << "volume success" << std::endl;
+    LOGI(TAG, "volume success");
 
-    std::cout << std::endl;
     example->setEq("gain_400hz", 90);
-    std::cout << "eq success" << std::endl;
+    LOGI(TAG, "eq success");
 
-    std::cout << std::endl;
     example->setLoudness(10);
-    std::cout << "loudness success" << std::endl;
+    LOGI(TAG, "loudness success");
 
-    std::cout << std::endl;
     example->setStub(40);
-    std::cout << "stub success" << std::endl;
+    LOGI(TAG, "stub success");
 
-    std::cout << "start time: " << cpfw::getCurrentTimeMs() << std::endl;
+    LOGI(TAG, "start time: " + std::to_string(cpfw::getCurrentTimeMs()));
     std::this_thread::sleep_for(std::chrono::milliseconds(20));
-    std::cout << "ExampleChain exit" << std::endl;
-    std::cout << "end time: " << cpfw::getCurrentTimeMs() << std::endl;
+    LOGI(TAG, "ExampleChain exit");
+    LOGI(TAG, "end time: " + std::to_string(cpfw::getCurrentTimeMs()));
 
     return 0;
 }

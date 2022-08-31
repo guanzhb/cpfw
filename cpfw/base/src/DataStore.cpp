@@ -14,7 +14,10 @@
  * limitations under the License.
  */
 
+#define TAG "DataStore"
+
 #include "cpfw/base/include/DataStore.h"
+#include "cpfw/base/include/Log.hpp"
 
 #include <iostream>
 
@@ -28,7 +31,7 @@ const std::vector<Convert> DataStore::EMPTY_CONVERT = {};
 const std::string DataStore::EMPTY_BIND = "";
 
 DataStore::DataStore() {
-    std::cout << "ctor DataStore " << std::endl;
+    LOGD(TAG, ("ctor DataStore"));
 }
 
 DataStore::~DataStore() {

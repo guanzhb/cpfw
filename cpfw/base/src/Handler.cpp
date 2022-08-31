@@ -14,12 +14,15 @@
  * limitations under the License.
  */
 
+#define TAG "Handler"
+
 #include "cpfw/base/include/Handler.h"
 
 #include <chrono>
 #include <iostream>
 
 #include "cpfw/base/include/Utils.h"
+#include "cpfw/base/include/Log.hpp"
 
 namespace cpfw {
 
@@ -72,7 +75,7 @@ int32_t Handler::postWhen(const Message &msg, uint64_t whenMs, const PostFlag fl
 }
 
 void Handler::handleMessage() {
-    std::cout << "handleMessage" << std::endl;
+    LOGI(TAG, "handleMessage");
     while (mRunning.load()) {
         uint64_t currentTimeMs = getCurrentTimeMs();
         auto itor = mMsgPool->front();
@@ -87,7 +90,7 @@ void Handler::handleMessage() {
         }
 
         int32_t status = onInvoke(itor->second);
-        std::cout << "handleMessage invoke over status: " << status << std::endl;
+        LOGI(TAG, "handleMessage invoke over status: " + std::to_string(status));
         reply(itor->second, status);
         mMsgPool->popFront();
     }
@@ -95,10 +98,10 @@ void Handler::handleMessage() {
 
 void Handler::reply(const Message &msg, int32_t status) {
     if (nullptr != msg.mCallback) {
-        std::cout << "reply to widget" << std::endl;
+        LOGI(TAG, "reply to widget");
         msg.mCallback(status);
     } else {
-        std::cout << "reply to Handler status: " << status << std::endl;
+        LOGI(TAG, "reply to Handler status: " + std::to_string(status));
         onReply(msg, status);
     }
 }

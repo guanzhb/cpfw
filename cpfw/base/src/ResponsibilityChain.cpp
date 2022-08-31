@@ -1,5 +1,4 @@
-/**
- * Copyright (C) 2022 The Cross Platform Framework Project
+/** * Copyright (C) 2022 The Cross Platform Framework Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,13 +13,17 @@
  * limitations under the License.
  */
 
+#define TAG "ResponsibilityChain"
+
+#include "cpfw/base/include/ResponsibilityChain.h"
+
 #include <string>
 #include <functional>
 #include <memory>
 #include <iostream>
 #include <algorithm>
 
-#include "cpfw/base/include/ResponsibilityChain.h"
+#include "cpfw/base/include/Log.hpp"
 
 namespace cpfw {
 
@@ -50,7 +53,7 @@ int32_t ResponsibilityChain::invokeWidget(std::string widgetName) const {
     }
     if ((ret = widget->get()->action()) != 0) {
         widget->get()->reset();
-        std::cout << "invokeWidget status: " << ret << std::endl;
+        LOGI(TAG, "invokeWidget status: " + ret);
         return ret;  // TODO(guanzhb) LOGE
     }
     widget->get()->swipe();
@@ -66,7 +69,7 @@ int32_t ResponsibilityChain::invokeWidget(std::string widgetName) const {
                 //  TODO(guanzhb) LOGE
             }
         });
-    std::cout << "ResponsibilityChain " << __func__ << " -> " << widgetName << " success" << std::endl;
+    LOGI(TAG, "invokeWidget -> " + widgetName + " success");
     return ret;
 }
 

@@ -41,7 +41,7 @@ class Bundle {
         mTable.erase(key);
     }
 
-    void clean() {
+    void clear() {
         mTable.clear();
     }
 
@@ -49,5 +49,5 @@ class Bundle {
     std::map<std::string, std::any> mTable;
 };
 
-#endif  // CPFW_BASE_INCLUDE_BUNDLE_H__
+#endif  // CPFW_BASE_INCLUDE_BUNDLE_HPP__
 
