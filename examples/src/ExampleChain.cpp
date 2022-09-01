@@ -29,22 +29,22 @@
 namespace cpfw {
 
 static int32_t func0() {
-    LOGI(TAG, "func0");
+    LOGI("func0");
     return 0;
 }
 
 static int32_t func1(int32_t v1) {
-    LOGI(TAG, "func0 v1:" + std::to_string(v1));
+    LOGI("func0 v1:" + std::to_string(v1));
     return 0;
 }
 
 static int32_t func2(int32_t v1, int32_t v2) {
-    LOGI(TAG, "func0 v1:" + std::to_string(v1) + ", v2:" + std::to_string(v2));
+    LOGI("func0 v1:" + std::to_string(v1) + ", v2:" + std::to_string(v2));
     return 0;
 }
 
 static int32_t func4(int32_t v1, int32_t v2, int32_t v3, int32_t v4) {
-    LOGI(TAG, "func0 v1:" + std::to_string(v1) + ", v2:" + std::to_string(v2)
+    LOGI("func0 v1:" + std::to_string(v1) + ", v2:" + std::to_string(v2)
          + ", v3:" + std::to_string(v3) + ", v4:" + std::to_string(v4));
     return 0;
 }
@@ -52,16 +52,16 @@ static int32_t func4(int32_t v1, int32_t v2, int32_t v3, int32_t v4) {
 static int32_t handle(
         DataStore *store, const std::string &funcName,
         const std::vector<int32_t> &values) {
-    LOGI(TAG, funcName);
+    LOGI(funcName);
     std::for_each(values.begin(), values.end(), [](auto d) -> void {
-        LOGI(TAG, "" + std::to_string(d));
+        LOGI("" + std::to_string(d));
     });
     return 0;
 }
 
 static void onReply(const std::string &widgetName, const std::string &elementName,
              const int32_t value, const int32_t status) {
-    LOGI(TAG, "reply: widget:" + widgetName + ", element:" + elementName
+    LOGI("reply: widget:" + widgetName + ", element:" + elementName
         + ", value:" + std::to_string(value) + ", status:" + std::to_string(status));
 }
 
@@ -71,13 +71,12 @@ class WidgetStub : public Widget {
     }
 
     int32_t action() override {
-        LOGI(TAG, "widget override " + getName()
-             + " action time: " + std::to_string(cpfw::getCurrentTimeMs()));
+        LOGI("widget override " + getName() + " action");
         uint32_t type = static_cast<uint32_t>(ElementType::PUBLIC);
         auto values = parseProfile(
             getDataStore()->getProfile(getName()), type, getName(), getDataStore());
         int32_t ret = handle(getDataStore().get(), getName() + " override action ", values);
-        LOGI(TAG, "WidgetStub action status: " + std::to_string(ret));
+        LOGI("WidgetStub action status: " + std::to_string(ret));
         return ret;
     }
 };
@@ -121,7 +120,7 @@ int32_t ExampleChain::setLoudness(int32_t loudness) {
 }
 
 int32_t ExampleChain::setStub(int32_t stub) {
-    LOGI(TAG, "stub call time: " + std::to_string(cpfw::getCurrentTimeMs()));
+    LOGI("stub call");
     return mLogic->setProfileDelay("stub", stub, 10, PostFlag::SYNC);
 }
 
@@ -129,39 +128,38 @@ int32_t ExampleChain::setStub(int32_t stub) {
 
 int main() {
     std::unique_ptr<cpfw::ExampleChain> example = std::make_unique<cpfw::ExampleChain>();
-    LOGI(TAG, "start");
+    LOGI("start");
 
     example->setStub(10);
-    LOGI(TAG, "stub success");
+    LOGI("stub success");
 
     example->setVolume(30);
-    LOGI(TAG, "volume success");
+    LOGI("volume success");
 
     example->setFade(50);
-    LOGI(TAG, "fade success");
+    LOGI("fade success");
 
     example->setEq("gain_100hz", 100);
-    LOGI(TAG, "eq success");
+    LOGI("eq success");
 
     example->setLoudness(120);
-    LOGI(TAG, "loudness success");
+    LOGI("loudness success");
 
     example->setVolume(300);
-    LOGI(TAG, "volume success");
+    LOGI("volume success");
 
     example->setEq("gain_400hz", 90);
-    LOGI(TAG, "eq success");
+    LOGI("eq success");
 
     example->setLoudness(10);
-    LOGI(TAG, "loudness success");
+    LOGI("loudness success");
 
     example->setStub(40);
-    LOGI(TAG, "stub success");
+    LOGI("stub success");
 
-    LOGI(TAG, "start time: " + std::to_string(cpfw::getCurrentTimeMs()));
     std::this_thread::sleep_for(std::chrono::milliseconds(20));
-    LOGI(TAG, "ExampleChain exit");
-    LOGI(TAG, "end time: " + std::to_string(cpfw::getCurrentTimeMs()));
+    LOGI("ExampleChain exit");
+    LOGI("end");
 
     return 0;
 }

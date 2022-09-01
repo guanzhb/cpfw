@@ -80,7 +80,7 @@ int32_t Widget::check() {
     }
     auto &conditionPair = mStore->getCondition(mName);
     if (&DataStore::EMPTY_CONDITION == &conditionPair) {
-        LOGI(TAG, "widget " + mName + " no check");
+        LOGI("widget " + mName + " no check");
         return 0;
     }
     auto &logic = conditionPair.first;
@@ -101,8 +101,7 @@ int32_t Widget::check() {
 }
 
 int32_t Widget::action() {
-    LOGI(TAG, "widget " + mName + " action time: "
-         + std::to_string(cpfw::getCurrentTimeMs()));
+    LOGD("widget " + mName + " action");
     uint32_t type = static_cast<uint32_t>(ElementType::PUBLIC);
     auto &bindName = mStore->getBind(getName());
     auto values = parseProfile(mStore->getProfile(getName()), type, getName(), mStore);

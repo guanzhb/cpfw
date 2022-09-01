@@ -31,7 +31,7 @@ const std::vector<Convert> DataStore::EMPTY_CONVERT = {};
 const std::string DataStore::EMPTY_BIND = "";
 
 DataStore::DataStore() {
-    LOGD(TAG, ("ctor DataStore"));
+    LOGD("ctor DataStore");
 }
 
 DataStore::~DataStore() {
@@ -82,11 +82,14 @@ void DataStore::setProfile(const std::string &profileName,
 int32_t DataStore::getConvertedData(std::string context, int32_t origin) {
     auto convert = mDataMapTable.find(context);
     if (convert == mDataMapTable.end()) {
-        return origin;  // TODO(guanzhb) LODI
+        LOGD("no context find for " + context);
+        return origin;
     }
     auto data = convert->second.find(origin);
     if (data == convert->second.end()) {
-        return origin;  // TODO(guanzhb) LODI
+        LOGD("context" + context + ", no convert find for "
+             + std::to_string(origin));
+        return origin;
     }
     return data->second;
 }

@@ -32,9 +32,12 @@ class Bundle {
     }
 
     template<typename TVALUE>
-    TVALUE get(const std::string &key, const TVALUE &defaultValue = TVALUE()) {
-        auto &value = mTable[key];
-        return value.has_value() ? std::any_cast<TVALUE>(value) : defaultValue;
+    bool get(const std::string &key, TVALUE &value) {
+        if (const auto &tmp = mTable.find(key); tmp != mTable.end()) {
+            value = std::any_cast<TVALUE&>(tmp->second);
+            return true;
+        }
+        return false;
     }
 
     void erase(const std::string &key) {

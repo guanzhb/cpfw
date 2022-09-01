@@ -18,6 +18,10 @@
 #ifndef CPFW_BASE_INCLUDE_LOG_HPP__
 #define CPFW_BASE_INCLUDE_LOG_HPP__
 
+#ifndef TAG
+#define TAG ""
+#endif
+
 #include <iostream>
 #include <iomanip>
 #include <stdarg.h>
@@ -32,10 +36,10 @@ enum class LOG_LEVEL : uint8_t {
     ERROR,
 };
 
-#define LOGI(TAG, ...) cpfw::LogOut(TAG, LOG_LEVEL::INFO, __VA_ARGS__);
-#define LOGD(TAG, ...) cpfw::LogOut(TAG, LOG_LEVEL::DEBUG, __VA_ARGS__);
-#define LOGW(TAG, ...) cpfw::LogOut(TAG, LOG_LEVEL::WARN, __VA_ARGS__);
-#define LOGE(TAG, ...) cpfw::LogOut(TAG, LOG_LEVEL::ERROR, __VA_ARGS__);
+#define LOGI(...) cpfw::LogOut(TAG, LOG_LEVEL::INFO, __VA_ARGS__);
+#define LOGD(...) cpfw::LogOut(TAG, LOG_LEVEL::DEBUG, __VA_ARGS__);
+#define LOGW(...) cpfw::LogOut(TAG, LOG_LEVEL::WARN, __VA_ARGS__);
+#define LOGE(...) cpfw::LogOut(TAG, LOG_LEVEL::ERROR, __VA_ARGS__);
 
 namespace cpfw {
 

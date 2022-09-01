@@ -75,7 +75,7 @@ int32_t Handler::postWhen(const Message &msg, uint64_t whenMs, const PostFlag fl
 }
 
 void Handler::handleMessage() {
-    LOGI(TAG, "handleMessage");
+    LOGI("handleMessage");
     while (mRunning.load()) {
         uint64_t currentTimeMs = getCurrentTimeMs();
         auto itor = mMsgPool->front();
@@ -90,7 +90,7 @@ void Handler::handleMessage() {
         }
 
         int32_t status = onInvoke(itor->second);
-        LOGI(TAG, "handleMessage invoke over status: " + std::to_string(status));
+        LOGI("handleMessage invoke over status: " + std::to_string(status));
         reply(itor->second, status);
         mMsgPool->popFront();
     }
@@ -98,10 +98,10 @@ void Handler::handleMessage() {
 
 void Handler::reply(const Message &msg, int32_t status) {
     if (nullptr != msg.mCallback) {
-        LOGI(TAG, "reply to widget");
+        LOGI("reply to widget");
         msg.mCallback(status);
     } else {
-        LOGI(TAG, "reply to Handler status: " + std::to_string(status));
+        LOGI("reply to Handler status: " + std::to_string(status));
         onReply(msg, status);
     }
 }

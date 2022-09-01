@@ -44,17 +44,17 @@ int32_t ResponsibilityChain::invokeChain(std::string widgetName) const {
 int32_t ResponsibilityChain::invokeWidget(std::string widgetName) const {
     std::optional<std::shared_ptr<Widget>> widget = mStore->getWidget(widgetName);
     if (!widget) {
-        return EINVAL;  // TODO(guanzhb) LOGE
+        LOGE("no widget for name " + widgetName);
     }
 
     int32_t ret = 0;
     if ((ret = widget->get()->check()) != 0) {
-        return ret;  // TODO(guanzhb) LOGE
+        LOGE("check for name " + widgetName + ", errno:" + std::to_string(ret));
     }
     if ((ret = widget->get()->action()) != 0) {
         widget->get()->reset();
-        LOGI(TAG, "invokeWidget status: " + ret);
-        return ret;  // TODO(guanzhb) LOGE
+        LOGE("action for name " + widgetName + ", errno:" + std::to_string(ret));
+        return ret;
     }
     widget->get()->swipe();
 
@@ -63,13 +63,13 @@ int32_t ResponsibilityChain::invokeWidget(std::string widgetName) const {
         return ret;
     }
     std::for_each(childrenChain.begin(), childrenChain.end(),
-        [&] (auto &childwidgetName) -> void {
-            ret = invokeChain(childwidgetName);
+        [&] (auto &childWidgetName) -> void {
+            ret = invokeChain(childWidgetName);
             if (0 != ret) {
-                //  TODO(guanzhb) LOGE
+                LOGE("action for name " + childWidgetName + ", errno:" + std::to_string(ret));
             }
         });
-    LOGI(TAG, "invokeWidget -> " + widgetName + " success");
+    LOGI("invokeWidget -> " + widgetName + " success");
     return ret;
 }
 

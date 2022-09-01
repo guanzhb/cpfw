@@ -107,15 +107,24 @@ int32_t Logic::getProfile(const std::string &widgetName,
 void Logic::onReply(const Message &message, const int32_t status) {
     if (nullptr != mCallback) {
         Bundle &bundle = const_cast<Message&>(message).mBundle;
-        const auto &profileName = bundle.get<std::string>(KEY_PROFILE);
-        const auto &elementName = bundle.get<std::string>(KEY_ELEMENT);
-        const auto &value = bundle.get<int32_t>(KEY_VALUE);
+        std::string profileName;
+        if (!bundle.get<std::string>(KEY_PROFILE, profileName)) {
+            return;
+        }
+        std::string elementName;
+        if (!bundle.get<std::string>(KEY_ELEMENT, elementName)) {
+            return;
+        }
+        int32_t value = 0;
+        if (!bundle.get<int32_t>(KEY_VALUE, value)) {
+            return;
+        }
         mCallback(profileName, elementName, value, status);
     }
 }
 
 Logic::LogicHandler::LogicHandler(Logic* logic) : mLogic(logic) {
-    LOGI(TAG, "LogicHandler ctor");
+    LOGI("LogicHandler ctor");
 }
 
 Logic::LogicHandler::~LogicHandler() {
@@ -123,10 +132,19 @@ Logic::LogicHandler::~LogicHandler() {
 
 int32_t Logic::LogicHandler::onInvoke(const Message &message) {
     Bundle &bundle = const_cast<Message&>(message).mBundle;
-    const auto &profileName = bundle.get<std::string>(KEY_PROFILE);
-    const auto &elementName = bundle.get<std::string>(KEY_ELEMENT);
-    const auto &value = bundle.get<int32_t>(KEY_VALUE);
-    LOGI(TAG, "onInvoke " + profileName + " -> " + elementName);
+    std::string profileName;
+    if (!bundle.get<std::string>(KEY_PROFILE, profileName)) {
+        return EINVAL;
+    }
+    std::string elementName;
+    if (!bundle.get<std::string>(KEY_ELEMENT, elementName)) {
+        return EINVAL;
+    }
+    int32_t value = 0;
+    if (!bundle.get<int32_t>(KEY_VALUE, value)) {
+        return EINVAL;
+    }
+    LOGI("onInvoke " + profileName + " -> " + elementName);
     mLogic->mStore->setProfile(profileName, elementName, value);
     return mLogic->mResponsibilityChain->invokeChain(profileName);
 }
