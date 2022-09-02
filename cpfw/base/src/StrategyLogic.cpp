@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-#include "cpfw/base/include/StrategyLogic.h"
+#include "StrategyLogic.h"
 
 #include <iostream>
 

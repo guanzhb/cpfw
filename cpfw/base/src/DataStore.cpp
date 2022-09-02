@@ -16,8 +16,8 @@
 
 #define TAG "DataStore"
 
-#include "cpfw/base/include/DataStore.h"
-#include "cpfw/base/include/Log.hpp"
+#include "DataStore.h"
+#include "Log.hpp"
 
 #include <iostream>
 

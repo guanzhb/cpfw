@@ -16,15 +16,15 @@
 
 #define TAG "Logic"
 
-#include "cpfw/core/include/Logic.h"
+#include "Logic.h"
 
 #include <functional>
 #include <iostream>
 #include <memory>
 #include <string>
 
-#include "cpfw/core/include/DataParser.h"
-#include "cpfw/base/include/Log.hpp"
+#include "DataParser.h"
+#include "Log.hpp"
 
 namespace cpfw {
 

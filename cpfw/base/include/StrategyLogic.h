@@ -18,8 +18,8 @@
 
 #include <memory>
 
-#include "cpfw/base/include/DataStore.h"
-#include "cpfw/base/include/Condition.h"
+#include "DataStore.h"
+#include "Condition.h"
 
 namespace cpfw {
 

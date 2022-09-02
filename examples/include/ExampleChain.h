@@ -19,7 +19,7 @@
 
 #include <memory>
 
-#include "cpfw/core/include/Logic.h"
+#include "Logic.h"
 
 namespace cpfw {
 class ExampleChain {

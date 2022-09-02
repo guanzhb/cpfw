@@ -21,7 +21,7 @@
 #include <map>
 #include <mutex>
 
-#include "cpfw/base/include/Message.h"
+#include "Message.h"
 
 namespace cpfw {
 

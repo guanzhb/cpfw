@@ -1,2 +1,0 @@
-# cpfw
-cross platform framework

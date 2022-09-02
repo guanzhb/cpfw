@@ -22,7 +22,7 @@
 #include <memory>
 #include <algorithm>
 
-#include "cpfw/base/include/DataStore.h"
+#include "DataStore.h"
 
 namespace cpfw {
 

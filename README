@@ -1,0 +1,7 @@
+1. brief:
+     cross platform framework @see doc/
+
+2. build
+     cmake -G Ninja
+     ninja
+

@@ -15,7 +15,7 @@
 
 #define TAG "ResponsibilityChain"
 
-#include "cpfw/base/include/ResponsibilityChain.h"
+#include "ResponsibilityChain.h"
 
 #include <string>
 #include <functional>
@@ -23,7 +23,7 @@
 #include <iostream>
 #include <algorithm>
 
-#include "cpfw/base/include/Log.hpp"
+#include "Log.hpp"
 
 namespace cpfw {
 

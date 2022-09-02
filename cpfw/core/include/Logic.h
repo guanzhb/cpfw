@@ -20,11 +20,11 @@
 #include <string>
 #include <memory>
 
-#include "cpfw/base/include/Base.h"
-#include "cpfw/base/include/DataStore.h"
-#include "cpfw/base/include/Widget.h"
-#include "cpfw/base/include/ResponsibilityChain.h"
-#include "cpfw/base/include/Handler.h"
+#include "Base.h"
+#include "DataStore.h"
+#include "Widget.h"
+#include "ResponsibilityChain.h"
+#include "Handler.h"
 
 namespace cpfw {
 

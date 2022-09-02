@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-#include "cpfw/base/include/Condition.h"
+#include "Condition.h"
 
 namespace cpfw {
 

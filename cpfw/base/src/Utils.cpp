@@ -14,9 +14,9 @@
  * limitations under the License.
  */
 
-#include "cpfw/base/include/Base.h"
-#include "cpfw/base/include/Utils.h"
-#include "cpfw/base/include/StrategyCalculate.h"
+#include "Base.h"
+#include "Utils.h"
+#include "StrategyCalculate.h"
 
 #include <iostream>
 #include <sys/time.h>

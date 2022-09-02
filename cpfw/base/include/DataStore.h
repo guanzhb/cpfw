@@ -25,11 +25,11 @@
 #include <optional>
 #include <utility>
 
-#include "cpfw/base/include/Base.h"
-#include "cpfw/base/include/Widget.h"
-#include "cpfw/base/include/Condition.h"
-#include "cpfw/base/include/Convert.h"
-#include "cpfw/base/include/ExpressionPool.h"
+#include "Base.h"
+#include "Widget.h"
+#include "Condition.h"
+#include "Convert.h"
+#include "ExpressionPool.h"
 
 namespace cpfw {
 

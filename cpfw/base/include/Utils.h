@@ -21,8 +21,8 @@
 #include <any>
 #include <vector>
 
-#include "cpfw/base/include/Base.h"
-#include "cpfw/base/include/DataStore.h"
+#include "Base.h"
+#include "DataStore.h"
 
 namespace cpfw {
 

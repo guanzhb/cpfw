@@ -20,8 +20,8 @@
 #include <string>
 #include <memory>
 
-#include "external/tinyxml2/tinyxml2.h"
-#include "cpfw/base/include/DataStore.h"
+#include "tinyxml2.h"
+#include "DataStore.h"
 
 namespace cpfw {
 

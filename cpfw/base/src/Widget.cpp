@@ -16,14 +16,14 @@
 
 #define TAG "Widget"
 
-#include "cpfw/base/include/Widget.h"
+#include "Widget.h"
 
 #include <iostream>
 
-#include "cpfw/base/include/Base.h"
-#include "cpfw/base/include/Condition.h"
-#include "cpfw/base/include/Utils.h"
-#include "cpfw/base/include/Log.hpp"
+#include "Base.h"
+#include "Condition.h"
+#include "Utils.h"
+#include "Log.hpp"
 
 namespace cpfw {
 

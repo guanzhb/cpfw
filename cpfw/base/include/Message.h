@@ -21,7 +21,7 @@
 #include <memory>
 #include <string>
 
-#include "cpfw/base/include/Bundle.hpp"
+#include "Bundle.hpp"
 
 namespace cpfw {
 

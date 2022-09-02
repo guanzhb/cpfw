@@ -19,7 +19,7 @@
 
 #include <string>
 
-#include "cpfw/base/include/ExpressionPool.h"
+#include "ExpressionPool.h"
 
 namespace cpfw {
 

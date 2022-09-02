@@ -15,16 +15,16 @@
  */
 #define TAG "Example"
 
-#include "examples/include/ExampleChain.h"
+#include "ExampleChain.h"
 
 #include <iostream>
 #include <string>
 #include <vector>
 #include <memory>
 
-#include "cpfw/base/include/Base.h"
-#include "cpfw/base/include/Utils.h"
-#include "cpfw/base/include/Log.hpp"
+#include "Base.h"
+#include "Utils.h"
+#include "Log.hpp"
 
 namespace cpfw {
 

@@ -16,13 +16,13 @@
 
 #define TAG "Handler"
 
-#include "cpfw/base/include/Handler.h"
+#include "Handler.h"
 
 #include <chrono>
 #include <iostream>
 
-#include "cpfw/base/include/Utils.h"
-#include "cpfw/base/include/Log.hpp"
+#include "Utils.h"
+#include "Log.hpp"
 
 namespace cpfw {
 

@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-#include "cpfw/base/include/MessagePool.h"
+#include "MessagePool.h"
 
 namespace cpfw {
 

@@ -22,8 +22,8 @@
 #include <thread>
 #include <iostream>
 
-#include "cpfw/base/include/Message.h"
-#include "cpfw/base/include/MessagePool.h"
+#include "Message.h"
+#include "MessagePool.h"
 
 namespace cpfw {
 

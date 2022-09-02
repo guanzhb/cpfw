@@ -20,8 +20,8 @@
 #include <string>
 #include <vector>
 
-#include "cpfw/base/include/DataStore.h"
-#include "cpfw/base/include/Convert.h"
+#include "DataStore.h"
+#include "Convert.h"
 
 namespace cpfw {
 

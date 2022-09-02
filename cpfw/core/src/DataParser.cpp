@@ -14,15 +14,14 @@
  * limitations under the License.
  */
 
-#include "cpfw/core/include/DataParser.h"
+#define TAG "DataParser"
+
+#include "DataParser.h"
 
 #include <iostream>
 
-#include "cpfw/base/include/ExpressionPool.h"
-#include "cpfw/base/include/Log.hpp"
-#include "external/tinyxml2/tinyxml2.h"
-
-#define TAG "DataParser"
+#include "ExpressionPool.h"
+#include "Log.hpp"
 
 namespace cpfw {
 
@@ -111,13 +110,13 @@ void DataParser::loadInvokeChain(tinyxml2::XMLElement *root) {
 }
 
 static Condition parseCondition(std::string name, std::string strs) {
-    std::vector<std::string> delim = {"@", ";", ":", ","};
+    std::vector<std::string> delim = {"@", ";", ":", ",", "@#$"/*end sentinel*/};
     std::vector<std::string> ss;
 
     int32_t i = 0;
 
     size_t pos = strs.find(delim[i]);
-    while(pos != strs.npos) {
+    while (pos != strs.npos) {
         std::string temp = strs.substr(0, pos);
         ss.push_back(temp);
         strs = strs.substr(pos+1, strs.size());

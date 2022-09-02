@@ -21,9 +21,9 @@
 #include <memory>
 #include <map>
 
-#include "cpfw/base/include/DataStore.h"
-#include "cpfw/base/include/StrategyLogic.h"
-#include "cpfw/base/include/ExpressionPool.h"
+#include "DataStore.h"
+#include "StrategyLogic.h"
+#include "ExpressionPool.h"
 
 namespace cpfw {
 

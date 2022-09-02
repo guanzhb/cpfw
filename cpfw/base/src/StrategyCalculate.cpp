@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-#include "cpfw/base/include/StrategyCalculate.h"
+#include "StrategyCalculate.h"
 
 #include <iostream>
 
