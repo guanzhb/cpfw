@@ -10,8 +10,8 @@ include_directories("cpfw/base/include"
                     "examples/include")
 
 FILE(GLOB BASE_SRCS "examples/src/ExampleChain.cpp"
-     "cpfw/base/src/*"
-     "cpfw/core/src/*"
-     "external/tinyxml2/tinyxml2.cpp")
+                    "cpfw/base/src/*"
+                    "cpfw/core/src/*"
+                    "external/tinyxml2/tinyxml2.cpp")
 
 add_executable(exampleChain ${BASE_SRCS})
