@@ -1,7 +1,22 @@
-1. brief:
+# brief:
      cross platform framework @see doc/
+     
+# blueprint
+   user only needs to care about implements of widgets and data define,
+   how to execute is defined in xml, including:
+     widgets' data.
+     invoke chain.
+     when and how to invoke.
+     whether and how convert data when invoke.
+   
+   middlewares in cpfw/base can be used alone.
 
-2. build
+# pull
+     git clone --recurse-submodules git@github.com:guanzhb/cpfw.git
+
+# build
      cmake -G Ninja
      ninja
 
+
+   
