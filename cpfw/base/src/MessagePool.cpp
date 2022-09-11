@@ -14,11 +14,15 @@
  * limitations under the License.
  */
 
+#define TAG "MessagePool"
+
 #include "MessagePool.h"
+#include "Log.hpp"
 
 namespace cpfw {
 
 MessagePool::MessagePool() {
+    LOGD("MessagePool ctor");
 }
 
 MessagePool::~MessagePool() {

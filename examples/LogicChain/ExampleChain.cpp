@@ -82,7 +82,7 @@ class WidgetStub : public Widget {
 };
 
 ExampleChain::ExampleChain() {
-    mLogic = std::make_shared<Logic>("./configs/exampleChain.xml");
+    mLogic = std::make_shared<Logic>("./exampleChain.xml");
 
     auto sv = std::make_shared<Widget>("volume", func1);
     mLogic->addWidget(sv);
