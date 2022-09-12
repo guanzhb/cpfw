@@ -1,23 +1,41 @@
-# brief:
-     cross platform framework @see doc/
+brief
+=======
+  cross platform framework @see doc/
      
-# blueprint
+blueprint
+=======
+  Logic
+  ------
    user only needs to care about implements of widgets and data define,
    how to execute is defined in xml, including:
-     widgets' data.
-     invoke chain.
-     when and how to invoke.
-     whether and how convert data when invoke.
-   
-   middlewares in cpfw/base can be used alone.
+    1. widgets' data.
+    2. invoke chain.
+    3. when and how to invoke.
+    4. whether and how to convert data when invoke.
 
-# pull
-     git clone --recurse-submodules git@github.com:guanzhb/cpfw.git
+  SimpleLogic
+  ------
+    only has invoke chain compared with above Logic.
 
-# build
-     go to examples/*/
-     cmake -G Ninja
-     ninja
+  StateMachine
+  ------
+    includes state machine and state.
+  
+  middlewares in cpfw/base can be used alone.
 
+pull
+=======
+  git clone --recurse-submodules git@github.com:guanzhb/cpfw.git
 
-   
+build
+=======
+  build libcpfw.so
+  ------
+     1. go to cpfw/
+     2. cmake -G Ninja
+     3. ninja
+  build example bin
+  ------
+     1. go to exmaples/*/
+     2. cmake -G Ninja
+     3. ninja

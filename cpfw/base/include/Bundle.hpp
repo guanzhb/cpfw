@@ -52,5 +52,20 @@ class Bundle {
     std::map<std::string, std::any> mTable;
 };
 
+#define INITIALIZE_TEMPLATE(TYPE) \
+    template void Bundle::set<TYPE>(const std::string &, const TYPE &); \
+    template bool Bundle::get<TYPE>(const std::string &, TYPE &)
+
+INITIALIZE_TEMPLATE(std::string);
+INITIALIZE_TEMPLATE(int64_t);
+INITIALIZE_TEMPLATE(uint64_t);
+INITIALIZE_TEMPLATE(int32_t);
+INITIALIZE_TEMPLATE(uint32_t);
+INITIALIZE_TEMPLATE(int16_t);
+INITIALIZE_TEMPLATE(uint16_t);
+INITIALIZE_TEMPLATE(int8_t);
+INITIALIZE_TEMPLATE(uint8_t);
+
+
 #endif  // CPFW_BASE_INCLUDE_BUNDLE_HPP__
 

@@ -8,9 +8,10 @@ include_directories("../../cpfw/base/include"
                     "../../cpfw/core/include"
                     "../../external/tinyxml2")
 
-FILE(GLOB BASE_SRCS "SimpleLogicExample.cpp"
-                    "../../cpfw/base/src/*"
-                    "../../cpfw/core/src/*"
-                    "../../external/tinyxml2/tinyxml2.cpp")
+FILE(GLOB BASE_SRCS "SimpleLogicExample.cpp")
+
+link_directories("../../out")
 
 add_executable(exampleSimpleLogic ${BASE_SRCS})
+
+target_link_libraries(exampleSimpleLogic cpfw)

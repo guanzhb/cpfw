@@ -14,8 +14,8 @@
  * limitations under the License.
  */
 
-#ifndef EXAMPLES_STATEMACHINE_SIMPLELOGICEXAMPLE_H_
-#define EXAMPLES_STATEMACHINE_SIMPLELOGICEXAMPLE_H_
+#ifndef EXAMPLES_SIMPLELOGIC_SIMPLELOGICEXAMPLE_H_
+#define EXAMPLES_SIMPLELOGIC_SIMPLELOGICEXAMPLE_H_
 
 #include "SimpleLogic.h"
 
@@ -29,5 +29,5 @@ class SimpleLogicExample : public SimpleLogic {
 
 }  // namespace cpfw
 
-#endif  // EXAMPLES_STATEMACHINE_SIMPLELOGICEXAMPLE_H_
+#endif  // EXAMPLES_SIMPLELOGIC_SIMPLELOGICEXAMPLE_H_
 
