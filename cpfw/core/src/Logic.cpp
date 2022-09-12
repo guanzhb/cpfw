@@ -9,7 +9,7 @@
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR DataParserS OF ANY KIND, either express or implied.
+ * WITHOUT WARRANTIES OR CONDITIONS  OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
@@ -23,7 +23,7 @@
 #include <memory>
 #include <string>
 
-#include "DataParser.h"
+#include "LogicDataParser.h"
 #include "Log.hpp"
 
 namespace cpfw {
@@ -33,7 +33,7 @@ Logic::Logic() {
 
 Logic::Logic(std::string configurationFile) {
     mStore = std::make_shared<DataStore>();
-    DataParser parser = DataParser(configurationFile, mStore);
+    LogicDataParser parser = LogicDataParser(configurationFile, mStore);
     mResponsibilityChain = std::make_unique<ResponsibilityChain>(mStore);
     mHandler = std::make_unique<LogicHandler>(this);
 }

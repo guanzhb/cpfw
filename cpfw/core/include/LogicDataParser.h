@@ -9,7 +9,7 @@
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR DataParserS OF ANY KIND, either express or implied.
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
@@ -25,7 +25,7 @@
 
 namespace cpfw {
 
-class DataParser {
+class LogicDataParser {
  public:
     static const std::string ROOT;
     static const std::string TAG_WIDGETS;
@@ -60,12 +60,12 @@ class DataParser {
     static const std::string TAG_CONTEXT;
 
  public:
-    DataParser();
+    LogicDataParser();
 
-    DataParser(std::string configurationFile,
+    LogicDataParser(std::string configurationFile,
                std::shared_ptr<DataStore> dataStore);
 
-    ~DataParser();
+    ~LogicDataParser();
 
 private:
     void loadConfiguration(tinyxml2::XMLElement *root);

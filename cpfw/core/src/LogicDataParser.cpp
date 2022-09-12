@@ -9,14 +9,14 @@
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR DataParserS OF ANY KIND, either express or implied.
+ * WITHOUT WARRANTIES OR CONDITIONS  OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
 
-#define TAG "DataParser"
+#define TAG "LogicDataParser"
 
-#include "DataParser.h"
+#include "LogicDataParser.h"
 
 #include <iostream>
 
@@ -25,47 +25,48 @@
 
 namespace cpfw {
 
-const std::string DataParser::ROOT = "cpfw";
-const std::string DataParser::TAG_WIDGETS = "widgets";
-const std::string DataParser::TAG_WIDGET ="widget";
-const std::string DataParser::ATTR_WIDGET ="widget";
-const std::string DataParser::ATTR_NAME = "name";
-const std::string DataParser::TAG_INVOKE_CHAIN = "invokeChains";
-const std::string DataParser::TAG_INVOKE_CHAIN_PARENT = "parent";
-const std::string DataParser::TAG_INVOKE_CHAIN_CHILD = "child";
-const std::string DataParser::ATTR_CONDITION = "condition";
-const std::string DataParser::TAG_CONDITIONS = "conditions";
-const std::string DataParser::TAG_CONDITION = "condition";
-const std::string DataParser::ATTR_LOGIC = "logic";
-const std::string DataParser::ATTR_CONDITION_WHEN = "when";
-const std::string DataParser::DEFAULT_NAME = "default";
-const std::string DataParser::PROFILE_DELIM = ";";
-const std::string DataParser::ATTR_CONDITION_WHEN_DELIM = "@";
-const std::string DataParser::ATTR_CONDITION_VALUE_DELIM = ",";
-const std::string DataParser::TAG_PROFILES = "profiles";
-const std::string DataParser::TAG_PROFILE = "profile";
-const std::string DataParser::ATTR_BIND_TO = "bindTo";
-const std::string DataParser::TAG_ELEMENT = "element";
-const std::string DataParser::ATTR_MIN = "min";
-const std::string DataParser::ATTR_MAX = "max";
-const std::string DataParser::ATTR_CURRENT = "current";
-const std::string DataParser::ATTR_TYPE = "type";
-const std::string DataParser::TAG_CONTEXT = "context";
-const std::string DataParser::TAG_CONVERTS = "converts";
-const std::string DataParser::TAG_CONVERT = "convert";
-const std::string DataParser::TAG_CALCULATE = "calculate";
-const std::string DataParser::ATTR_ORIGIN = "origin";
-const std::string DataParser::ATTR_TARGET = "target";
+const std::string LogicDataParser::ROOT = "cpfw";
+const std::string LogicDataParser::TAG_WIDGETS = "widgets";
+const std::string LogicDataParser::TAG_WIDGET ="widget";
+const std::string LogicDataParser::ATTR_WIDGET ="widget";
+const std::string LogicDataParser::ATTR_NAME = "name";
+const std::string LogicDataParser::TAG_INVOKE_CHAIN = "invokeChains";
+const std::string LogicDataParser::TAG_INVOKE_CHAIN_PARENT = "parent";
+const std::string LogicDataParser::TAG_INVOKE_CHAIN_CHILD = "child";
+const std::string LogicDataParser::ATTR_CONDITION = "condition";
+const std::string LogicDataParser::TAG_CONDITIONS = "conditions";
+const std::string LogicDataParser::TAG_CONDITION = "condition";
+const std::string LogicDataParser::ATTR_LOGIC = "logic";
+const std::string LogicDataParser::ATTR_CONDITION_WHEN = "when";
+const std::string LogicDataParser::DEFAULT_NAME = "default";
+const std::string LogicDataParser::PROFILE_DELIM = ";";
+const std::string LogicDataParser::ATTR_CONDITION_WHEN_DELIM = "@";
+const std::string LogicDataParser::ATTR_CONDITION_VALUE_DELIM = ",";
+const std::string LogicDataParser::TAG_PROFILES = "profiles";
+const std::string LogicDataParser::TAG_PROFILE = "profile";
+const std::string LogicDataParser::ATTR_BIND_TO = "bindTo";
+const std::string LogicDataParser::TAG_ELEMENT = "element";
+const std::string LogicDataParser::ATTR_MIN = "min";
+const std::string LogicDataParser::ATTR_MAX = "max";
+const std::string LogicDataParser::ATTR_CURRENT = "current";
+const std::string LogicDataParser::ATTR_TYPE = "type";
+const std::string LogicDataParser::TAG_CONTEXT = "context";
+const std::string LogicDataParser::TAG_CONVERTS = "converts";
+const std::string LogicDataParser::TAG_CONVERT = "convert";
+const std::string LogicDataParser::TAG_CALCULATE = "calculate";
+const std::string LogicDataParser::ATTR_ORIGIN = "origin";
+const std::string LogicDataParser::ATTR_TARGET = "target";
 
-DataParser::DataParser() {
+LogicDataParser::LogicDataParser() {
 }
 
-DataParser::DataParser(std::string configurationFile,
+LogicDataParser::LogicDataParser(std::string configurationFile,
         std::shared_ptr<DataStore> dataStore)
         : mDataStore(dataStore) {
-    LOGD(TAG, "DataParser begin");
-    LOGD(TAG, "DataParser load " + configurationFile + " begin");
-    std::shared_ptr<tinyxml2::XMLDocument> doc = std::make_shared<tinyxml2::XMLDocument>();
+    LOGD(TAG, "LogicDataParser begin");
+    LOGD(TAG, "LogicDataParser load " + configurationFile + " begin");
+    std::shared_ptr<tinyxml2::XMLDocument> doc
+        = std::make_shared<tinyxml2::XMLDocument>();
     tinyxml2::XMLError err = doc->LoadFile(configurationFile.c_str());
     if (err != tinyxml2::XML_SUCCESS) {
         LOGE(TAG, "read file error!");
@@ -75,20 +76,20 @@ DataParser::DataParser(std::string configurationFile,
     tinyxml2::XMLElement *root = doc->RootElement();
     loadConfiguration(root);
 
-    LOGD(TAG, "DataParser load " + configurationFile + " end");
+    LOGD(TAG, "LogicDataParser load " + configurationFile + " end");
 }
 
-DataParser::~DataParser() {
+LogicDataParser::~LogicDataParser() {
 }
 
-void DataParser::loadConfiguration(tinyxml2::XMLElement *root) {
+void LogicDataParser::loadConfiguration(tinyxml2::XMLElement *root) {
     loadInvokeChain(root);
     loadConditions(root);
     loadProfile(root);
     loadDataConvert(root);
 }
 
-void DataParser::loadInvokeChain(tinyxml2::XMLElement *root) {
+void LogicDataParser::loadInvokeChain(tinyxml2::XMLElement *root) {
     LOGD(TAG, "loadInvokeChain begin");
     tinyxml2::XMLElement *surface = root->FirstChildElement(TAG_INVOKE_CHAIN.c_str());
     tinyxml2::XMLElement *surfaceParent
@@ -136,7 +137,7 @@ static Condition parseCondition(std::string name, std::string strs) {
                      std::atoi(ss[3].c_str()), std::atoi(ss[4].c_str()));
 }
 
-void DataParser::loadConditions(tinyxml2::XMLElement *root) {
+void LogicDataParser::loadConditions(tinyxml2::XMLElement *root) {
     LOGD(TAG, "loadCondition begin");
     tinyxml2::XMLElement *surface = root->FirstChildElement(TAG_CONDITIONS.c_str());
     tinyxml2::XMLElement *surfaceCondition
@@ -160,10 +161,11 @@ void DataParser::loadConditions(tinyxml2::XMLElement *root) {
     }
 }
 
-void DataParser::loadProfile(tinyxml2::XMLElement *root) {
+void LogicDataParser::loadProfile(tinyxml2::XMLElement *root) {
     LOGD(TAG, "loadProfile begin");
     tinyxml2::XMLElement *surface = root->FirstChildElement(TAG_PROFILES.c_str());
-    tinyxml2::XMLElement *surfaceProfile = surface->FirstChildElement(TAG_PROFILE.c_str());
+    tinyxml2::XMLElement *surfaceProfile
+        = surface->FirstChildElement(TAG_PROFILE.c_str());
     
     while (surfaceProfile) {
         const char* widgetName = surfaceProfile->Attribute(ATTR_WIDGET.c_str());
@@ -224,7 +226,7 @@ static std::vector<Convert> parseCalculate(std::string name, std::string strs) {
     return ret;
 }
 
-void DataParser::loadDataConvert(tinyxml2::XMLElement *root) {
+void LogicDataParser::loadDataConvert(tinyxml2::XMLElement *root) {
     LOGD(TAG, "loadDataConvert begin");
     tinyxml2::XMLElement *surface = root->FirstChildElement(TAG_CONVERTS.c_str());
     tinyxml2::XMLElement *surfaceContext
@@ -236,7 +238,8 @@ void DataParser::loadDataConvert(tinyxml2::XMLElement *root) {
         const char* widgetName = surfaceContext->Attribute(TAG_WIDGET.c_str());
         const char* calculate = surfaceContext->Attribute(TAG_CALCULATE.c_str());
         if (0 != std::string("").compare(calculate)) {
-            mDataStore->addDataConvert(widgetName, parseCalculate(widgetName, calculate));
+            mDataStore->addDataConvert(
+                widgetName, parseCalculate(widgetName, calculate));
         }
         while (surfaceElement) {
             int origin = 0;
