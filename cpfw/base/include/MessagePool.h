@@ -19,7 +19,7 @@
 
 #include <condition_variable>
 #include <map>
-#include <mutex>
+#include <shared_mutex>
 
 #include "Message.h"
 
@@ -63,8 +63,8 @@ class MessagePool {
     std::multimap<const uint64_t/*whenMs*/, const Message> mQueue;
     // perf for find when post with flag delete or omit
     std::multimap<uint64_t/*what*/, uint64_t/*whenMs*/> mFlagTable;
-    std::mutex mMutex;
-    std::condition_variable mConditionVariable;
+    mutable std::shared_mutex mMutex;
+    std::condition_variable_any mConditionVariable;
 };
 
 }  // namespace cpfw

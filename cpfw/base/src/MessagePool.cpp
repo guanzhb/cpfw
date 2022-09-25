@@ -17,6 +17,7 @@
 #define TAG "MessagePool"
 
 #include "MessagePool.h"
+
 #include "Log.hpp"
 
 namespace cpfw {
@@ -30,14 +31,14 @@ MessagePool::~MessagePool() {
 
 void MessagePool::post(
         const uint64_t whenMs, const Message &message, const uint64_t what) {
-    std::unique_lock<std::mutex> lck(mMutex);
+    std::unique_lock<std::shared_mutex> lck(mMutex);
     postWithLock(whenMs, message, what);
     notify();
 }
 
 void MessagePool::postAndDeleteFormers(
         const uint64_t whenMs, const Message &message, const uint64_t what) {
-    std::unique_lock<std::mutex> lck(mMutex);
+    std::unique_lock<std::shared_mutex> lck(mMutex);
     deleteMessage(what);
     postWithLock(whenMs, message, what);
     notify();
@@ -45,7 +46,7 @@ void MessagePool::postAndDeleteFormers(
 
 void MessagePool::postButOmitIfExist(
         const uint64_t whenMs, const Message &message, const uint64_t what) {
-    std::unique_lock<std::mutex> lck(mMutex);
+    std::unique_lock<std::shared_mutex> lck(mMutex);
     if (findEntry(what)) {
         return;
     }
@@ -59,7 +60,7 @@ std::multimap<const uint64_t, const Message>::iterator MessagePool::front() {
 }
 
 void MessagePool::popFront() {
-    std::unique_lock<std::mutex> lck(mMutex);
+    std::shared_lock<std::shared_mutex> lck(mMutex);
     if (!mQueue.empty()) {
         auto itorToDel = mQueue.begin();
         // mQueue must keep path with mFlagTable, so no need to check nullptr
@@ -72,7 +73,7 @@ void MessagePool::popFront() {
 }
 
 void MessagePool::clear() {
-    std::unique_lock<std::mutex> lck(mMutex);
+    std::unique_lock<std::shared_mutex> lck(mMutex);
     mQueue.clear();
     mFlagTable.clear();
 }
@@ -82,14 +83,14 @@ void MessagePool::notify() {
 }
 
 void MessagePool::wait() {
-    std::unique_lock<std::mutex> lck(mMutex);
+    std::unique_lock<std::shared_mutex> lck(mMutex);
     if (mQueue.empty()) {
         mConditionVariable.wait(lck);
     }
 }
 
 std::cv_status MessagePool::waitFor(uint64_t waitTimeMs) {
-    std::unique_lock<std::mutex> lck(mMutex);
+    std::unique_lock<std::shared_mutex> lck(mMutex);
     return mConditionVariable.wait_for(lck, std::chrono::milliseconds(waitTimeMs));
 }
 
