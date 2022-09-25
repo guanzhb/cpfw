@@ -17,11 +17,11 @@
 
 #include "ResponsibilityChain.h"
 
-#include <string>
-#include <functional>
-#include <memory>
-#include <iostream>
 #include <algorithm>
+#include <functional>
+#include <iostream>
+#include <memory>
+#include <string>
 
 #include "Log.hpp"
 
@@ -37,39 +37,40 @@ ResponsibilityChain::ResponsibilityChain(std::shared_ptr<DataStore> store)
 ResponsibilityChain::~ResponsibilityChain() {
 }
 
-int32_t ResponsibilityChain::invokeChain(std::string widgetName) const {
-    return invokeWidget(widgetName);
+int32_t ResponsibilityChain::invokeChain(const uint32_t widgetId) const {
+    return invokeWidget(widgetId);
 }
 
-int32_t ResponsibilityChain::invokeWidget(std::string widgetName) const {
-    std::optional<std::shared_ptr<Widget>> widget = mStore->getWidget(widgetName);
+int32_t ResponsibilityChain::invokeWidget(const uint32_t widgetId) const {
+    std::optional<std::shared_ptr<Widget>> widget = mStore->getWidget(widgetId);
     if (!widget) {
-        LOGE("no widget for name " + widgetName);
+        LOGE("no widget for id " + std::to_string(widgetId));
     }
 
     int32_t ret = 0;
     if ((ret = widget->get()->check()) != 0) {
-        LOGE("check for name " + widgetName + ", errno:" + std::to_string(ret));
+        LOGE("check for name " + widget->get()->getName() + ", errno:" + std::to_string(ret));
     }
     if ((ret = widget->get()->action()) != 0) {
         widget->get()->reset();
-        LOGE("action for name " + widgetName + ", errno:" + std::to_string(ret));
+        LOGE("action for name " + widget->get()->getName() + ", errno:" + std::to_string(ret));
         return ret;
     }
     widget->get()->swipe();
 
-    auto childrenChain = mStore->getChain(widgetName);
+    auto childrenChain = mStore->getChain(widgetId);
     if (childrenChain == DataStore::EMPTY_INVOKE_CHAIN) {
         return ret;
     }
     std::for_each(childrenChain.begin(), childrenChain.end(),
-        [&] (auto &childWidgetName) -> void {
-            ret = invokeChain(childWidgetName);
+        [&] (auto &childWidgetId) -> void {
+            ret = invokeChain(childWidgetId);
             if (0 != ret) {
-                LOGE("action for name " + childWidgetName + ", errno:" + std::to_string(ret));
+                LOGE("action for name " + std::to_string(childWidgetId)
+                     + ", errno:" + std::to_string(ret));
             }
         });
-    LOGI("invokeWidget -> " + widgetName + " success");
+    LOGI("invokeWidget -> " + widget->get()->getName() + " success");
     return ret;
 }
 

@@ -20,66 +20,66 @@
 
 namespace cpfw {
 
-int32_t StrategyCalculateDummy::handle(const std::string &context,
+int32_t StrategyCalculateDummy::handle(const uint32_t widgetId,
         const int32_t origin, const Convert &convert,
         std::shared_ptr<DataStore> dataStore) {
     return origin;
 }
 
-int32_t StrategyCalculateAddConst::handle(const std::string &context,
+int32_t StrategyCalculateAddConst::handle(const uint32_t widgetId,
         const int32_t origin, const Convert &convert,
         std::shared_ptr<DataStore> dataStore) {
     return origin + convert.getFactor();
 }
 
-int32_t StrategyCalculateAddVariable::handle(const std::string &context,
+int32_t StrategyCalculateAddVariable::handle(const uint32_t widgetId,
         const int32_t origin, const Convert &convert,
         std::shared_ptr<DataStore> dataStore) {
     return origin
-        + dataStore->getProfile(convert.getProfileName())
-              .elements[convert.getElementName()].current;
+        + dataStore->getProfile(convert.getWidgetId())
+              .elements[convert.getElementId()].current;
 }
 
-int32_t StrategyCalculateSubConst::handle(const std::string &context,
+int32_t StrategyCalculateSubConst::handle(const uint32_t widgetId,
         const int32_t origin, const Convert &convert,
         std::shared_ptr<DataStore> dataStore) {
     return origin - convert.getFactor();
 }
 
-int32_t StrategyCalculateSubVariable::handle(const std::string &context,
+int32_t StrategyCalculateSubVariable::handle(const uint32_t widgetId,
         const int32_t origin, const Convert &convert,
         std::shared_ptr<DataStore> dataStore) {
     return origin
-        - dataStore->getProfile(convert.getProfileName())
-              .elements[convert.getElementName()].current;
+        - dataStore->getProfile(convert.getWidgetId())
+              .elements[convert.getElementId()].current;
 }
 
-int32_t StrategyCalculateMulConst::handle(const std::string &context,
+int32_t StrategyCalculateMulConst::handle(const uint32_t widgetId,
         const int32_t origin, const Convert &convert,
         std::shared_ptr<DataStore> dataStore) {
     return origin * convert.getFactor();
 }
 
-int32_t StrategyCalculateMulVariable::handle(const std::string &context,
+int32_t StrategyCalculateMulVariable::handle(const uint32_t widgetId,
         const int32_t origin, const Convert &convert,
         std::shared_ptr<DataStore> dataStore) {
     return origin
-        * dataStore->getProfile(convert.getProfileName())
-              .elements[convert.getElementName()].current;
+        * dataStore->getProfile(convert.getWidgetId())
+              .elements[convert.getElementId()].current;
 }
 
-int32_t StrategyCalculateDivConst::handle(const std::string &context,
+int32_t StrategyCalculateDivConst::handle(const uint32_t widgetId,
         const int32_t origin, const Convert &convert,
         std::shared_ptr<DataStore> dataStore) {
     return origin / convert.getFactor();
 }
 
-int32_t StrategyCalculateDivVariable::handle(const std::string &context,
+int32_t StrategyCalculateDivVariable::handle(const uint32_t widgetId,
         const int32_t origin, const Convert &convert,
         std::shared_ptr<DataStore> dataStore) {
     return origin
-        / dataStore->getProfile(convert.getProfileName())
-              .elements[convert.getElementName()].current;
+        / dataStore->getProfile(convert.getWidgetId())
+              .elements[convert.getElementId()].current;
 }
 
 std::map<ExpressionEnum,

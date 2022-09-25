@@ -31,7 +31,7 @@ class ExampleChain {
 
     int32_t setFade(int32_t data);
 
-    int32_t setEq(std::string band, int32_t db);
+    int32_t setEq(uint32_t band, int32_t db);
 
     int32_t setLoudness(int32_t loudness);
 

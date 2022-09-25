@@ -23,12 +23,12 @@
 
 namespace cpfw {
 
-const TINVOKE_CHAIN DataStore::EMPTY_INVOKE_CHAIN = {""};
+const TINVOKE_CHAIN DataStore::EMPTY_INVOKE_CHAIN = {};
 const TINVOKE_CONDITION DataStore::EMPTY_CONDITION
     = std::make_pair(ExpressionEnum::EMPTY, std::vector<Condition>());
 Profile DataStore::EMPTY_PROFILE = Profile();
 const std::vector<Convert> DataStore::EMPTY_CONVERT = {};
-const std::string DataStore::EMPTY_BIND = "";
+const uint32_t DataStore::EMPTY_BIND = UINT32_MAX;
 
 DataStore::DataStore() {
     LOGD("ctor DataStore");
@@ -38,35 +38,50 @@ DataStore::~DataStore() {
 }
 
 std::optional<std::shared_ptr<Widget>>
-        DataStore::getWidget(const std::string &name) {
-    std::optional<std::shared_ptr<Widget>> ret = std::nullopt;
-    if (mWidgetTable.find(name) != mWidgetTable.end()) {
-        ret = mWidgetTable[name];
+        DataStore::getWidget(const uint32_t widgetId) {
+    return getOptionalFromMap(mWidgetTable, widgetId);
+}
+
+std::optional<std::shared_ptr<Widget>>
+        DataStore::getWidget(const std::string &widgetName) {
+    if (auto id = getIdWithStr(widgetName); id) {
+        return getWidget(id.value());
     }
-    return ret;
+    return  std::nullopt;
+}
+
+const TINVOKE_CHAIN& DataStore::getChain(uint32_t parentId) {
+    return getOrDefaultFromMap(mInvokeChainTable, parentId, EMPTY_INVOKE_CHAIN);
 }
 
 const TINVOKE_CHAIN& DataStore::getChain(const std::string &parentName) {
-    return  mInvokeChainTable.find(parentName) != mInvokeChainTable.end()
-        ? mInvokeChainTable[parentName] : EMPTY_INVOKE_CHAIN;
+    if (auto id = getIdWithStr(parentName); id) {
+        return getChain(id.value());
+    }
+    return EMPTY_INVOKE_CHAIN;
 }
 
-Profile& DataStore::getProfile(const std::string &name) {
-    return mProfileTable.find(name) != mProfileTable.end()
-        ? mProfileTable[name] : EMPTY_PROFILE;
+Profile& DataStore::getProfile(const uint32_t widgetId) {
+    return getOrDefaultFromMap(mProfileTable, widgetId, EMPTY_PROFILE);
 }
 
-void DataStore::setProfile(const std::string &profileName, int32_t value) {
-    setProfile(profileName, "default", value);
+Profile& DataStore::getProfile(const std::string &widgetName) {
+    if (auto id = getIdWithStr(widgetName); id) {
+        return getProfile(id.value());
+    }
+    return EMPTY_PROFILE;
 }
 
-void DataStore::setProfile(const std::string &profileName,
-        const std::string &elementName, int32_t value) {
-    Profile &profile = getProfile(profileName);
+void DataStore::setProfile(const uint32_t widgetId, int32_t value) {
+    setProfile(widgetId, 0, value);
+}
+
+void DataStore::setProfile(const uint32_t widgetId, const uint32_t elementId, int32_t value) {
+    Profile &profile = getProfile(widgetId);
     if (&EMPTY_PROFILE == &profile) {
         return;
     }
-    auto elementItor = profile.elements.find(elementName);
+    auto elementItor = profile.elements.find(elementId);
     if (elementItor == profile.elements.end()) {
         return;
     }
@@ -79,67 +94,111 @@ void DataStore::setProfile(const std::string &profileName,
     }
 }
 
-int32_t DataStore::getConvertedData(std::string context, int32_t origin) {
-    auto convert = mDataMapTable.find(context);
+void DataStore::setProfile(const std::string &widgetName, int32_t value) {
+    setProfile(widgetName, "default", value);
+}
+
+void DataStore::setProfile(const std::string &widgetName,
+        const std::string &elementName, int32_t value) {
+    if (auto widgetId = getIdWithStr(widgetName); !widgetId) {
+        return;
+    } else if (auto elementId = getIdWithStr(elementName); !elementId) {
+        setProfile(widgetId.value(), elementId.value(), value);
+    }
+}
+
+int32_t DataStore::getConvertedData(const uint32_t contextId, int32_t origin) {
+    auto convert = mDataMapTable.find(contextId);
     if (convert == mDataMapTable.end()) {
-        LOGD("no context find for " + context);
         return origin;
     }
     auto data = convert->second.find(origin);
     if (data == convert->second.end()) {
-        LOGD("context" + context + ", no convert find for "
-             + std::to_string(origin));
         return origin;
     }
     return data->second;
 }
 
-const std::vector<Convert>& DataStore::getConvertTable(std::string &context) {
-    return mConvertTable.find(context) != mConvertTable.end()
-        ? mConvertTable[context] : EMPTY_CONVERT;
+
+int32_t DataStore::getConvertedData(const std::string &context, int32_t origin) {
+    if (auto id = getIdWithStr(context); id) {
+        return getConvertedData(id.value(), origin);
+    }
+    return origin;
 }
 
-const TINVOKE_CONDITION& DataStore::getCondition(const std::string widgetName) {
-    return mConditionTable.find(widgetName) != mConditionTable.end()
-        ? mConditionTable[widgetName] : EMPTY_CONDITION;
+const std::vector<Convert>& DataStore::getConvertTable(const uint32_t widgetId) {
+    return getOrDefaultFromMap(mConvertTable, widgetId, EMPTY_CONVERT);
 }
 
-const std::string& DataStore::getBind(const std::string widgetName) {
-    return mBindTable.find(widgetName) != mBindTable.end()
-        ? mBindTable[widgetName] : EMPTY_BIND;
+const std::vector<Convert>& DataStore::getConvertTable(const std::string &context) {
+    if (auto id = getIdWithStr(context); id) {
+        return getConvertTable(id.value());
+    }
+    return EMPTY_CONVERT;
+}
+
+const TINVOKE_CONDITION& DataStore::getCondition(const uint32_t widgetId) {
+    return getOrDefaultFromMap(mConditionTable, widgetId, EMPTY_CONDITION);
+}
+
+const TINVOKE_CONDITION& DataStore::getCondition(const std::string &widgetName) {
+    if (auto id = getIdWithStr(widgetName); id) {
+        return getCondition(id.value());
+    }
+    return EMPTY_CONDITION;
+}
+
+const uint32_t DataStore::getBind(const uint32_t widgetId) {
+    return getOrDefaultFromMap(mBindTable, widgetId, EMPTY_BIND);
+}
+
+const uint32_t DataStore::getBind(const std::string &widgetName) {
+    if (auto id = getIdWithStr(widgetName); id) {
+        return getBind(id.value());
+    }
+    return UINT32_MAX;
 }
 
 void DataStore::addWidget(std::shared_ptr<Widget> widget) {
     widget->linkDataStore(shared_from_this());
-    mWidgetTable.emplace(widget->getName(), widget);
+    mWidgetTable.emplace(widget->getId(), widget);
 }
 
-void DataStore::addInvokeChain(std::string parent, TINVOKE_CHAIN children) {
+void DataStore::addInvokeChain(const uint32_t parent, TINVOKE_CHAIN children) {
     mInvokeChainTable.emplace(parent, children);
 }
 
-void DataStore::addProfile(const std::string name, const Profile profile) {
-    mProfileTable.emplace(name, profile);
+void DataStore::addProfile(const uint32_t widgetId, const Profile profile) {
+    mProfileTable.emplace(widgetId, profile);
 }
 
 void DataStore::addDataConvert(
         std::string context, int32_t origin, int32_t target) {
     std::map<int32_t, int32_t> convert;
     convert.emplace(origin, target);
-    mDataMapTable.emplace(context, convert);
+    mDataMapTable.emplace(getIdWithStr(context).value(), convert);
 }
 
 void DataStore::addDataConvert(
         std::string context, std::vector<Convert> convert) {
-    mConvertTable.emplace(context, convert);
+    mConvertTable.emplace(getIdWithStr(context).value(), convert);
 }
 
 void DataStore::addCondition(std::string widgetName, TINVOKE_CONDITION condition) {
-    mConditionTable.emplace(widgetName, condition);
+    mConditionTable.emplace(getIdWithStr(widgetName).value(), condition);
 }
 
-void DataStore::addBind(std::string widgetName, std::string bindName) {
-    mBindTable.emplace(widgetName, bindName);
+void DataStore::addBind(const uint32_t widgetId, const uint32_t bindId) {
+    mBindTable.emplace(widgetId, bindId);
+}
+
+void DataStore::addStrIdPair(std::string name, uint32_t id) {
+    mStrToIdTable.emplace(name, id);
+}
+
+std::optional<uint32_t> DataStore::getIdWithStr(const std::string &name) {
+    return getOptionalFromMap(mStrToIdTable, name);
 }
 
 }  // namespace cpfw

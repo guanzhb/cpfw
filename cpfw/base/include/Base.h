@@ -25,6 +25,20 @@
 
 namespace cpfw {
 
+enum class DataType : uint8_t {
+    INT8,
+    UINT8,
+    INT16,
+    UINT16,
+    INT32,
+    UINT32,
+    INT64,
+    UINT64,
+
+    STRING,
+    CHAR,
+};
+
 enum class ElementType : uint32_t {
     PUBLIC = 0x01,
     NEED_CONVERT = 0x02,
@@ -40,8 +54,8 @@ struct Element {
 };
 
 struct Profile {
-    std::map<std::string, Element> elements;
-    std::map<std::string, Profile> profile;
+    std::map<uint32_t, Element> elements;
+    std::map<uint32_t, Profile> profile;
 };
 
 using FUNCTION_0INT = std::function<int32_t()>;

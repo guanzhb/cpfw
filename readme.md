@@ -1,7 +1,7 @@
 brief
 =====
   cross platform framework @see doc/
-     
+
 blueprint
 =========
   Logic
@@ -20,8 +20,8 @@ blueprint
   StateMachine
   ------------
     includes state machine and state.
-  
-  *middlewares in cpfw/base can be used alone.*
+
+  **middlewares in cpfw/base can be used alone.**
 
 pull
 ====

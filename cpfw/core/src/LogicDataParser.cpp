@@ -44,6 +44,7 @@ const std::string LogicDataParser::ATTR_CONDITION_WHEN_DELIM = "@";
 const std::string LogicDataParser::ATTR_CONDITION_VALUE_DELIM = ",";
 const std::string LogicDataParser::TAG_PROFILES = "profiles";
 const std::string LogicDataParser::TAG_PROFILE = "profile";
+const std::string LogicDataParser::ATTR_ID = "id";
 const std::string LogicDataParser::ATTR_BIND_TO = "bindTo";
 const std::string LogicDataParser::TAG_ELEMENT = "element";
 const std::string LogicDataParser::ATTR_MIN = "min";
@@ -83,9 +84,9 @@ LogicDataParser::~LogicDataParser() {
 }
 
 void LogicDataParser::loadConfiguration(tinyxml2::XMLElement *root) {
+    loadProfile(root);
     loadInvokeChain(root);
     loadConditions(root);
-    loadProfile(root);
     loadDataConvert(root);
 }
 
@@ -102,15 +103,16 @@ void LogicDataParser::loadInvokeChain(tinyxml2::XMLElement *root) {
         TINVOKE_CHAIN chains;
         while (surfaceChild) {
             const char* childWidgetName = surfaceChild->Attribute(ATTR_WIDGET.c_str());
-            chains.push_back(childWidgetName);
+            chains.push_back(mDataStore->getIdWithStr(childWidgetName).value());
             surfaceChild = surfaceChild->NextSiblingElement();
         }
-        mDataStore->addInvokeChain(parentWidgetName, chains);
+        mDataStore->addInvokeChain(
+            mDataStore->getIdWithStr(parentWidgetName).value(), chains);
         surfaceParent = surfaceParent->NextSiblingElement();
     }
 }
 
-static Condition parseCondition(std::string name, std::string strs) {
+static Condition parseCondition(DataStore *dataStore, std::string name, std::string strs) {
     std::vector<std::string> delim = {"@", ";", ":", ",", "@#$"/*end sentinel*/};
     std::vector<std::string> ss;
 
@@ -127,14 +129,26 @@ static Condition parseCondition(std::string name, std::string strs) {
     ss.push_back(strs);
     switch (ss.size()) {
         case 4:
-            return Condition(name, ss[0], ss[1], ExpressionPool::getEnum(ss[2]),
-                         std::atoi(ss[3].c_str()), std::atoi(ss[3].c_str()));
+            return Condition(name,
+                             dataStore->getIdWithStr(ss[0]).value(),
+                             dataStore->getIdWithStr(ss[1]).value(),
+                             ExpressionPool::getEnum(ss[2]),
+                             std::atoi(ss[3].c_str()),
+                             std::atoi(ss[3].c_str()));
         case 3:
-            return Condition(name, ss[0], ss[1], ExpressionPool::getEnum(ss[2]),
-                             0, 0);
+            return Condition(name,
+                             dataStore->getIdWithStr(ss[0]).value(),
+                             dataStore->getIdWithStr(ss[1]).value(),
+                             ExpressionPool::getEnum(ss[2]),
+                             0,
+                             0);
     }
-    return Condition(name, ss[0], ss[1], ExpressionPool::getEnum(ss[2]),
-                     std::atoi(ss[3].c_str()), std::atoi(ss[4].c_str()));
+    return Condition(name,
+                     dataStore->getIdWithStr(ss[0]).value(),
+                     dataStore->getIdWithStr(ss[1]).value(),
+                     ExpressionPool::getEnum(ss[2]),
+                     std::atoi(ss[3].c_str()),
+                     std::atoi(ss[4].c_str()));
 }
 
 void LogicDataParser::loadConditions(tinyxml2::XMLElement *root) {
@@ -151,7 +165,7 @@ void LogicDataParser::loadConditions(tinyxml2::XMLElement *root) {
         std::vector<Condition> condition;
         while (surfaceElement) {
             const char* when = surfaceElement->Attribute(ATTR_CONDITION_WHEN.c_str());
-            Condition c = parseCondition(widgetName, when);
+            Condition c = parseCondition(mDataStore.get(), widgetName, when);
             condition.push_back(c);
             surfaceElement = surfaceElement->NextSiblingElement();
         }
@@ -169,15 +183,23 @@ void LogicDataParser::loadProfile(tinyxml2::XMLElement *root) {
     
     while (surfaceProfile) {
         const char* widgetName = surfaceProfile->Attribute(ATTR_WIDGET.c_str());
-        const char* bindTo = surfaceProfile->Attribute(ATTR_BIND_TO.c_str());
-        if (0 != DataStore::EMPTY_BIND.compare(bindTo)) {
-             mDataStore->addBind(widgetName, bindTo);
+        int widgetId = 0;
+        surfaceProfile->QueryIntAttribute(ATTR_ID.c_str(), &widgetId);
+        mDataStore->addStrIdPair(widgetName, widgetId);
+
+        int bindId = 0;
+        surfaceProfile->QueryIntAttribute(ATTR_ID.c_str(), &bindId);
+        if (bindId != DataStore::EMPTY_BIND) {
+            mDataStore->addBind(widgetId, bindId);
         }
+
         Profile profile;
         tinyxml2::XMLElement *surfaceElement
             = surfaceProfile->FirstChildElement(TAG_ELEMENT.c_str());
         while (surfaceElement) {
             const char* name = surfaceElement->Attribute(ATTR_NAME.c_str());
+            int id = 0;
+            surfaceElement->QueryIntAttribute(ATTR_ID.c_str(), &id);
             int min = 0;
             surfaceElement->QueryIntAttribute(ATTR_MIN.c_str(), &min);
             int max = 0;
@@ -188,15 +210,16 @@ void LogicDataParser::loadProfile(tinyxml2::XMLElement *root) {
             surfaceElement->QueryIntAttribute(ATTR_TYPE.c_str(), &type);
 
             Element ele = {min, max, current, current, static_cast<uint32_t>(type)};
-            profile.elements.emplace(name, ele);
+            mDataStore->addStrIdPair(name, id);
+            profile.elements.emplace(id, ele);
             surfaceElement = surfaceElement->NextSiblingElement();
         }
-        mDataStore->addProfile(widgetName, profile);
+        mDataStore->addProfile(widgetId, profile);
         surfaceProfile = surfaceProfile->NextSiblingElement();
     }
 }
 
-static std::vector<Convert> parseCalculate(std::string name, std::string strs) {
+static std::vector<Convert> parseCalculate(DataStore *dataStore, std::string name, std::string strs) {
     std::vector<Convert> ret;
     std::string splitExpression = ";";
     std::string splitKv = ":";
@@ -215,10 +238,10 @@ static std::vector<Convert> parseCalculate(std::string name, std::string strs) {
                                   atof(value.c_str())));
         } else {
             size_t posVariable = value.find(splitVariable);
-            ret.emplace_back(Convert(
-                name, ExpressionPool::getEnum(expression),
-                value.substr(posVariable+1, value.size()),
-                value.substr(0, posVariable)));
+            ret.emplace_back(
+                Convert(name, ExpressionPool::getEnum(expression),
+                        dataStore->getIdWithStr(value.substr(posVariable+1, value.size())).value(),
+                        dataStore->getIdWithStr(value.substr(0, posVariable)).value()));
         }
         strs = strs.substr(pos+1, strs.size());
         pos = strs.find(splitExpression);
@@ -239,7 +262,7 @@ void LogicDataParser::loadDataConvert(tinyxml2::XMLElement *root) {
         const char* calculate = surfaceContext->Attribute(TAG_CALCULATE.c_str());
         if (0 != std::string("").compare(calculate)) {
             mDataStore->addDataConvert(
-                widgetName, parseCalculate(widgetName, calculate));
+                widgetName, parseCalculate(mDataStore.get(), widgetName, calculate));
         }
         while (surfaceElement) {
             int origin = 0;

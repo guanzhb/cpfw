@@ -45,19 +45,31 @@ class Logic {
 
     void addWidget(std::shared_ptr<Widget> widget);
 
+    int32_t setProfile(const uint32_t widgetId,
+                int32_t value, const PostFlag flag = PostFlag::NONE);
     int32_t setProfile(const std::string &widgetName,
+                int32_t value, const PostFlag flag = PostFlag::NONE);
+    int32_t setProfile(const uint32_t widgetId, const uint32_t elementId,
                 int32_t value, const PostFlag flag = PostFlag::NONE);
     int32_t setProfile(const std::string &widgetName, const std::string &elementName,
                 int32_t value, const PostFlag flag = PostFlag::NONE);
 
+    int32_t setProfileDelay(const uint32_t widgetId,
+                int32_t value, uint64_t delayTimeMs,
+                const PostFlag flag = PostFlag::NONE);
     int32_t setProfileDelay(const std::string &widgetName,
                 int32_t value, uint64_t delayTimeMs,
                 const PostFlag flag = PostFlag::NONE);
+    int32_t setProfileDelay(const uint32_t widgetId,
+                const uint32_t elementId, int32_t value,
+                uint64_t delayTimeMs, const PostFlag flag = PostFlag::NONE);
     int32_t setProfileDelay(const std::string &widgetName,
                 const std::string &elementName, int32_t value,
                 uint64_t delayTimeMs, const PostFlag flag = PostFlag::NONE);
 
+    int32_t getProfile(const uint32_t widgetId);
     int32_t getProfile(const std::string &widgetName);
+    int32_t getProfile(const uint32_t widgeteId, const uint32_t elementId);
     int32_t getProfile(const std::string &widgeteName,
                 const std::string &elementName);
 

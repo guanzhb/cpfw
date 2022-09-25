@@ -18,23 +18,23 @@
 
 namespace cpfw {
 
-Convert::Convert() : Convert("", ExpressionEnum::EMPTY, 0.0f, "", "") {
+Convert::Convert() : Convert("", ExpressionEnum::EMPTY, 0.0f, 0, 0) {
 }
 
 Convert::Convert(std::string name, ExpressionEnum expression, float factor)
-    : Convert(name, expression, factor, "", "") {
+    : Convert(name, expression, factor, 0, 0) {
 }
 
 Convert::Convert(std::string name, ExpressionEnum expression,
-            std::string profileName, std::string elementName)
-    : Convert(name, expression, 0.0f, profileName, elementName) {
+            uint32_t widgetId, uint32_t elementId)
+    : Convert(name, expression, 0.0f, widgetId, elementId) {
 }
 
 Convert::Convert(
         std::string name, ExpressionEnum expression, float factor,
-        std::string profileName, std::string elementName)
+        uint32_t widgetId, uint32_t elementId)
     : mName(name), mExpression(expression), mFactor(factor),
-      mProfileName(profileName), mElementName(elementName) {
+      mWidgetId(widgetId), mElementId(elementId) {
 }
 
 Convert::~Convert() {
@@ -48,12 +48,12 @@ const ExpressionEnum Convert::getExpression() const {
     return mExpression;
 }
 
-const std::string& Convert::getProfileName() const {
-    return mProfileName;
+const uint32_t Convert::getWidgetId() const {
+    return mWidgetId;
 }
 
-const std::string& Convert::getElementName() const {
-    return mElementName;
+const uint32_t Convert::getElementId() const {
+    return mElementId;
 }
 
 float Convert::getFactor() const {

@@ -25,7 +25,7 @@ namespace cpfw {
 
 std::vector<int32_t> parseProfile(
         const Profile &profile, uint32_t type,
-        std::string context, std::shared_ptr<DataStore> store) {
+        uint32_t widgetId, std::shared_ptr<DataStore> store) {
     std::vector<int32_t> ret;
     if (!store) {
         return ret;
@@ -41,12 +41,12 @@ std::vector<int32_t> parseProfile(
             int32_t current = data.second.current;
             if (0 != (data.second.type
                     & static_cast<uint32_t>(ElementType::NEED_CONVERT))) {
-                current = store->getConvertedData(context, current);
-                auto& converts = store->getConvertTable(context);
+                current = store->getConvertedData(widgetId, current);
+                auto& converts = store->getConvertTable(widgetId);
                 for (auto &c : converts) {
                     current = StrategyCalculatePool::getStrategy(
                                     c.getExpression())->handle(
-                                        context, current, c, store);
+                                        widgetId, current, c, store);
                 }
             }
             ret.push_back(current);

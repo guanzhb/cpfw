@@ -19,6 +19,7 @@
 
 #include <algorithm>
 #include <any>
+#include <optional>
 #include <vector>
 
 #include "Base.h"
@@ -38,11 +39,30 @@ namespace cpfw {
  */
 std::vector<int32_t> parseProfile(
         const Profile &profile, uint32_t type,
-        std::string context, std::shared_ptr<DataStore> store);
+        uint32_t widgetId, std::shared_ptr<DataStore> store);
 
 uint64_t getCurrentTimeMs();
 
 int32_t invoke(const std::any &func, std::vector<int32_t> &value);
+
+template<typename TTable, typename TKey>
+std::optional<typename TTable::mapped_type> getOptionalFromMap(
+        const TTable &table, const TKey &key) {
+    std::optional<typename TTable::mapped_type> ret = std::nullopt;
+    if (const auto &itor = table.find(key); itor != table.end()) {
+         ret = itor->second;
+    }
+    return ret;
+}
+
+template<typename TTable, typename TKey, typename TValue>
+TValue& getOrDefaultFromMap(
+        TTable &table, const TKey &key, TValue &value) {
+    if (auto itor = table.find(key); itor != table.end()) {
+         return itor->second;
+    }
+    return value;
+}
 
 }  // namespace cpfw
 

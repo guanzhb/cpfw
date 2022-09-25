@@ -13,53 +13,89 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+#define TAG "StrategyLogic"
 
 #include "StrategyLogic.h"
 
 #include <iostream>
 
+#include "Log.hpp"
+
+#define LOG_VV
+#ifdef LOG_VV
+#define LOGVV LOGV
+#else
+#define LOGVV(...) do {} while(0)
+#endif
+
 namespace cpfw {
 
 int32_t StrategyLogicDummy::handle(
             const Condition &condition, std::shared_ptr<DataStore> dataStore) {
-    Profile &profile = dataStore->getProfile(condition.getProfileName());
+    LOGVV("Dummy");
+    LOGVV("condition, name:" + condition.getName()
+          + ", widgetId:" + std::to_string(condition.getWidgetId())
+          + ", elementId:" + std::to_string(condition.getElementId()));
+    Profile &profile = dataStore->getProfile(condition.getWidgetId());
     return 0;
 }
 
 int32_t StrategyLogicEqual::handle(
             const Condition &condition, std::shared_ptr<DataStore> dataStore) {
-    Profile &profile = dataStore->getProfile(condition.getProfileName());
-    int32_t current = profile.elements[condition.getElementName()].current;
+    LOGVV("Equal");
+    LOGVV("condition, name:" + condition.getName()
+          + ", widgetId:" + std::to_string(condition.getWidgetId())
+          + ", elementId:" + std::to_string(condition.getElementId()));
+    Profile &profile = dataStore->getProfile(condition.getWidgetId());
+    int32_t current = profile.elements[condition.getElementId()].current;
+    LOGVV("condition, current:" + std::to_string(current)
+          + ", getDefault::" + std::to_string(condition.getDefault()));
     return current == condition.getDefault() ? 0 : EINVAL;
 }
 
 int32_t StrategyLogicNotEqual::handle(
             const Condition &condition, std::shared_ptr<DataStore> dataStore) {
-    Profile &profile = dataStore->getProfile(condition.getProfileName());
-    int32_t current = profile.elements[condition.getElementName()].current;
+    LOGVV("NotEqual");
+    LOGVV("condition, name:" + condition.getName()
+          + ", widgetId:" + std::to_string(condition.getWidgetId())
+          + ", elementId:" + std::to_string(condition.getElementId()));
+    Profile &profile = dataStore->getProfile(condition.getWidgetId());
+    int32_t current = profile.elements[condition.getElementId()].current;
     return current != condition.getDefault() ? 0 : EINVAL;
 }
 
 int32_t StrategyLogicInRange::handle(
             const Condition &condition, std::shared_ptr<DataStore> dataStore) {
-    Profile &profile = dataStore->getProfile(condition.getProfileName());
-    int32_t current = profile.elements[condition.getElementName()].current;
+    LOGVV("InRange");
+    LOGVV("condition, name:" + condition.getName()
+          + ", widgetId:" + std::to_string(condition.getWidgetId())
+          + ", elementId:" + std::to_string(condition.getElementId()));
+    Profile &profile = dataStore->getProfile(condition.getWidgetId());
+    int32_t current = profile.elements[condition.getElementId()].current;
     return (current >= condition.getLeft() && current <= condition.getRight())
         ? 0 : EINVAL;
 }
 
 int32_t StrategyLogicOutRange::handle(
             const Condition &condition, std::shared_ptr<DataStore> dataStore) {
-    Profile &profile = dataStore->getProfile(condition.getProfileName());
-    int32_t current = profile.elements[condition.getElementName()].current;
+    LOGVV("OutRange");
+    LOGVV("condition, name:" + condition.getName()
+          + ", widgetId:" + std::to_string(condition.getWidgetId())
+          + ", elementId:" + std::to_string(condition.getElementId()));
+    Profile &profile = dataStore->getProfile(condition.getWidgetId());
+    int32_t current = profile.elements[condition.getElementId()].current;
     return (current < condition.getLeft() && current > condition.getRight())
         ? 0 : EINVAL;
 }
 
 int32_t StrategyLogicChange::handle(
             const Condition &condition, std::shared_ptr<DataStore> dataStore) {
-    Profile &profile = dataStore->getProfile(condition.getProfileName());
-    return (profile.elements[condition.getElementName()].flag) ? 0 : EINVAL;
+    LOGVV("Change");
+    LOGVV("condition, name:" + condition.getName()
+          + ", widgetId:" + std::to_string(condition.getWidgetId())
+          + ", elementId:" + std::to_string(condition.getElementId()));
+    Profile &profile = dataStore->getProfile(condition.getWidgetId());
+    return (profile.elements[condition.getElementId()].flag) ? 0 : EINVAL;
 }
 
 std::map<ExpressionEnum,

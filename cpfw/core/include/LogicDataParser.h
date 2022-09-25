@@ -45,6 +45,7 @@ class LogicDataParser {
     static const std::string ATTR_CONDITION_WHEN_DELIM;
     static const std::string ATTR_CONDITION_VALUE_DELIM;
     static const std::string TAG_PROFILES;
+    static const std::string ATTR_ID;
     static const std::string ATTR_BIND_TO;
     static const std::string TAG_PROFILE;
     static const std::string TAG_ELEMENT;

@@ -27,34 +27,61 @@
 
 namespace cpfw {
 
-Widget::Widget() : Widget("") {
+Widget::Widget() : Widget("", 0) {
 }
 
-Widget::Widget(std::string name) : mName(name) {
+Widget::Widget(std::string name) : Widget(name, 0) {
+}
+
+Widget::Widget(std::string name, uint32_t id) : mName(name), mId(id) {
 }
 
 Widget::Widget(std::string name, FUNCTION_0INT funcAction)
-    : mName(name), mFunctionBind(funcAction) {
+    : mName(name), mId(0), mFunctionBind(funcAction) {
 }
 
 Widget::Widget(std::string name, FUNCTION_1INT funcAction)
-    : mName(name), mFunctionBind(funcAction) {
+    : mName(name), mId(0), mFunctionBind(funcAction) {
 }
 
 Widget::Widget(std::string name, FUNCTION_2INT funcAction)
-    : mName(name), mFunctionBind(funcAction) {
+    : mName(name), mId(0), mFunctionBind(funcAction) {
 }
 
 Widget::Widget(std::string name, FUNCTION_3INT funcAction)
-    : mName(name), mFunctionBind(funcAction) {
+    : mName(name), mId(0), mFunctionBind(funcAction) {
 }
 
 Widget::Widget(std::string name, FUNCTION_4INT funcAction)
-    : mName(name), mFunctionBind(funcAction) {
+    : mName(name), mId(0), mFunctionBind(funcAction) {
 }
 
 Widget::Widget(std::string name, FUNCTION_5INT funcAction)
-    : mName(name), mFunctionBind(funcAction) {
+    : mName(name), mId(0), mFunctionBind(funcAction) {
+}
+
+Widget::Widget(std::string name, uint32_t id, FUNCTION_0INT funcAction)
+    : mName(name), mId(id), mFunctionBind(funcAction) {
+}
+
+Widget::Widget(std::string name, uint32_t id, FUNCTION_1INT funcAction)
+    : mName(name), mId(id), mFunctionBind(funcAction) {
+}
+
+Widget::Widget(std::string name, uint32_t id, FUNCTION_2INT funcAction)
+    : mName(name), mId(id), mFunctionBind(funcAction) {
+}
+
+Widget::Widget(std::string name, uint32_t id, FUNCTION_3INT funcAction)
+    : mName(name), mId(id), mFunctionBind(funcAction) {
+}
+
+Widget::Widget(std::string name, uint32_t id, FUNCTION_4INT funcAction)
+    : mName(name), mId(id), mFunctionBind(funcAction) {
+}
+
+Widget::Widget(std::string name, uint32_t id, FUNCTION_5INT funcAction)
+    : mName(name), mId(id), mFunctionBind(funcAction) {
 }
 
 Widget::~Widget() {
@@ -69,16 +96,22 @@ const std::string& Widget::getName() const {
     return mName;
 }
 
+const uint32_t Widget::getId() const {
+    return mId;
+}
+
 std::shared_ptr<DataStore> Widget::getDataStore() const {
     return mStore;
 }
+
+using SLP = StrategyLogicPool;
 
 int32_t Widget::check() {
     int32_t ret = 0;
     if (!mStore) {
         return ret;
     }
-    auto &conditionPair = mStore->getCondition(mName);
+    auto &conditionPair = mStore->getCondition(mId);
     if (&DataStore::EMPTY_CONDITION == &conditionPair) {
         LOGI("widget " + mName + " no check");
         return 0;
@@ -86,10 +119,7 @@ int32_t Widget::check() {
     auto &logic = conditionPair.first;
     for (auto itor : conditionPair.second) {
         const auto &expressionIn = itor.getExpression();
-
-        ret = StrategyLogicPool::getStrategy(expressionIn)
-            ->handle(itor, mStore);
-
+        ret = SLP::getStrategy(expressionIn)->handle(itor, mStore);
         if (0 == ret && ExpressionEnum::OR == logic) {
             break;
         } else if (0 != ret && ExpressionEnum::AND == logic) {
@@ -103,16 +133,16 @@ int32_t Widget::check() {
 int32_t Widget::action() {
     LOGD("widget " + mName + " action");
     uint32_t type = static_cast<uint32_t>(ElementType::PUBLIC);
-    auto &bindName = mStore->getBind(getName());
-    auto values = parseProfile(mStore->getProfile(getName()), type, getName(), mStore);
-    if (values.empty() && (bindName.compare(DataStore::EMPTY_BIND) != 0)) {
-        values = parseProfile(mStore->getProfile(bindName), type, getName(), mStore);
+    auto bindId = mStore->getBind(getId());
+    auto values = parseProfile(mStore->getProfile(getId()), type, getId(), mStore);
+    if (values.empty() && (bindId != DataStore::EMPTY_BIND)) {
+        values = parseProfile(mStore->getProfile(bindId), type, getId(), mStore);
     }
     if (mFunctionBind.has_value()) {
         return invoke(mFunctionBind, values);
     }
-    if (bindName.compare(DataStore::EMPTY_BIND) != 0) {
-        return invoke(mStore->getWidget(bindName)->get()->getBind(), values);
+    if (bindId != DataStore::EMPTY_BIND) {
+        return invoke(mStore->getWidget(bindId).value(), values);
     }
 
     return 0;
@@ -123,7 +153,7 @@ int32_t Widget::swipe() {
 }
 
 int32_t Widget::reset() {
-    Profile &profile = mStore->getProfile(getName());
+    Profile &profile = mStore->getProfile(getId());
     for (auto &itor : profile.elements) {
         itor.second.current = itor.second.backup;
     }

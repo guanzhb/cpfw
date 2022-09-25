@@ -28,8 +28,8 @@ class Condition {
     Condition();
 
     Condition(std::string name,
-              std::string elementName,
-              std::string profileName,
+              uint32_t elementId,
+              uint32_t widgetId,
               ExpressionEnum expression,
               int32_t left,
               int32_t right);
@@ -40,9 +40,9 @@ class Condition {
 
     const ExpressionEnum getExpression() const;
 
-    const std::string& getProfileName() const;
+    const uint32_t getWidgetId() const;
 
-    const std::string& getElementName() const;
+    const uint32_t getElementId() const;
 
     int32_t getDefault() const;
 
@@ -53,8 +53,8 @@ class Condition {
  private:
     const std::string mName;
     const ExpressionEnum mExpression;
-    const std::string mProfileName;
-    const std::string mElementName;
+    const uint32_t mWidgetId;
+    const uint32_t mElementId;
     int32_t mLeft;
     int32_t mRight;
 };

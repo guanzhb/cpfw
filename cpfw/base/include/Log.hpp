@@ -31,12 +31,14 @@
 #include "Utils.h"
 
 enum class LOG_LEVEL : uint8_t {
-    INFO = 0,
+    VERBOSE = 0,
+    INFO,
     DEBUG,
     WARN,
     ERROR,
 };
 
+#define LOGV(...) cpfw::LogOut(TAG, LOG_LEVEL::VERBOSE, __VA_ARGS__);
 #define LOGI(...) cpfw::LogOut(TAG, LOG_LEVEL::INFO, __VA_ARGS__);
 #define LOGD(...) cpfw::LogOut(TAG, LOG_LEVEL::DEBUG, __VA_ARGS__);
 #define LOGW(...) cpfw::LogOut(TAG, LOG_LEVEL::WARN, __VA_ARGS__);
@@ -51,6 +53,7 @@ void LogOut(const std::string &tag, LOG_LEVEL level, Args... args) {
     std::cout << std::left << std::setw(12) << "[" + tag + "] ";
     std::cout << std::right << std::setw(6);
     switch (level) {
+    case LOG_LEVEL::VERBOSE: std::cout << "[VERBOSE] "; break;
     case LOG_LEVEL::INFO: std::cout << "[INFO] "; break;
     case LOG_LEVEL::DEBUG: std::cout << "[DEBUG] "; break;
     case LOG_LEVEL::WARN: std::cout << "[WARN] "; break;

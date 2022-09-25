@@ -33,8 +33,8 @@ class Convert {
 
     Convert(std::string name,
             ExpressionEnum expression,
-            std::string profileName,
-            std::string elementName);
+            uint32_t widgetId,
+            uint32_t elementId);
 
     ~Convert();
 
@@ -42,9 +42,9 @@ class Convert {
 
     const ExpressionEnum getExpression() const;
 
-    const std::string& getProfileName() const;
+    const uint32_t getWidgetId() const;
 
-    const std::string& getElementName() const;
+    const uint32_t getElementId() const;
 
     float getFactor() const;
 
@@ -52,15 +52,15 @@ class Convert {
     Convert(std::string name,
             ExpressionEnum expression,
             float factor,
-            std::string profileName,
-            std::string elementName);
+            uint32_t widgetId,
+            uint32_t elementId);
 
  private:
     const std::string mName;
     const ExpressionEnum mExpression;
     const float mFactor;
-    const std::string mProfileName;
-    const std::string mElementName;
+    const uint32_t mWidgetId;
+    const uint32_t mElementId;
 };
 
 }  // namespace cpfw

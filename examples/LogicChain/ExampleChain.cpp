@@ -67,14 +67,14 @@ static void onReply(const std::string &widgetName, const std::string &elementNam
 
 class WidgetStub : public Widget {
  public:
-    WidgetStub(std::string name) : Widget(name) {
+    WidgetStub(std::string name, uint32_t id) : Widget(name, id) {
     }
 
     int32_t action() override {
         LOGI("widget override " + getName() + " action");
         uint32_t type = static_cast<uint32_t>(ElementType::PUBLIC);
         auto values = parseProfile(
-            getDataStore()->getProfile(getName()), type, getName(), getDataStore());
+            getDataStore()->getProfile(getId()), type, getId(), getDataStore());
         int32_t ret = handle(getDataStore().get(), getName() + " override action ", values);
         LOGI("WidgetStub action status: " + std::to_string(ret));
         return ret;
@@ -84,17 +84,17 @@ class WidgetStub : public Widget {
 ExampleChain::ExampleChain() {
     mLogic = std::make_shared<Logic>("./exampleChain.xml");
 
-    auto sv = std::make_shared<Widget>("volume", func1);
+    auto sv = std::make_shared<Widget>("volume", 11221, func1);
     mLogic->addWidget(sv);
-    auto sl = std::make_shared<Widget>("loudness", func1);
+    auto sl = std::make_shared<Widget>("loudness", 11225, func1);
     mLogic->addWidget(sl);
-    auto sf = std::make_shared<Widget>("fade", func1);
+    auto sf = std::make_shared<Widget>("fade", 11222, func1);
     mLogic->addWidget(sf);
-    auto se = std::make_shared<Widget>("equalizer", func4);
+    auto se = std::make_shared<Widget>("equalizer", 11223, func4);
     mLogic->addWidget(se);
-    auto sd = std::make_shared<Widget>("duck");
-    mLogic->addWidget(sd);
-    auto ss = std::make_shared<WidgetStub>("stub");
+   // auto sd = std::make_shared<Widget>("duck", 11224);
+   // mLogic->addWidget(sd);
+    auto ss = std::make_shared<WidgetStub>("stub", 11226);
     mLogic->addWidget(ss);
 
     mLogic->registerCallback(onReply);
@@ -104,24 +104,24 @@ ExampleChain::~ExampleChain() {
 }
 
 int32_t ExampleChain::setVolume(int32_t volume) {
-    return mLogic->setProfile("volume", volume);
+    return mLogic->setProfile(11221, volume);
 }
 
 int32_t ExampleChain::setFade(int32_t fade) {
-    return mLogic->setProfile("fade", fade);
+    return mLogic->setProfile(11222, fade);
 }
 
-int32_t ExampleChain::setEq(std::string band, int32_t db) {
-    return mLogic->setProfile("equalizer", band, db);
+int32_t ExampleChain::setEq(uint32_t band, int32_t db) {
+    return mLogic->setProfile(11223, band, db);
 }
 
 int32_t ExampleChain::setLoudness(int32_t loudness) {
-    return mLogic->setProfile("loudness", loudness);
+    return mLogic->setProfile(11225, loudness);
 }
 
 int32_t ExampleChain::setStub(int32_t stub) {
     LOGI("stub call");
-    return mLogic->setProfileDelay("stub", stub, 10, PostFlag::SYNC);
+    return mLogic->setProfileDelay(11226, stub, 10, PostFlag::SYNC);
 }
 
 }  // namespace cpfw
@@ -136,19 +136,19 @@ int main() {
     example->setVolume(30);
     LOGI("volume success");
 
-    example->setFade(50);
+    example->setFade(5);
     LOGI("fade success");
 
-    example->setEq("gain_100hz", 100);
+    example->setEq(0, 100);
     LOGI("eq success");
 
     example->setLoudness(120);
     LOGI("loudness success");
 
-    example->setVolume(300);
+    example->setVolume(20);
     LOGI("volume success");
 
-    example->setEq("gain_400hz", 90);
+    example->setEq(4, 5);
     LOGI("eq success");
 
     example->setLoudness(10);

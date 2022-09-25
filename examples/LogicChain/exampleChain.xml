@@ -1,10 +1,34 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <exampleChain>
 
+    <profiles>
+        <profile widget="volume" id="11221" bindTo="">
+            <element name="default" id="0" min="1" max="50" current="5" type="3">default</element>
+        </profile>
+        <profile widget="fade" id="11222" bindTo="">
+            <element name="default" id="0"  min="1" max="20" current="5" type="3">fade</element>
+        </profile>
+        <profile widget="equalizer" id="11223" bindTo="">
+            <element name="gain_100hz" id="0"  min="1" max="20" current="5" type="1"></element>
+            <element name="gain_200hz" id="1"  min="5" max="20" current="10" type="1"></element>
+            <element name="gain_400hz" id="2"  min="20" max="30" current="5" type="1"></element>
+            <element name="gain_800hz" id="3"  min="50" max="200" current="100" type="1"></element>
+        </profile>
+        <profile widget="duck" id="11224" bindTo="volume">
+            <element name="default" id="0"  min="0" max="100" current="80" type="3">default</element>
+        </profile>
+        <profile widget="loudness" id="11225" bindTo="">
+            <element name="default" id="0"  min="10" max="20" current="5" type="1">default</element>
+        </profile>
+        <profile widget="stub" id="11226" bindTo="">
+            <element name="default" id="0"  min="10" max="20" current="5" type="1">default</element>
+        </profile>
+    </profiles>
+
     <invokeChains>
         <parent widget="volume">
             <child widget="loudness"></child>
-            <child widget="duck"></child>
+            <!-- <child widget="duck"></child> -->
         </parent>
     </invokeChains>
 
@@ -21,30 +45,6 @@
             <element when="gain_400hz@equalizer;change"></element>
         </condition>
     </conditions>
-
-    <profiles>
-        <profile widget="volume" bindTo="">
-            <element name="default" min="1" max="50" current="5" type="3">default</element>
-        </profile>
-        <profile widget="fade" bindTo="">
-            <element name="default" min="1" max="20" current="5" type="3">fade</element>
-        </profile>
-        <profile widget="equalizer" bindTo="">
-            <element name="gain_100hz" min="1" max="20" current="5" type="1"></element>
-            <element name="gain_200hz" min="5" max="20" current="10" type="1"></element>
-            <element name="gain_400hz" min="20" max="30" current="25" type="1"></element>
-            <element name="gain_800hz" min="50" max="200" current="100" type="1"></element>
-        </profile>
-        <profile widget="duck" bindTo="volume">
-            <element name="default" min="0" max="100" current="80" type="3">default</element>
-        </profile>
-        <profile widget="loudness" bindTo="">
-            <element name="default" min="10" max="20" current="5" type="1">default</element>
-        </profile>
-        <profile widget="stub" bindTo="">
-            <element name="default" min="10" max="20" current="5" type="1">default</element>
-        </profile>
-    </profiles>
 
     <converts>
         <context widget="duck"

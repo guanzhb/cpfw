@@ -35,6 +35,7 @@ class Widget {
     Widget();
 
     explicit Widget(std::string name);
+    explicit Widget(std::string name, uint32_t id);
 
     Widget(std::string name, FUNCTION_0INT func);
     Widget(std::string name, FUNCTION_1INT func);
@@ -43,11 +44,20 @@ class Widget {
     Widget(std::string name, FUNCTION_4INT func);
     Widget(std::string name, FUNCTION_5INT func);
 
+    Widget(std::string name, uint32_t id, FUNCTION_0INT func);
+    Widget(std::string name, uint32_t id, FUNCTION_1INT func);
+    Widget(std::string name, uint32_t id, FUNCTION_2INT func);
+    Widget(std::string name, uint32_t id, FUNCTION_3INT func);
+    Widget(std::string name, uint32_t id, FUNCTION_4INT func);
+    Widget(std::string name, uint32_t id, FUNCTION_5INT func);
+
     virtual ~Widget();
 
     virtual void linkDataStore(std::shared_ptr<DataStore> dataStore);
 
     virtual const std::string& getName() const;
+
+    virtual const uint32_t getId() const;
 
     virtual std::shared_ptr<DataStore> getDataStore() const;
 
@@ -62,6 +72,7 @@ class Widget {
     virtual const std::any& getBind() const;
  private:
     const std::string mName;
+    const uint32_t mId;
     std::shared_ptr<DataStore> mStore;
     static std::map<ExpressionEnum,
         std::shared_ptr<IStrategyLogic>> mStrategy;

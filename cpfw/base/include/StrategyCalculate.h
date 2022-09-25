@@ -27,70 +27,70 @@ namespace cpfw {
 
 class IStrategyCalculate {
  public:
-    virtual int32_t handle(const std::string &context,
+    virtual int32_t handle(const uint32_t widgetId,
         const int32_t origin, const Convert &convert,
         std::shared_ptr<DataStore> dataStore) = 0;
 };
 
 class StrategyCalculateDummy : public IStrategyCalculate {
  public:
-    int32_t handle(const std::string &context,
+    int32_t handle(const uint32_t widgetId,
         const int32_t origin, const Convert &convert,
         std::shared_ptr<DataStore> dataStore) override;
 };
 
 class StrategyCalculateAddConst : public IStrategyCalculate {
  public:
-    int32_t handle(const std::string &context,
+    int32_t handle(const uint32_t widgetId,
         const int32_t origin, const Convert &convert,
         std::shared_ptr<DataStore> dataStore) override;
 };
 
 class StrategyCalculateAddVariable : public IStrategyCalculate {
  public:
-    int32_t handle(const std::string &context,
+    int32_t handle(const uint32_t widgetId,
         const int32_t origin, const Convert &convert,
         std::shared_ptr<DataStore> dataStore) override;
 };
 
 class StrategyCalculateSubConst : public IStrategyCalculate {
  public:
-    int32_t handle(const std::string &context,
+    int32_t handle(const uint32_t widgetId,
         const int32_t origin, const Convert &convert,
         std::shared_ptr<DataStore> dataStore) override;
 };
 
 class StrategyCalculateSubVariable : public IStrategyCalculate {
  public:
-    int32_t handle(const std::string &context,
+    int32_t handle(const uint32_t widgetId,
         const int32_t origin, const Convert &convert,
         std::shared_ptr<DataStore> dataStore) override;
 };
 
 class StrategyCalculateMulConst : public IStrategyCalculate {
  public:
-    int32_t handle(const std::string &context,
+    int32_t handle(const uint32_t widgetId,
         const int32_t origin, const Convert &convert,
         std::shared_ptr<DataStore> dataStore) override;
 };
 
 class StrategyCalculateMulVariable : public IStrategyCalculate {
  public:
-    int32_t handle(const std::string &context,
+    int32_t handle(const uint32_t widgetId,
         const int32_t origin, const Convert &convert,
         std::shared_ptr<DataStore> dataStore) override;
 };
 
 class StrategyCalculateDivConst : public IStrategyCalculate {
  public:
-    int32_t handle(const std::string &context,
+    int32_t handle(const uint32_t widgetId,
         const int32_t origin, const Convert &convert,
         std::shared_ptr<DataStore> dataStore) override;
 };
 
 class StrategyCalculateDivVariable : public IStrategyCalculate {
  public:
-    int32_t handle(const std::string &context,
+    int32_t handle(const uint32_t widgetId,
         const int32_t origin, const Convert &convert,
         std::shared_ptr<DataStore> dataStore) override;
 };
