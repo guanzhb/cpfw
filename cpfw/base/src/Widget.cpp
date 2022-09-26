@@ -136,13 +136,13 @@ int32_t Widget::action() {
     auto bindId = mStore->getBind(getId());
     auto values = parseProfile(mStore->getProfile(getId()), type, getId(), mStore);
     if (values.empty() && (bindId != DataStore::EMPTY_BIND)) {
-        values = parseProfile(mStore->getProfile(bindId), type, getId(), mStore);
+        values = parseProfile(mStore->getProfile(getId()), type, getId(), mStore);
     }
     if (mFunctionBind.has_value()) {
         return invoke(mFunctionBind, values);
     }
     if (bindId != DataStore::EMPTY_BIND) {
-        return invoke(mStore->getWidget(bindId).value(), values);
+        return invoke(mStore->getWidget(bindId).value()->getBind(), values);
     }
 
     return 0;

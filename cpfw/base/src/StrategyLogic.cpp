@@ -21,7 +21,7 @@
 
 #include "Log.hpp"
 
-#define LOG_VV
+//#define LOG_VV
 #ifdef LOG_VV
 #define LOGVV LOGV
 #else

@@ -92,8 +92,8 @@ ExampleChain::ExampleChain() {
     mLogic->addWidget(sf);
     auto se = std::make_shared<Widget>("equalizer", 11223, func4);
     mLogic->addWidget(se);
-   // auto sd = std::make_shared<Widget>("duck", 11224);
-   // mLogic->addWidget(sd);
+    auto sd = std::make_shared<Widget>("duck", 11224);
+    mLogic->addWidget(sd);
     auto ss = std::make_shared<WidgetStub>("stub", 11226);
     mLogic->addWidget(ss);
 

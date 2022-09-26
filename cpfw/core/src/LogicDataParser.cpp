@@ -188,7 +188,7 @@ void LogicDataParser::loadProfile(tinyxml2::XMLElement *root) {
         mDataStore->addStrIdPair(widgetName, widgetId);
 
         int bindId = 0;
-        surfaceProfile->QueryIntAttribute(ATTR_ID.c_str(), &bindId);
+        surfaceProfile->QueryIntAttribute(ATTR_BIND_TO.c_str(), &bindId);
         if (bindId != DataStore::EMPTY_BIND) {
             mDataStore->addBind(widgetId, bindId);
         }

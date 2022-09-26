@@ -14,7 +14,7 @@
             <element name="gain_400hz" id="2"  min="20" max="30" current="5" type="1"></element>
             <element name="gain_800hz" id="3"  min="50" max="200" current="100" type="1"></element>
         </profile>
-        <profile widget="duck" id="11224" bindTo="volume">
+        <profile widget="duck" id="11224" bindTo="11221">
             <element name="default" id="0"  min="0" max="100" current="80" type="3">default</element>
         </profile>
         <profile widget="loudness" id="11225" bindTo="">
@@ -28,7 +28,7 @@
     <invokeChains>
         <parent widget="volume">
             <child widget="loudness"></child>
-            <!-- <child widget="duck"></child> -->
+            <child widget="duck"></child>
         </parent>
     </invokeChains>
 
@@ -42,7 +42,10 @@
             <element when="default@volume;in_range:1,200"></element>
         </condition>
         <condition widget="equalizer" logic="or">
+            <element when="gain_100hz@equalizer;change"></element>
+            <element when="gain_200hz@equalizer;change"></element>
             <element when="gain_400hz@equalizer;change"></element>
+            <element when="gain_800hz@equalizer;change"></element>
         </condition>
     </conditions>
 
