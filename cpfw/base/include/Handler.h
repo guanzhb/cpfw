@@ -27,25 +27,16 @@
 
 namespace cpfw {
 
-enum class PostFlag : uint8_t {
-    NONE = 0x0,
-    DELETE_FORMER = 0x1,
-    OMIT_IF_EXIST = 0x2,
-    SYNC = 0x3,
-};
-
 class Handler {
  public:
     Handler();
     ~Handler();
 
-    int32_t post(const Message &msg, const PostFlag flag = PostFlag::NONE);
+    int32_t post(const Message &msg);
 
-    int32_t postDelay(const Message &msg, uint64_t delayMs,
-             const PostFlag flag = PostFlag::NONE);
+    int32_t postDelay(const Message &msg, uint64_t delayMs);
 
-    int32_t postWhen(const Message &msg, uint64_t whenMs,
-             const PostFlag flag = PostFlag::NONE);
+    int32_t postWhen(const Message &msg, uint64_t whenMs);
 
     /**
      * @brief deal message actually.

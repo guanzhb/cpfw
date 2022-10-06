@@ -35,43 +35,40 @@ Handler::Handler() {
 Handler::~Handler() {
     mRunning.store(false);
     Message msg;
-    post(msg, PostFlag::NONE);
+    post(msg);
     mWorkingThread.join();
 }
 
-int32_t Handler::post(const Message &msg, const PostFlag flag) {
-    return postDelay(msg, 0, flag);
+int32_t Handler::post(const Message &msg) {
+    return postDelay(msg, 0);
 }
 
-int32_t Handler::postDelay(const Message &msg, uint64_t delayMs, const PostFlag flag) {
-    if (flag == PostFlag::SYNC) {
+int32_t Handler::postDelay(const Message &msg, uint64_t delayMs) {
+    LOGI("postDelay flag:" + std::to_string(msg.mFlag));
+
+    if (0 != (msg.mFlag & PostFlag::SYNC)) {
         return onInvoke(msg);
     }
 
     uint64_t whenMs = getCurrentTimeMs() + delayMs;
     int32_t ret = 0;
-    switch (flag) {
-        case PostFlag::DELETE_FORMER:
-            mMsgPool->postAndDeleteFormers(whenMs, msg, msg.mWhat);
-            break;
-        case PostFlag::OMIT_IF_EXIST:
-            mMsgPool->postButOmitIfExist(whenMs, msg, msg.mWhat);
-            break;
-        [[likely]] case PostFlag::NONE:
-        default:
-            mMsgPool->post(whenMs, msg, msg.mWhat);
-            break;
+    if (0 != (msg.mFlag & PostFlag::DELETE_FORMER)) {
+        mMsgPool->postAndDeleteFormers(whenMs, msg, msg.mWhat);
+    } else if (0 != (msg.mFlag & PostFlag::OMIT_IF_EXIST)) {
+        mMsgPool->postButOmitIfExist(whenMs, msg, msg.mWhat);
+    } else {
+        mMsgPool->post(whenMs, msg, msg.mWhat);
     }
-    return 0;
+    return ret;
 }
 
-int32_t Handler::postWhen(const Message &msg, uint64_t whenMs, const PostFlag flag) {
+int32_t Handler::postWhen(const Message &msg, uint64_t whenMs) {
     uint64_t currentTimeMs = getCurrentTimeMs();
     if (currentTimeMs > whenMs) {
         return 0;  // The task is planned to do at a past time. Ignore it.
     }
 
-    return postDelay(msg, whenMs - currentTimeMs, flag);
+    return postDelay(msg, whenMs - currentTimeMs);
 }
 
 void Handler::handleMessage() {
@@ -89,9 +86,21 @@ void Handler::handleMessage() {
             break;
         }
 
-        int32_t status = onInvoke(itor->second);
+        const Message &msg = itor->second;
+
+        int32_t status = onInvoke(msg);
         LOGI("handleMessage invoke over status: " + std::to_string(status));
-        reply(itor->second, status);
+        reply(msg, status);
+
+        if (0 != (msg.mFlag & PostFlag::LOOP)) {
+            uint64_t delayMs = 0;
+            Bundle &bundle = const_cast<Message&>(msg).mBundle;
+            if (bundle.get(KEY_DELAY_TIME_MS, delayMs)) {
+                postDelay(msg, delayMs);
+            }
+        }
+
+        // why del here? msg is a reference, if del before LOOP check, msg would be null
         mMsgPool->popFront();
     }
 }

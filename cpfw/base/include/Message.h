@@ -25,15 +25,25 @@
 
 namespace cpfw {
 
+const std::string KEY_DELAY_TIME_MS = "delayTimeMs";
+
+enum PostFlag/* : uint8_t */{
+    NONE = 0x0,
+    DELETE_FORMER = 0x1,
+    OMIT_IF_EXIST = 0x2,
+    SYNC = 0x4,
+    LOOP = 0x8,
+};
+
 class Message {
  public:
     uint64_t mWhat;
     int32_t mArg1;
     int32_t mArg2;
 
-    Bundle mBundle;
-
     std::function<void(int32_t/*status*/)> mCallback;
+    Bundle mBundle;
+    PostFlag mFlag = PostFlag::NONE;
 };
 
 }  // namesapce cpfw

@@ -67,9 +67,10 @@ int32_t Logic::setProfile(const uint32_t widgetId,
     bundle.set<uint32_t>(KEY_ELEMENT, elementId);
     bundle.set<int32_t>(KEY_VALUE, value);
     msg.mBundle = bundle;
+    msg.mFlag = flag;
     msg.mArg1 = static_cast<int32_t>(DataType::UINT32);
 
-    mHandler->post(msg, flag);
+    mHandler->post(msg);
 
     return 0;
 }
@@ -88,9 +89,10 @@ int32_t Logic::setProfile(const std::string &widgetName,
     bundle.set<std::string>(KEY_ELEMENT, elementName);
     bundle.set<int32_t>(KEY_VALUE, value);
     msg.mBundle = bundle;
+    msg.mFlag = flag;
     msg.mArg1 = static_cast<int32_t>(DataType::STRING);
 
-    mHandler->post(msg, flag);
+    mHandler->post(msg);
 
     return 0;
 }
@@ -109,10 +111,12 @@ int32_t Logic::setProfileDelay(const uint32_t widgetId,
     bundle.set<uint32_t>(KEY_PROFILE, widgetId);
     bundle.set<uint32_t>(KEY_ELEMENT, elementId);
     bundle.set<int32_t>(KEY_VALUE, value);
+    bundle.set<uint64_t>(KEY_DELAY_TIME_MS, delayTimeMs);
     msg.mBundle = bundle;
+    msg.mFlag = flag;
     msg.mArg1 = static_cast<int32_t>(DataType::UINT32);
 
-    mHandler->postDelay(msg, delayTimeMs, flag);
+    mHandler->postDelay(msg, delayTimeMs);
 
     return 0;
 }
@@ -126,10 +130,12 @@ int32_t Logic::setProfileDelay(const std::string &widgetName,
     bundle.set<std::string>(KEY_PROFILE, widgetName);
     bundle.set<std::string>(KEY_ELEMENT, elementName);
     bundle.set<int32_t>(KEY_VALUE, value);
+    bundle.set<uint64_t>(KEY_DELAY_TIME_MS, delayTimeMs);
     msg.mBundle = bundle;
+    msg.mFlag = flag;
     msg.mArg1 = static_cast<int32_t>(DataType::STRING);
 
-    mHandler->postDelay(msg, delayTimeMs, flag);
+    mHandler->postDelay(msg, delayTimeMs);
 
     return 0;
 }

@@ -32,7 +32,7 @@ class Bundle {
     }
 
     template<typename TVALUE>
-    bool get(const std::string &key, TVALUE &value) {
+    [[nodiscard]] bool get(const std::string &key, TVALUE &value) {
         if (const auto &tmp = mTable.find(key); tmp != mTable.end()) {
             value = std::any_cast<TVALUE&>(tmp->second);
             return true;

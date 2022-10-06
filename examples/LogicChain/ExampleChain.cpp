@@ -96,6 +96,8 @@ ExampleChain::ExampleChain() {
     mLogic->addWidget(sd);
     auto ss = std::make_shared<WidgetStub>("stub", 11226);
     mLogic->addWidget(ss);
+    auto sloop = std::make_shared<Widget>("loop", 11227, func1);
+    mLogic->addWidget(sloop);
 
     mLogic->registerCallback(onReply);
 }
@@ -116,12 +118,26 @@ int32_t ExampleChain::setEq(uint32_t band, int32_t db) {
 }
 
 int32_t ExampleChain::setLoudness(int32_t loudness) {
-    return mLogic->setProfile(11225, loudness);
+    return mLogic->setProfileDelay(
+        static_cast<uint32_t>(11225), loudness, static_cast<uint64_t>(10));
 }
 
 int32_t ExampleChain::setStub(int32_t stub) {
     LOGI("stub call");
-    return mLogic->setProfileDelay(11226, stub, 10, PostFlag::SYNC);
+    return mLogic->setProfileDelay(
+        static_cast<uint32_t>(11226), stub, static_cast<uint64_t>(10), PostFlag::SYNC);
+}
+
+int32_t ExampleChain::setLoop(int32_t loop) {
+    LOGI("loop call");
+    return mLogic->setProfileDelay(
+        static_cast<uint32_t>(11227), loop, static_cast<uint64_t>(500), PostFlag::LOOP);
+}
+
+int32_t ExampleChain::delLoop() {
+    LOGI("del loop call");
+    return mLogic->setProfileDelay(
+        static_cast<uint32_t>(11227), 0, static_cast<uint64_t>(500), PostFlag::DELETE_FORMER);
 }
 
 }  // namespace cpfw
@@ -157,7 +173,19 @@ int main() {
     example->setStub(40);
     LOGI("stub success");
 
-    std::this_thread::sleep_for(std::chrono::milliseconds(20));
+    example->setLoop(40);
+    LOGI("stub success");
+
+    LOGI("sleep 2s begin");
+    std::this_thread::sleep_for(std::chrono::milliseconds(2000));
+    LOGI("sleep 2s over");
+
+    example->delLoop();
+
+    LOGI("sleep 5s begin");
+    std::this_thread::sleep_for(std::chrono::milliseconds(5000));
+    LOGI("sleep 5s over");
+
     LOGI("ExampleChain exit");
     LOGI("end");
 

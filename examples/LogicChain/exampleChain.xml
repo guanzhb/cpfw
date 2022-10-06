@@ -23,6 +23,9 @@
         <profile widget="stub" id="11226" bindTo="">
             <element name="default" id="0"  min="10" max="20" current="5" type="1">default</element>
         </profile>
+        <profile widget="loop" id="11227" bindTo="">
+            <element name="default" id="0"  min="10" max="80" current="5" type="1">default</element>
+        </profile>
     </profiles>
 
     <invokeChains>

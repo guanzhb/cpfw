@@ -37,6 +37,9 @@ class ExampleChain {
 
     int32_t setStub(int32_t stub);
 
+    int32_t setLoop(int32_t loop);
+    int32_t delLoop();
+
  private:
     std::shared_ptr<Logic> mLogic;
 };
