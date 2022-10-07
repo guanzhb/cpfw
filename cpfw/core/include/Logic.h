@@ -28,8 +28,12 @@
 
 namespace cpfw {
 
-using TCallback = std::function<void(const std::string widgetName,
+using TCallbackWithName = std::function<void(const std::string widgetName,
                          const std::string elementName, const int32_t value,
+                         const int32_t status)>;
+
+using TCallbackWithId = std::function<void(const uint32_t widgetId,
+                         const uint32_t elementId, const int32_t value,
                          const int32_t status)>;
 
 class Logic {
@@ -40,8 +44,10 @@ class Logic {
 
     ~Logic();
 
-    void registerCallback(TCallback callback);
-    void unregisterCallback(TCallback callback);
+    void registerCallback(TCallbackWithName callbackWithName);
+    void unregisterCallback(TCallbackWithName callbackWithName);
+    void registerCallback(TCallbackWithId callbackWithId);
+    void unregisterCallback(TCallbackWithId callbackWithId);
 
     void addWidget(std::shared_ptr<Widget> widget);
 
@@ -90,7 +96,8 @@ class Logic {
     };
 
  private:
-    TCallback mCallback;
+    TCallbackWithName mCallbackWithName;
+    TCallbackWithId mCallbackWithId;
     std::unique_ptr<Handler> mHandler;
     std::shared_ptr<DataStore> mStore;
     std::unique_ptr<ResponsibilityChain> mResponsibilityChain;

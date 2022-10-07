@@ -131,7 +131,7 @@ int32_t ExampleChain::setStub(int32_t stub) {
 int32_t ExampleChain::setLoop(int32_t loop) {
     LOGI("loop call");
     return mLogic->setProfileDelay(
-        static_cast<uint32_t>(11227), loop, static_cast<uint64_t>(500), PostFlag::LOOP);
+        "loop", loop, static_cast<uint64_t>(500), PostFlag::LOOP);
 }
 
 int32_t ExampleChain::delLoop() {

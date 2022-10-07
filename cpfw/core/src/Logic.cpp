@@ -41,12 +41,20 @@ Logic::Logic(std::string configurationFile) {
 Logic::~Logic() {
 }
 
-void Logic::registerCallback(TCallback callback) {
-    mCallback = callback;
+void Logic::registerCallback(TCallbackWithName callbackWithName) {
+    mCallbackWithName = callbackWithName;
 }
 
-void Logic::unregisterCallback(TCallback callback) {
-    mCallback = nullptr;
+void Logic::unregisterCallback(TCallbackWithName callbackWithName) {
+    mCallbackWithName = nullptr;
+}
+
+void Logic::registerCallback(TCallbackWithId callbackWithId) {
+    mCallbackWithId = callbackWithId;
+}
+
+void Logic::unregisterCallback(TCallbackWithId callbackWithId) {
+    mCallbackWithId = nullptr;
 }
 
 void Logic::addWidget(std::shared_ptr<Widget> widget) {
@@ -83,7 +91,9 @@ int32_t Logic::setProfile(
 int32_t Logic::setProfile(const std::string &widgetName,
         const std::string &elementName, int32_t value, const PostFlag flag) {
     Message msg;
-    msg.mWhat = std::hash<std::string>{}(widgetName + elementName);
+    uint32_t widgetId = mStore->getIdWithStr(widgetName).value();
+    uint32_t elementId = mStore->getIdWithStr(elementName).value();
+    msg.mWhat = (widgetId << 16) + elementId;
     Bundle bundle;
     bundle.set(KEY_PROFILE, widgetName);
     bundle.set(KEY_ELEMENT, elementName);
@@ -121,11 +131,18 @@ int32_t Logic::setProfileDelay(const uint32_t widgetId,
     return 0;
 }
 
+int32_t Logic::setProfileDelay(const std::string &widgetName, int32_t value,
+        uint64_t delayTimeMs, const PostFlag flag) {
+    return setProfileDelay(widgetName, "default", value, delayTimeMs, flag);
+}
+
 int32_t Logic::setProfileDelay(const std::string &widgetName,
         const std::string &elementName, int32_t value,
         uint64_t delayTimeMs, const PostFlag flag) {
     Message msg;
-    msg.mWhat = std::hash<std::string>{}(widgetName + elementName);
+    uint32_t widgetId = mStore->getIdWithStr(widgetName).value();
+    uint32_t elementId = mStore->getIdWithStr(elementName).value();
+    msg.mWhat = (widgetId << 16) + elementId;
     Bundle bundle;
     bundle.set(KEY_PROFILE, widgetName);
     bundle.set(KEY_ELEMENT, elementName);
@@ -159,11 +176,11 @@ int32_t Logic::getProfile(const std::string &widgetName,
 }
 
 void Logic::onReply(const Message &message, const int32_t status) {
-#if 0  // FIXME(guanzhb) callback value can be int or str
-    if (nullptr != mCallback) {
+    if (nullptr != mCallbackWithName
+            && message.mArg1 == static_cast<int32_t>(DataType::STRING)) {
         Bundle &bundle = const_cast<Message&>(message).mBundle;
-        std::string profileName;
-        if (!bundle.get<std::string>(KEY_PROFILE, profileName)) {
+        std::string widgetName;
+        if (!bundle.get<std::string>(KEY_PROFILE, widgetName)) {
             return;
         }
         std::string elementName;
@@ -174,9 +191,24 @@ void Logic::onReply(const Message &message, const int32_t status) {
         if (!bundle.get<int32_t>(KEY_VALUE, value)) {
             return;
         }
-        mCallback(profileName, elementName, value, status);
+        mCallbackWithName(widgetName, elementName, value, status);
+    } else if (nullptr != mCallbackWithId
+           && message.mArg1 == static_cast<int32_t>(DataType::INT32)) {
+        Bundle &bundle = const_cast<Message&>(message).mBundle;
+        uint32_t widgetId = 0;
+        if (!bundle.get(KEY_PROFILE, widgetId)) {
+            return;
+        }
+        uint32_t elementId = 0;
+        if (!bundle.get(KEY_ELEMENT, elementId)) {
+            return;
+        }
+        int32_t value = 0;
+        if (!bundle.get<int32_t>(KEY_VALUE, value)) {
+            return;
+        }
+        mCallbackWithId(widgetId, elementId, value, status);
     }
-#endif
 }
 
 Logic::LogicHandler::LogicHandler(Logic* logic) : mLogic(logic) {
@@ -188,41 +220,37 @@ Logic::LogicHandler::~LogicHandler() {
 
 int32_t Logic::LogicHandler::onInvoke(const Message &message) {
     Bundle &bundle = const_cast<Message&>(message).mBundle;
+    uint32_t widgetId = 0;
+    uint32_t elementId = 0;
+
     if (message.mArg1 == static_cast<int32_t>(DataType::STRING)) {
-#if 0  // FIXME(guanzhb) whether export str interface to user?
-        std::string profileName;
-        if (!bundle.get<std::string>(KEY_PROFILE, profileName)) {
+        std::string widgetName;
+        if (!bundle.get<std::string>(KEY_PROFILE, widgetName)) {
             return EINVAL;
         }
         std::string elementName;
         if (!bundle.get<std::string>(KEY_ELEMENT, elementName)) {
             return EINVAL;
         }
-        int32_t value = 0;
-        if (!bundle.get<int32_t>(KEY_VALUE, value)) {
-            return EINVAL;
-        }
-        LOGI("onInvoke " + profileName + " -> " + elementName);
-        mLogic->mStore->setProfile(profileName, elementName, value);
-        return mLogic->mResponsibilityChain->invokeChain(profileName);
-#endif
+        widgetId = mLogic->mStore->getIdWithStr(widgetName).value();
+        elementId = mLogic->mStore->getIdWithStr(elementName).value();
     } else {
-        uint32_t widgetId;
         if (!bundle.get(KEY_PROFILE, widgetId)) {
             return EINVAL;
         }
-        uint32_t elementId;
         if (!bundle.get(KEY_ELEMENT, elementId)) {
             return EINVAL;
         }
-        int32_t value = 0;
-        if (!bundle.get<int32_t>(KEY_VALUE, value)) {
-            return EINVAL;
-        }
-        mLogic->mStore->setProfile(widgetId, elementId, value);
-        return mLogic->mResponsibilityChain->invokeChain(widgetId);
     }
-    return 0;
+    int32_t value = 0;
+    if (!bundle.get<int32_t>(KEY_VALUE, value)) {
+        return EINVAL;
+    }
+    LOGI("onInvoke widgetId:" + std::to_string(widgetId)
+         + " -> elemetId:" + std::to_string(elementId)
+         + "with value:" + std::to_string(value));
+    mLogic->mStore->setProfile(widgetId, elementId, value);
+    return mLogic->mResponsibilityChain->invokeChain(widgetId);
 }
 
 void Logic::LogicHandler::onReply(const Message &message, const int32_t status) {
