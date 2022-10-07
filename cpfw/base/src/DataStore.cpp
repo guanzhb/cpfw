@@ -72,39 +72,60 @@ Profile& DataStore::getProfile(const std::string &widgetName) {
     return EMPTY_PROFILE;
 }
 
-void DataStore::setProfile(const uint32_t widgetId, int32_t value) {
-    setProfile(widgetId, 0, value);
-}
-
-void DataStore::setProfile(const uint32_t widgetId, const uint32_t elementId, int32_t value) {
+void DataStore::setProfile(
+        const uint32_t widgetId, std::vector<TElementPairWithId> elementPairs) {
     Profile &profile = getProfile(widgetId);
     if (&EMPTY_PROFILE == &profile) {
         return;
     }
-    auto elementItor = profile.elements.find(elementId);
-    if (elementItor == profile.elements.end()) {
-        return;
-    }
-    auto &element = elementItor->second;
-    element.flag = false;
-    if (value != element.current) {
-        element.flag = true;
-        element.backup = element.current;
-        element.current = std::clamp(value, element.min, element.max);
-    }
+    std::for_each(elementPairs.begin(), elementPairs.end(),
+        [&](auto &elementPair) -> void {
+            auto elementItor = profile.elements.find(elementPair.first);
+            if (elementItor == profile.elements.end()) {
+                return;
+            }
+            auto &element = elementItor->second;
+            element.flag = false;
+            if (elementPair.second != element.current) {
+                element.flag = true;
+                element.backup = element.current;
+                element.current = std::clamp(elementPair.second, element.min, element.max);
+            }
+        });
 }
 
-void DataStore::setProfile(const std::string &widgetName, int32_t value) {
-    setProfile(widgetName, "default", value);
-}
-
-void DataStore::setProfile(const std::string &widgetName,
-        const std::string &elementName, int32_t value) {
-    if (auto widgetId = getIdWithStr(widgetName); !widgetId) {
+void DataStore::setProfile(
+        const std::string &widgetName, std::vector<TElementPairWithName> elementPairs) {
+    uint32_t widgetId = 0;
+    if (auto widgetIdOption = getIdWithStr(widgetName); widgetIdOption) {
+        widgetId = widgetIdOption.value();
+    } else {
         return;
-    } else if (auto elementId = getIdWithStr(elementName); !elementId) {
-        setProfile(widgetId.value(), elementId.value(), value);
     }
+    Profile &profile = getProfile(widgetId);
+    if (&EMPTY_PROFILE == &profile) {
+        return;
+    }
+    std::for_each(elementPairs.begin(), elementPairs.end(),
+        [&](auto &elementPair) -> void {
+            uint32_t elementId = 0;
+            if (auto elementIdOption = getIdWithStr(elementPair.first); elementIdOption) {
+                elementId = elementIdOption.value();
+            } else {
+                return;
+            }
+            auto elementItor = profile.elements.find(elementId);
+            if (elementItor == profile.elements.end()) {
+                return;
+            }
+            auto &element = elementItor->second;
+            element.flag = false;
+            if (elementPair.second != element.current) {
+                element.flag = true;
+                element.backup = element.current;
+                element.current = std::clamp(elementPair.second, element.min, element.max);
+            }
+        });
 }
 
 int32_t DataStore::getConvertedData(const uint32_t contextId, int32_t origin) {

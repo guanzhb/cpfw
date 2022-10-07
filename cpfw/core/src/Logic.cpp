@@ -61,43 +61,30 @@ void Logic::addWidget(std::shared_ptr<Widget> widget) {
     mStore->addWidget(widget);
 }
 
-int32_t Logic::setProfile(
-        const uint32_t widgetId, int32_t value, const PostFlag flag) {
-    return setProfile(widgetId, 0, value, flag);
-}
-
 int32_t Logic::setProfile(const uint32_t widgetId,
-        const uint32_t elementId, int32_t value, const PostFlag flag) {
+        const std::vector<TElementPairWithId> &elementPairs, const PostFlag flag) {
     Message msg;
-    msg.mWhat = (widgetId << 16) | elementId;
+    msg.mWhat = widgetId;
     Bundle bundle;
     bundle.set(KEY_PROFILE, widgetId);
-    bundle.set(KEY_ELEMENT, elementId);
-    bundle.set(KEY_VALUE, value);
+    bundle.set(KEY_ELEMENT, elementPairs);
     msg.mBundle = bundle;
     msg.mFlag = flag;
-    msg.mArg1 = static_cast<int32_t>(DataType::UINT32);
+    msg.mArg1 = static_cast<int32_t>(DataType::INT32);
 
     mHandler->post(msg);
 
     return 0;
 }
 
-int32_t Logic::setProfile(
-        const std::string &widgetName, int32_t value, const PostFlag flag) {
-    return setProfile(widgetName, "default", value, flag);
-}
-
 int32_t Logic::setProfile(const std::string &widgetName,
-        const std::string &elementName, int32_t value, const PostFlag flag) {
+        const std::vector<TElementPairWithName> &elementPairs, const PostFlag flag) {
     Message msg;
     uint32_t widgetId = mStore->getIdWithStr(widgetName).value();
-    uint32_t elementId = mStore->getIdWithStr(elementName).value();
-    msg.mWhat = (widgetId << 16) + elementId;
+    msg.mWhat = widgetId;
     Bundle bundle;
     bundle.set(KEY_PROFILE, widgetName);
-    bundle.set(KEY_ELEMENT, elementName);
-    bundle.set(KEY_VALUE, value);
+    bundle.set(KEY_ELEMENT, elementPairs);
     msg.mBundle = bundle;
     msg.mFlag = flag;
     msg.mArg1 = static_cast<int32_t>(DataType::STRING);
@@ -108,45 +95,32 @@ int32_t Logic::setProfile(const std::string &widgetName,
 }
 
 int32_t Logic::setProfileDelay(const uint32_t widgetId,
-            int32_t value, uint64_t delayTimeMs, const PostFlag flag) {
-    return setProfileDelay(widgetId, 0, value, delayTimeMs, flag);
-}
-
-int32_t Logic::setProfileDelay(const uint32_t widgetId,
-        const uint32_t elementId, int32_t value,
+        const std::vector<TElementPairWithId> &elementPairs,
         uint64_t delayTimeMs, const PostFlag flag) {
     Message msg;
-    msg.mWhat = (widgetId << 16) + elementId;
+    msg.mWhat = widgetId;
     Bundle bundle;
     bundle.set(KEY_PROFILE, widgetId);
-    bundle.set(KEY_ELEMENT, elementId);
-    bundle.set(KEY_VALUE, value);
+    bundle.set(KEY_ELEMENT, elementPairs);
     bundle.set(KEY_DELAY_TIME_MS, delayTimeMs);
     msg.mBundle = bundle;
     msg.mFlag = flag;
-    msg.mArg1 = static_cast<int32_t>(DataType::UINT32);
+    msg.mArg1 = static_cast<int32_t>(DataType::INT32);
 
     mHandler->postDelay(msg, delayTimeMs);
 
     return 0;
 }
 
-int32_t Logic::setProfileDelay(const std::string &widgetName, int32_t value,
-        uint64_t delayTimeMs, const PostFlag flag) {
-    return setProfileDelay(widgetName, "default", value, delayTimeMs, flag);
-}
-
 int32_t Logic::setProfileDelay(const std::string &widgetName,
-        const std::string &elementName, int32_t value,
+        const std::vector<TElementPairWithName> &elementPairs,
         uint64_t delayTimeMs, const PostFlag flag) {
     Message msg;
     uint32_t widgetId = mStore->getIdWithStr(widgetName).value();
-    uint32_t elementId = mStore->getIdWithStr(elementName).value();
-    msg.mWhat = (widgetId << 16) + elementId;
+    msg.mWhat = widgetId;
     Bundle bundle;
     bundle.set(KEY_PROFILE, widgetName);
-    bundle.set(KEY_ELEMENT, elementName);
-    bundle.set(KEY_VALUE, value);
+    bundle.set(KEY_ELEMENT, elementPairs);
     bundle.set(KEY_DELAY_TIME_MS, delayTimeMs);
     msg.mBundle = bundle;
     msg.mFlag = flag;
@@ -180,18 +154,14 @@ void Logic::onReply(const Message &message, const int32_t status) {
             && message.mArg1 == static_cast<int32_t>(DataType::STRING)) {
         Bundle &bundle = const_cast<Message&>(message).mBundle;
         std::string widgetName;
-        if (!bundle.get<std::string>(KEY_PROFILE, widgetName)) {
+        if (!bundle.get(KEY_PROFILE, widgetName)) {
             return;
         }
-        std::string elementName;
-        if (!bundle.get<std::string>(KEY_ELEMENT, elementName)) {
+        std::vector<TElementPairWithName> elementPairs;
+        if (!bundle.get(KEY_ELEMENT, elementPairs)) {
             return;
         }
-        int32_t value = 0;
-        if (!bundle.get<int32_t>(KEY_VALUE, value)) {
-            return;
-        }
-        mCallbackWithName(widgetName, elementName, value, status);
+        mCallbackWithName(widgetName, elementPairs, status);
     } else if (nullptr != mCallbackWithId
            && message.mArg1 == static_cast<int32_t>(DataType::INT32)) {
         Bundle &bundle = const_cast<Message&>(message).mBundle;
@@ -199,15 +169,11 @@ void Logic::onReply(const Message &message, const int32_t status) {
         if (!bundle.get(KEY_PROFILE, widgetId)) {
             return;
         }
-        uint32_t elementId = 0;
-        if (!bundle.get(KEY_ELEMENT, elementId)) {
+        std::vector<TElementPairWithId> elementPairs;
+        if (!bundle.get(KEY_ELEMENT, elementPairs)) {
             return;
         }
-        int32_t value = 0;
-        if (!bundle.get<int32_t>(KEY_VALUE, value)) {
-            return;
-        }
-        mCallbackWithId(widgetId, elementId, value, status);
+        mCallbackWithId(widgetId, elementPairs, status);
     }
 }
 
@@ -221,35 +187,32 @@ Logic::LogicHandler::~LogicHandler() {
 int32_t Logic::LogicHandler::onInvoke(const Message &message) {
     Bundle &bundle = const_cast<Message&>(message).mBundle;
     uint32_t widgetId = 0;
-    uint32_t elementId = 0;
 
     if (message.mArg1 == static_cast<int32_t>(DataType::STRING)) {
         std::string widgetName;
-        if (!bundle.get<std::string>(KEY_PROFILE, widgetName)) {
+        if (!bundle.get(KEY_PROFILE, widgetName)) {
             return EINVAL;
         }
-        std::string elementName;
-        if (!bundle.get<std::string>(KEY_ELEMENT, elementName)) {
+        if (auto widget = mLogic->mStore->getIdWithStr(widgetName); widget) {
+            widgetId = widget.value();
+        } else {
             return EINVAL;
         }
-        widgetId = mLogic->mStore->getIdWithStr(widgetName).value();
-        elementId = mLogic->mStore->getIdWithStr(elementName).value();
-    } else {
+        std::vector<TElementPairWithName> elementPairs;
+        if (!bundle.get(KEY_ELEMENT, elementPairs)) {
+            return EINVAL;
+        }
+        mLogic->mStore->setProfile(widgetName, elementPairs);
+    } else if (message.mArg1 == static_cast<int32_t>(DataType::INT32)) {
         if (!bundle.get(KEY_PROFILE, widgetId)) {
             return EINVAL;
         }
-        if (!bundle.get(KEY_ELEMENT, elementId)) {
+        std::vector<TElementPairWithId> elementPairs;
+        if (!bundle.get(KEY_ELEMENT, elementPairs)) {
             return EINVAL;
         }
+        mLogic->mStore->setProfile(widgetId, elementPairs);
     }
-    int32_t value = 0;
-    if (!bundle.get<int32_t>(KEY_VALUE, value)) {
-        return EINVAL;
-    }
-    LOGI("onInvoke widgetId:" + std::to_string(widgetId)
-         + " -> elemetId:" + std::to_string(elementId)
-         + "with value:" + std::to_string(value));
-    mLogic->mStore->setProfile(widgetId, elementId, value);
     return mLogic->mResponsibilityChain->invokeChain(widgetId);
 }
 

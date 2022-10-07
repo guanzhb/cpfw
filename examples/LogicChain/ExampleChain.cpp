@@ -34,17 +34,17 @@ static int32_t func0() {
 }
 
 static int32_t func1(int32_t v1) {
-    LOGI("func0 v1:" + std::to_string(v1));
+    LOGI("func1 v1:" + std::to_string(v1));
     return 0;
 }
 
 static int32_t func2(int32_t v1, int32_t v2) {
-    LOGI("func0 v1:" + std::to_string(v1) + ", v2:" + std::to_string(v2));
+    LOGI("func2 v1:" + std::to_string(v1) + ", v2:" + std::to_string(v2));
     return 0;
 }
 
 static int32_t func4(int32_t v1, int32_t v2, int32_t v3, int32_t v4) {
-    LOGI("func0 v1:" + std::to_string(v1) + ", v2:" + std::to_string(v2)
+    LOGI("func3 v1:" + std::to_string(v1) + ", v2:" + std::to_string(v2)
          + ", v3:" + std::to_string(v3) + ", v4:" + std::to_string(v4));
     return 0;
 }
@@ -59,10 +59,9 @@ static int32_t handle(
     return 0;
 }
 
-static void onReply(const std::string &widgetName, const std::string &elementName,
-             const int32_t value, const int32_t status) {
-    LOGI("reply: widget:" + widgetName + ", element:" + elementName
-        + ", value:" + std::to_string(value) + ", status:" + std::to_string(status));
+static void onReply(const std::string &widgetName,
+        const std::vector<TElementPairWithName> &elementPair, const int32_t status) {
+    LOGI("reply: widget:" + widgetName + ", status:" + std::to_string(status));
 }
 
 class WidgetStub : public Widget {
@@ -86,7 +85,7 @@ ExampleChain::ExampleChain() {
 
     auto sv = std::make_shared<Widget>("volume", 11221, func1);
     mLogic->addWidget(sv);
-    auto sl = std::make_shared<Widget>("loudness", 11225, func1);
+    auto sl = std::make_shared<Widget>("loudness", 11225, func2);
     mLogic->addWidget(sl);
     auto sf = std::make_shared<Widget>("fade", 11222, func1);
     mLogic->addWidget(sf);
@@ -106,38 +105,42 @@ ExampleChain::~ExampleChain() {
 }
 
 int32_t ExampleChain::setVolume(int32_t volume) {
-    return mLogic->setProfile(11221, volume);
+    return mLogic->setProfile(11221, {{static_cast<uint32_t>(0), volume}});
 }
 
 int32_t ExampleChain::setFade(int32_t fade) {
-    return mLogic->setProfile(11222, fade);
+    return mLogic->setProfile(11222, {{static_cast<uint32_t>(0), fade}});
 }
 
 int32_t ExampleChain::setEq(uint32_t band, int32_t db) {
-    return mLogic->setProfile(11223, band, db);
+    return mLogic->setProfile(11223, {{band, db}});
 }
 
 int32_t ExampleChain::setLoudness(int32_t loudness) {
-    return mLogic->setProfileDelay(
-        static_cast<uint32_t>(11225), loudness, static_cast<uint64_t>(10));
+    return mLogic->setProfileDelay(static_cast<uint32_t>(11225),
+        {{static_cast<uint32_t>(0), loudness}, {static_cast<uint32_t>(1), 15}},
+        static_cast<uint64_t>(10));
 }
 
 int32_t ExampleChain::setStub(int32_t stub) {
     LOGI("stub call");
     return mLogic->setProfileDelay(
-        static_cast<uint32_t>(11226), stub, static_cast<uint64_t>(10), PostFlag::SYNC);
+        static_cast<uint32_t>(11226), {{static_cast<uint32_t>(0), stub}},
+        static_cast<uint64_t>(10), PostFlag::SYNC);
 }
 
 int32_t ExampleChain::setLoop(int32_t loop) {
     LOGI("loop call");
     return mLogic->setProfileDelay(
-        "loop", loop, static_cast<uint64_t>(500), PostFlag::LOOP);
+        "loop", {{"default", loop}},
+        static_cast<uint64_t>(500), PostFlag::LOOP);
 }
 
 int32_t ExampleChain::delLoop() {
     LOGI("del loop call");
     return mLogic->setProfileDelay(
-        static_cast<uint32_t>(11227), 0, static_cast<uint64_t>(500), PostFlag::DELETE_FORMER);
+        static_cast<uint32_t>(11227), {{static_cast<uint32_t>(0), 0}},
+        static_cast<uint64_t>(500), PostFlag::DELETE_FORMER);
 }
 
 }  // namespace cpfw

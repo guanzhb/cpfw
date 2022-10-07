@@ -28,12 +28,12 @@
 
 namespace cpfw {
 
-using TCallbackWithName = std::function<void(const std::string widgetName,
-                         const std::string elementName, const int32_t value,
+using TCallbackWithName = std::function<void(const std::string &widgetName,
+                         const std::vector<TElementPairWithName> &elementPairs,
                          const int32_t status)>;
 
 using TCallbackWithId = std::function<void(const uint32_t widgetId,
-                         const uint32_t elementId, const int32_t value,
+                         const std::vector<TElementPairWithId> &elementPairs,
                          const int32_t status)>;
 
 class Logic {
@@ -52,26 +52,20 @@ class Logic {
     void addWidget(std::shared_ptr<Widget> widget);
 
     int32_t setProfile(const uint32_t widgetId,
-                int32_t value, const PostFlag flag = PostFlag::NONE);
+                const std::vector<TElementPairWithId> &elementPairs,
+                const PostFlag flag = PostFlag::NONE);
     int32_t setProfile(const std::string &widgetName,
-                int32_t value, const PostFlag flag = PostFlag::NONE);
-    int32_t setProfile(const uint32_t widgetId, const uint32_t elementId,
-                int32_t value, const PostFlag flag = PostFlag::NONE);
-    int32_t setProfile(const std::string &widgetName, const std::string &elementName,
-                int32_t value, const PostFlag flag = PostFlag::NONE);
+                const std::vector<TElementPairWithName> &elementPairs,
+                const PostFlag flag = PostFlag::NONE);
 
     int32_t setProfileDelay(const uint32_t widgetId,
-                int32_t value, uint64_t delayTimeMs,
+                const std::vector<TElementPairWithId> &elementPairs,
+                uint64_t delayTimeMs,
                 const PostFlag flag = PostFlag::NONE);
     int32_t setProfileDelay(const std::string &widgetName,
-                int32_t value, uint64_t delayTimeMs,
+                const std::vector<TElementPairWithName> &elementPairs,
+                uint64_t delayTimeMs,
                 const PostFlag flag = PostFlag::NONE);
-    int32_t setProfileDelay(const uint32_t widgetId,
-                const uint32_t elementId, int32_t value,
-                uint64_t delayTimeMs, const PostFlag flag = PostFlag::NONE);
-    int32_t setProfileDelay(const std::string &widgetName,
-                const std::string &elementName, int32_t value,
-                uint64_t delayTimeMs, const PostFlag flag = PostFlag::NONE);
 
     int32_t getProfile(const uint32_t widgetId);
     int32_t getProfile(const std::string &widgetName);

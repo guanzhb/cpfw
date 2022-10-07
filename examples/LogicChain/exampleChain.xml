@@ -19,6 +19,7 @@
         </profile>
         <profile widget="loudness" id="11225" bindTo="">
             <element name="default" id="0"  min="10" max="20" current="5" type="1">default</element>
+            <element name="default1" id="1"  min="10" max="20" current="5" type="1">default1</element>
         </profile>
         <profile widget="stub" id="11226" bindTo="">
             <element name="default" id="0"  min="10" max="20" current="5" type="1">default</element>

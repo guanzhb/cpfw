@@ -39,6 +39,9 @@ using TINVOKE_CHAIN = std::vector<uint32_t/*child id*/>;
 using TINVOKE_CONDITION = std::pair<ExpressionEnum/*and, or*/,
                                     std::vector<Condition>>;
 
+using TElementPairWithId = std::pair<uint32_t/*id*/, int32_t/*value*/>;
+using TElementPairWithName = std::pair<std::string/*name*/, int32_t/*value*/>;
+
 /**
  * @brief database of framework, who is configuried by file or user.
  * no logic here, only data.
@@ -64,11 +67,10 @@ class DataStore : public std::enable_shared_from_this<DataStore>{
     Profile& getProfile(const uint32_t widgetId);
     Profile& getProfile(const std::string &widgetName);
 
-    void setProfile(const uint32_t widgetId, int32_t value);
-    void setProfile(const std::string &widgetName, int32_t value);
-    void setProfile(const uint32_t widgetId, const uint32_t elementId, int32_t value);
-    void setProfile(const std::string &widgetName,
-            const std::string &elementName, int32_t value);
+    void setProfile(
+            const uint32_t widgetId, std::vector<TElementPairWithId> TElementPairs);
+    void setProfile(
+            const std::string &widgetName, std::vector<TElementPairWithName> TElementPairs);
 
     int32_t getConvertedData(const uint32_t contextId, int32_t origin);
     int32_t getConvertedData(const std::string &context, int32_t origin);
