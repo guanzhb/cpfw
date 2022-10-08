@@ -64,6 +64,7 @@ using FUNCTION_2INT = std::function<int32_t(int32_t, int32_t)>;
 using FUNCTION_3INT = std::function<int32_t(int32_t, int32_t, int32_t)>;
 using FUNCTION_4INT = std::function<int32_t(int32_t, int32_t, int32_t, int32_t)>;
 using FUNCTION_5INT = std::function<int32_t(int32_t, int32_t, int32_t, int32_t, int32_t)>;
+using FUNCTION_VINT = std::function<int32_t(std::vector<int32_t>&)>;
 
 const std::string KEY_PROFILE = "profile";
 const std::string KEY_ELEMENT = "element";

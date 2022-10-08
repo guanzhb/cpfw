@@ -43,6 +43,7 @@ class Widget {
     Widget(std::string name, FUNCTION_3INT func);
     Widget(std::string name, FUNCTION_4INT func);
     Widget(std::string name, FUNCTION_5INT func);
+    Widget(std::string name, FUNCTION_VINT func);
 
     Widget(std::string name, uint32_t id, FUNCTION_0INT func);
     Widget(std::string name, uint32_t id, FUNCTION_1INT func);
@@ -50,6 +51,7 @@ class Widget {
     Widget(std::string name, uint32_t id, FUNCTION_3INT func);
     Widget(std::string name, uint32_t id, FUNCTION_4INT func);
     Widget(std::string name, uint32_t id, FUNCTION_5INT func);
+    Widget(std::string name, uint32_t id, FUNCTION_VINT func);
 
     virtual ~Widget();
 

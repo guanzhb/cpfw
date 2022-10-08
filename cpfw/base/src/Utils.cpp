@@ -86,6 +86,7 @@ int32_t invoke(const std::any &func, std::vector<int32_t> &values) {
                           values[0], values[1], values[2], values[3], values[4]);
         break;
     default:
+        ret = std::invoke(std::any_cast<FUNCTION_VINT>(func), values);
         break;
     }
     return ret;

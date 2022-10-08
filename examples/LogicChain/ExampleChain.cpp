@@ -49,6 +49,11 @@ static int32_t func4(int32_t v1, int32_t v2, int32_t v3, int32_t v4) {
     return 0;
 }
 
+static int32_t funcv(std::vector<int32_t> &v) {
+    LOGI("funcv size:" + std::to_string(v.size()));
+    return 0;
+}
+
 static int32_t handle(
         DataStore *store, const std::string &funcName,
         const std::vector<int32_t> &values) {
@@ -87,7 +92,7 @@ ExampleChain::ExampleChain() {
     mLogic->addWidget(sv);
     auto sl = std::make_shared<Widget>("loudness", 11225, func2);
     mLogic->addWidget(sl);
-    auto sf = std::make_shared<Widget>("fade", 11222, func1);
+    auto sf = std::make_shared<Widget>("fade", 11222, funcv);
     mLogic->addWidget(sf);
     auto se = std::make_shared<Widget>("equalizer", 11223, func4);
     mLogic->addWidget(se);

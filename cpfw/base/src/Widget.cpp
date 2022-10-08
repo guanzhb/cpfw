@@ -60,6 +60,10 @@ Widget::Widget(std::string name, FUNCTION_5INT funcAction)
     : mName(name), mId(0), mFunctionBind(funcAction) {
 }
 
+Widget::Widget(std::string name, FUNCTION_VINT funcAction)
+    : mName(name), mId(0), mFunctionBind(funcAction) {
+}
+
 Widget::Widget(std::string name, uint32_t id, FUNCTION_0INT funcAction)
     : mName(name), mId(id), mFunctionBind(funcAction) {
 }
@@ -81,6 +85,10 @@ Widget::Widget(std::string name, uint32_t id, FUNCTION_4INT funcAction)
 }
 
 Widget::Widget(std::string name, uint32_t id, FUNCTION_5INT funcAction)
+    : mName(name), mId(id), mFunctionBind(funcAction) {
+}
+
+Widget::Widget(std::string name, uint32_t id, FUNCTION_VINT funcAction)
     : mName(name), mId(id), mFunctionBind(funcAction) {
 }
 
