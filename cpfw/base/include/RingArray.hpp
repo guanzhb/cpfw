@@ -23,22 +23,16 @@ namespace cpfw {
  *  only impl operator[], keep others same as array. 
  */
 template<typename T, int32_t N>
-class CircleArray {
+class RingArray : public std::array<T, N> {
  public:
     T& operator[](int32_t index) {
         index %= N;
         if (index < 0) {
             index += N;
         }
-        return mArray[index];
-    }
 
-    std::array<T, N>& data() {
-        return mArray;
+        return std::array<T, N>::operator[](index);
     }
-
- private:
-    std::array<T, N> mArray;
 };
 
 }  // namespace cpfw

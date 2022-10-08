@@ -14,44 +14,40 @@
  * limitations under the License.
  */
 
-#define TAG "CircleArrayTest"
-
-#include "CircleArray.hpp"
+#include "RingArray.hpp"
 #include "Log.hpp"
 
-void test(cpfw::CircleArray<int32_t, 5> circleArray, int index) {
+void test(cpfw::RingArray<int32_t, 5> &ringArray, int32_t index) {
     std::cout << "index:" + std::to_string(index)
-                 + " -> " + std::to_string(circleArray[index]) << std::endl;
+                 + " -> " + std::to_string(ringArray[index]) << std::endl;
 }
 
-void print(cpfw::CircleArray<int32_t, 5> circleArray) {
-    auto &data = circleArray.data();
-    for (int32_t index=0; index<data.size(); ++index) {
+void print(cpfw::RingArray<int32_t, 5> &RingArray) {
+    for (int32_t index=0; index<RingArray.size(); ++index) {
         std::cout << "index:" + std::to_string(index)
-                 + " -> " + std::to_string(circleArray[index]) << std::endl;
+                 + " -> " + std::to_string(RingArray.at(index)) << std::endl;
     }
 }
 
 int main() {
-    cpfw::CircleArray<int32_t, 5> circleArray;
-    auto &data = circleArray.data();
+    cpfw::RingArray<int32_t, 5> ringArray;
     int i = 0;
-    for (auto &d : data) {
+    for (auto &d : ringArray) {
         d = i++;
     }
 
     std::cout << "table:" << std::endl;
-    print(circleArray);
+    print(ringArray);
 
     std::cout << "test:" << std::endl;
-    test(circleArray, -10);
-    test(circleArray, -5);
-    test(circleArray, -4);
-    test(circleArray, -1);
-    test(circleArray, 0);
-    test(circleArray, 4);
-    test(circleArray, 5);
-    test(circleArray, 9);
+    test(ringArray, -10);
+    test(ringArray, -5);
+    test(ringArray, -4);
+    test(ringArray, -1);
+    test(ringArray, 0);
+    test(ringArray, 4);
+    test(ringArray, 5);
+    test(ringArray, 9);
 
     return 0;
 }
