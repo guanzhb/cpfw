@@ -62,6 +62,14 @@ class RingBuffer {
         return 0;
     }
 
+    int32_t getIdleSize() {
+        return N - mAvailableSize;
+    }
+
+    int32_t getAvailableSize() {
+        return mAvailableSize;
+    }
+
 #ifdef TEST
     std::array<T, N>& get() {
         return mBuffer;
@@ -73,10 +81,6 @@ class RingBuffer {
 
     int32_t getTailPos() {
         return mTailPos;
-    }
-
-    int32_t getAvailableSize() {
-        return mAvailableSize;
     }
 #endif
 
@@ -94,7 +98,7 @@ class RingBuffer {
 
     void shrink(int32_t size) {
         mHeadPos += size;
-        if (mHeadPos > N) {
+        if (mHeadPos >= N) {
             mHeadPos -= N;
         }
         mAvailableSize -= size;
