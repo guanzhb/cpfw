@@ -17,14 +17,13 @@
 
 #include "ExampleChain.h"
 
-#include <iostream>
+#include <memory>
 #include <string>
 #include <vector>
-#include <memory>
 
 #include "Base.h"
-#include "Utils.h"
 #include "Log.hpp"
+#include "Utils.h"
 
 namespace cpfw {
 

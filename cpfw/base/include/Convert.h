@@ -42,7 +42,7 @@ class Convert {
 
     const uint32_t getElementId() const;
 
-    float getFactor() const;
+    const float getFactor() const;
 
  private:
     Convert(const std::string &name, ExpressionEnum expression,

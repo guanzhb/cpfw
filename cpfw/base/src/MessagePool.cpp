@@ -79,19 +79,19 @@ void MessagePool::clear() {
 }
 
 void MessagePool::notify() {
-    mConditionVariable.notify_one();
+    mCv.notify_one();
 }
 
 void MessagePool::wait() {
     std::unique_lock<std::shared_mutex> lck(mMutex);
     if (mQueue.empty()) {
-        mConditionVariable.wait(lck);
+        mCv.wait(lck);
     }
 }
 
 std::cv_status MessagePool::waitFor(uint64_t waitTimeMs) {
     std::unique_lock<std::shared_mutex> lck(mMutex);
-    return mConditionVariable.wait_for(lck, std::chrono::milliseconds(waitTimeMs));
+    return mCv.wait_for(lck, std::chrono::milliseconds(waitTimeMs));
 }
 
 void MessagePool::postWithLock(

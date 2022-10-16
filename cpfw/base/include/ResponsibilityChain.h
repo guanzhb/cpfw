@@ -17,10 +17,10 @@
 #ifndef CPFW_BASE_INCLUDE_RESPONSIBILITYCHAIN_H_
 #define CPFW_BASE_INCLUDE_RESPONSIBILITYCHAIN_H_
 
-#include <string>
+#include <algorithm>
 #include <functional>
 #include <memory>
-#include <algorithm>
+#include <string>
 
 #include "DataStore.h"
 

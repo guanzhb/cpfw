@@ -16,9 +16,10 @@
 
 #define TAG "StateMachineExample"
 
+#include "StateMachineExample.h"
+
 #include <memory>
 
-#include "StateMachineExample.h"
 #include "Log.hpp"
 
 namespace cpfw {

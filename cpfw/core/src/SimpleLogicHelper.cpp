@@ -84,8 +84,7 @@ static std::vector<int32_t> parseValue(std::string strs) {
 
 void SimpleLogicHelper::loadState(tinyxml2::XMLElement *root) {
     LOGV("loadState begin");
-    tinyxml2::XMLElement *surfaceState
-        = root->FirstChildElement(TAG_STATE.c_str());
+    tinyxml2::XMLElement *surfaceState = root->FirstChildElement(TAG_STATE.c_str());
     
     while (surfaceState) {
         int32_t stateValue = 0;

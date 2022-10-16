@@ -30,8 +30,7 @@ Convert::Convert(const std::string &name, ExpressionEnum expression,
     : Convert(name, expression, 0.0f, widgetId, elementId) {
 }
 
-Convert::Convert(
-        const std::string &name, ExpressionEnum expression, float factor,
+Convert::Convert(const std::string &name, ExpressionEnum expression, float factor,
         uint32_t widgetId, uint32_t elementId)
     : mName(name), mExpression(expression), mFactor(factor),
       mWidgetId(widgetId), mElementId(elementId) {
@@ -56,7 +55,7 @@ const uint32_t Convert::getElementId() const {
     return mElementId;
 }
 
-float Convert::getFactor() const {
+const float Convert::getFactor() const {
     return mFactor;
 }
 

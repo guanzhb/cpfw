@@ -42,7 +42,7 @@ std::map<std::string, ExpressionEnum> ExpressionPool::mTable {
 };
     
 ExpressionEnum ExpressionPool::getEnum(const std::string &expressionStr) {
-    return mTable[expressionStr];  // crash if not find
+    return mTable[expressionStr];  // XXX crash when exec if not find
 }
 
 }  // namespace cpfw

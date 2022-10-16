@@ -22,8 +22,9 @@
 #include <string>
 #include <vector>
 
-#include "tinyxml2.h"
 #include "Widget.h"
+
+#include "tinyxml2.h"
 
 namespace cpfw {
 
@@ -53,6 +54,7 @@ class SimpleLogicHelper {
     void loadConfiguration(const std::string &configurationFile);
     
     const std::string& getStateName(uint32_t stateId);
+
     const std::vector<WidgetPair>& getWidgetPair(uint32_t stateId);
 
 private:

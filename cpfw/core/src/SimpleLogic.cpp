@@ -43,19 +43,16 @@ void SimpleLogic::sendMessage(Message message) {
     mHandler->post(message);
 }
 
-SimpleLogic::SimpleLogicHandler
-  ::SimpleLogicHandler(SimpleLogic *SimpleLogic,
+SimpleLogic::SimpleLogicHandler::SimpleLogicHandler(SimpleLogic *SimpleLogic,
         std::shared_ptr<SimpleLogicHelper> helper)
         : mSimpleLogic(SimpleLogic), mHelper(helper) {
     LOGI("SimpleLogicHandler ctor");
 }
 
-SimpleLogic::SimpleLogicHandler
-  ::~SimpleLogicHandler() {
+SimpleLogic::SimpleLogicHandler::~SimpleLogicHandler() {
 }
 
-int32_t SimpleLogic::SimpleLogicHandler
-  ::onInvoke(const Message &message) {
+int32_t SimpleLogic::SimpleLogicHandler::onInvoke(const Message &message) {
     LOGI("onInvoke enter state:" + mHelper->getStateName(message.mWhat));
     const auto &widgetItor = mHelper->getWidgetPair(message.mWhat);
     for (auto itor=widgetItor.begin(); itor!=widgetItor.end(); ++itor) {

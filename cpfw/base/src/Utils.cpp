@@ -14,12 +14,12 @@
  * limitations under the License.
  */
 
-#include "Base.h"
 #include "Utils.h"
-#include "StrategyCalculate.h"
 
-#include <iostream>
 #include <sys/time.h>
+
+#include "Base.h"
+#include "StrategyCalculate.h"
 
 namespace cpfw {
 

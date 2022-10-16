@@ -16,8 +16,8 @@
 #ifndef CPFW_BASE_INCLUDE_EXPRESSIONPOOL_H__
 #define CPFW_BASE_INCLUDE_EXPRESSIONPOOL_H__
 
-#include <string>
 #include <map>
+#include <string>
 
 namespace cpfw {
 

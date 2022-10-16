@@ -19,10 +19,9 @@
 #include "Handler.h"
 
 #include <chrono>
-#include <iostream>
 
-#include "Utils.h"
 #include "Log.hpp"
+#include "Utils.h"
 
 namespace cpfw {
 

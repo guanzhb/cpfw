@@ -23,9 +23,6 @@
 
 class Bundle {
  public:
-    Bundle() {}
-    ~Bundle() {}
-
     template<typename TVALUE>
     void set(const std::string &key, const TVALUE &value) {
         mTable[key] = value;
@@ -53,8 +50,8 @@ class Bundle {
 };
 
 #define INITIALIZE_TEMPLATE(TYPE) \
-    template void Bundle::set<TYPE>(const std::string &, const TYPE &); \
-    template bool Bundle::get<TYPE>(const std::string &, TYPE &)
+    template void Bundle::set(const std::string &, const TYPE &); \
+    template bool Bundle::get(const std::string &, TYPE &)
 
 INITIALIZE_TEMPLATE(std::string);
 INITIALIZE_TEMPLATE(int64_t);

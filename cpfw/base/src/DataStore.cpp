@@ -19,8 +19,6 @@
 #include "DataStore.h"
 #include "Log.hpp"
 
-#include <iostream>
-
 namespace cpfw {
 
 const TINVOKE_CHAIN DataStore::EMPTY_INVOKE_CHAIN = {};
@@ -37,13 +35,11 @@ DataStore::DataStore() {
 DataStore::~DataStore() {
 }
 
-std::optional<std::shared_ptr<Widget>>
-        DataStore::getWidget(const uint32_t widgetId) {
+std::optional<std::shared_ptr<Widget>> DataStore::getWidget(const uint32_t widgetId) {
     return getOptionalFromMap(mWidgetTable, widgetId);
 }
 
-std::optional<std::shared_ptr<Widget>>
-        DataStore::getWidget(const std::string &widgetName) {
+std::optional<std::shared_ptr<Widget>> DataStore::getWidget(const std::string &widgetName) {
     if (auto id = getIdWithStr(widgetName); id) {
         return getWidget(id.value());
     }
@@ -178,7 +174,7 @@ const uint32_t DataStore::getBind(const std::string &widgetName) {
     if (auto id = getIdWithStr(widgetName); id) {
         return getBind(id.value());
     }
-    return UINT32_MAX;
+    return EMPTY_BIND;
 }
 
 void DataStore::addWidget(std::shared_ptr<Widget> widget) {
@@ -201,13 +197,11 @@ void DataStore::addDataConvert(
     mDataMapTable.emplace(getIdWithStr(context).value(), convert);
 }
 
-void DataStore::addDataConvert(
-        const std::string &context, std::vector<Convert> convert) {
+void DataStore::addDataConvert(const std::string &context, std::vector<Convert> convert) {
     mConvertTable.emplace(getIdWithStr(context).value(), convert);
 }
 
-void DataStore::addCondition(
-        const std::string &widgetName, TINVOKE_CONDITION condition) {
+void DataStore::addCondition(const std::string &widgetName, TINVOKE_CONDITION condition) {
     mConditionTable.emplace(getIdWithStr(widgetName).value(), condition);
 }
 

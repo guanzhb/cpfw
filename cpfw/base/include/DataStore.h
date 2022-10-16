@@ -22,8 +22,8 @@
 #include <memory>
 #include <optional>
 #include <string>
-#include <vector>
 #include <utility>
+#include <vector>
 
 #include "Base.h"
 #include "Condition.h"

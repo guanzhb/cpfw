@@ -17,14 +17,14 @@
 #ifndef CPFW_CORE_INCLUDE_LOGIC_H_
 #define CPFW_CORE_INCLUDE_LOGIC_H_
 
-#include <string>
 #include <memory>
+#include <string>
 
 #include "Base.h"
 #include "DataStore.h"
-#include "Widget.h"
-#include "ResponsibilityChain.h"
 #include "Handler.h"
+#include "ResponsibilityChain.h"
+#include "Widget.h"
 
 namespace cpfw {
 

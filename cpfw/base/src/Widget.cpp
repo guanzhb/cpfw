@@ -18,12 +18,10 @@
 
 #include "Widget.h"
 
-#include <iostream>
-
 #include "Base.h"
 #include "Condition.h"
-#include "Utils.h"
 #include "Log.hpp"
+#include "Utils.h"
 
 namespace cpfw {
 

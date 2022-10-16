@@ -20,7 +20,6 @@
 #include <atomic>
 #include <memory>
 #include <thread>
-#include <iostream>
 
 #include "Message.h"
 #include "MessagePool.h"

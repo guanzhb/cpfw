@@ -18,12 +18,12 @@
 #define CPFW_BASE_INCLUDE_WIDGET_H_
 
 #include <any>
-#include <memory>
 #include <map>
+#include <memory>
 
 #include "DataStore.h"
-#include "StrategyLogic.h"
 #include "ExpressionPool.h"
+#include "StrategyLogic.h"
 
 namespace cpfw {
 
@@ -58,6 +58,7 @@ class Widget {
     virtual int32_t reset();
 
     virtual const std::any& getBind() const;
+
  private:
     const std::string mName;
     const uint32_t mId;

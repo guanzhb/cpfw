@@ -18,8 +18,6 @@
 
 #include "LogicDataParser.h"
 
-#include <iostream>
-
 #include "ExpressionPool.h"
 #include "Log.hpp"
 

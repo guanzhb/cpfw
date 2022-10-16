@@ -63,7 +63,7 @@ class RingBufferManager {
         return 0;
     }
 
-    int32_t read(std::vector<T> &readBuffer, std::size_t readSize) {
+    int32_t read(std::vector<T> &readBuffer, int32_t readSize) {
         return readLock(readBuffer, readSize);
     }
 
@@ -142,7 +142,7 @@ class RingBufferManager {
         return 0;
     }
 
-    int32_t readLock(std::vector<T> &readBuffer, std::size_t readSize) {
+    int32_t readLock(std::vector<T> &readBuffer, int32_t readSize) {
         while (mBuffer.getAvailableSize() < readSize) {
             LOGW(mName + " underrun");
             std::shared_lock<std::shared_mutex> lck(mMutex);

@@ -27,16 +27,6 @@
 
 namespace cpfw {
 
-/**
- * @brief parse data from prifile.
- *
- * @param profile where to parse
- * @param type how to parse @see ElementType
- * @param context get context
- * @param store data store, used when convert data
- *
- * @return data parsed from profil
- */
 std::vector<int32_t> parseProfile(
         const Profile &profile, uint32_t type,
         uint32_t widgetId, std::shared_ptr<DataStore> store);

@@ -16,8 +16,8 @@
 
 #define TAG "ThreadPoolTest"
 
-#include "ThreadPool.hpp"
 #include "Log.hpp"
+#include "ThreadPool.hpp"
 
 uint32_t getThreadId() {
     auto id = std::this_thread::get_id();

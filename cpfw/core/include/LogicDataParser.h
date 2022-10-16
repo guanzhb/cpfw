@@ -17,11 +17,12 @@
 #ifndef CPFW_CORE_INCLUDE_DATAPARSER_H_
 #define CPFW_CORE_INCLUDE_DATAPARSER_H_
 
-#include <string>
 #include <memory>
+#include <string>
+
+#include "DataStore.h"
 
 #include "tinyxml2.h"
-#include "DataStore.h"
 
 namespace cpfw {
 

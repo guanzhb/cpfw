@@ -23,8 +23,8 @@
 #endif
 
 #include <initializer_list>
-#include <iostream>
 #include <iomanip>
+#include <iostream>
 #include <mutex>
 #include <stdarg.h>
 

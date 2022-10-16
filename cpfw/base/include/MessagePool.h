@@ -64,7 +64,7 @@ class MessagePool {
     // perf for find when post with flag delete or omit
     std::multimap<uint64_t/*what*/, uint64_t/*whenMs*/> mFlagTable;
     mutable std::shared_mutex mMutex;
-    std::condition_variable_any mConditionVariable;
+    std::condition_variable_any mCv;
 };
 
 }  // namespace cpfw

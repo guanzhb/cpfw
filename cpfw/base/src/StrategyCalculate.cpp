@@ -16,8 +16,6 @@
 
 #include "StrategyCalculate.h"
 
-#include <iostream>
-
 namespace cpfw {
 
 int32_t StrategyCalculateDummy::handle(const uint32_t widgetId,

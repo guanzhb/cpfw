@@ -17,8 +17,6 @@
 
 #include "StrategyLogic.h"
 
-#include <iostream>
-
 #include "Log.hpp"
 
 //#define LOG_VV

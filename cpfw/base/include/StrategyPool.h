@@ -22,7 +22,7 @@ namespace cpfw {
 class StrategyCalculatePool {
 
  private:
-static std::map<ExpressionEnum,
+    static std::map<ExpressionEnum,
         std::shared_ptr<IStrategyCalculate>> mStrategyCalculate;
 }  // namespace cpfw
 

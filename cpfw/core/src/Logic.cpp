@@ -19,12 +19,11 @@
 #include "Logic.h"
 
 #include <functional>
-#include <iostream>
 #include <memory>
 #include <string>
 
-#include "LogicDataParser.h"
 #include "Log.hpp"
+#include "LogicDataParser.h"
 
 namespace cpfw {
 
@@ -135,8 +134,7 @@ int32_t Logic::getProfile(const uint32_t widgetId) {
     return getProfile(widgetId, 0);
 }
 
-int32_t Logic::getProfile(const uint32_t widgetId,
-            const uint32_t elementId) {
+int32_t Logic::getProfile(const uint32_t widgetId, const uint32_t elementId) {
     return 0;
 }
 
@@ -144,8 +142,7 @@ int32_t Logic::getProfile(const std::string &widgetName) {
     return getProfile(widgetName, "default");
 }
 
-int32_t Logic::getProfile(const std::string &widgetName,
-            const std::string &elementName) {
+int32_t Logic::getProfile(const std::string &widgetName, const std::string &elementName) {
     return 0;
 }
 
