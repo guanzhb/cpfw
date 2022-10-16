@@ -40,7 +40,7 @@ class Logic {
  public:
     Logic();
 
-    Logic(std::string configurationFile);
+    Logic(const std::string &configurationFile);
 
     ~Logic();
 

@@ -27,74 +27,27 @@
 
 namespace cpfw {
 
+template Widget::Widget(const std::string &name, uint32_t id, FUNCTION_0INT func);
+template Widget::Widget(const std::string &name, uint32_t id, FUNCTION_1INT func);
+template Widget::Widget(const std::string &name, uint32_t id, FUNCTION_2INT func);
+template Widget::Widget(const std::string &name, uint32_t id, FUNCTION_3INT func);
+template Widget::Widget(const std::string &name, uint32_t id, FUNCTION_4INT func);
+template Widget::Widget(const std::string &name, uint32_t id, FUNCTION_5INT func);
+template Widget::Widget(const std::string &name, uint32_t id, FUNCTION_VINT func);
+
 Widget::Widget() : Widget("", 0) {
 }
 
-Widget::Widget(std::string name) : Widget(name, 0) {
+Widget::Widget(const std::string &name, uint32_t id) : mName(name), mId(id) {
 }
 
-Widget::Widget(std::string name, uint32_t id) : mName(name), mId(id) {
-}
-
-Widget::Widget(std::string name, FUNCTION_0INT funcAction)
-    : mName(name), mId(0), mFunctionBind(funcAction) {
-}
-
-Widget::Widget(std::string name, FUNCTION_1INT funcAction)
-    : mName(name), mId(0), mFunctionBind(funcAction) {
-}
-
-Widget::Widget(std::string name, FUNCTION_2INT funcAction)
-    : mName(name), mId(0), mFunctionBind(funcAction) {
-}
-
-Widget::Widget(std::string name, FUNCTION_3INT funcAction)
-    : mName(name), mId(0), mFunctionBind(funcAction) {
-}
-
-Widget::Widget(std::string name, FUNCTION_4INT funcAction)
-    : mName(name), mId(0), mFunctionBind(funcAction) {
-}
-
-Widget::Widget(std::string name, FUNCTION_5INT funcAction)
-    : mName(name), mId(0), mFunctionBind(funcAction) {
-}
-
-Widget::Widget(std::string name, FUNCTION_VINT funcAction)
-    : mName(name), mId(0), mFunctionBind(funcAction) {
-}
-
-Widget::Widget(std::string name, uint32_t id, FUNCTION_0INT funcAction)
-    : mName(name), mId(id), mFunctionBind(funcAction) {
-}
-
-Widget::Widget(std::string name, uint32_t id, FUNCTION_1INT funcAction)
-    : mName(name), mId(id), mFunctionBind(funcAction) {
-}
-
-Widget::Widget(std::string name, uint32_t id, FUNCTION_2INT funcAction)
-    : mName(name), mId(id), mFunctionBind(funcAction) {
-}
-
-Widget::Widget(std::string name, uint32_t id, FUNCTION_3INT funcAction)
-    : mName(name), mId(id), mFunctionBind(funcAction) {
-}
-
-Widget::Widget(std::string name, uint32_t id, FUNCTION_4INT funcAction)
-    : mName(name), mId(id), mFunctionBind(funcAction) {
-}
-
-Widget::Widget(std::string name, uint32_t id, FUNCTION_5INT funcAction)
-    : mName(name), mId(id), mFunctionBind(funcAction) {
-}
-
-Widget::Widget(std::string name, uint32_t id, FUNCTION_VINT funcAction)
+template<typename TFUNC>
+Widget::Widget(const std::string &name, uint32_t id, TFUNC funcAction)
     : mName(name), mId(id), mFunctionBind(funcAction) {
 }
 
 Widget::~Widget() {
 }
-
 
 void Widget::linkDataStore(std::shared_ptr<DataStore> store) {
     mStore = store;
@@ -112,8 +65,6 @@ std::shared_ptr<DataStore> Widget::getDataStore() const {
     return mStore;
 }
 
-using SLP = StrategyLogicPool;
-
 int32_t Widget::check() {
     int32_t ret = 0;
     if (!mStore) {
@@ -127,6 +78,7 @@ int32_t Widget::check() {
     auto &logic = conditionPair.first;
     for (auto itor : conditionPair.second) {
         const auto &expressionIn = itor.getExpression();
+        using SLP = StrategyLogicPool;
         ret = SLP::getStrategy(expressionIn)->handle(itor, mStore);
         if (0 == ret && ExpressionEnum::OR == logic) {
             break;

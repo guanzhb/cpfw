@@ -61,7 +61,7 @@ const std::string LogicDataParser::ATTR_TARGET = "target";
 LogicDataParser::LogicDataParser() {
 }
 
-LogicDataParser::LogicDataParser(std::string configurationFile,
+LogicDataParser::LogicDataParser(const std::string &configurationFile,
         std::shared_ptr<DataStore> dataStore)
         : mDataStore(dataStore) {
     LOGD(TAG, "LogicDataParser begin");

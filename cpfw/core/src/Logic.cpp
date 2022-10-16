@@ -31,7 +31,7 @@ namespace cpfw {
 Logic::Logic() {
 }
 
-Logic::Logic(std::string configurationFile) {
+Logic::Logic(const std::string &configurationFile) {
     mStore = std::make_shared<DataStore>();
     LogicDataParser parser = LogicDataParser(configurationFile, mStore);
     mResponsibilityChain = std::make_unique<ResponsibilityChain>(mStore);

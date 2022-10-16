@@ -195,18 +195,19 @@ void DataStore::addProfile(const uint32_t widgetId, const Profile profile) {
 }
 
 void DataStore::addDataConvert(
-        std::string context, int32_t origin, int32_t target) {
+        const std::string &context, int32_t origin, int32_t target) {
     std::map<int32_t, int32_t> convert;
     convert.emplace(origin, target);
     mDataMapTable.emplace(getIdWithStr(context).value(), convert);
 }
 
 void DataStore::addDataConvert(
-        std::string context, std::vector<Convert> convert) {
+        const std::string &context, std::vector<Convert> convert) {
     mConvertTable.emplace(getIdWithStr(context).value(), convert);
 }
 
-void DataStore::addCondition(std::string widgetName, TINVOKE_CONDITION condition) {
+void DataStore::addCondition(
+        const std::string &widgetName, TINVOKE_CONDITION condition) {
     mConditionTable.emplace(getIdWithStr(widgetName).value(), condition);
 }
 
@@ -214,7 +215,7 @@ void DataStore::addBind(const uint32_t widgetId, const uint32_t bindId) {
     mBindTable.emplace(widgetId, bindId);
 }
 
-void DataStore::addStrIdPair(std::string name, uint32_t id) {
+void DataStore::addStrIdPair(const std::string &name, uint32_t id) {
     mStrToIdTable.emplace(name, id);
 }
 

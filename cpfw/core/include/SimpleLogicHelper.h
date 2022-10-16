@@ -38,6 +38,7 @@ class SimpleLogicHelper {
     static const std::string ATTR_VALUE;
     static const std::string TAG_CHILD;
     static const std::string ATTR_WIDGET;
+    static const std::string ATTR_ID;
     static const std::string VALUE_DELIM;
     static const std::vector<WidgetPair> EMPTY_WIDGET_PAIR;
     static const std::string EMPTY_STATE;
@@ -49,7 +50,7 @@ class SimpleLogicHelper {
 
     void addWidget(std::shared_ptr<Widget> widget);
 
-    void loadConfiguration(std::string configurationFile);
+    void loadConfiguration(const std::string &configurationFile);
     
     const std::string& getStateName(uint32_t stateId);
     const std::vector<WidgetPair>& getWidgetPair(uint32_t stateId);
@@ -60,7 +61,7 @@ private:
  private:
     std::map<uint32_t/*state id*/, std::string> mStateNameTable;
     std::map<uint32_t/*state id*/, std::vector<WidgetPair>> mStateTable;
-    std::map<std::string/*widget name*/, std::shared_ptr<Widget>> mWidgetTable;
+    std::map<uint32_t/*widget id*/, std::shared_ptr<Widget>> mWidgetTable;
 };
 
 }  // namespace cpfw

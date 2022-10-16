@@ -21,17 +21,17 @@ namespace cpfw {
 Convert::Convert() : Convert("", ExpressionEnum::EMPTY, 0.0f, 0, 0) {
 }
 
-Convert::Convert(std::string name, ExpressionEnum expression, float factor)
+Convert::Convert(const std::string &name, ExpressionEnum expression, float factor)
     : Convert(name, expression, factor, 0, 0) {
 }
 
-Convert::Convert(std::string name, ExpressionEnum expression,
+Convert::Convert(const std::string &name, ExpressionEnum expression,
             uint32_t widgetId, uint32_t elementId)
     : Convert(name, expression, 0.0f, widgetId, elementId) {
 }
 
 Convert::Convert(
-        std::string name, ExpressionEnum expression, float factor,
+        const std::string &name, ExpressionEnum expression, float factor,
         uint32_t widgetId, uint32_t elementId)
     : mName(name), mExpression(expression), mFactor(factor),
       mWidgetId(widgetId), mElementId(elementId) {

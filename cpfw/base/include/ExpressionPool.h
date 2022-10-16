@@ -71,7 +71,7 @@ const std::string EXPRESSION_OR = "or";
 
 class ExpressionPool {
  public:
-    static ExpressionEnum getEnum(std::string expressionStr);
+    static ExpressionEnum getEnum(const std::string &expressionStr);
 
  private:
     static std::map<std::string, ExpressionEnum> mTable;

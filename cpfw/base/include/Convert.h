@@ -27,14 +27,10 @@ class Convert {
  public:
     Convert();
 
-    Convert(std::string name,
-            ExpressionEnum expression,
-            float factor);
+    Convert(const std::string &name, ExpressionEnum expression, float factor);
 
-    Convert(std::string name,
-            ExpressionEnum expression,
-            uint32_t widgetId,
-            uint32_t elementId);
+    Convert(const std::string &name, ExpressionEnum expression,
+            uint32_t widgetId, uint32_t elementId);
 
     ~Convert();
 
@@ -49,11 +45,8 @@ class Convert {
     float getFactor() const;
 
  private:
-    Convert(std::string name,
-            ExpressionEnum expression,
-            float factor,
-            uint32_t widgetId,
-            uint32_t elementId);
+    Convert(const std::string &name, ExpressionEnum expression,
+            float factor, uint32_t widgetId, uint32_t elementId);
 
  private:
     const std::string mName;

@@ -41,7 +41,7 @@ std::map<std::string, ExpressionEnum> ExpressionPool::mTable {
     {EXPRESSION_OR, ExpressionEnum::OR},
 };
     
-ExpressionEnum ExpressionPool::getEnum(std::string expressionStr) {
+ExpressionEnum ExpressionPool::getEnum(const std::string &expressionStr) {
     return mTable[expressionStr];  // crash if not find
 }
 

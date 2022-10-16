@@ -63,7 +63,7 @@ class LogicDataParser {
  public:
     LogicDataParser();
 
-    LogicDataParser(std::string configurationFile,
+    LogicDataParser(const std::string &configurationFile,
                std::shared_ptr<DataStore> dataStore);
 
     ~LogicDataParser();

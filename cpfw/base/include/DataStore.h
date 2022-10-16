@@ -122,21 +122,21 @@ class DataStore : public std::enable_shared_from_this<DataStore>{
      * @param target converted data
      */
     void addDataConvert(
-            const std::string context, int32_t origin, int32_t target);
+            const std::string &context, int32_t origin, int32_t target);
 
     void addDataConvert(
-            const std::string context, std::vector<Convert> convert);
+            const std::string &context, std::vector<Convert> convert);
     /**
      * @brief add condition data.
      *
      * @param widgetName
      * @param condition check data and expression(or, and)
      */
-    void addCondition(const std::string widgetName, TINVOKE_CONDITION condition);
+    void addCondition(const std::string &widgetName, TINVOKE_CONDITION condition);
 
-    void addBind(const uint32_t widgetId, const uint32_t  bindId);
+    void addBind(const uint32_t widgetId, const uint32_t bindId);
 
-    void addStrIdPair(std::string name, uint32_t id);
+    void addStrIdPair(const std::string &name, uint32_t id);
 
  private:
 

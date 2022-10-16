@@ -22,9 +22,8 @@ Condition::Condition() : Condition("", 0, 0, ExpressionEnum::EMPTY, 0, 0) {
 }
 
 Condition::Condition(
-        std::string name, uint32_t elementId,
-        uint32_t widgetId, ExpressionEnum expression,
-        int32_t left, int32_t right)
+        const std::string &name, uint32_t elementId, uint32_t widgetId,
+        ExpressionEnum expression, int32_t left, int32_t right)
     : mName(name), mExpression(expression),
       mWidgetId(widgetId), mElementId(elementId),
       mLeft(left), mRight(right) {

@@ -23,7 +23,6 @@
 #include <future>
 #include <queue>
 #include <thread>
-#include <functional>
 #include <vector>
 
 namespace cpfw {

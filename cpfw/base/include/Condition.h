@@ -27,12 +27,8 @@ class Condition {
  public:
     Condition();
 
-    Condition(std::string name,
-              uint32_t elementId,
-              uint32_t widgetId,
-              ExpressionEnum expression,
-              int32_t left,
-              int32_t right);
+    Condition(const std::string &name, uint32_t elementId, uint32_t widgetId,
+              ExpressionEnum expression, int32_t left, int32_t right);
 
     ~Condition();
 

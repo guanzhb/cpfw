@@ -28,37 +28,36 @@ template<typename T, int32_t N>
 class RingBuffer {
  public:
     RingBuffer() {
-        mBuffer.fill(T());
     }
 
-    int32_t write(const std::vector<T> &in) {
-        std::size_t inSize = in.size();
+    int32_t write(const std::vector<T> &writeBuffer) {
+        std::size_t writeSize = writeBuffer.size();
         std::size_t residualSize = N - mTailPos;
 
-        if (residualSize < inSize) {
+        if (residualSize < writeSize) {
             std::ranges::copy_n(
-                in.begin(), residualSize, mBuffer.begin()+mTailPos);
+                writeBuffer.begin(), residualSize, mBuffer.begin()+mTailPos);
             std::ranges::copy_n(
-                in.begin()+residualSize, inSize-residualSize, mBuffer.begin());
+                writeBuffer.begin()+residualSize, writeSize-residualSize, mBuffer.begin());
         } else {
-            std::ranges::copy_n(in.begin(), inSize, mBuffer.begin()+mTailPos);
+            std::ranges::copy_n(writeBuffer.begin(), writeSize, mBuffer.begin()+mTailPos);
         }
-        expand(inSize);
+        expand(writeSize);
         return 0;
     }
 
-    int32_t read(std::vector<T> &out, std::size_t outSize) {
-        out.resize(outSize);
+    int32_t read(std::vector<T> &readBuffer, std::size_t readSize) {
+        readBuffer.resize(readSize);
         std::size_t residualSize = N - mHeadPos;
-        if (residualSize < outSize) {
+        if (residualSize < readSize) {
             std::ranges::copy_n(
-                mBuffer.begin()+mHeadPos, residualSize, out.begin());
+                mBuffer.begin()+mHeadPos, residualSize, readBuffer.begin());
             std::ranges::copy_n(
-                mBuffer.begin(), outSize-residualSize, out.begin()+residualSize);
+                mBuffer.begin(), readSize-residualSize, readBuffer.begin()+residualSize);
         } else {
-            std::ranges::copy_n(mBuffer.begin()+mHeadPos, outSize, out.begin());
+            std::ranges::copy_n(mBuffer.begin()+mHeadPos, readSize, readBuffer.begin());
         }
-        shrink(outSize);
+        shrink(readSize);
         return 0;
     }
 
