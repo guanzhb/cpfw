@@ -183,12 +183,12 @@ void LogicDataParser::loadProfile(tinyxml2::XMLElement *root) {
     
     while (surfaceProfile) {
         const char* widgetName = surfaceProfile->Attribute(ATTR_WIDGET.c_str());
-        int widgetId = 0;
-        surfaceProfile->QueryIntAttribute(ATTR_ID.c_str(), &widgetId);
+        uint32_t widgetId = 0;
+        surfaceProfile->QueryUnsignedAttribute(ATTR_ID.c_str(), &widgetId);
         mDataStore->addStrIdPair(widgetName, widgetId);
 
-        int bindId = 0;
-        surfaceProfile->QueryIntAttribute(ATTR_BIND_TO.c_str(), &bindId);
+        uint32_t bindId = 0;
+        surfaceProfile->QueryUnsignedAttribute(ATTR_BIND_TO.c_str(), &bindId);
         if (bindId != DataStore::EMPTY_BIND) {
             mDataStore->addBind(widgetId, bindId);
         }
@@ -198,18 +198,18 @@ void LogicDataParser::loadProfile(tinyxml2::XMLElement *root) {
             = surfaceProfile->FirstChildElement(TAG_ELEMENT.c_str());
         while (surfaceElement) {
             const char* name = surfaceElement->Attribute(ATTR_NAME.c_str());
-            int id = 0;
-            surfaceElement->QueryIntAttribute(ATTR_ID.c_str(), &id);
-            int min = 0;
+            uint32_t id = 0;
+            surfaceElement->QueryUnsignedAttribute(ATTR_ID.c_str(), &id);
+            int32_t min = 0;
             surfaceElement->QueryIntAttribute(ATTR_MIN.c_str(), &min);
-            int max = 0;
+            int32_t max = 0;
             surfaceElement->QueryIntAttribute(ATTR_MAX.c_str(), &max);
-            int current = 0;
+            int32_t current = 0;
             surfaceElement->QueryIntAttribute(ATTR_CURRENT.c_str(), &current);
-            int type = 0;
-            surfaceElement->QueryIntAttribute(ATTR_TYPE.c_str(), &type);
+            uint32_t type = 0;
+            surfaceElement->QueryUnsignedAttribute(ATTR_TYPE.c_str(), &type);
 
-            Element ele = {min, max, current, current, static_cast<uint32_t>(type)};
+            Element ele = {min, max, current, current, type};
             mDataStore->addStrIdPair(name, id);
             profile.elements.emplace(id, ele);
             surfaceElement = surfaceElement->NextSiblingElement();
@@ -265,9 +265,9 @@ void LogicDataParser::loadDataConvert(tinyxml2::XMLElement *root) {
                 widgetName, parseCalculate(mDataStore.get(), widgetName, calculate));
         }
         while (surfaceElement) {
-            int origin = 0;
+            int32_t origin = 0;
             surfaceElement->QueryIntAttribute(ATTR_ORIGIN.c_str(), &origin);
-            int target = 0;
+            int32_t target = 0;
             surfaceElement->QueryIntAttribute(ATTR_TARGET.c_str(), &target);
             surfaceElement = surfaceElement->NextSiblingElement();
             mDataStore->addDataConvert(widgetName, origin, target);

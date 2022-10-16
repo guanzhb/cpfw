@@ -70,7 +70,7 @@ int32_t Logic::setProfile(const uint32_t widgetId,
     bundle.set(KEY_ELEMENT, elementPairs);
     msg.mBundle = bundle;
     msg.mFlag = flag;
-    msg.mArg1 = static_cast<int32_t>(DataType::INT32);
+    msg.mArg1 = DataType::INT32;
 
     mHandler->post(msg);
 
@@ -87,7 +87,7 @@ int32_t Logic::setProfile(const std::string &widgetName,
     bundle.set(KEY_ELEMENT, elementPairs);
     msg.mBundle = bundle;
     msg.mFlag = flag;
-    msg.mArg1 = static_cast<int32_t>(DataType::STRING);
+    msg.mArg1 = DataType::STRING;
 
     mHandler->post(msg);
 
@@ -105,7 +105,7 @@ int32_t Logic::setProfileDelay(const uint32_t widgetId,
     bundle.set(KEY_DELAY_TIME_MS, delayTimeMs);
     msg.mBundle = bundle;
     msg.mFlag = flag;
-    msg.mArg1 = static_cast<int32_t>(DataType::INT32);
+    msg.mArg1 = DataType::INT32;
 
     mHandler->postDelay(msg, delayTimeMs);
 
@@ -124,7 +124,7 @@ int32_t Logic::setProfileDelay(const std::string &widgetName,
     bundle.set(KEY_DELAY_TIME_MS, delayTimeMs);
     msg.mBundle = bundle;
     msg.mFlag = flag;
-    msg.mArg1 = static_cast<int32_t>(DataType::STRING);
+    msg.mArg1 = DataType::STRING;
 
     mHandler->postDelay(msg, delayTimeMs);
 
@@ -151,7 +151,7 @@ int32_t Logic::getProfile(const std::string &widgetName,
 
 void Logic::onReply(const Message &message, const int32_t status) {
     if (nullptr != mCallbackWithName
-            && message.mArg1 == static_cast<int32_t>(DataType::STRING)) {
+            && message.mArg1 == DataType::STRING) {
         Bundle &bundle = const_cast<Message&>(message).mBundle;
         std::string widgetName;
         if (!bundle.get(KEY_WIDGET, widgetName)) {
@@ -162,8 +162,7 @@ void Logic::onReply(const Message &message, const int32_t status) {
             return;
         }
         mCallbackWithName(widgetName, elementPairs, status);
-    } else if (nullptr != mCallbackWithId
-           && message.mArg1 == static_cast<int32_t>(DataType::INT32)) {
+    } else if (nullptr != mCallbackWithId && message.mArg1 == DataType::INT32) {
         Bundle &bundle = const_cast<Message&>(message).mBundle;
         uint32_t widgetId = 0;
         if (!bundle.get(KEY_WIDGET, widgetId)) {
@@ -188,7 +187,7 @@ int32_t Logic::LogicHandler::onInvoke(const Message &message) {
     Bundle &bundle = const_cast<Message&>(message).mBundle;
     uint32_t widgetId = 0;
 
-    if (message.mArg1 == static_cast<int32_t>(DataType::STRING)) {
+    if (message.mArg1 == DataType::STRING) {
         std::string widgetName;
         if (!bundle.get(KEY_WIDGET, widgetName)) {
             return EINVAL;
@@ -203,7 +202,7 @@ int32_t Logic::LogicHandler::onInvoke(const Message &message) {
             return EINVAL;
         }
         mLogic->mStore->setProfile(widgetName, elementPairs);
-    } else if (message.mArg1 == static_cast<int32_t>(DataType::INT32)) {
+    } else if (message.mArg1 == DataType::INT32) {
         if (!bundle.get(KEY_WIDGET, widgetId)) {
             return EINVAL;
         }

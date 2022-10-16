@@ -25,7 +25,7 @@
 
 namespace cpfw {
 
-enum class DataType : uint8_t {
+enum DataType : uint8_t {
     INT8,
     UINT8,
     INT16,
@@ -39,7 +39,8 @@ enum class DataType : uint8_t {
     CHAR,
 };
 
-enum class ElementType : uint32_t {
+// why not enum class? may have multi vaild type, avoid static_cast
+enum ElementType : uint32_t {
     PUBLIC = 0x01,
     NEED_CONVERT = 0x02,
 };

@@ -76,7 +76,7 @@ class WidgetStub : public Widget {
 
     int32_t action() override {
         LOGI("widget override " + getName() + " action");
-        uint32_t type = static_cast<uint32_t>(ElementType::PUBLIC);
+        uint32_t type = ElementType::PUBLIC;
         auto values = parseProfile(
             getDataStore()->getProfile(getId()), type, getId(), getDataStore());
         int32_t ret = handle(getDataStore().get(), getName() + " override action ", values);
@@ -88,19 +88,19 @@ class WidgetStub : public Widget {
 ExampleChain::ExampleChain() {
     mLogic = std::make_shared<Logic>("./exampleChain.xml");
 
-    auto sv = std::make_shared<Widget>("volume", 11221, func1);
+    auto sv = std::make_shared<Widget>("volume", 11221U, func1);
     mLogic->addWidget(sv);
-    auto sl = std::make_shared<Widget>("loudness", 11225, func2);
+    auto sl = std::make_shared<Widget>("loudness", 11225U, func2);
     mLogic->addWidget(sl);
-    auto sf = std::make_shared<Widget>("fade", 11222, funcv);
+    auto sf = std::make_shared<Widget>("fade", 11222U, funcv);
     mLogic->addWidget(sf);
-    auto se = std::make_shared<Widget>("equalizer", 11223, func4);
+    auto se = std::make_shared<Widget>("equalizer", 11223U, func4);
     mLogic->addWidget(se);
-    auto sd = std::make_shared<Widget>("duck", 11224);
+    auto sd = std::make_shared<Widget>("duck", 11224U);
     mLogic->addWidget(sd);
-    auto ss = std::make_shared<WidgetStub>("stub", 11226);
+    auto ss = std::make_shared<WidgetStub>("stub", 11226U);
     mLogic->addWidget(ss);
-    auto sloop = std::make_shared<Widget>("loop", 11227, func1);
+    auto sloop = std::make_shared<Widget>("loop", 11227U, func1);
     mLogic->addWidget(sloop);
 
     mLogic->registerCallback(onReply);
@@ -110,42 +110,34 @@ ExampleChain::~ExampleChain() {
 }
 
 int32_t ExampleChain::setVolume(int32_t volume) {
-    return mLogic->setProfile(11221, {{static_cast<uint32_t>(0), volume}});
+    return mLogic->setProfile(11221U, {{0U, volume}});
 }
 
 int32_t ExampleChain::setFade(int32_t fade) {
-    return mLogic->setProfile(11222, {{static_cast<uint32_t>(0), fade}});
+    return mLogic->setProfile(11222U, {{0U, fade}});
 }
 
 int32_t ExampleChain::setEq(uint32_t band, int32_t db) {
-    return mLogic->setProfile(11223, {{band, db}});
+    return mLogic->setProfile(11223U, {{band, db}});
 }
 
 int32_t ExampleChain::setLoudness(int32_t loudness) {
-    return mLogic->setProfileDelay(static_cast<uint32_t>(11225),
-        {{static_cast<uint32_t>(0), loudness}, {static_cast<uint32_t>(1), 15}},
-        static_cast<uint64_t>(10));
+    return mLogic->setProfileDelay(11225U, {{0U, loudness}, {1U, 15}}, 10U);
 }
 
 int32_t ExampleChain::setStub(int32_t stub) {
     LOGI("stub call");
-    return mLogic->setProfileDelay(
-        static_cast<uint32_t>(11226), {{static_cast<uint32_t>(0), stub}},
-        static_cast<uint64_t>(10), PostFlag::SYNC);
+    return mLogic->setProfileDelay(11226U, {{0U, stub}}, 10U, PostFlag::SYNC);
 }
 
 int32_t ExampleChain::setLoop(int32_t loop) {
     LOGI("loop call");
-    return mLogic->setProfileDelay(
-        "loop", {{"default", loop}},
-        static_cast<uint64_t>(500), PostFlag::LOOP);
+    return mLogic->setProfileDelay("loop", {{"default", loop}}, 500U, PostFlag::LOOP);
 }
 
 int32_t ExampleChain::delLoop() {
     LOGI("del loop call");
-    return mLogic->setProfileDelay(
-        static_cast<uint32_t>(11227), {{static_cast<uint32_t>(0), 0}},
-        static_cast<uint64_t>(500), PostFlag::DELETE_FORMER);
+    return mLogic->setProfileDelay(11227U, {{0U, 0}}, 500U, PostFlag::DELETE_FORMER);
 }
 
 }  // namespace cpfw
@@ -163,7 +155,7 @@ int main() {
     example->setFade(5);
     LOGI("fade success");
 
-    example->setEq(0, 100);
+    example->setEq(0U, 100);
     LOGI("eq success");
 
     example->setLoudness(120);
@@ -172,7 +164,7 @@ int main() {
     example->setVolume(20);
     LOGI("volume success");
 
-    example->setEq(4, 5);
+    example->setEq(4U, 5);
     LOGI("eq success");
 
     example->setLoudness(10);
@@ -185,13 +177,13 @@ int main() {
     LOGI("stub success");
 
     LOGI("sleep 2s begin");
-    std::this_thread::sleep_for(std::chrono::milliseconds(2000));
+    std::this_thread::sleep_for(std::chrono::milliseconds(2000U));
     LOGI("sleep 2s over");
 
     example->delLoop();
 
     LOGI("sleep 5s begin");
-    std::this_thread::sleep_for(std::chrono::milliseconds(5000));
+    std::this_thread::sleep_for(std::chrono::milliseconds(5000U));
     LOGI("sleep 5s over");
 
     LOGI("ExampleChain exit");

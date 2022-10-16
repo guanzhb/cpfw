@@ -92,11 +92,11 @@ int32_t Widget::check() {
 
 int32_t Widget::action() {
     LOGD("widget " + mName + " action");
-    uint32_t type = static_cast<uint32_t>(ElementType::PUBLIC);
+    constexpr uint32_t type = ElementType::PUBLIC;
     auto bindId = mStore->getBind(getId());
     auto values = parseProfile(mStore->getProfile(getId()), type, getId(), mStore);
     if (values.empty() && (bindId != DataStore::EMPTY_BIND)) {
-        values = parseProfile(mStore->getProfile(getId()), type, getId(), mStore);
+        values = parseProfile(mStore->getProfile(bindId), type, getId(), mStore);
     }
     if (mFunctionBind.has_value()) {
         return invoke(mFunctionBind, values);

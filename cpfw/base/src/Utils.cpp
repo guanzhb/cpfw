@@ -33,14 +33,13 @@ std::vector<int32_t> parseProfile(
     auto &elements = profile.elements;
     std::for_each(elements.begin(), elements.end(),
         [&](auto &data) -> void {
-            if (0 == (type & static_cast<uint32_t>(ElementType::PUBLIC))
-                    || (0 == (data.second.type &
-                              static_cast<uint32_t>(ElementType::PUBLIC)))) {
+            auto &d = data.second;
+            if (0 == (type & ElementType::PUBLIC)
+                    || (0 == (d.type & ElementType::PUBLIC))) {
                 return;
             }
-            int32_t current = data.second.current;
-            if (0 != (data.second.type
-                    & static_cast<uint32_t>(ElementType::NEED_CONVERT))) {
+            int32_t current = d.current;
+            if (0 != (d.type & ElementType::NEED_CONVERT)) {
                 current = store->getConvertedData(widgetId, current);
                 auto& converts = store->getConvertTable(widgetId);
                 for (auto &c : converts) {

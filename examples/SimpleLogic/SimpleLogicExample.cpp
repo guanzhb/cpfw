@@ -60,17 +60,17 @@ static int32_t func4(int32_t v1, int32_t v2, int32_t v3, int32_t v4) {
 int main() {
     auto helper = std::make_shared<cpfw::SimpleLogicHelper>();
 
-    auto sc = std::make_shared<cpfw::Widget>("screen", 1, func1);
+    auto sc = std::make_shared<cpfw::Widget>("screen", 1U, func1);
     helper->addWidget(sc);
-    auto wifi = std::make_shared<cpfw::Widget>("wifi", 2, func2);
+    auto wifi = std::make_shared<cpfw::Widget>("wifi", 2U, func2);
     helper->addWidget(wifi);
-    auto sound = std::make_shared<cpfw::Widget>("sound", 3, func1);
+    auto sound = std::make_shared<cpfw::Widget>("sound", 3U, func1);
     helper->addWidget(sound);
-    auto gps = std::make_shared<cpfw::Widget>("gps", 4, func1);
+    auto gps = std::make_shared<cpfw::Widget>("gps", 4U, func1);
     helper->addWidget(gps);
-    auto app = std::make_shared<cpfw::Widget>("app", 5, func3);
+    auto app = std::make_shared<cpfw::Widget>("app", 5U, func3);
     helper->addWidget(app);
-    auto bt = std::make_shared<cpfw::Widget>("bluetooth", 6, func1);
+    auto bt = std::make_shared<cpfw::Widget>("bluetooth", 6U, func1);
     helper->addWidget(bt);
 
     helper->loadConfiguration("./simpleLogic.xml");
@@ -85,7 +85,7 @@ int main() {
     message.mWhat = 3;
     sl.sendMessage(message);
 
-    std::this_thread::sleep_for(std::chrono::milliseconds(20));
+    std::this_thread::sleep_for(std::chrono::milliseconds(20U));
 
     return 0;
 }
