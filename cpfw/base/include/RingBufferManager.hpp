@@ -163,16 +163,14 @@ class RingBufferManager {
             switch (message.mWhat) {
             case WHAT_WRITE_DIRECT: {
                 std::vector<T> writeBuffer;
-                if (bundle.get(KEY_DATA, writeBuffer)) {
-                    mRmb->writeLock(writeBuffer);
-                }
+                bundle.get(KEY_DATA, writeBuffer);
+                mRmb->writeLock(writeBuffer);
                 break;
             }
             case WHAT_WRITE_LOOP: {
                 RingBufferManager<T, N>::FUNCTION_WRITE funcWrite;
-                if (bundle.get(KEY_WRITE, funcWrite)) {
-                    funcWrite();
-                }
+                bundle.get(KEY_WRITE, funcWrite);
+                funcWrite();
                 break;
             }
             default:
@@ -199,10 +197,9 @@ class RingBufferManager {
             case WHAT_READ_LOOP: {
                 std::vector<T> readBuffer;
                 RingBufferManager<T, N>::FUNCTION_READ funcRead;
-                if (bundle.get(KEY_READ, funcRead)) {
-                    mRmb->readLock(readBuffer, message.mArg1/*size*/);
-                    funcRead(readBuffer, message.mArg1/*size*/);
-                }
+                bundle.get(KEY_READ, funcRead);
+                mRmb->readLock(readBuffer, message.mArg1/*size*/);
+                funcRead(readBuffer, message.mArg1/*size*/);
                 break;
             }
             default:

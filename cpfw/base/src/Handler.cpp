@@ -94,7 +94,7 @@ void Handler::handleMessage() {
         if (0 != (msg.mFlag & PostFlag::LOOP)) {
             uint64_t delayMs = 0;
             Bundle &bundle = const_cast<Message&>(msg).mBundle;
-            if (bundle.get(KEY_DELAY_TIME_MS, delayMs)) {
+            if (bundle.getSafe(KEY_DELAY_TIME_MS, delayMs)) {
                 postDelay(msg, delayMs);
             }
         }

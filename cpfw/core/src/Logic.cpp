@@ -146,29 +146,23 @@ int32_t Logic::getProfile(const std::string &widgetName, const std::string &elem
     return 0;
 }
 
+
+// get bundle with no safe version for perf, ensure it's safe inside the Logic
 void Logic::onReply(const Message &message, const int32_t status) {
     if (nullptr != mCallbackWithName
             && message.mArg1 == DataType::STRING) {
         Bundle &bundle = const_cast<Message&>(message).mBundle;
         std::string widgetName;
-        if (!bundle.get(KEY_WIDGET, widgetName)) {
-            return;
-        }
+        bundle.get(KEY_WIDGET, widgetName);
         std::vector<TElementPairWithName> elementPairs;
-        if (!bundle.get(KEY_ELEMENT, elementPairs)) {
-            return;
-        }
+        bundle.get(KEY_ELEMENT, elementPairs);
         mCallbackWithName(widgetName, elementPairs, status);
     } else if (nullptr != mCallbackWithId && message.mArg1 == DataType::INT32) {
         Bundle &bundle = const_cast<Message&>(message).mBundle;
         uint32_t widgetId = 0;
-        if (!bundle.get(KEY_WIDGET, widgetId)) {
-            return;
-        }
+        bundle.get(KEY_WIDGET, widgetId);
         std::vector<TElementPairWithId> elementPairs;
-        if (!bundle.get(KEY_ELEMENT, elementPairs)) {
-            return;
-        }
+        bundle.get(KEY_ELEMENT, elementPairs);
         mCallbackWithId(widgetId, elementPairs, status);
     }
 }
@@ -180,33 +174,26 @@ Logic::LogicHandler::LogicHandler(Logic* logic) : mLogic(logic) {
 Logic::LogicHandler::~LogicHandler() {
 }
 
+// get bundle with no safe version for perf, ensure it's safe inside the Logic
 int32_t Logic::LogicHandler::onInvoke(const Message &message) {
     Bundle &bundle = const_cast<Message&>(message).mBundle;
     uint32_t widgetId = 0;
 
     if (message.mArg1 == DataType::STRING) {
         std::string widgetName;
-        if (!bundle.get(KEY_WIDGET, widgetName)) {
-            return EINVAL;
-        }
+        bundle.get(KEY_WIDGET, widgetName);
         if (auto widget = mLogic->mStore->getIdWithStr(widgetName); widget) {
             widgetId = widget.value();
         } else {
             return EINVAL;
         }
         std::vector<TElementPairWithName> elementPairs;
-        if (!bundle.get(KEY_ELEMENT, elementPairs)) {
-            return EINVAL;
-        }
+        bundle.get(KEY_ELEMENT, elementPairs);
         mLogic->mStore->setProfile(widgetName, elementPairs);
     } else if (message.mArg1 == DataType::INT32) {
-        if (!bundle.get(KEY_WIDGET, widgetId)) {
-            return EINVAL;
-        }
+        bundle.get(KEY_WIDGET, widgetId);
         std::vector<TElementPairWithId> elementPairs;
-        if (!bundle.get(KEY_ELEMENT, elementPairs)) {
-            return EINVAL;
-        }
+        bundle.get(KEY_ELEMENT, elementPairs);
         mLogic->mStore->setProfile(widgetId, elementPairs);
     }
     return mLogic->mResponsibilityChain->invokeChain(widgetId);
