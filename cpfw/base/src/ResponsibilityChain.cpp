@@ -44,11 +44,13 @@ int32_t ResponsibilityChain::invokeWidget(const uint32_t widgetId) const {
     std::optional<std::shared_ptr<Widget>> widget = mStore->getWidget(widgetId);
     if (!widget) {
         LOGE("no widget for id " + std::to_string(widgetId));
+        return EINVAL;
     }
 
     int32_t ret = 0;
     if ((ret = widget->get()->check()) != 0) {
         LOGE("check for name " + widget->get()->getName() + ", errno:" + std::to_string(ret));
+        return ret;
     }
     if ((ret = widget->get()->action()) != 0) {
         widget->get()->reset();
