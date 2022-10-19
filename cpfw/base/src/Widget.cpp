@@ -25,23 +25,14 @@
 
 namespace cpfw {
 
-template Widget::Widget(const std::string &name, uint32_t id, FUNCTION_0INT func);
-template Widget::Widget(const std::string &name, uint32_t id, FUNCTION_1INT func);
-template Widget::Widget(const std::string &name, uint32_t id, FUNCTION_2INT func);
-template Widget::Widget(const std::string &name, uint32_t id, FUNCTION_3INT func);
-template Widget::Widget(const std::string &name, uint32_t id, FUNCTION_4INT func);
-template Widget::Widget(const std::string &name, uint32_t id, FUNCTION_5INT func);
-template Widget::Widget(const std::string &name, uint32_t id, FUNCTION_VINT func);
-
 Widget::Widget() : Widget("", 0) {
 }
 
-Widget::Widget(const std::string &name, uint32_t id) : mName(name), mId(id) {
+Widget::Widget(const std::string &name, uint32_t id) : Widget(name, id, nullptr) {
 }
 
-template<typename TFUNC>
-Widget::Widget(const std::string &name, uint32_t id, TFUNC funcAction)
-    : mName(name), mId(id), mFunctionBind(funcAction) {
+Widget::Widget(const std::string &name, uint32_t id, TCallback callback)
+    : mName(name), mId(id), mCallback(callback) {
 }
 
 Widget::~Widget() {
@@ -96,11 +87,11 @@ int32_t Widget::action() {
     if (values.empty() && (bindId != DataStore::EMPTY_BIND)) {
         values = parseProfile(mStore->getProfile(bindId), type, getId(), mStore);
     }
-    if (mFunctionBind.has_value()) {
-        return invoke(mFunctionBind, values);
+    if (nullptr != mCallback) {
+        return std::invoke(mCallback, values);
     }
     if (bindId != DataStore::EMPTY_BIND) {
-        return invoke(mStore->getWidget(bindId).value()->getBind(), values);
+        return std::invoke(mStore->getWidget(bindId).value()->getCallback(), values);
     }
 
     return 0;
@@ -118,8 +109,8 @@ int32_t Widget::reset() {
     return 0;
 }
 
-const std::any& Widget::getBind() const {
-    return mFunctionBind;
+const TCallback& Widget::getCallback() const {
+    return mCallback;
 }
 
 }  // namespace cpfw

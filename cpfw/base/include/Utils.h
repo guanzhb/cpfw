@@ -33,8 +33,6 @@ std::vector<int32_t> parseProfile(
 
 uint64_t getCurrentTimeMs();
 
-int32_t invoke(const std::any &func, std::vector<int32_t> &value);
-
 template<typename TTable, typename TKey>
 std::optional<typename TTable::mapped_type> getOptionalFromMap(
         const TTable &table, const TKey &key) {

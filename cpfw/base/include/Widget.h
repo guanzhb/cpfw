@@ -30,14 +30,17 @@ namespace cpfw {
 class DataStore;
 class IStrategyLogic;
 
+namespace {
+using TCallback = int32_t(*)(std::vector<int32_t>&);
+}
+
 class Widget {
  public:
     Widget();
 
     explicit Widget(const std::string &name, uint32_t id);
 
-    template<typename TFUNC>
-    explicit Widget(const std::string &name, uint32_t id, TFUNC func);
+    explicit Widget(const std::string &name, uint32_t id, TCallback callback);
 
     virtual ~Widget();
 
@@ -57,7 +60,7 @@ class Widget {
 
     virtual int32_t reset();
 
-    virtual const std::any& getBind() const;
+    virtual const TCallback& getCallback() const;
 
  private:
     const std::string mName;
@@ -65,7 +68,7 @@ class Widget {
     std::shared_ptr<DataStore> mStore;
     static std::map<ExpressionEnum,
         std::shared_ptr<IStrategyLogic>> mStrategy;
-    const std::any mFunctionBind;
+    const TCallback mCallback;
 };
 
 }  // namespace cpfw

@@ -32,24 +32,22 @@ static int32_t func0() {
     return 0;
 }
 
-static int32_t func1(int32_t v1) {
-    LOGI("func1 v1:" + std::to_string(v1));
+static std::string parseValue(std::vector<int32_t> &v) {
+    std::string tmp;
+    for (auto s : v) {
+        tmp.append(":");
+        tmp.append(std::to_string(s));
+    }
+    return tmp;
+}
+
+static int32_t funcv1(std::vector<int32_t> &v) {
+    LOGI("funcv1 " + parseValue(v));
     return 0;
 }
 
-static int32_t func2(int32_t v1, int32_t v2) {
-    LOGI("func2 v1:" + std::to_string(v1) + ", v2:" + std::to_string(v2));
-    return 0;
-}
-
-static int32_t func4(int32_t v1, int32_t v2, int32_t v3, int32_t v4) {
-    LOGI("func3 v1:" + std::to_string(v1) + ", v2:" + std::to_string(v2)
-         + ", v3:" + std::to_string(v3) + ", v4:" + std::to_string(v4));
-    return 0;
-}
-
-static int32_t funcv(std::vector<int32_t> &v) {
-    LOGI("funcv size:" + std::to_string(v.size()));
+static int32_t funcv2(std::vector<int32_t> &v) {
+    LOGI("funcv2 " + parseValue(v));
     return 0;
 }
 
@@ -87,19 +85,19 @@ class WidgetStub : public Widget {
 ExampleChain::ExampleChain() {
     mLogic = std::make_shared<Logic>("./exampleChain.xml");
 
-    auto sv = std::make_shared<Widget>("volume", 11221U, func1);
+    auto sv = std::make_shared<Widget>("volume", 11221U, funcv1);
     mLogic->addWidget(sv);
-    auto sl = std::make_shared<Widget>("loudness", 11225U, func2);
+    auto sl = std::make_shared<Widget>("loudness", 11225U, funcv2);
     mLogic->addWidget(sl);
-    auto sf = std::make_shared<Widget>("fade", 11222U, funcv);
+    auto sf = std::make_shared<Widget>("fade", 11222U, funcv1);
     mLogic->addWidget(sf);
-    auto se = std::make_shared<Widget>("equalizer", 11223U, func4);
+    auto se = std::make_shared<Widget>("equalizer", 11223U, funcv1);
     mLogic->addWidget(se);
     auto sd = std::make_shared<Widget>("duck", 11224U);
     mLogic->addWidget(sd);
     auto ss = std::make_shared<WidgetStub>("stub", 11226U);
     mLogic->addWidget(ss);
-    auto sloop = std::make_shared<Widget>("loop", 11227U, func1);
+    auto sloop = std::make_shared<Widget>("loop", 11227U, funcv2);
     mLogic->addWidget(sloop);
 
     mLogic->registerCallback(onReply);

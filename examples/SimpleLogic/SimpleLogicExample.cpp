@@ -30,47 +30,39 @@ SimpleLogicExample::SimpleLogicExample(
 
 }  // namespace cpfw
 
-static int32_t func0() {
-    LOGI("func0");
+static std::string parseValue(std::vector<int32_t> &v) {
+    std::string tmp;
+    for (auto s : v) {
+        tmp.append(":");
+        tmp.append(std::to_string(s));
+    }
+    return tmp;
+}
+
+static int32_t funcv1(std::vector<int32_t> &v) {
+    LOGI("funcv1 " + parseValue(v));
     return 0;
 }
 
-static int32_t func1(int32_t v1) {
-    LOGI("func1 v1:" + std::to_string(v1));
-    return 0;
-}
-
-static int32_t func2(int32_t v1, int32_t v2) {
-    LOGI("func2 v1:" + std::to_string(v1) + ", v2:" + std::to_string(v2));
-    return 0;
-}
-
-static int32_t func3(int32_t v1, int32_t v2, int32_t v3) {
-    LOGI("func4 v1:" + std::to_string(v1) + ", v2:" + std::to_string(v2)
-         + ", v3:" + std::to_string(v3));
-    return 0;
-}
-
-static int32_t func4(int32_t v1, int32_t v2, int32_t v3, int32_t v4) {
-    LOGI("func4 v1:" + std::to_string(v1) + ", v2:" + std::to_string(v2)
-         + ", v3:" + std::to_string(v3) + ", v4:" + std::to_string(v4));
+static int32_t funcv2(std::vector<int32_t> &v) {
+    LOGI("funcv2 " + parseValue(v));
     return 0;
 }
 
 int main() {
     auto helper = std::make_shared<cpfw::SimpleLogicHelper>();
 
-    auto sc = std::make_shared<cpfw::Widget>("screen", 1U, func1);
+    auto sc = std::make_shared<cpfw::Widget>("screen", 1U, funcv1);
     helper->addWidget(sc);
-    auto wifi = std::make_shared<cpfw::Widget>("wifi", 2U, func2);
+    auto wifi = std::make_shared<cpfw::Widget>("wifi", 2U, funcv2);
     helper->addWidget(wifi);
-    auto sound = std::make_shared<cpfw::Widget>("sound", 3U, func1);
+    auto sound = std::make_shared<cpfw::Widget>("sound", 3U, funcv1);
     helper->addWidget(sound);
-    auto gps = std::make_shared<cpfw::Widget>("gps", 4U, func1);
+    auto gps = std::make_shared<cpfw::Widget>("gps", 4U, funcv1);
     helper->addWidget(gps);
-    auto app = std::make_shared<cpfw::Widget>("app", 5U, func3);
+    auto app = std::make_shared<cpfw::Widget>("app", 5U, funcv2);
     helper->addWidget(app);
-    auto bt = std::make_shared<cpfw::Widget>("bluetooth", 6U, func1);
+    auto bt = std::make_shared<cpfw::Widget>("bluetooth", 6U, funcv1);
     helper->addWidget(bt);
 
     helper->loadConfiguration("./simpleLogic.xml");

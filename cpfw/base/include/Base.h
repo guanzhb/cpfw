@@ -59,16 +59,6 @@ struct Profile {
     std::map<uint32_t, Profile> profile;  // TODO profile in profile
 };
 
-// why not use std::function? typeid of std::function is different from function pointer,
-// if use std::function, success to ctor, but fail to any_cast in Widget.
-using FUNCTION_0INT = int32_t(*)();
-using FUNCTION_1INT = int32_t(*)(int32_t);
-using FUNCTION_2INT = int32_t(*)(int32_t, int32_t);
-using FUNCTION_3INT = int32_t(*)(int32_t, int32_t, int32_t);
-using FUNCTION_4INT = int32_t(*)(int32_t, int32_t, int32_t, int32_t);
-using FUNCTION_5INT = int32_t(*)(int32_t, int32_t, int32_t, int32_t, int32_t);
-using FUNCTION_VINT = int32_t(*)(std::vector<int32_t>&);
-
 const std::string KEY_WIDGET = "widget";
 const std::string KEY_ELEMENT = "element";
 const std::string KEY_VALUE = "value";
