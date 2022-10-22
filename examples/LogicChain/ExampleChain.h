@@ -40,6 +40,11 @@ class ExampleChain {
     int32_t setLoop(int32_t loop);
     int32_t delLoop();
 
+    std::map<uint32_t, int32_t> getProfile(const uint32_t widgetId,
+        std::vector<uint32_t> elementId = {});
+    std::map<uint32_t, int32_t> getProfile(const std::string widgetName,
+        std::vector<std::string> elementName = {});
+
  private:
     std::shared_ptr<Logic> mLogic;
 };

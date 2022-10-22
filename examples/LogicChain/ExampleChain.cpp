@@ -137,7 +137,26 @@ int32_t ExampleChain::delLoop() {
     return mLogic->setProfileDelay(11227U, {{0U, 0}}, 500U, PostFlag::DELETE_FORMER);
 }
 
+std::map<uint32_t, int32_t> ExampleChain::getProfile(const uint32_t widgetId,
+        std::vector<uint32_t> elementId) {
+    return mLogic->getProfile(widgetId, elementId);
+}
+
+std::map<uint32_t, int32_t> ExampleChain::getProfile(const std::string widgetName,
+        std::vector<std::string> elementName) {
+    return mLogic->getProfile(widgetName, elementName);
+}
+
 }  // namespace cpfw
+
+static std::string parseValue(std::map<uint32_t, int32_t> v) {
+    std::string tmp;
+    for (auto s : v) {
+        tmp.append(", ");
+        tmp.append(std::to_string(s.first) + ":" + std::to_string(s.second));
+    }
+    return tmp;
+}
 
 int main() {
     std::unique_ptr<cpfw::ExampleChain> example = std::make_unique<cpfw::ExampleChain>();
@@ -182,6 +201,15 @@ int main() {
     LOGI("sleep 5s begin");
     std::this_thread::sleep_for(std::chrono::milliseconds(5000U));
     LOGI("sleep 5s over");
+
+    LOGI("get stub with name:" + parseValue(example->getProfile("stub")));
+    LOGI("get stub with id:" + parseValue(example->getProfile(11226U)));
+
+    LOGI("get fade with name:" + parseValue(example->getProfile("fade")));
+    LOGI("get fade with id:" + parseValue(example->getProfile(11222U)));
+
+    LOGI("get fade with name:" + parseValue(example->getProfile("fade", {"default1"})));
+    LOGI("get fade with id:" + parseValue(example->getProfile(11222U, {2})));
 
     LOGI("ExampleChain exit");
     LOGI("end");

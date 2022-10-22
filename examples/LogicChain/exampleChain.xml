@@ -6,13 +6,13 @@
             <element name="default" id="0" min="1" max="50" current="5" type="3">default</element>
         </profile>
         <profile widget="fade" id="11222" bindTo="">
-            <element name="default0" id="0"  min="1" max="20" current="5" type="3">fade0</element>
-            <element name="default1" id="1"  min="1" max="20" current="5" type="3">fade1</element>
-            <element name="default2" id="2"  min="1" max="20" current="5" type="3">fade2</element>
-            <element name="default3" id="3"  min="1" max="20" current="5" type="3">fade3</element>
+            <element name="default0" id="0"  min="1" max="20" current="1" type="3">fade0</element>
+            <element name="default1" id="1"  min="1" max="20" current="2" type="3">fade1</element>
+            <element name="default2" id="2"  min="1" max="20" current="3" type="3">fade2</element>
+            <element name="default3" id="3"  min="1" max="20" current="4" type="3">fade3</element>
             <element name="default4" id="4"  min="1" max="20" current="5" type="3">fade4</element>
-            <element name="default5" id="5"  min="1" max="20" current="5" type="3">fade5</element>
-            <element name="default6" id="6"  min="1" max="20" current="5" type="3">fade6</element>
+            <element name="default5" id="5"  min="1" max="20" current="6" type="3">fade5</element>
+            <element name="default6" id="6"  min="1" max="20" current="7" type="3">fade6</element>
         </profile>
         <profile widget="equalizer" id="11223" bindTo="">
             <element name="gain_100hz" id="0"  min="1" max="20" current="5" type="1"></element>

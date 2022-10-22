@@ -29,6 +29,7 @@
 #include "Condition.h"
 #include "Convert.h"
 #include "ExpressionPool.h"
+#include "MutexPool.h"
 #include "Widget.h"
 
 namespace cpfw {
@@ -87,6 +88,13 @@ class DataStore : public std::enable_shared_from_this<DataStore>{
     std::optional<uint32_t> getIdWithStr(const std::string &name);
 
  public:
+
+    /**
+     * @brief get profile with lock outside.
+     */
+    Profile& getProfileLocked(const uint32_t widgetId);
+    Profile& getProfileLocked(const std::string &widgetName);
+
     /**
      * @brief bind every widget to it's unique name.
      * invoke in constructor.
@@ -154,6 +162,8 @@ class DataStore : public std::enable_shared_from_this<DataStore>{
     std::map<uint32_t/*widget id*/, TINVOKE_CONDITION> mConditionTable;
     // bind name to id
     std::map<std::string/*value str*/, uint32_t/*value id*/> mStrToIdTable;
+    // use MutexPool to reduce lock action bewteen different widgets for performance
+    std::unique_ptr<MutexPool> mMutexPool;
 };
 
 }  // namespace cpfw

@@ -30,6 +30,7 @@ const uint32_t DataStore::EMPTY_BIND = UINT32_MAX;
 
 DataStore::DataStore() {
     LOGD("ctor DataStore");
+    mMutexPool = std::make_unique<MutexPool>();
 }
 
 DataStore::~DataStore() {
@@ -63,17 +64,30 @@ Profile& DataStore::getProfile(const uint32_t widgetId) {
 
 Profile& DataStore::getProfile(const std::string &widgetName) {
     if (auto id = getIdWithStr(widgetName); id) {
-        return getProfile(id.value());
+        std::shared_lock<std::shared_mutex> lck(mMutexPool->getMutex(id.value()));
+        return getProfileLocked(id.value());
+    }
+    return EMPTY_PROFILE;
+}
+
+Profile& DataStore::getProfileLocked(const uint32_t widgetId) {
+    return getOrDefaultFromMap(mProfileTable, widgetId, EMPTY_PROFILE);
+}
+
+Profile& DataStore::getProfileLocked(const std::string &widgetName) {
+    if (auto id = getIdWithStr(widgetName); id) {
+        return getProfileLocked(id.value());
     }
     return EMPTY_PROFILE;
 }
 
 void DataStore::setProfile(
         const uint32_t widgetId, std::vector<TElementPairWithId> elementPairs) {
-    Profile &profile = getProfile(widgetId);
+    Profile &profile = getProfileLocked(widgetId);
     if (&EMPTY_PROFILE == &profile) {
         return;
     }
+    std::unique_lock<std::shared_mutex> lck(mMutexPool->getMutex(widgetId));
     std::for_each(elementPairs.begin(), elementPairs.end(),
         [&](auto &elementPair) -> void {
             auto elementItor = profile.elements.find(elementPair.first);
@@ -98,10 +112,11 @@ void DataStore::setProfile(
     } else {
         return;
     }
-    Profile &profile = getProfile(widgetId);
+    Profile &profile = getProfileLocked(widgetId);
     if (&EMPTY_PROFILE == &profile) {
         return;
     }
+    std::unique_lock<std::shared_mutex> lck(mMutexPool->getMutex(widgetId));
     std::for_each(elementPairs.begin(), elementPairs.end(),
         [&](auto &elementPair) -> void {
             uint32_t elementId = 0;
@@ -135,7 +150,6 @@ int32_t DataStore::getConvertedData(const uint32_t contextId, int32_t origin) {
     }
     return data->second;
 }
-
 
 int32_t DataStore::getConvertedData(const std::string &context, int32_t origin) {
     if (auto id = getIdWithStr(context); id) {

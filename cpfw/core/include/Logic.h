@@ -67,11 +67,10 @@ class Logic {
                 uint64_t delayTimeMs,
                 const PostFlag flag = PostFlag::NONE);
 
-    int32_t getProfile(const uint32_t widgetId);
-    int32_t getProfile(const std::string &widgetName);
-    int32_t getProfile(const uint32_t widgeteId, const uint32_t elementId);
-    int32_t getProfile(const std::string &widgeteName,
-                const std::string &elementName);
+     std::map<uint32_t, int32_t> getProfile(const uint32_t widgeteId,
+         const std::vector<uint32_t> elementId = {});
+     std::map<uint32_t, int32_t> getProfile(const std::string &widgeteName,
+         const std::vector<std::string> &elementName = {"default"});
 
     void onReply(const Message &message, const int32_t status);
 

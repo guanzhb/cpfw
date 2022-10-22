@@ -130,22 +130,50 @@ int32_t Logic::setProfileDelay(const std::string &widgetName,
     return 0;
 }
 
-int32_t Logic::getProfile(const uint32_t widgetId) {
-    return getProfile(widgetId, 0);
+std::map<uint32_t, int32_t> Logic::getProfile(
+        const uint32_t widgetId, const std::vector<uint32_t> elementId) {
+    std::map<uint32_t, int32_t> ret;
+    Profile profile = mStore->getProfile(widgetId);
+    auto &elements = profile.elements;
+    if (!elementId.empty()) {
+        for (auto elementIdItor : elementId) {
+            if (auto elementItor = elements.find(elementIdItor);
+                    elementItor != elements.end()) {
+                ret.emplace(elementIdItor, elementItor->second.current);
+            }
+        }
+    } else {
+        for (auto &elementItor : elements) {
+            ret.emplace(elementItor.first, elementItor.second.current);
+        }
+    }
+    return ret;
 }
 
-int32_t Logic::getProfile(const uint32_t widgetId, const uint32_t elementId) {
-    return 0;
+std::map<uint32_t, int32_t> Logic::getProfile(
+        const std::string &widgetName, const std::vector<std::string> &elementName) {
+    std::map<uint32_t, int32_t> ret;
+    Profile profile = mStore->getProfile(widgetName);
+    auto &elements = profile.elements;
+    if (elements.empty()) {
+        return ret;
+    }
+    if (!elementName.empty()) {
+        for (auto elementNameItor : elementName) {
+            if (auto id = mStore->getIdWithStr(elementNameItor); id) {
+                if (auto elementItor = elements.find(id.value());
+                        elementItor != elements.end()) {
+                    ret.emplace(id.value(), elementItor->second.current);
+                }
+            }
+        }
+    } else {
+        for (auto &elementItor : elements) {
+            ret.emplace(elementItor.first, elementItor.second.current);
+        }
+    }
+    return ret;
 }
-
-int32_t Logic::getProfile(const std::string &widgetName) {
-    return getProfile(widgetName, "default");
-}
-
-int32_t Logic::getProfile(const std::string &widgetName, const std::string &elementName) {
-    return 0;
-}
-
 
 // get bundle with no safe version for perf, ensure it's safe inside the Logic
 void Logic::onReply(const Message &message, const int32_t status) {
