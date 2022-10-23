@@ -79,8 +79,7 @@ int32_t Logic::setProfile(const uint32_t widgetId,
 int32_t Logic::setProfile(const std::string &widgetName,
         const std::vector<TElementPairWithName> &elementPairs, const PostFlag flag) {
     Message msg;
-    uint32_t widgetId = mStore->getIdWithStr(widgetName).value();
-    msg.mWhat = widgetId;
+    msg.mWhat = mStore->getIdWithStr(widgetName).value();
     Bundle bundle;
     bundle.set(KEY_WIDGET, widgetName);
     bundle.set(KEY_ELEMENT, elementPairs);
@@ -115,8 +114,7 @@ int32_t Logic::setProfileDelay(const std::string &widgetName,
         const std::vector<TElementPairWithName> &elementPairs,
         uint64_t delayTimeMs, const PostFlag flag) {
     Message msg;
-    uint32_t widgetId = mStore->getIdWithStr(widgetName).value();
-    msg.mWhat = widgetId;
+    msg.mWhat = mStore->getIdWithStr(widgetName).value();
     Bundle bundle;
     bundle.set(KEY_WIDGET, widgetName);
     bundle.set(KEY_ELEMENT, elementPairs);

@@ -64,15 +64,14 @@ LogicDataParser::LogicDataParser(const std::string &configurationFile,
         : mDataStore(dataStore) {
     LOGD(TAG, "LogicDataParser begin");
     LOGD(TAG, "LogicDataParser load " + configurationFile + " begin");
-    std::shared_ptr<tinyxml2::XMLDocument> doc
-        = std::make_shared<tinyxml2::XMLDocument>();
-    tinyxml2::XMLError err = doc->LoadFile(configurationFile.c_str());
+    tinyxml2::XMLDocument doc = tinyxml2::XMLDocument();
+    tinyxml2::XMLError err = doc.LoadFile(configurationFile.c_str());
     if (err != tinyxml2::XML_SUCCESS) {
         LOGE(TAG, "read file error!");
         return;
     }
 
-    tinyxml2::XMLElement *root = doc->RootElement();
+    tinyxml2::XMLElement *root = doc.RootElement();
     loadConfiguration(root);
 
     LOGD(TAG, "LogicDataParser load " + configurationFile + " end");
