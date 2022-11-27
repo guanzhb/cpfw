@@ -1,0 +1,3 @@
+/home/guanhb/workspace/github/cpfw/examples/Singleton/CMakeFiles/SingletonTest.dir
+/home/guanhb/workspace/github/cpfw/examples/Singleton/CMakeFiles/edit_cache.dir
+/home/guanhb/workspace/github/cpfw/examples/Singleton/CMakeFiles/rebuild_cache.dir
