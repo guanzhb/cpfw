@@ -19,23 +19,24 @@
 #include "Log.hpp"
 #include "ThreadPool.hpp"
 
+using namespace cpfw;
+
 uint32_t getThreadId() {
     auto id = std::this_thread::get_id();
     return *((uint32_t*)&id);
 }
 
 void fun1(int32_t slp) {
-    LOGI("  hello, fun1 ! " + std::to_string(getThreadId()));
+    LOGI("  hello, fun1 ! %d", getThreadId());
     if (slp > 0) {
-        LOGI(" ======= fun1 sleep " + std::to_string(slp)
-            + " ==== " + std::to_string(getThreadId()));
+        LOGI(" ======= fun1 sleep %d == %d", slp, getThreadId());
         std::this_thread::sleep_for(std::chrono::milliseconds(slp));
     }
 }
 
 struct gfun {
     int32_t operator()(int32_t n) {
-        LOGI(std::to_string(n) + " hello, gfun ! " + std::to_string(getThreadId()));
+        LOGI("%d hello gfun %d", n, getThreadId());
         return 42;
     }
 };
@@ -43,13 +44,12 @@ struct gfun {
 class A {
 public:
     static int32_t Afun(int32_t n = 0) {
-        LOGI(std::to_string(n) + "hello, Afun ! " + std::to_string(getThreadId()));
+        LOGI("%d hello Afun %d", n, getThreadId());
         return n;
     }
 
     static std::string Bfun(int32_t n, std::string str, char c) {
-        LOGI(std::to_string(n) + "hello, Bfun ! " + str + "  "
-             + std::to_string(c) + std::to_string(getThreadId()));
+        LOGI("%d hello Bfun str:%s c:%d %d", n, str.c_str(), c, getThreadId());
         return str;
     }
 };
@@ -63,32 +63,31 @@ int32_t main() {
     std::future<std::string> gh = executor.commit(A::Bfun, 9998, "mult args", 123);
     std::future<std::string> fh = executor.commit(
         []() -> std::string {
-            LOGI("hello, fh !  " + std::to_string(getThreadId()));
+            LOGI("hello fh %d", getThreadId());
             return "hello,fh ret !";
         });
 
-    LOGI(" =======  sleep ========= " + std::to_string(getThreadId()));
+    LOGI(" =======  sleep ========= %d", getThreadId());
     std::this_thread::sleep_for(std::chrono::microseconds(900));
 
     for (int32_t i = 0; i < 50; i++) {
         executor.commit(fun1, i*100 );
     }
-    LOGI(" =======  commit all ========= " + std::to_string(getThreadId())
-         + " idlsize=" + std::to_string(executor.getIdleThreadCount()));
+    LOGI(" =======  commit all ========= %d idleSize:%d",
+         getThreadId(), executor.getIdleThreadCount());
 
-    LOGI(" =======  sleep ========= " + std::to_string(getThreadId()));
+    LOGI(" =======  sleep ========= %d", getThreadId());
     std::this_thread::sleep_for(std::chrono::seconds(3));
 
     ff.get();
-    //LOGI(std::string(ff.get()) + " " + fh.get() + " " + std::to_string(getThreadId()));
 
-    LOGI(" =======  sleep ========= " + std::to_string(getThreadId()));
+    LOGI(" =======  sleep ========= %d", getThreadId());
     std::this_thread::sleep_for(std::chrono::seconds(3));
 
-    LOGI(" =======  func1,55 ========= " + std::to_string(getThreadId()));
+    LOGI(" =======  func1 55 ========= %d", getThreadId());
     executor.commit(fun1, 55).get();
 
-    LOGI(" =======  end ========= " + std::to_string(getThreadId()));
+    LOGI(" =======  end ========= %d", getThreadId());
 
     cpfw::ThreadPool pool(4);
     std::vector< std::future<int> > results;
@@ -96,21 +95,22 @@ int32_t main() {
     for (int32_t i = 0; i < 8; ++i) {
         results.emplace_back(
             pool.commit([i] {
-                LOGI(" =======  hello ========= " + std::to_string(i));
+                LOGI(" =======  hello ========= %d", getThreadId());
                 std::this_thread::sleep_for(std::chrono::seconds(1));
-                LOGI(" =======  world ========= " + std::to_string(i));
+                LOGI(" =======  world ========= %d", i);
                 return i*i;
             })
         );
     }
-    LOGI(" =======  commit all2 ========= " + std::to_string(getThreadId()));
+    LOGI(" =======  commit all2 ========= %d idleSize:%d",
+         getThreadId(), executor.getIdleThreadCount());
 
     std::string tmp;
     for (auto &&result : results) {
         tmp.append(std::to_string(result.get()));
         tmp.append(" ");
     }
-    LOGI(tmp);
+    LOGI("%s", tmp.c_str());
     return 0;
 }
 

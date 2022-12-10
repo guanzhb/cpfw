@@ -36,7 +36,7 @@ class ThreadPool {
     ThreadPool(uint8_t size = 4) {
         initThreadPool(size);
     }
-    
+
     ~ThreadPool() {
         mIsRunning = false;
         mCv.notify_all();

@@ -53,10 +53,10 @@ SimpleLogic::SimpleLogicHandler::~SimpleLogicHandler() {
 }
 
 int32_t SimpleLogic::SimpleLogicHandler::onInvoke(const Message &message) {
-    LOGI("onInvoke enter state:" + mHelper->getStateName(message.mWhat));
+    LOGI("onInvoke enter state:%s", mHelper->getStateName(message.mWhat).c_str());
     const auto &widgetItor = mHelper->getWidgetPair(message.mWhat);
     for (auto itor=widgetItor.begin(); itor!=widgetItor.end(); ++itor) {
-        LOGI("onInvoke widget:" + itor->first->getName());
+        LOGI("onInvoke widget:%s", itor->first->getName().c_str());
         std::invoke(itor->first->getCallback(), const_cast<WidgetValue&>(itor->second));
     }
     return 0;

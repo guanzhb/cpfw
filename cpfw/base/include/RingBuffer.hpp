@@ -27,7 +27,7 @@ namespace cpfw {
 template<typename T, int32_t N>
 class RingBuffer {
  public:
-    RingBuffer() {
+    RingBuffer() : mBuffer() {
     }
 
     int32_t write(const std::vector<T> &writeBuffer) {

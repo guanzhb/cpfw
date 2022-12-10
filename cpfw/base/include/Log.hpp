@@ -22,48 +22,29 @@
 #define TAG ""
 #endif
 
-#include <initializer_list>
-#include <iomanip>
-#include <iostream>
-#include <mutex>
 #include <stdarg.h>
+#include <stdio.h>
 
 #include "Utils.h"
 
-enum class LOG_LEVEL : uint8_t {
-    VERBOSE = 0,
-    INFO,
-    DEBUG,
-    WARN,
-    ERROR,
-};
-
-#define LOGV(...) cpfw::LogOut(TAG, LOG_LEVEL::VERBOSE, __VA_ARGS__);
-#define LOGI(...) cpfw::LogOut(TAG, LOG_LEVEL::INFO, __VA_ARGS__);
-#define LOGD(...) cpfw::LogOut(TAG, LOG_LEVEL::DEBUG, __VA_ARGS__);
-#define LOGW(...) cpfw::LogOut(TAG, LOG_LEVEL::WARN, __VA_ARGS__);
-#define LOGE(...) cpfw::LogOut(TAG, LOG_LEVEL::ERROR, __VA_ARGS__);
-
 namespace cpfw {
 
-template<typename ...Args>
-void LogOut(const std::string &tag, LOG_LEVEL level, Args... args) {
-    auto print = [] (auto i) { std::cout << i << " ";};
-    std::cout << std::left << std::setw(12) << "timestamp:" + std::to_string(getCurrentTimeMs()) + " ";
-    std::cout << std::left << std::setw(12) << "[" + tag + "] ";
-    std::cout << std::right << std::setw(6);
-    switch (level) {
-    case LOG_LEVEL::VERBOSE: std::cout << "[VERBOSE] "; break;
-    case LOG_LEVEL::INFO: std::cout << "[INFO] "; break;
-    case LOG_LEVEL::DEBUG: std::cout << "[DEBUG] "; break;
-    case LOG_LEVEL::WARN: std::cout << "[WARN] "; break;
-    case LOG_LEVEL::ERROR: std::cout << "[ERROR] "; break;
-    default: break;
-    };
-    std::initializer_list<int>{(print(args), 0)...};
-    std::cout << std::endl;
-}
+#ifdef __others__
+
+#else
+    #define LOG_OUT(level, format, ...) do { \
+        auto timeMs = getCurrentTimeMs(); \
+        printf("[%-12s] [%-s] [%ld] " format"\n", TAG, level, timeMs, ##__VA_ARGS__); \
+    } while (0)
+
+    #define LOGV(format, ...) LOG_OUT("V", format, ##__VA_ARGS__);
+    #define LOGD(format, ...) LOG_OUT("D", format, ##__VA_ARGS__);
+    #define LOGI(format, ...) LOG_OUT("I",  format, ##__VA_ARGS__);
+    #define LOGW(format, ...) LOG_OUT("W",  format, ##__VA_ARGS__);
+    #define LOGE(format, ...) LOG_OUT("E", format, ##__VA_ARGS__);
+    #define LOGF(format, ...) LOG_OUT("F", format, ##__VA_ARGS__);
+#endif
 
 }  // namespace cpfw
-   //
+
 #endif  // CPFW_BASE_INCLUDE_LOG_HPP__

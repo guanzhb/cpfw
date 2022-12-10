@@ -22,6 +22,8 @@
 
 #include "Log.hpp"
 
+using namespace cpfw;
+
 namespace cpfw {
 
 const uint32_t StateMachineExample::STATE_INIT = 0;
@@ -43,15 +45,15 @@ StateInit::StateInit(StateMachine *context) : State(context, "stateInit") {
 }
 
 void StateInit::enter() {
-    LOGD("StateInit " + std::string(__func__));
+    LOGD("StateInit %s", __func__);
 }
 
 void StateInit::exit() {
-    LOGD("StateInit " + std::string(__func__));
+    LOGD("StateInit %s", __func__);
 }
 
 bool StateInit::handleMessage(const Message &message) {
-    LOGD("StateInit " + std::string(__func__));
+    LOGD("StateInit %s", __func__);
     switch (message.mWhat) {
     case StateMachineExample::MSG_4:
         mContext->transitStateTo(StateMachineExample::STATE_1);
@@ -66,15 +68,15 @@ State1::State1(StateMachine *context) : State(context, "state1") {
 }
 
 void State1::enter() {
-    LOGD("State1 " + std::string(__func__));
+    LOGD("State1 %s", __func__);
 }
 
 void State1::exit() {
-    LOGD("State1 " + std::string(__func__));
+    LOGD("State1 %s", __func__);
 }
 
 bool State1::handleMessage(const Message &message) {
-    LOGD("State1 " + std::string(__func__));
+    LOGD("State1 %s", __func__);
     switch (message.mWhat) {
     case StateMachineExample::MSG_1:
         mContext->transitStateTo(StateMachineExample::STATE_2);
@@ -89,15 +91,15 @@ State2::State2(StateMachine *context) : State(context, "state2") {
 }
 
 void State2::enter() {
-    LOGD("State2 " + std::string(__func__));
+    LOGD("State2 %s", __func__);
 }
 
 void State2::exit() {
-    LOGD("State2 " + std::string(__func__));
+    LOGD("State2 %s", __func__);
 }
 
 bool State2::handleMessage(const Message &message) {
-    LOGD("State2 " + std::string(__func__));
+    LOGD("State2 %s", __func__);
     switch (message.mWhat) {
     case StateMachineExample::MSG_2:
         mContext->transitStateTo(StateMachineExample::STATE_3);
@@ -112,15 +114,15 @@ State3::State3(StateMachine *context) : State(context, "state3") {
 }
 
 void State3::enter() {
-    LOGD("State3 " + std::string(__func__));
+    LOGD("State3 %s", __func__);
 }
 
 void State3::exit() {
-    LOGD("State3 " + std::string(__func__));
+    LOGD("State3 %s", __func__);
 }
 
 bool State3::handleMessage(const Message &message) {
-    LOGD("State3 " + std::string(__func__));
+    LOGD("State3 %s", __func__);
     switch (message.mWhat) {
     case StateMachineExample::MSG_3:
         mContext->transitStateTo(StateMachineExample::STATE_INIT);

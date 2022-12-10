@@ -59,5 +59,5 @@ int32_t Condition::getRight() const {
     return mRight;
 }
 
-}  // namespace cpfw 
+}  // namespace cpfw
 

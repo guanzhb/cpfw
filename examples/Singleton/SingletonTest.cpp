@@ -16,21 +16,23 @@
 
 #define TAG "singleton-a"
 
-#include <mutex>
-
+#include "Log.hpp"
 #include "Singleton.hpp"
 #include "Log.hpp"
+
+
+using namespace cpfw;
 
 namespace cpfw {
 
 class SingletonA : public Singleton<SingletonA> {
  public:
     SingletonA(int32_t a) : SingletonA(a, 0) {
-        LOGI("ctor a:" + std::to_string(a));
+        LOGI("ctor a:%d", a);
     }
 
     SingletonA(int32_t a, uint8_t b) : mA(a), mB(b) {
-        LOGI("ctor a:" + std::to_string(a) + ", b:" + std::to_string(b));
+        LOGI("ctor a:%d, b:%d", a, b);
     }
 
     int32_t getA() {
@@ -49,14 +51,14 @@ class SingletonA : public Singleton<SingletonA> {
 
 int main() {
     auto a = cpfw::SingletonA::getInstance(2);
-    LOGI("get a::a:", __func__, a->getA());
-    LOGI("get a::b:", __func__, a->getB());
+    LOGI("get a::a:%d", a->getA());
+    LOGI("get a::b:%d", a->getB());
 
     auto b = cpfw::SingletonA::getInstance(4, 5);
-    LOGI("get a::a:", __func__, a->getA());
-    LOGI("get a::b:", __func__, a->getB());
-    LOGI("get b::a:", __func__, b->getA());
-    LOGI("get b::b:", __func__, b->getB());
+    LOGI("get a::a:%d", a->getA());
+    LOGI("get a::b:%d", a->getB());
+    LOGI("get b::a:%d", b->getA());
+    LOGI("get b::b:%d", b->getB());
 
     return 0;
 }

@@ -59,5 +59,5 @@ const float Convert::getFactor() const {
     return mFactor;
 }
 
-}  // namespace cpfw 
+}  // namespace cpfw
 

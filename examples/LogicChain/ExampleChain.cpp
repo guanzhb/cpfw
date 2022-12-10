@@ -42,28 +42,28 @@ static std::string parseValue(std::vector<int32_t> &v) {
 }
 
 static int32_t funcv1(std::vector<int32_t> &v) {
-    LOGI("funcv1 " + parseValue(v));
+    LOGI("funcv1: %s", parseValue(v).c_str());
     return 0;
 }
 
 static int32_t funcv2(std::vector<int32_t> &v) {
-    LOGI("funcv2 " + parseValue(v));
+    LOGI("funcv2: %s", parseValue(v).c_str());
     return 0;
 }
 
 static int32_t handle(
         DataStore *store, const std::string &funcName,
         const std::vector<int32_t> &values) {
-    LOGI(funcName);
+    LOGI("%s", funcName.c_str());
     std::for_each(values.begin(), values.end(), [](auto d) -> void {
-        LOGI("" + std::to_string(d));
+        LOGI("%d", d);
     });
     return 0;
 }
 
 static void onReply(const std::string &widgetName,
         const std::vector<TElementPairWithName> &elementPair, const int32_t status) {
-    LOGI("reply: widget:" + widgetName + ", status:" + std::to_string(status));
+    LOGI("reply: widget:%s, status:%d", widgetName.c_str(), status);
 }
 
 class WidgetStub : public Widget {
@@ -72,12 +72,12 @@ class WidgetStub : public Widget {
     }
 
     int32_t action() override {
-        LOGI("widget override " + getName() + " action");
+        LOGI("widget override %s action", getName().c_str());
         uint32_t type = ElementType::PUBLIC;
         auto values = parseProfile(
             getDataStore()->getProfile(getId()), type, getId(), getDataStore());
         int32_t ret = handle(getDataStore().get(), getName() + " override action ", values);
-        LOGI("WidgetStub action status: " + std::to_string(ret));
+        LOGI("WidgetStub action status:%d", ret);
         return ret;
     }
 };
@@ -159,6 +159,7 @@ static std::string parseValue(std::map<uint32_t, int32_t> v) {
 }
 
 int main() {
+    using namespace cpfw;
     std::unique_ptr<cpfw::ExampleChain> example = std::make_unique<cpfw::ExampleChain>();
     LOGI("start");
 
@@ -202,14 +203,14 @@ int main() {
     std::this_thread::sleep_for(std::chrono::milliseconds(5000U));
     LOGI("sleep 5s over");
 
-    LOGI("get stub with name:" + parseValue(example->getProfile("stub")));
-    LOGI("get stub with id:" + parseValue(example->getProfile(11226U)));
+    LOGI("get stub with name:%s", parseValue(example->getProfile("stub")).c_str());
+    LOGI("get stub with id:%s", parseValue(example->getProfile(11226U)).c_str());
 
-    LOGI("get fade with name:" + parseValue(example->getProfile("fade")));
-    LOGI("get fade with id:" + parseValue(example->getProfile(11222U)));
+    LOGI("get fade with name:%s", parseValue(example->getProfile("fade")).c_str());
+    LOGI("get fade with id:%s", parseValue(example->getProfile(11222U)).c_str());
 
-    LOGI("get fade with name:" + parseValue(example->getProfile("fade", {"default1"})));
-    LOGI("get fade with id:" + parseValue(example->getProfile(11222U, {2})));
+    LOGI("get fade with name:%s", parseValue(example->getProfile("fade", {"default1"})).c_str());
+    LOGI("get fade with id:%s", parseValue(example->getProfile(11222U, {2})).c_str());
 
     LOGI("ExampleChain exit");
     LOGI("end");

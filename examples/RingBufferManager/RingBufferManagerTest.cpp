@@ -23,55 +23,51 @@
 #include "Log.hpp"
 #include "RingBufferManager.hpp"
 
+using namespace cpfw;
+
 constexpr std::size_t N = 12;
 using T = char;
 
 cpfw::RingBufferManager<T, N> ringBufferManager {std::string("test")};
 
-void print(std::vector<T> buffer) {
-    std::string tmp;
+void print(std::string str, std::vector<T> buffer) {
     for (auto &s : buffer) {
-        tmp.push_back(s);
-        tmp.append(std::string(" "));
+        str.push_back(s);
+        str.append(" ");
     }
-    LOGI(tmp);
+    LOGI("%s", str.c_str());
 }
 
-void print(cpfw::RingBufferManager<T, N> &ringBufferManager) {
+void print(std::string str, cpfw::RingBufferManager<T, N> &ringBufferManager) {
     auto &data = ringBufferManager.get().get();
-    std::string tmp;
     for (int32_t index=0; index<data.size(); ++index) {
-        tmp.push_back(data[index]);
-        tmp.append(std::string(" "));
+        str.push_back(data[index]);
+        str.append(std::string(" "));
     }
-    LOGI("po:");
-    LOGI(tmp);
-    tmp.erase();
+    LOGI("%s", str.c_str());
+    str = "po: ";
     for (int32_t index=0; index<data.size(); ++index) {
         if (index == ringBufferManager.get().getHeadPos()) {
-            tmp.append(std::string("H "));
+            str.append("H ");
         } else if (index == ringBufferManager.get().getTailPos()) {
-            tmp.append(std::string("T "));
+            str.append("T ");
         } else {
-            tmp.append(std::string("  "));
+            str.append("  ");
         }
     }
-    LOGI(tmp);
+    LOGI("%s", str.c_str());
 }
 
 void testWrite(cpfw::RingBufferManager<T, N> &ringBufferManager, std::vector<T> in) {
-    LOGI("in:");
-    print(in);
+    print("in: ", in);
     ringBufferManager.write(in);
-    LOGI("rb:");
-    print(ringBufferManager);
+    print("rb: ", ringBufferManager);
 }
 
-int gIndex = 0;
+static int gIndex = 0;
 
 static int32_t readIntra(std::vector<T> &readBuffer, int32_t readSize) {
-    LOGI("ou:");
-    print(readBuffer);
+    print("ou: ", readBuffer);
     return 0;
 }
 
@@ -100,7 +96,7 @@ static int32_t writeIntra() {
 }
 
 int main() {
-    std::cout << "test:" << std::endl;
+    LOGD("test:");
     ringBufferManager.registerWrite(writeIntra, 20);
     // ringBufferManager.registerRead(readIntra, 10, 500);  // overrun
     ringBufferManager.registerRead(readIntra, 1, 50); // underrun

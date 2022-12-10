@@ -43,7 +43,7 @@ int32_t Handler::post(const Message &msg) {
 }
 
 int32_t Handler::postDelay(const Message &msg, uint64_t delayMs) {
-    LOGI("postDelay flag:" + std::to_string(msg.mFlag));
+    LOGI("postDelay flag:%d", msg.mFlag);
 
     if (0 != (msg.mFlag & PostFlag::SYNC)) {
         return onInvoke(msg);
@@ -88,7 +88,7 @@ void Handler::handleMessage() {
         const Message &msg = itor->second;
 
         int32_t status = onInvoke(msg);
-        LOGI("handleMessage invoke over status: " + std::to_string(status));
+        LOGI("handleMessage invoke over status:%d", status);
         reply(msg, status);
 
         if (0 != (msg.mFlag & PostFlag::LOOP)) {
@@ -109,7 +109,7 @@ void Handler::reply(const Message &msg, int32_t status) {
         LOGI("reply to widget");
         msg.mCallback(status);
     } else {
-        LOGI("reply to Handler status: " + std::to_string(status));
+        LOGI("reply to Handler status:%d", status);
         onReply(msg, status);
     }
 }

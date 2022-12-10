@@ -14,18 +14,20 @@
  * limitations under the License.
  */
 
+#define TAG "RingArrayTest"
+
 #include "RingArray.hpp"
 #include "Log.hpp"
 
+using namespace cpfw;
+
 void test(cpfw::RingArray<int32_t, 5> &ringArray, int32_t index) {
-    std::cout << "index:" + std::to_string(index)
-                 + " -> " + std::to_string(ringArray[index]) << std::endl;
+    LOGD("index:%d value:%d", index, ringArray[index]);
 }
 
-void print(cpfw::RingArray<int32_t, 5> &RingArray) {
-    for (int32_t index=0; index<RingArray.size(); ++index) {
-        std::cout << "index:" + std::to_string(index)
-                 + " -> " + std::to_string(RingArray.at(index)) << std::endl;
+void print(cpfw::RingArray<int32_t, 5> &ringArray) {
+    for (int32_t index=0; index<ringArray.size(); ++index) {
+        LOGD("index:%d value:%d", index, ringArray.at(index));
     }
 }
 
@@ -36,10 +38,10 @@ int main() {
         d = i++;
     }
 
-    std::cout << "table:" << std::endl;
+    LOGD("table");
     print(ringArray);
 
-    std::cout << "test:" << std::endl;
+    LOGD("test");
     test(ringArray, -10);
     test(ringArray, -5);
     test(ringArray, -4);

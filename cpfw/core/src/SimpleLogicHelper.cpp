@@ -56,7 +56,7 @@ void SimpleLogicHelper::addWidget(std::shared_ptr<Widget> widget) {
 }
 
 void SimpleLogicHelper::loadConfiguration(const std::string &configurationFile) {
-    LOGV("loadConfiguration begin file:" + configurationFile);
+    LOGV("loadConfiguration file %s begin", configurationFile.c_str());
     tinyxml2::XMLDocument doc = tinyxml2::XMLDocument();
     tinyxml2::XMLError err = doc.LoadFile(configurationFile.c_str());
     if (err != tinyxml2::XML_SUCCESS) {
@@ -85,7 +85,7 @@ static std::vector<int32_t> parseValue(std::string strs) {
 void SimpleLogicHelper::loadState(tinyxml2::XMLElement *root) {
     LOGV("loadState begin");
     tinyxml2::XMLElement *surfaceState = root->FirstChildElement(TAG_STATE.c_str());
-    
+
     while (surfaceState) {
         int32_t stateValue = 0;
         surfaceState->QueryIntAttribute(ATTR_VALUE.c_str(), &stateValue);
@@ -96,11 +96,11 @@ void SimpleLogicHelper::loadState(tinyxml2::XMLElement *root) {
         std::vector<std::pair<std::shared_ptr<Widget>, WidgetValue>> stateAction;
         while (surfaceChild) {
             const char *widgetName = surfaceChild->Attribute(ATTR_WIDGET.c_str());
-            LOGV("loadState widget:" + std::string(widgetName));
+            LOGV("loadState widget:%s", widgetName);
             uint32_t widgetId = 0;
             surfaceChild->QueryUnsignedAttribute(ATTR_ID.c_str(), &widgetId);
             const char *widgetValue = surfaceChild->Attribute(ATTR_VALUE.c_str());
-            LOGV("loadState widget value:" + std::string(widgetValue));
+            LOGV("loadState widget value:%s", widgetValue);
             stateAction.push_back(std::make_pair(
                     mWidgetTable[widgetId], parseValue(widgetValue)));
             surfaceChild = surfaceChild->NextSiblingElement();

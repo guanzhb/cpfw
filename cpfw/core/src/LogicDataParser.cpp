@@ -62,19 +62,18 @@ LogicDataParser::LogicDataParser() {
 LogicDataParser::LogicDataParser(const std::string &configurationFile,
         std::shared_ptr<DataStore> dataStore)
         : mDataStore(dataStore) {
-    LOGD(TAG, "LogicDataParser begin");
-    LOGD(TAG, "LogicDataParser load " + configurationFile + " begin");
+    LOGD("LogicDataParser load %s begin", configurationFile.c_str());
     tinyxml2::XMLDocument doc = tinyxml2::XMLDocument();
     tinyxml2::XMLError err = doc.LoadFile(configurationFile.c_str());
     if (err != tinyxml2::XML_SUCCESS) {
-        LOGE(TAG, "read file error!");
+        LOGE("read file error!");
         return;
     }
 
     tinyxml2::XMLElement *root = doc.RootElement();
     loadConfiguration(root);
 
-    LOGD(TAG, "LogicDataParser load " + configurationFile + " end");
+    LOGD("LogicDataParser load %s end", configurationFile.c_str());
 }
 
 LogicDataParser::~LogicDataParser() {
@@ -88,11 +87,11 @@ void LogicDataParser::loadConfiguration(tinyxml2::XMLElement *root) {
 }
 
 void LogicDataParser::loadInvokeChain(tinyxml2::XMLElement *root) {
-    LOGD(TAG, "loadInvokeChain begin");
+    LOGD("loadInvokeChain begin");
     tinyxml2::XMLElement *surface = root->FirstChildElement(TAG_INVOKE_CHAIN.c_str());
     tinyxml2::XMLElement *surfaceParent
         = surface->FirstChildElement(TAG_INVOKE_CHAIN_PARENT.c_str());
-    
+
     while (surfaceParent) {
         const char* parentWidgetName = surfaceParent->Attribute(ATTR_WIDGET.c_str());
         tinyxml2::XMLElement *surfaceChild
@@ -149,11 +148,11 @@ static Condition parseCondition(DataStore *dataStore, std::string name, std::str
 }
 
 void LogicDataParser::loadConditions(tinyxml2::XMLElement *root) {
-    LOGD(TAG, "loadCondition begin");
+    LOGD("loadCondition begin");
     tinyxml2::XMLElement *surface = root->FirstChildElement(TAG_CONDITIONS.c_str());
     tinyxml2::XMLElement *surfaceCondition
         = surface->FirstChildElement(TAG_CONDITION.c_str());
-    
+
     while (surfaceCondition) {
         tinyxml2::XMLElement *surfaceElement
             = surfaceCondition->FirstChildElement(TAG_ELEMENT.c_str());
@@ -173,11 +172,11 @@ void LogicDataParser::loadConditions(tinyxml2::XMLElement *root) {
 }
 
 void LogicDataParser::loadProfile(tinyxml2::XMLElement *root) {
-    LOGD(TAG, "loadProfile begin");
+    LOGD("loadProfile begin");
     tinyxml2::XMLElement *surface = root->FirstChildElement(TAG_PROFILES.c_str());
     tinyxml2::XMLElement *surfaceProfile
         = surface->FirstChildElement(TAG_PROFILE.c_str());
-    
+
     while (surfaceProfile) {
         const char* widgetName = surfaceProfile->Attribute(ATTR_WIDGET.c_str());
         uint32_t widgetId = 0;
@@ -247,11 +246,11 @@ static std::vector<Convert> parseCalculate(DataStore *dataStore, std::string nam
 }
 
 void LogicDataParser::loadDataConvert(tinyxml2::XMLElement *root) {
-    LOGD(TAG, "loadDataConvert begin");
+    LOGD("loadDataConvert begin");
     tinyxml2::XMLElement *surface = root->FirstChildElement(TAG_CONVERTS.c_str());
     tinyxml2::XMLElement *surfaceContext
         = surface->FirstChildElement(TAG_CONTEXT.c_str());
-    
+
     while (surfaceContext) {
         tinyxml2::XMLElement *surfaceElement
             = surfaceContext->FirstChildElement(TAG_ELEMENT.c_str());

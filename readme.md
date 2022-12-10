@@ -21,6 +21,23 @@ blueprint
   ------------
     includes state machine and state.
 
+  RingBuffer
+  ----------
+    wrapper ringbuffer with no lock
+
+  RingBufferManager
+  -----------------
+    ringbuffer with Handler and lock
+
+  Singleton
+  ---------
+    singleton template
+
+  ThreadPool
+  ----------
+    thread pool
+
+
   **middlewares in cpfw/base can be used alone.**
 
 pull

@@ -16,50 +16,55 @@
 
 #define TEST  // used in RingBuffer
 
+#define TAG "RingBufferTest"
+
 #include <iostream>
 
+#include "Log.hpp"
+
 #include "RingBuffer.hpp"
+
+using namespace cpfw;
 
 constexpr std::size_t N = 12;
 using T = char;
 
-void print(std::vector<T> buffer) {
+void print(std::string str, std::vector<T> buffer) {
     for (auto &s : buffer) {
-        std::cout << s << " ";
+        str.push_back(s);
+        str += " ";
     }
-    std::cout << std::endl;
+    LOGD("%s", str.c_str());
 }
 
-void print(cpfw::RingBuffer<T, N> &ringBuffer) {
+void print(std::string str, cpfw::RingBuffer<T, N> &ringBuffer) {
     auto &data = ringBuffer.get();
     for (std::size_t index=0; index<data.size(); ++index) {
-        std::cout << data[index] << " ";
+        str.push_back(data[index]);
+        str += " ";
     }
-    std::cout << std::endl;
-    std::cout << "po: ";
+    LOGD("%s", str.c_str());
+    str = "po: ";
     for (std::size_t index=0; index<data.size(); ++index) {
         if (index == ringBuffer.getHeadPos()) {
-            std::cout << "H ";
+            str += "H ";
         } else if (index == ringBuffer.getTailPos()) {
-            std::cout << "T ";
+            str += "T ";
         } else {
-            std::cout << "  ";
+            str += "  ";
         }
     }
-    std::cout << std::endl;
+    LOGD("%s", str.c_str());
 }
 
 void test(cpfw::RingBuffer<T, N> &ringBuffer,
           std::vector<T> in, std::size_t readSize) {
-    std::cout << "in: ";
-    print(in);
+    print("in: ", in);
     ringBuffer.write(in);
-    std::cout << "rb: ";
-    print(ringBuffer);
+    print("rb: ", ringBuffer);
     std::vector<T> out = std::vector(readSize, '0');
     ringBuffer.read(out, out.size());
-    std::cout << "ou: ";
-    print(out);
+    print("ou: ", out);
 }
 
 int main() {

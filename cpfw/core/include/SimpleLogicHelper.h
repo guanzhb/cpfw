@@ -29,7 +29,7 @@
 namespace cpfw {
 
 using WidgetValue = std::vector<int32_t>;
-using WidgetPair = std::pair<std::shared_ptr<Widget>, WidgetValue>; 
+using WidgetPair = std::pair<std::shared_ptr<Widget>, WidgetValue>;
 
 class SimpleLogicHelper {
  public:
@@ -52,7 +52,7 @@ class SimpleLogicHelper {
     void addWidget(std::shared_ptr<Widget> widget);
 
     void loadConfiguration(const std::string &configurationFile);
-    
+
     const std::string& getStateName(uint32_t stateId);
 
     const std::vector<WidgetPair>& getWidgetPair(uint32_t stateId);

@@ -46,7 +46,7 @@ void StateMachine::removeState(uint32_t stateId) {
 void StateMachine::setInitialState(uint32_t stateId) {
     const auto &initialStateItor = mStateTable.find(stateId);
     if (initialStateItor == mStateTable.end()) {
-         LOGE("[transitState] stateId:" + std::to_string(stateId) + " mismatch");
+         LOGE("[transitState] stateId:%d mismatch", stateId);
          return;
     }
     mCurrentState = initialStateItor->second;
@@ -56,7 +56,7 @@ void StateMachine::setInitialState(uint32_t stateId) {
 void StateMachine::transitStateTo(uint32_t stateId) {
     const auto &nextStateItor = mStateTable.find(stateId);
     if (nextStateItor == mStateTable.end()) {
-         LOGE("[transitState] stateId:" + std::to_string(stateId) + " mismatch");
+         LOGE("[transitState] stateId:%d mismatchmatch", stateId);
          return;
     }
     mCurrentState->exit();

@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.5)
 
-project(RingBufferTest)
+project(ringBufferTest)
 
 set(CMAKE_CXX_STANDARD 20)
 
@@ -8,4 +8,8 @@ include_directories("../../cpfw/base/include")
 
 FILE(GLOB BASE_SRCS "RingBufferTest.cpp")
 
-add_executable(RingBufferTest ${BASE_SRCS})
+link_directories("../../out")
+
+add_executable(ringBufferTest ${BASE_SRCS})
+
+target_link_libraries(ringBufferTest cpfw)

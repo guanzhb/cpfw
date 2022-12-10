@@ -133,7 +133,7 @@ class RingBufferManager {
 
     int32_t writeLock(const std::vector<T> &writeBuffer) {
         while (mBuffer.getIdleSize() < writeBuffer.size()) {
-            LOGW(mName + " overrun");
+            LOGW("%s overrun", mName.c_str());
             std::unique_lock<std::shared_mutex> lck(mMutex);
             mConditionVariable.wait(lck);
         }
@@ -144,7 +144,7 @@ class RingBufferManager {
 
     int32_t readLock(std::vector<T> &readBuffer, int32_t readSize) {
         while (mBuffer.getAvailableSize() < readSize) {
-            LOGW(mName + " underrun");
+            LOGW("%s underrun", mName.c_str());
             std::shared_lock<std::shared_mutex> lck(mMutex);
             mConditionVariable.wait(lck);
         }

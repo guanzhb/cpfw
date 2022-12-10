@@ -20,6 +20,8 @@
 
 #include "Log.hpp"
 
+using namespace cpfw;
+
 namespace cpfw {
 
 SimpleLogicExample::SimpleLogicExample(
@@ -40,12 +42,12 @@ static std::string parseValue(std::vector<int32_t> &v) {
 }
 
 static int32_t funcv1(std::vector<int32_t> &v) {
-    LOGI("funcv1 " + parseValue(v));
+    LOGI("funcv1 %s", parseValue(v).c_str());
     return 0;
 }
 
 static int32_t funcv2(std::vector<int32_t> &v) {
-    LOGI("funcv2 " + parseValue(v));
+    LOGI("funcv2 %s", parseValue(v).c_str());
     return 0;
 }
 

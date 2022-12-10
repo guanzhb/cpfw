@@ -20,7 +20,7 @@
 namespace cpfw {
 
 /**
- *  only impl operator[], keep others same as array. 
+ *  only impl operator[], keep others same as array.
  */
 template<typename T, int32_t N>
 class RingArray : public std::array<T, N> {

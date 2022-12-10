@@ -61,7 +61,7 @@ int32_t Widget::check() {
     }
     auto &conditionPair = mStore->getCondition(mId);
     if (&DataStore::EMPTY_CONDITION == &conditionPair) {
-        LOGI("widget " + mName + " no check");
+        LOGD("widget %s no check", mName.c_str());
         return 0;
     }
     auto &logic = conditionPair.first;
@@ -80,7 +80,7 @@ int32_t Widget::check() {
 }
 
 int32_t Widget::action() {
-    LOGD("widget " + mName + " action");
+    LOGD("widget %s action", mName.c_str());
     constexpr uint32_t type = ElementType::PUBLIC;
     auto bindId = mStore->getBind(getId());
     auto values = parseProfile(mStore->getProfile(getId()), type, getId(), mStore);

@@ -17,6 +17,7 @@
 #ifndef CPFW_BASE_INCLUDE_SINGLETON_H__
 #define CPFW_BASE_INCLUDE_SINGLETON_H__
 
+#include <mutex>
 #include <utility>
 
 namespace cpfw {
