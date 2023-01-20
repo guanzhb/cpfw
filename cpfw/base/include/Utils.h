@@ -52,6 +52,9 @@ TValue& getOrDefaultFromMap(
     return value;
 }
 
+void dumpBytes(const uint8_t *data, const std::size_t bytes,
+               const std::size_t dataInLine, const char *header);
+
 }  // namespace cpfw
 
 #endif  // CPFW_BASE_INCLUDE_UTILS_HPP_

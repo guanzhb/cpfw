@@ -14,11 +14,14 @@
  * limitations under the License.
  */
 
+#define TAG "Utils"
+
 #include "Utils.h"
 
 #include <sys/time.h>
 
 #include "Base.h"
+#include "Log.hpp"
 #include "StrategyCalculate.h"
 
 namespace cpfw {
@@ -57,6 +60,42 @@ uint64_t getCurrentTimeMs() {
     struct timespec stTimeSpec;
     clock_gettime(CLOCK_MONOTONIC, &stTimeSpec);
     return stTimeSpec.tv_sec * 1000 + stTimeSpec.tv_nsec / 1000000;
+}
+
+void dumpBytes(const uint8_t *data, const std::size_t bytes,
+               const std::size_t dataInLine, const char *header) {
+    constexpr char CODE[] = "0123456789ABCDEF";
+    constexpr std::size_t DATA_WIDTH = 3U;
+    const std::size_t MAX_DATA = dataInLine * DATA_WIDTH;
+
+    std::string str(MAX_DATA, ' ');
+
+    std::size_t indexInLine = 0U;
+    for (std::size_t i=0; i<dataInLine; ++i) {
+        str[indexInLine++] = CODE[i / 10];
+        str[indexInLine] = CODE[i % 10];
+        indexInLine += 2;
+    }
+    LOGD("<%s>  index : 0d %s", header, str.substr(0, indexInLine).c_str());
+
+    indexInLine = 0U;
+    std::size_t line = 0U;
+
+    for (std::size_t i=0; i<bytes; ++i) {
+        str[indexInLine++] = CODE[data[i] >> 0x4];
+        str[indexInLine] = CODE[data[i] & 0xF];
+        indexInLine += 2U;
+        if (indexInLine == MAX_DATA) {
+            LOGD("<%s> line[%lu]: 0x %s", header, line, str.substr(0, indexInLine).c_str());
+            ++line;
+            indexInLine = 0U;
+        }
+    }
+
+    if (0 != indexInLine) {
+        LOGD("<%s> line[%lu]: 0x %s", header, line, str.substr(0, indexInLine).c_str());
+    }
+
 }
 
 }  // namespace cpfw
