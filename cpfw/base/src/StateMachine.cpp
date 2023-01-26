@@ -13,11 +13,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-#define TAG "StateMachine"
-
-#include "StateMachine.h"
+#define LOG_TAG "StateMachine"
 
 #include "Log.hpp"
+#include "StateMachine.h"
 
 namespace cpfw {
 
@@ -85,8 +84,7 @@ int32_t StateMachine::StateMachineHandler::onInvoke(const Message &message) {
     return 0;
 }
 
-void StateMachine::StateMachineHandler::onReply(
-        const Message &message, const int32_t status) {
+void StateMachine::StateMachineHandler::onReply(const Message &message, const int32_t status) {
 }
 
 }  // namespace cpfw

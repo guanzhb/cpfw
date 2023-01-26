@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-#define TAG "RingArrayTest"
+#define LOG_TAG "RingArrayTest"
 
 #include "RingArray.hpp"
 #include "Log.hpp"

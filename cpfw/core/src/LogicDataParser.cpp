@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-#define TAG "LogicDataParser"
+#define LOG_LOG_TAG "LogicDataParser"
 
 #include "LogicDataParser.h"
 

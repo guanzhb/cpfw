@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-#define TAG "ThreadPoolTest"
+#define LOG_TAG "ThreadPoolTest"
 
 #include "Log.hpp"
 #include "ThreadPool.hpp"

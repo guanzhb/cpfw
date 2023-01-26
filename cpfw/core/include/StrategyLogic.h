@@ -13,8 +13,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-#ifndef CPFW_BASE_INCLUDE_STRATEGYLOGIC_H__
-#define CPFW_BASE_INCLUDE_STRATEGYLOGIC_H__
+#ifndef CPFW_CORE_INCLUDE_STRATEGYLOGIC_H_
+#define CPFW_CORE_INCLUDE_STRATEGYLOGIC_H_
 
 #include <memory>
 
@@ -28,57 +28,48 @@ class Condition;
 
 class IStrategyLogic {
  public:
-    virtual int32_t handle(const Condition &condition,
-                           std::shared_ptr<DataStore> dataStore) = 0;
+    virtual int32_t handle(const Condition &condition, std::shared_ptr<DataStore> dataStore) = 0;
 };
 
 class StrategyLogicDummy : public IStrategyLogic {
  public:
-    int32_t handle(const Condition &condition,
-                   std::shared_ptr<DataStore> dataStore) override;
+    int32_t handle(const Condition &condition, std::shared_ptr<DataStore> dataStore) override;
 };
 
 class StrategyLogicEqual : public IStrategyLogic {
  public:
-    int32_t handle(const Condition &condition,
-                   std::shared_ptr<DataStore> dataStore) override;
+    int32_t handle(const Condition &condition, std::shared_ptr<DataStore> dataStore) override;
 };
 
 class StrategyLogicNotEqual : public IStrategyLogic {
  public:
-    int32_t handle(const Condition &condition,
-                   std::shared_ptr<DataStore> dataStore) override;
+    int32_t handle(const Condition &condition, std::shared_ptr<DataStore> dataStore) override;
 };
 
 class StrategyLogicInRange : public IStrategyLogic {
  public:
-    int32_t handle(const Condition &condition,
-                   std::shared_ptr<DataStore> dataStore) override;
+    int32_t handle(const Condition &condition, std::shared_ptr<DataStore> dataStore) override;
 };
 
 class StrategyLogicOutRange : public IStrategyLogic {
  public:
-    int32_t handle(const Condition &condition,
-                   std::shared_ptr<DataStore> dataStore) override;
+    int32_t handle(const Condition &condition, std::shared_ptr<DataStore> dataStore) override;
 };
 
 class StrategyLogicChange : public IStrategyLogic {
  public:
-    int32_t handle(const Condition &condition,
-                   std::shared_ptr<DataStore> dataStore) override;
+    int32_t handle(const Condition &condition, std::shared_ptr<DataStore> dataStore) override;
 };
 
 class StrategyLogicPool {
  public:
-    static std::shared_ptr<IStrategyLogic>
-        getStrategy(ExpressionEnum expression);
+    static std::shared_ptr<IStrategyLogic> getStrategy(ExpressionEnum expression);
 
  private:
-    static std::map<ExpressionEnum,
-        std::shared_ptr<IStrategyLogic>> mStrategy;
+    static std::map<ExpressionEnum, std::shared_ptr<IStrategyLogic>> mStrategy;
     static std::shared_ptr<IStrategyLogic> STRATEGY_DUMMY;
 };  // StrategyLogicPool
 
 }  // namespace cpfw
 
-#endif  // CPFW_BASE_INCLUDE_STRATEGYLOGIC_H__
+#endif  // CPFW_CORE_INCLUDE_STRATEGYLOGIC_H_

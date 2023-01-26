@@ -14,8 +14,8 @@
  * limitations under the License.
  */
 
-#ifndef CPFW_BASE_INCLUDE_MESSAGEPOOL_H__
-#define CPFW_BASE_INCLUDE_MESSAGEPOOL_H__
+#ifndef CPFW_BASE_INCLUDE_MESSAGEPOOL_H_
+#define CPFW_BASE_INCLUDE_MESSAGEPOOL_H_
 
 #include <condition_variable>
 #include <map>
@@ -69,5 +69,5 @@ class MessagePool {
 
 }  // namespace cpfw
 
-#endif  // CPFW_BASE_INCLUDE_MESSAGEPOOL_H__
+#endif  // CPFW_BASE_INCLUDE_MESSAGEPOOL_H_
 

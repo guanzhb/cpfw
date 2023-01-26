@@ -13,8 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
-#define TAG "Handler"
+#define LOG_TAG "Handler"
 
 #include "Handler.h"
 
@@ -73,14 +72,15 @@ int32_t Handler::postWhen(const Message &msg, uint64_t whenMs) {
 void Handler::handleMessage() {
     LOGI("handleMessage");
     while (mRunning.load()) {
-        uint64_t currentTimeMs = getCurrentTimeMs();
         auto itor = mMsgPool->front();
+        uint64_t currentTimeMs = getCurrentTimeMs();
         if (itor->first > currentTimeMs) {
             if (std::cv_status::no_timeout
                     == mMsgPool->waitFor(itor->first-currentTimeMs)) {
                 continue;
             }
         }
+
         if (!mRunning.load()) {
             break;
         }

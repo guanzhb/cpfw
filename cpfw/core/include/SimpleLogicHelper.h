@@ -13,7 +13,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 #ifndef CPFW_CORE_INCLUDE_SIMPLELOGICHELPER_H_
 #define CPFW_CORE_INCLUDE_SIMPLELOGICHELPER_H_
 
@@ -28,7 +27,7 @@
 
 namespace cpfw {
 
-using WidgetValue = std::vector<int32_t>;
+using WidgetValue = Bundle;
 using WidgetPair = std::pair<std::shared_ptr<Widget>, WidgetValue>;
 
 class SimpleLogicHelper {
@@ -57,7 +56,7 @@ class SimpleLogicHelper {
 
     const std::vector<WidgetPair>& getWidgetPair(uint32_t stateId);
 
-private:
+ private:
     void loadState(tinyxml2::XMLElement *root);
 
  private:

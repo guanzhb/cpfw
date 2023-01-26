@@ -13,8 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
-#define TAG "Widget"
+#define LOG_TAG "Widget"
 
 #include "Widget.h"
 
@@ -32,7 +31,7 @@ Widget::Widget(const std::string &name, uint32_t id) : Widget(name, id, nullptr)
 }
 
 Widget::Widget(const std::string &name, uint32_t id, TCallback callback)
-    : mName(name), mId(id), mCallback(callback) {
+        : mName(name), mId(id), mCallback(callback) {
 }
 
 Widget::~Widget() {
@@ -59,14 +58,16 @@ int32_t Widget::check() {
     if (!mStore) {
         return ret;
     }
+
     auto &conditionPair = mStore->getCondition(mId);
     if (&DataStore::EMPTY_CONDITION == &conditionPair) {
         LOGD("widget %s no check", mName.c_str());
         return 0;
     }
+
     auto &logic = conditionPair.first;
     for (auto itor : conditionPair.second) {
-        const auto &expressionIn = itor.getExpression();
+        const auto &expressionIn = itor.expression;
         using SLP = StrategyLogicPool;
         ret = SLP::getStrategy(expressionIn)->handle(itor, mStore);
         if (0 == ret && ExpressionEnum::OR == logic) {

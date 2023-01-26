@@ -13,9 +13,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
-#ifndef CPFW_BASE_INCLUDE_HANDLER_H__
-#define CPFW_BASE_INCLUDE_HANDLER_H__
+#ifndef CPFW_BASE_INCLUDE_HANDLER_H_
+#define CPFW_BASE_INCLUDE_HANDLER_H_
 
 #include <atomic>
 #include <memory>
@@ -47,6 +46,7 @@ class Handler {
     virtual int32_t onInvoke(const Message &msg) = 0;
 
     virtual void onReply(const Message &msg, const int32_t status) = 0;
+
  private:
     void handleMessage();
 
@@ -60,4 +60,4 @@ class Handler {
 
 }  // namesapce cpfw
 
-#endif  // CPFW_BASE_INCLUDE_HANDLER_H__
+#endif  // CPFW_BASE_INCLUDE_HANDLER_H_

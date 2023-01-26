@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-#define TAG "RingBufferManagerTest"
+#define LOG_TAG "RingBufferManagerTest"
 
 #define TEST  // used in RingBufferManager
 

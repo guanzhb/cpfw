@@ -13,8 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
-#define TAG "Logic"
+#define LOG_TAG "Logic"
 
 #include "Logic.h"
 
@@ -156,6 +155,7 @@ std::map<uint32_t, int32_t> Logic::getProfile(
     if (elements.empty()) {
         return ret;
     }
+
     if (!elementName.empty()) {
         for (auto elementNameItor : elementName) {
             if (auto id = mStore->getIdWithStr(elementNameItor); id) {
@@ -211,7 +211,7 @@ int32_t Logic::LogicHandler::onInvoke(const Message &message) {
         if (auto widget = mLogic->mStore->getIdWithStr(widgetName); widget) {
             widgetId = widget.value();
         } else {
-            return EINVAL;
+            return -EINVAL;
         }
         std::vector<TElementPairWithName> elementPairs;
         bundle.get(KEY_ELEMENT, elementPairs);

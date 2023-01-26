@@ -15,11 +15,11 @@
  * limitations under the License.
  */
 
-#ifndef CPFW_BASE_INCLUDE_LOG_HPP__
-#define CPFW_BASE_INCLUDE_LOG_HPP__
+#ifndef CPFW_BASE_INCLUDE_LOG_HPP_
+#define CPFW_BASE_INCLUDE_LOG_HPP_
 
-#ifndef TAG
-#define TAG ""
+#ifndef LOG_TAG
+#define LOG_TAG ""
 #endif
 
 #include <stdarg.h>
@@ -34,7 +34,7 @@ namespace cpfw {
 #else
     #define LOG_OUT(level, format, ...) do { \
         auto timeMs = getCurrentTimeMs(); \
-        printf("[%-12s] [%-s] [%ld] " format"\n", TAG, level, timeMs, ##__VA_ARGS__); \
+        printf("[%-12s] [%-s] [%ld] " format"\n", LOG_TAG, level, timeMs, ##__VA_ARGS__); \
     } while (0)
 
     #define LOGV(format, ...) LOG_OUT("V", format, ##__VA_ARGS__);
@@ -47,4 +47,4 @@ namespace cpfw {
 
 }  // namespace cpfw
 
-#endif  // CPFW_BASE_INCLUDE_LOG_HPP__
+#endif  // CPFW_BASE_INCLUDE_LOG_HPP_

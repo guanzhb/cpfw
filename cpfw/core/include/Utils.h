@@ -14,8 +14,8 @@
  * limitations under the License.
  */
 
-#ifndef CPFW_BASE_INCLUDE_UTILS_HPP_
-#define CPFW_BASE_INCLUDE_UTILS_HPP_
+#ifndef CPFW_CORE_INCLUDE_UTILS_HPP_
+#define CPFW_CORE_INCLUDE_UTILS_HPP_
 
 #include <algorithm>
 #include <any>
@@ -23,15 +23,18 @@
 #include <vector>
 
 #include "Base.h"
+#include "Bundle.hpp"
 #include "DataStore.h"
 
 namespace cpfw {
 
-std::vector<int32_t> parseProfile(
-        const Profile &profile, uint32_t type,
+Bundle parseProfile(const Profile &profile, uint32_t type,
         uint32_t widgetId, std::shared_ptr<DataStore> store);
 
 uint64_t getCurrentTimeMs();
+
+void dumpBytes(const uint8_t *data, const std::size_t bytes,
+               const std::size_t dataInLine, const char *header);
 
 template<typename TTable, typename TKey>
 std::optional<typename TTable::mapped_type> getOptionalFromMap(
@@ -44,17 +47,13 @@ std::optional<typename TTable::mapped_type> getOptionalFromMap(
 }
 
 template<typename TTable, typename TKey, typename TValue>
-TValue& getOrDefaultFromMap(
-        TTable &table, const TKey &key, TValue &value) {
+TValue& getOrDefaultFromMap(TTable &table, const TKey &key, TValue &value) {
     if (auto itor = table.find(key); itor != table.end()) {
          return itor->second;
     }
     return value;
 }
 
-void dumpBytes(const uint8_t *data, const std::size_t bytes,
-               const std::size_t dataInLine, const char *header);
-
 }  // namespace cpfw
 
-#endif  // CPFW_BASE_INCLUDE_UTILS_HPP_
+#endif  // CPFW_CORE_INCLUDE_UTILS_HPP_

@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-#define TAG "Example"
+#define LOG_TAG "Example"
 
 #include "ExampleChain.h"
 
@@ -32,31 +32,33 @@ static int32_t func0() {
     return 0;
 }
 
-static std::string parseValue(std::vector<int32_t> &v) {
+static std::string parseValue(Bundle &bundle) {
     std::string tmp;
-    for (auto s : v) {
+    std::for_each(bundle.begin(), bundle.end(), [&tmp] (auto &data) {
         tmp.append(":");
-        tmp.append(std::to_string(s));
-    }
+        tmp.append(std::any_cast<std::string>(data.first));
+        tmp.append("=");
+        tmp.append(std::to_string(std::any_cast<int32_t>(data.second)));
+    });
     return tmp;
 }
 
-static int32_t funcv1(std::vector<int32_t> &v) {
-    LOGI("funcv1: %s", parseValue(v).c_str());
+static int32_t funcv1(Bundle &bundle) {
+    LOGI("funcv1 %s", parseValue(bundle).c_str());
     return 0;
 }
 
-static int32_t funcv2(std::vector<int32_t> &v) {
-    LOGI("funcv2: %s", parseValue(v).c_str());
+static int32_t funcv2(Bundle &bundle) {
+    LOGI("funcv2 %s", parseValue(bundle).c_str());
     return 0;
 }
 
 static int32_t handle(
         DataStore *store, const std::string &funcName,
-        const std::vector<int32_t> &values) {
+        Bundle &bundle) {
     LOGI("%s", funcName.c_str());
-    std::for_each(values.begin(), values.end(), [](auto d) -> void {
-        LOGI("%d", d);
+    std::for_each(bundle.begin(), bundle.end(), [](auto d) {
+        LOGI("%d", std::any_cast<int32_t>(d.second));
     });
     return 0;
 }

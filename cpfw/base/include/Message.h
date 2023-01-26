@@ -14,8 +14,8 @@
  * limitations under the License.
  */
 
-#ifndef CPFW_BASE_INCLUDE_MESSAGE_H__
-#define CPFW_BASE_INCLUDE_MESSAGE_H__
+#ifndef CPFW_BASE_INCLUDE_MESSAGE_H_
+#define CPFW_BASE_INCLUDE_MESSAGE_H_
 
 #include <functional>
 #include <memory>
@@ -27,16 +27,15 @@ namespace cpfw {
 
 const std::string KEY_DELAY_TIME_MS = "delayTimeMs";
 
-enum PostFlag/* : uint8_t */{
-    NONE = 0x0,
-    DELETE_FORMER = 0x1,
-    OMIT_IF_EXIST = 0x2,
-    SYNC = 0x4,
-    LOOP = 0x8,
+enum PostFlag {
+    NONE = 0x0U,
+    DELETE_FORMER = 0x1U,
+    OMIT_IF_EXIST = 0x2U,
+    SYNC = 0x4U,
+    LOOP = 0x8U,
 };
 
-class Message {
- public:
+struct Message {
     uint64_t mWhat;
     int32_t mArg1;
     int32_t mArg2;
@@ -48,5 +47,5 @@ class Message {
 
 }  // namesapce cpfw
 
-#endif  // CPFW_BASE_INCLUDE_MESSAGE_H__
+#endif  // CPFW_BASE_INCLUDE_MESSAGE_H_
 

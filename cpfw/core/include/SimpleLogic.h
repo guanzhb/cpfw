@@ -13,7 +13,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 #ifndef CPFW_CORE_INCLUDE_SIMPLELOGIC_H_
 #define CPFW_CORE_INCLUDE_SIMPLELOGIC_H_
 
@@ -28,8 +27,7 @@ namespace cpfw {
 class SimpleLogic {
  public:
     SimpleLogic();
-    explicit SimpleLogic(
-        const std::string &name, std::shared_ptr<SimpleLogicHelper> helper);
+    explicit SimpleLogic(const std::string &name, std::shared_ptr<SimpleLogicHelper> helper);
     ~SimpleLogic();
 
     const std::string& getName() const;
@@ -39,18 +37,16 @@ class SimpleLogic {
  private:
     class SimpleLogicHandler : public Handler {
      public:
-         SimpleLogicHandler(
-            SimpleLogic *SimpleLogic,
-            std::shared_ptr<SimpleLogicHelper> helper);
-         ~SimpleLogicHandler();
+        SimpleLogicHandler(SimpleLogic *SimpleLogic, std::shared_ptr<SimpleLogicHelper> helper);
+        ~SimpleLogicHandler();
 
-         int32_t onInvoke(const Message &message) override;
+        int32_t onInvoke(const Message &message) override;
 
-         void onReply(const Message &message, const int32_t status) override;
+        void onReply(const Message &message, const int32_t status) override;
 
      private:
-         SimpleLogic* mSimpleLogic;
-         std::shared_ptr<SimpleLogicHelper> mHelper;
+        SimpleLogic* mSimpleLogic;
+        std::shared_ptr<SimpleLogicHelper> mHelper;
     };
 
  private:

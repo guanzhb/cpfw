@@ -16,7 +16,7 @@
 
 #define TEST  // used in RingBuffer
 
-#define TAG "RingBufferTest"
+#define LOG_TAG "RingBufferTest"
 
 #include <iostream>
 

@@ -14,16 +14,59 @@
  * limitations under the License.
  */
 
-#ifndef CPFW_BASE_INCLUDE_BUNDLE_HPP__
-#define CPFW_BASE_INCLUDE_BUNDLE_HPP__
+#ifndef CPFW_BASE_INCLUDE_BUNDLE_HPP_
+#define CPFW_BASE_INCLUDE_BUNDLE_HPP_
 
 #include <any>
 #include <map>
 #include <string>
 #include <typeindex>
 
+namespace cpfw {
+
+namespace {
+    using TTable = std::map<std::string, std::any>;
+    using iterator = TTable::iterator;
+    using reverse_iterator = TTable::reverse_iterator;
+    using const_iterator = TTable::const_iterator;
+    using const_reverse_iterator = TTable::const_reverse_iterator;
+}  // namespace
+
 class Bundle {
  public:
+
+    iterator begin() noexcept {
+        return mTable.begin();
+    }
+
+    reverse_iterator rbegin() noexcept {
+        return mTable.rbegin();
+    }
+
+    const_iterator cbegin() const noexcept {
+        return mTable.cbegin();
+    }
+
+    const_reverse_iterator crbegin() const noexcept {
+        return mTable.crbegin();
+    }
+
+    iterator end() noexcept {
+        return mTable.end();
+    }
+
+    reverse_iterator rend() noexcept {
+        return mTable.rend();
+    }
+
+    const_iterator cend() const noexcept {
+        return mTable.cend();
+    }
+
+    const_reverse_iterator crend() const noexcept {
+        return mTable.crend();
+    }
+
     template<typename TVALUE>
     void set(const std::string &key, const TVALUE &value) {
         mTable[key] = value;
@@ -56,8 +99,13 @@ class Bundle {
         mTable.clear();
     }
 
+    [[nodiscard]] bool empty() {
+        return mTable.empty();
+    }
+
  private:
-    std::map<std::string, std::any> mTable;
+
+    TTable mTable;
 };
 
 #define INITIALIZE_TEMPLATE(TYPE) \
@@ -75,5 +123,7 @@ INITIALIZE_TEMPLATE(uint16_t);
 INITIALIZE_TEMPLATE(int8_t);
 INITIALIZE_TEMPLATE(uint8_t);
 
-#endif  // CPFW_BASE_INCLUDE_BUNDLE_HPP__
+} // namespace cpfw
+
+#endif  // CPFW_BASE_INCLUDE_BUNDLE_HPP_
 

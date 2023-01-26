@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-#define TAG "singleton-a"
+#define LOG_TAG "singleton-a"
 
 #include "Log.hpp"
 #include "Singleton.hpp"

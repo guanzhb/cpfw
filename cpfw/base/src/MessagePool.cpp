@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-#define TAG "MessagePool"
+#define LOG_TAG "MessagePool"
 
 #include "MessagePool.h"
 
@@ -29,8 +29,7 @@ MessagePool::MessagePool() {
 MessagePool::~MessagePool() {
 }
 
-void MessagePool::post(
-        const uint64_t whenMs, const Message &message, const uint64_t what) {
+void MessagePool::post(const uint64_t whenMs, const Message &message, const uint64_t what) {
     std::unique_lock<std::shared_mutex> lck(mMutex);
     postWithLock(whenMs, message, what);
     notify();

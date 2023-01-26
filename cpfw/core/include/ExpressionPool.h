@@ -13,8 +13,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-#ifndef CPFW_BASE_INCLUDE_EXPRESSIONPOOL_H__
-#define CPFW_BASE_INCLUDE_EXPRESSIONPOOL_H__
+#ifndef CPFW_CORE_INCLUDE_EXPRESSIONPOOL_H_
+#define CPFW_CORE_INCLUDE_EXPRESSIONPOOL_H_
 
 #include <map>
 #include <string>
@@ -79,5 +79,5 @@ class ExpressionPool {
 
 }  // namespace cpfw
 
-#endif  // CPFW_BASE_INCLUDE_EXPRESSIONPOOL_H__
+#endif  // CPFW_CORE_INCLUDE_EXPRESSIONPOOL_H_
 

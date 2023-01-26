@@ -13,8 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
-#define TAG "RingBufferManager"
+#define LOG_TAG "RingBufferManager"
 
 #include <condition_variable>
 #include <functional>
@@ -34,10 +33,10 @@ namespace {
     const std::string KEY_READ = "funcRead";
     const std::string KEY_DATA = "data";
 
-    const uint32_t WHAT_WRITE_DIRECT = 0;
-    const uint32_t WHAT_WRITE_LOOP = 1;
-    const uint32_t WHAT_READ_DIRECT = 2;
-    const uint32_t WHAT_READ_LOOP = 3;
+    const uint32_t WHAT_WRITE_DIRECT = 0U;
+    const uint32_t WHAT_WRITE_LOOP = 1U;
+    const uint32_t WHAT_READ_DIRECT = 2U;
+    const uint32_t WHAT_READ_LOOP = 3U;
 }
 
 template<typename T, int32_t N>
@@ -53,6 +52,7 @@ class RingBufferManager {
         if (mBuffer.getIdleSize() >= writeBuffer.size()) {
             return writeLock(writeBuffer);
         }
+
         Message msg;
         msg.mWhat = WHAT_WRITE_DIRECT;
         Bundle bundle;

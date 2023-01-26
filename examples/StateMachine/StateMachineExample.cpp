@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-#define TAG "StateMachineExample"
+#define LOG_TAG "StateMachineExample"
 
 #include "StateMachineExample.h"
 

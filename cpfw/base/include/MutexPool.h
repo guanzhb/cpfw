@@ -13,9 +13,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
-#ifndef CPFW_BASE_INCLUDE_MUTEXPOOL_H__
-#define CPFW_BASE_INCLUDE_MUTEXPOOL_H__
+#ifndef CPFW_BASE_INCLUDE_MUTEXPOOL_H_
+#define CPFW_BASE_INCLUDE_MUTEXPOOL_H_
 
 #include <condition_variable>
 #include <map>
@@ -47,5 +46,5 @@ class MutexPool {
 
 }  // namespace cpfw
 
-#endif  // CPFW_BASE_INCLUDE_MUTEXPOOL_H__
+#endif  // CPFW_BASE_INCLUDE_MUTEXPOOL_H_
 

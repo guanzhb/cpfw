@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-#define TAG "SimpleLogic"
+#define LOG_TAG "SimpleLogic"
 
 #include "SimpleLogic.h"
 
@@ -22,12 +22,10 @@
 
 namespace cpfw {
 
-SimpleLogic::SimpleLogic()
-    : SimpleLogic("", nullptr) {
+SimpleLogic::SimpleLogic() : SimpleLogic("", nullptr) {
 }
 
-SimpleLogic::SimpleLogic(const std::string &name,
-        std::shared_ptr<SimpleLogicHelper> helper)
+SimpleLogic::SimpleLogic(const std::string &name, std::shared_ptr<SimpleLogicHelper> helper)
         : mName(name) {
     mHandler = std::make_unique<SimpleLogicHandler>(this, helper);
 }
@@ -57,7 +55,7 @@ int32_t SimpleLogic::SimpleLogicHandler::onInvoke(const Message &message) {
     const auto &widgetItor = mHelper->getWidgetPair(message.mWhat);
     for (auto itor=widgetItor.begin(); itor!=widgetItor.end(); ++itor) {
         LOGI("onInvoke widget:%s", itor->first->getName().c_str());
-        std::invoke(itor->first->getCallback(), const_cast<WidgetValue&>(itor->second));
+        std::invoke(itor->first->getCallback(), const_cast<Bundle&>(itor->second));
     }
     return 0;
 }

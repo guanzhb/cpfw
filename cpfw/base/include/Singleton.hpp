@@ -13,9 +13,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
-#ifndef CPFW_BASE_INCLUDE_SINGLETON_H__
-#define CPFW_BASE_INCLUDE_SINGLETON_H__
+#ifndef CPFW_BASE_INCLUDE_SINGLETON_H_
+#define CPFW_BASE_INCLUDE_SINGLETON_H_
 
 #include <mutex>
 #include <utility>
@@ -85,5 +84,5 @@ T* Singleton<T>::gInstance = nullptr;
 
 }  // namespace cpfw
 
-#endif  // CPFW_BASE_INCLUDE_SINGLETON_H__
+#endif  // CPFW_BASE_INCLUDE_SINGLETON_H_
 

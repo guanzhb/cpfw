@@ -13,15 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-#define TAG "SimpleLogicHelper"
-
-//#define LOG_VERBLE
-
-#ifdef LOG_VERBLE
-#define LOGV LOGD
-#else
-#define LOGV(...) while (0);
-#endif
+#define LOG_TAG "SimpleLogicHelper"
 
 #include "SimpleLogicHelper.h"
 
@@ -42,7 +34,7 @@ const std::string SimpleLogicHelper::TAG_CHILD = "child";
 const std::string SimpleLogicHelper::ATTR_WIDGET = "widget";
 const std::string SimpleLogicHelper::ATTR_ID = "id";
 const std::string SimpleLogicHelper::VALUE_DELIM = ",";
-const std::vector<WidgetPair> SimpleLogicHelper::EMPTY_WIDGET_PAIR = {};
+const std::vector<WidgetPair> SimpleLogicHelper::EMPTY_WIDGET_PAIR = { };
 const std::string SimpleLogicHelper::EMPTY_STATE = "empty";
 
 SimpleLogicHelper::SimpleLogicHelper() {
@@ -68,17 +60,17 @@ void SimpleLogicHelper::loadConfiguration(const std::string &configurationFile) 
     loadState(root);
 }
 
-static std::vector<int32_t> parseValue(std::string strs) {
+static Bundle parseValue(std::string strs) {
     std::string delim = ",";
-    std::vector<int32_t> ret;
+    Bundle ret;
 
     size_t pos = strs.find(delim);
     while (pos != strs.npos) {
-        ret.push_back(std::atoi(strs.substr(0, pos).c_str()));
+        ret.set("TODO", std::atoi(strs.substr(0, pos).c_str()));
         strs = strs.substr(pos+1, strs.size());
         pos = strs.find(delim);
     }
-    ret.push_back(std::atoi(strs.substr(0, pos).c_str()));
+    ret.set("TODO", std::atoi(strs.substr(0, pos).c_str()));
     return ret;
 }
 

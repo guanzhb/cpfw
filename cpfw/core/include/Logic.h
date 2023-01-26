@@ -13,7 +13,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 #ifndef CPFW_CORE_INCLUDE_LOGIC_H_
 #define CPFW_CORE_INCLUDE_LOGIC_H_
 
@@ -67,9 +66,9 @@ class Logic {
                 uint64_t delayTimeMs,
                 const PostFlag flag = PostFlag::NONE);
 
-     std::map<uint32_t, int32_t> getProfile(const uint32_t widgeteId,
+    std::map<uint32_t, int32_t> getProfile(const uint32_t widgeteId,
          const std::vector<uint32_t> elementId = {});
-     std::map<uint32_t, int32_t> getProfile(const std::string &widgeteName,
+    std::map<uint32_t, int32_t> getProfile(const std::string &widgeteName,
          const std::vector<std::string> &elementName = {"default"});
 
     void onReply(const Message &message, const int32_t status);
@@ -77,15 +76,15 @@ class Logic {
  private:
     class LogicHandler : public Handler {
      public:
-         LogicHandler(Logic* logic);
-         ~LogicHandler();
+        LogicHandler(Logic* logic);
+        ~LogicHandler();
 
-         int32_t onInvoke(const Message &message) override;
+        int32_t onInvoke(const Message &message) override;
 
-         void onReply(const Message &message, const int32_t status) override;
+        void onReply(const Message &message, const int32_t status) override;
 
      private:
-         Logic* mLogic;
+        Logic* mLogic;
     };
 
  private:

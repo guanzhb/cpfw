@@ -13,19 +13,19 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
-#define TAG "DataStore"
+#define LOG_TAG "DataStore"
 
 #include "DataStore.h"
+
 #include "Log.hpp"
 
 namespace cpfw {
 
-const TINVOKE_CHAIN DataStore::EMPTY_INVOKE_CHAIN = {};
+const TINVOKE_CHAIN DataStore::EMPTY_INVOKE_CHAIN = { };
 const TINVOKE_CONDITION DataStore::EMPTY_CONDITION
     = std::make_pair(ExpressionEnum::EMPTY, std::vector<Condition>());
 Profile DataStore::EMPTY_PROFILE = Profile();
-const std::vector<Convert> DataStore::EMPTY_CONVERT = {};
+const std::vector<Convert> DataStore::EMPTY_CONVERT = { };
 const uint32_t DataStore::EMPTY_BIND = UINT32_MAX;
 
 DataStore::DataStore() {

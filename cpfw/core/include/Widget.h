@@ -13,14 +13,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
-#ifndef CPFW_BASE_INCLUDE_WIDGET_H_
-#define CPFW_BASE_INCLUDE_WIDGET_H_
+#ifndef CPFW_CORE_INCLUDE_WIDGET_H_
+#define CPFW_CORE_INCLUDE_WIDGET_H_
 
 #include <any>
 #include <map>
 #include <memory>
 
+#include "Bundle.hpp"
 #include "DataStore.h"
 #include "ExpressionPool.h"
 #include "StrategyLogic.h"
@@ -31,7 +31,7 @@ class DataStore;
 class IStrategyLogic;
 
 namespace {
-using TCallback = int32_t(*)(std::vector<int32_t>&);
+    using TCallback = std::function<int32_t(Bundle&)>;
 }
 
 class Widget {
@@ -66,12 +66,11 @@ class Widget {
     const std::string mName;
     const uint32_t mId;
     std::shared_ptr<DataStore> mStore;
-    static std::map<ExpressionEnum,
-        std::shared_ptr<IStrategyLogic>> mStrategy;
+    static std::map<ExpressionEnum, std::shared_ptr<IStrategyLogic>> mStrategy;
     const TCallback mCallback;
 };
 
 }  // namespace cpfw
 
-#endif  // CPFW_BASE_INCLUDE_WIDGET_H_
+#endif  // CPFW_CORE_INCLUDE_WIDGET_H_
 

@@ -13,9 +13,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
-#ifndef CPFW_BASE_INCLUDE_RESPONSIBILITYCHAIN_H_
-#define CPFW_BASE_INCLUDE_RESPONSIBILITYCHAIN_H_
+#ifndef CPFW_CORE_INCLUDE_RESPONSIBILITYCHAIN_H_
+#define CPFW_CORE_INCLUDE_RESPONSIBILITYCHAIN_H_
 
 #include <algorithm>
 #include <functional>
@@ -50,5 +49,5 @@ class ResponsibilityChain {
 
 }  // namespace cpfw
 
-#endif  // CPFW_BASE_INCLUDE_RESPONSIBILITYCHAIN_H_
+#endif  // CPFW_CORE_INCLUDE_RESPONSIBILITYCHAIN_H_
 

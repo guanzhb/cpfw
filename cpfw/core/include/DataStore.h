@@ -13,9 +13,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
-#ifndef CPFW_BASE_INCLUDE_DATASTORE_H_
-#define CPFW_BASE_INCLUDE_DATASTORE_H_
+#ifndef CPFW_CORE_INCLUDE_DATASTORE_H_
+#define CPFW_CORE_INCLUDE_DATASTORE_H_
 
 #include <functional>
 #include <map>
@@ -37,8 +36,7 @@ namespace cpfw {
 class Widget;
 
 using TINVOKE_CHAIN = std::vector<uint32_t/*child id*/>;
-using TINVOKE_CONDITION = std::pair<ExpressionEnum/*and, or*/,
-                                    std::vector<Condition>>;
+using TINVOKE_CONDITION = std::pair<ExpressionEnum/*and, or*/, std::vector<Condition>>;
 
 using TElementPairWithId = std::pair<uint32_t/*id*/, int32_t/*value*/>;
 using TElementPairWithName = std::pair<std::string/*name*/, int32_t/*value*/>;
@@ -129,11 +127,9 @@ class DataStore : public std::enable_shared_from_this<DataStore>{
      * @param origin original data
      * @param target converted data
      */
-    void addDataConvert(
-            const std::string &context, int32_t origin, int32_t target);
+    void addDataConvert(const std::string &context, int32_t origin, int32_t target);
 
-    void addDataConvert(
-            const std::string &context, std::vector<Convert> convert);
+    void addDataConvert(const std::string &context, std::vector<Convert> convert);
     /**
      * @brief add condition data.
      *
@@ -168,5 +164,5 @@ class DataStore : public std::enable_shared_from_this<DataStore>{
 
 }  // namespace cpfw
 
-#endif  // CPFW_BASE_INCLUDE_DATASTORE_HPP_
+#endif  // CPFW_CORE_INCLUDE_DATASTORE_HPP_
 

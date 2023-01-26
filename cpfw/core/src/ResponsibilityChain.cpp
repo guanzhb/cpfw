@@ -12,8 +12,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
-#define TAG "ResponsibilityChain"
+#define LOG_TAG "ResponsibilityChain"
 
 #include "ResponsibilityChain.h"
 
@@ -44,7 +43,7 @@ int32_t ResponsibilityChain::invokeWidget(const uint32_t widgetId) const {
     std::optional<std::shared_ptr<Widget>> widget = mStore->getWidget(widgetId);
     if (!widget) {
         LOGE("no widget for id:%d", widgetId);
-        return EINVAL;
+        return -EINVAL;
     }
 
     int32_t ret = 0;
@@ -52,17 +51,20 @@ int32_t ResponsibilityChain::invokeWidget(const uint32_t widgetId) const {
         LOGE("check for name:%s, errno:%d", widget->get()->getName().c_str(), ret);
         return ret;
     }
+
     if ((ret = widget->get()->action()) != 0) {
         widget->get()->reset();
         LOGE("action for name:%s, errno:%d", widget->get()->getName().c_str(), ret);
         return ret;
     }
+
     widget->get()->swipe();
 
     auto childrenChain = mStore->getChain(widgetId);
     if (childrenChain == DataStore::EMPTY_INVOKE_CHAIN) {
         return ret;
     }
+
     std::for_each(childrenChain.begin(), childrenChain.end(),
         [&] (auto &childWidgetId) -> void {
             ret = invokeChain(childWidgetId);
@@ -70,6 +72,7 @@ int32_t ResponsibilityChain::invokeWidget(const uint32_t widgetId) const {
                 LOGE("action for id:%d, errno:%d", childWidgetId, ret);
             }
         });
+
     LOGI("invokeWidget -> %s success", widget->get()->getName().c_str());
     return ret;
 }

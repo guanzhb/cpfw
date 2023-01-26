@@ -13,9 +13,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
-#ifndef CPFW_BASE_INCLUDE_THREADPOOL_HPP__
-#define CPFW_BASE_INCLUDE_THREADPOOL_HPP__
+#ifndef CPFW_BASE_INCLUDE_THREADPOOL_HPP_
+#define CPFW_BASE_INCLUDE_THREADPOOL_HPP_
 
 #include <atomic>
 #include <condition_variable>
@@ -28,12 +27,12 @@
 namespace cpfw {
 
 namespace {
-    const uint8_t MAX_THREAD_COUNT = 16;
+    const uint8_t MAX_THREAD_COUNT = 16U;
 }
 
 class ThreadPool {
  public:
-    ThreadPool(uint8_t size = 4) {
+    ThreadPool(uint8_t size = 4U) {
         initThreadPool(size);
     }
 
@@ -116,5 +115,5 @@ class ThreadPool {
 
 }  // namespace cpfw
 
-#endif  // CPFW_BASE_INCLUDE_THREADPOOL_HPP__
+#endif  // CPFW_BASE_INCLUDE_THREADPOOL_HPP_
 

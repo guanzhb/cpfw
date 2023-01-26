@@ -27,17 +27,26 @@ class StateMachine;
 
 class State {
  public:
-    State();
-    explicit State(StateMachine *context, const std::string &name);
-    virtual ~State();
+    State() : State(nullptr, "") {
+    }
 
-    virtual void enter();
+    explicit State(StateMachine *context, const std::string &name)
+        : mContext(context), mName(name) {
+    }
 
-    virtual void exit();
+    virtual ~State() { }
 
-    virtual bool handleMessage(const Message &message);
+    virtual void enter() { }
 
-    virtual const std::string& getName() const;
+    virtual void exit() { }
+
+    virtual bool handleMessage(const Message &message) {
+        return true;
+    }
+
+    virtual const std::string& getName() const {
+        return mName;
+    }
 
  protected:
     const std::string mName;

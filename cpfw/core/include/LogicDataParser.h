@@ -13,16 +13,15 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 #ifndef CPFW_CORE_INCLUDE_DATAPARSER_H_
 #define CPFW_CORE_INCLUDE_DATAPARSER_H_
 
 #include <memory>
 #include <string>
 
-#include "DataStore.h"
-
 #include "tinyxml2.h"
+
+#include "DataStore.h"
 
 namespace cpfw {
 
@@ -69,7 +68,7 @@ class LogicDataParser {
 
     ~LogicDataParser();
 
-private:
+ private:
     void loadConfiguration(tinyxml2::XMLElement *root);
 
     void loadInvokeChain(tinyxml2::XMLElement *root);
