@@ -52,7 +52,7 @@ class LogicDataParser {
     static const std::string ATTR_MIN;
     static const std::string ATTR_MAX;
     static const std::string ATTR_CURRENT;
-    static const std::string ATTR_TYPE;
+    static const std::string ATTR_FLAG;
     static const std::string TAG_CONVERTS;
     static const std::string TAG_CONVERT;
     static const std::string TAG_CALCULATE;

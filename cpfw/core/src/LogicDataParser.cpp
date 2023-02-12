@@ -48,7 +48,7 @@ const std::string LogicDataParser::TAG_ELEMENT = "element";
 const std::string LogicDataParser::ATTR_MIN = "min";
 const std::string LogicDataParser::ATTR_MAX = "max";
 const std::string LogicDataParser::ATTR_CURRENT = "current";
-const std::string LogicDataParser::ATTR_TYPE = "type";
+const std::string LogicDataParser::ATTR_FLAG = "flag";
 const std::string LogicDataParser::TAG_CONTEXT = "context";
 const std::string LogicDataParser::TAG_CONVERTS = "converts";
 const std::string LogicDataParser::TAG_CONVERT = "convert";
@@ -202,10 +202,10 @@ void LogicDataParser::loadProfile(tinyxml2::XMLElement *root) {
             surfaceElement->QueryIntAttribute(ATTR_MAX.c_str(), &max);
             int32_t current = 0;
             surfaceElement->QueryIntAttribute(ATTR_CURRENT.c_str(), &current);
-            uint32_t type = 0;
-            surfaceElement->QueryUnsignedAttribute(ATTR_TYPE.c_str(), &type);
+            uint32_t flag = 0;
+            surfaceElement->QueryUnsignedAttribute(ATTR_FLAG.c_str(), &flag);
 
-            Element ele = {min, max, current, current, type};
+            Element ele = {min, max, current, current, flag};
             mDataStore->addStrIdPair(name, id);
             profile.elements.emplace(id, ele);
             surfaceElement = surfaceElement->NextSiblingElement();

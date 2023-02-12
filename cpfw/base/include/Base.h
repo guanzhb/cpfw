@@ -56,7 +56,6 @@ struct Element {
 
 struct Profile {
     std::map<uint32_t, Element> elements;
-    std::map<uint32_t, Profile> profile;  // TODO profile in profile
 };
 
 const std::string KEY_WIDGET = "widget";

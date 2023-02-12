@@ -39,7 +39,6 @@ namespace {
 int32_t StrategyLogicDummy::handle(
             const Condition &condition, std::shared_ptr<DataStore> dataStore) {
     tryLog("Dymmy", condition);
-    Profile &profile = dataStore->getProfile(condition.widgetId);
     return 0;
 }
 
@@ -48,7 +47,7 @@ int32_t StrategyLogicEqual::handle(
     tryLog("Equal", condition);
     Profile &profile = dataStore->getProfile(condition.widgetId);
     int32_t current = profile.elements[condition.elementId].current;
-    return current == condition.value ? 0 : EINVAL;
+    return current == condition.value ? 0 : -EINVAL;
 }
 
 int32_t StrategyLogicNotEqual::handle(
@@ -56,7 +55,7 @@ int32_t StrategyLogicNotEqual::handle(
     tryLog("NotEqual", condition);
     Profile &profile = dataStore->getProfile(condition.widgetId);
     int32_t current = profile.elements[condition.elementId].current;
-    return current != condition.value ? 0 : EINVAL;
+    return current != condition.value ? 0 : -EINVAL;
 }
 
 int32_t StrategyLogicInRange::handle(
@@ -64,7 +63,7 @@ int32_t StrategyLogicInRange::handle(
     tryLog("InRange", condition);
     Profile &profile = dataStore->getProfile(condition.widgetId);
     int32_t current = profile.elements[condition.elementId].current;
-    return (current >= condition.left && current <= condition.right) ? 0 : EINVAL;
+    return (current >= condition.left && current <= condition.right) ? 0 : -EINVAL;
 }
 
 int32_t StrategyLogicOutRange::handle(
@@ -72,14 +71,14 @@ int32_t StrategyLogicOutRange::handle(
     tryLog("OutRange", condition);
     Profile &profile = dataStore->getProfile(condition.widgetId);
     int32_t current = profile.elements[condition.elementId].current;
-    return (current < condition.left && current > condition.right) ? 0 : EINVAL;
+    return (current < condition.left && current > condition.right) ? 0 : -EINVAL;
 }
 
 int32_t StrategyLogicChange::handle(
             const Condition &condition, std::shared_ptr<DataStore> dataStore) {
     tryLog("Change", condition);
     Profile &profile = dataStore->getProfile(condition.widgetId);
-    return (profile.elements[condition.elementId].flag) ? 0 : EINVAL;
+    return (profile.elements[condition.elementId].flag) ? 0 : -EINVAL;
 }
 
 std::map<ExpressionEnum, std::shared_ptr<IStrategyLogic>> StrategyLogicPool::mStrategy {

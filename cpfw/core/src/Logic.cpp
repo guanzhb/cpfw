@@ -175,8 +175,7 @@ std::map<uint32_t, int32_t> Logic::getProfile(
 
 // get bundle with no safe version for perf, ensure it's safe inside the Logic
 void Logic::onReply(const Message &message, const int32_t status) {
-    if (nullptr != mCallbackWithName
-            && message.mArg1 == DataType::STRING) {
+    if (nullptr != mCallbackWithName && message.mArg1 == DataType::STRING) {
         Bundle &bundle = const_cast<Message&>(message).mBundle;
         std::string widgetName;
         bundle.get(KEY_WIDGET, widgetName);

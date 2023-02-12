@@ -44,7 +44,7 @@ std::optional<std::shared_ptr<Widget>> DataStore::getWidget(const std::string &w
     if (auto id = getIdWithStr(widgetName); id) {
         return getWidget(id.value());
     }
-    return  std::nullopt;
+    return std::nullopt;
 }
 
 const TINVOKE_CHAIN& DataStore::getChain(uint32_t parentId) {
@@ -204,8 +204,7 @@ void DataStore::addProfile(const uint32_t widgetId, const Profile profile) {
     mProfileTable.emplace(widgetId, profile);
 }
 
-void DataStore::addDataConvert(
-        const std::string &context, int32_t origin, int32_t target) {
+void DataStore::addDataConvert(const std::string &context, int32_t origin, int32_t target) {
     std::map<int32_t, int32_t> convert;
     convert.emplace(origin, target);
     mDataMapTable.emplace(getIdWithStr(context).value(), convert);
