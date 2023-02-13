@@ -32,22 +32,22 @@ SimpleLogicExample::SimpleLogicExample(
 
 }  // namespace cpfw
 
-static std::string parseValue(Bundle &bundle) {
+static std::string parseValue(std::vector<int32_t> &value) {
     std::string tmp;
-    std::for_each(bundle.begin(), bundle.end(), [&tmp] (auto &data) {
+    std::for_each(value.begin(), value.end(), [&tmp] (auto &data) {
         tmp.append(":");
-        tmp.append(std::to_string(std::any_cast<int32_t>(data.second)));
+        tmp.append(std::to_string(data));
     });
     return tmp;
 }
 
-static int32_t funcv1(Bundle &bundle) {
-    LOGI("funcv1 %s", parseValue(bundle).c_str());
+static int32_t funcv1(std::vector<int32_t> &value) {
+    LOGI("funcv1 %s", parseValue(value).c_str());
     return 0;
 }
 
-static int32_t funcv2(Bundle &bundle) {
-    LOGI("funcv2 %s", parseValue(bundle).c_str());
+static int32_t funcv2(std::vector<int32_t> &value) {
+    LOGI("funcv2 %s", parseValue(value).c_str());
     return 0;
 }
 

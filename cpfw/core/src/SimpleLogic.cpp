@@ -55,7 +55,7 @@ int32_t SimpleLogic::SimpleLogicHandler::onInvoke(const Message &message) {
     const auto &widgetItor = mHelper->getWidgetPair(message.mWhat);
     for (auto itor=widgetItor.begin(); itor!=widgetItor.end(); ++itor) {
         LOGI("onInvoke widget:%s", itor->first->getName().c_str());
-        std::invoke(itor->first->getCallback(), const_cast<Bundle&>(itor->second));
+        std::invoke(itor->first->getCallback(), const_cast<std::vector<int32_t>&>(itor->second));
     }
     return 0;
 }

@@ -28,9 +28,9 @@
 
 namespace cpfw {
 
-Bundle parseProfile(const Profile &profile, uint32_t type,
+std::vector<int32_t> parseProfile(const Profile &profile, uint32_t type,
         uint32_t widgetId, std::shared_ptr<DataStore> store) {
-    Bundle ret;
+    std::vector<int32_t> ret;
     if (!store) {
         return ret;
     }
@@ -51,7 +51,7 @@ Bundle parseProfile(const Profile &profile, uint32_t type,
                                   ->handle(widgetId, current, c, store);
                 }
             }
-            ret.set(std::to_string(i), current);
+            ret.push_back(current);
             ++i;
     });
     return ret;

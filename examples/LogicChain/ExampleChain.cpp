@@ -32,34 +32,30 @@ static int32_t func0() {
     return 0;
 }
 
-static std::string parseValue(Bundle &bundle) {
+static std::string parseValue(std::vector<int32_t> &value) {
     std::string tmp;
-    std::for_each(bundle.begin(), bundle.end(), [&tmp] (auto &data) {
+    std::for_each(value.begin(), value.end(), [&tmp] (auto &data) {
         tmp.append(":");
-        tmp.append(std::any_cast<std::string>(data.first));
-        tmp.append("=");
-        tmp.append(std::to_string(std::any_cast<int32_t>(data.second)));
+        tmp.append(std::to_string(data));
     });
     return tmp;
 }
 
-static int32_t funcv1(Bundle &bundle) {
-    LOGI("funcv1 %s", parseValue(bundle).c_str());
+static int32_t funcv1(std::vector<int32_t> &value) {
+    LOGI("funcv1 %s", parseValue(value).c_str());
     return 0;
 }
 
-static int32_t funcv2(Bundle &bundle) {
-    LOGI("funcv2 %s", parseValue(bundle).c_str());
+static int32_t funcv2(std::vector<int32_t> &value) {
+    LOGI("funcv2 %s", parseValue(value).c_str());
     return 0;
 }
 
 static int32_t handle(
         DataStore *store, const std::string &funcName,
-        Bundle &bundle) {
+        std::vector<int32_t> &value) {
     LOGI("%s", funcName.c_str());
-    std::for_each(bundle.begin(), bundle.end(), [](auto d) {
-        LOGI("%d", std::any_cast<int32_t>(d.second));
-    });
+    LOGI("handle %s", parseValue(value).c_str());
     return 0;
 }
 
@@ -84,16 +80,31 @@ class WidgetStub : public Widget {
     }
 };
 
+class ClassFunc1 {
+ public:
+    int32_t func(std::vector<int32_t> &value) {
+        LOGI("class func %s", parseValue(value).c_str());
+        return 0;
+    }
+};
+
 ExampleChain::ExampleChain() {
     mLogic = std::make_shared<Logic>("./exampleChain.xml");
+
+    auto lambda_func1 = [&](std::vector<int32_t> &value) -> int32_t {
+        LOGI("lambda_funcv1 %s", parseValue(value).c_str());
+        return 0;
+    };
+
+    ClassFunc1 classFunc;
 
     auto sv = std::make_shared<Widget>("volume", 11221U, funcv1);
     mLogic->addWidget(sv);
     auto sl = std::make_shared<Widget>("loudness", 11225U, funcv2);
     mLogic->addWidget(sl);
-    auto sf = std::make_shared<Widget>("fade", 11222U, funcv1);
+    auto sf = std::make_shared<Widget>("fade", 11222U, std::bind(&ClassFunc1::func, classFunc, std::placeholders::_1));
     mLogic->addWidget(sf);
-    auto se = std::make_shared<Widget>("equalizer", 11223U, funcv1);
+    auto se = std::make_shared<Widget>("equalizer", 11223U, lambda_func1);
     mLogic->addWidget(se);
     auto sd = std::make_shared<Widget>("duck", 11224U);
     mLogic->addWidget(sd);

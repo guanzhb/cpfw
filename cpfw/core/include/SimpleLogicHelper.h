@@ -27,7 +27,7 @@
 
 namespace cpfw {
 
-using WidgetValue = Bundle;
+using WidgetValue = std::vector<int32_t>;
 using WidgetPair = std::pair<std::shared_ptr<Widget>, WidgetValue>;
 
 class SimpleLogicHelper {

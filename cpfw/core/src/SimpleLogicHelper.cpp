@@ -60,17 +60,17 @@ void SimpleLogicHelper::loadConfiguration(const std::string &configurationFile) 
     loadState(root);
 }
 
-static Bundle parseValue(std::string strs) {
+static std::vector<int32_t> parseValue(std::string strs) {
     std::string delim = ",";
-    Bundle ret;
+    std::vector<int32_t> ret;
 
     size_t pos = strs.find(delim);
     while (pos != strs.npos) {
-        ret.set("TODO", std::atoi(strs.substr(0, pos).c_str()));
+        ret.push_back(std::atoi(strs.substr(0, pos).c_str()));
         strs = strs.substr(pos+1, strs.size());
         pos = strs.find(delim);
     }
-    ret.set("TODO", std::atoi(strs.substr(0, pos).c_str()));
+    ret.push_back(static_cast<int32_t>(std::atoi(strs.substr(0, pos).c_str())));
     return ret;
 }
 

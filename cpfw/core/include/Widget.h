@@ -31,7 +31,7 @@ class DataStore;
 class IStrategyLogic;
 
 namespace {
-    using TCallback = std::function<int32_t(Bundle&)>;
+    using TCallback = std::function<int32_t(std::vector<int32_t>&)>;
 }
 
 class Widget {

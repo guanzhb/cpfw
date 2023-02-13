@@ -28,7 +28,7 @@
 
 namespace cpfw {
 
-Bundle parseProfile(const Profile &profile, uint32_t type,
+std::vector<int32_t> parseProfile(const Profile &profile, uint32_t type,
         uint32_t widgetId, std::shared_ptr<DataStore> store);
 
 uint64_t getCurrentTimeMs();
