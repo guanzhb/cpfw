@@ -52,6 +52,8 @@ class Widget {
 
     virtual std::shared_ptr<DataStore> getDataStore() const;
 
+    virtual int32_t process();
+
     virtual int32_t check();
 
     virtual int32_t action();
@@ -59,6 +61,7 @@ class Widget {
     virtual int32_t swipe();
 
     virtual int32_t reset();
+
 
     virtual const TCallback& getCallback() const;
 

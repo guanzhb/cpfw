@@ -47,33 +47,31 @@ int32_t ResponsibilityChain::invokeWidget(const uint32_t widgetId) const {
     }
 
     int32_t ret = 0;
-    if ((ret = widget->get()->check()) != 0) {
-        LOGE("check for name:%s, errno:%d", widget->get()->getName().c_str(), ret);
-        return ret;
-    }
 
-    if ((ret = widget->get()->action()) != 0) {
-        widget->get()->reset();
-        LOGE("action for name:%s, errno:%d", widget->get()->getName().c_str(), ret);
-        return ret;
-    }
-
-    widget->get()->swipe();
-
-    auto childrenChain = mStore->getChain(widgetId);
-    if (childrenChain == DataStore::EMPTY_INVOKE_CHAIN) {
-        return ret;
-    }
-
-    std::for_each(childrenChain.begin(), childrenChain.end(),
-        [&] (auto &childWidgetId) -> void {
-            ret = invokeChain(childWidgetId);
+    auto preChain = mStore->getPreChain(widgetId);
+    if (preChain != DataStore::EMPTY_INVOKE_CHAIN) {
+        for (auto preId : preChain) {
+            ret = invokeChain(preId);
             if (0 != ret) {
-                LOGE("action for id:%d, errno:%d", childWidgetId, ret);
+                LOGE("pre action for id:%d, errno:%d", preId, ret);
             }
-        });
+        }
+    }
 
-    LOGI("invokeWidget -> %s success", widget->get()->getName().c_str());
+    ret = widget->get()->process();
+
+    auto postChain = mStore->getPostChain(widgetId);
+    if (postChain != DataStore::EMPTY_INVOKE_CHAIN) {
+        for (auto postId : postChain) {
+            ret = invokeChain(postId);
+            if (0 != ret) {
+                LOGE("post action for id:%d, errno:%d", postId, ret);
+            }
+        }
+    }
+
+    LOGI("finish to invokeWidget:%s with error: %d", widget->get()->getName().c_str(), ret);
+
     return ret;
 }
 

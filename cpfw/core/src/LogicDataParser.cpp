@@ -29,6 +29,8 @@ const std::string LogicDataParser::TAG_WIDGET ="widget";
 const std::string LogicDataParser::ATTR_WIDGET ="widget";
 const std::string LogicDataParser::ATTR_NAME = "name";
 const std::string LogicDataParser::TAG_INVOKE_CHAIN = "invokeChains";
+const std::string LogicDataParser::TAG_PRE = "pre";
+const std::string LogicDataParser::TAG_POST = "post";
 const std::string LogicDataParser::TAG_INVOKE_CHAIN_PARENT = "parent";
 const std::string LogicDataParser::TAG_INVOKE_CHAIN_CHILD = "child";
 const std::string LogicDataParser::ATTR_CONDITION = "condition";
@@ -95,15 +97,26 @@ void LogicDataParser::loadInvokeChain(tinyxml2::XMLElement *root) {
     while (surfaceParent) {
         const char* parentWidgetName = surfaceParent->Attribute(ATTR_WIDGET.c_str());
         tinyxml2::XMLElement *surfaceChild
-            = surfaceParent->FirstChildElement(TAG_INVOKE_CHAIN_CHILD.c_str());
-        TINVOKE_CHAIN chains;
+            = surfaceParent->FirstChildElement(TAG_PRE.c_str());
+        surfaceChild = surfaceChild->FirstChildElement(TAG_INVOKE_CHAIN_CHILD.c_str());
+        TINVOKE_CHAIN prechain;
         while (surfaceChild) {
             const char* childWidgetName = surfaceChild->Attribute(ATTR_WIDGET.c_str());
-            chains.push_back(mDataStore->getIdWithStr(childWidgetName).value());
+            prechain.push_back(mDataStore->getIdWithStr(childWidgetName).value());
             surfaceChild = surfaceChild->NextSiblingElement();
         }
-        mDataStore->addInvokeChain(
-            mDataStore->getIdWithStr(parentWidgetName).value(), chains);
+        mDataStore->addPreChain(mDataStore->getIdWithStr(parentWidgetName).value(), prechain);
+
+        surfaceChild = surfaceParent->FirstChildElement(TAG_POST.c_str());
+        surfaceChild = surfaceChild->FirstChildElement(TAG_INVOKE_CHAIN_CHILD.c_str());
+        TINVOKE_CHAIN postchain;
+        while (surfaceChild) {
+            const char* childWidgetName = surfaceChild->Attribute(ATTR_WIDGET.c_str());
+            postchain.push_back(mDataStore->getIdWithStr(childWidgetName).value());
+            surfaceChild = surfaceChild->NextSiblingElement();
+        }
+        mDataStore->addPostChain(mDataStore->getIdWithStr(parentWidgetName).value(), postchain);
+
         surfaceParent = surfaceParent->NextSiblingElement();
     }
 }

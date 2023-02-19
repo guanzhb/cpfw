@@ -47,13 +47,24 @@ std::optional<std::shared_ptr<Widget>> DataStore::getWidget(const std::string &w
     return std::nullopt;
 }
 
-const TINVOKE_CHAIN& DataStore::getChain(uint32_t parentId) {
-    return getOrDefaultFromMap(mInvokeChainTable, parentId, EMPTY_INVOKE_CHAIN);
+const TINVOKE_CHAIN& DataStore::getPreChain(uint32_t parentId) {
+    return getOrDefaultFromMap(mPreChainTable, parentId, EMPTY_INVOKE_CHAIN);
 }
 
-const TINVOKE_CHAIN& DataStore::getChain(const std::string &parentName) {
+const TINVOKE_CHAIN& DataStore::getPreChain(const std::string &parentName) {
     if (auto id = getIdWithStr(parentName); id) {
-        return getChain(id.value());
+        return getPreChain(id.value());
+    }
+    return EMPTY_INVOKE_CHAIN;
+}
+
+const TINVOKE_CHAIN& DataStore::getPostChain(uint32_t parentId) {
+    return getOrDefaultFromMap(mPostChainTable, parentId, EMPTY_INVOKE_CHAIN);
+}
+
+const TINVOKE_CHAIN& DataStore::getPostChain(const std::string &parentName) {
+    if (auto id = getIdWithStr(parentName); id) {
+        return getPostChain(id.value());
     }
     return EMPTY_INVOKE_CHAIN;
 }
@@ -196,8 +207,12 @@ void DataStore::addWidget(std::shared_ptr<Widget> widget) {
     mWidgetTable.emplace(widget->getId(), widget);
 }
 
-void DataStore::addInvokeChain(const uint32_t parent, TINVOKE_CHAIN children) {
-    mInvokeChainTable.emplace(parent, children);
+void DataStore::addPreChain(const uint32_t parent, TINVOKE_CHAIN children) {
+    mPreChainTable.emplace(parent, children);
+}
+
+void DataStore::addPostChain(const uint32_t parent, TINVOKE_CHAIN children) {
+    mPostChainTable.emplace(parent, children);
 }
 
 void DataStore::addProfile(const uint32_t widgetId, const Profile profile) {

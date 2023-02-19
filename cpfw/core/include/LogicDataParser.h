@@ -33,6 +33,8 @@ class LogicDataParser {
     static const std::string ATTR_WIDGET;
     static const std::string ATTR_NAME;
     static const std::string TAG_INVOKE_CHAIN;
+    static const std::string TAG_PRE;
+    static const std::string TAG_POST;
     static const std::string TAG_INVOKE_CHAIN_PARENT;
     static const std::string TAG_INVOKE_CHAIN_CHILD;
     static const std::string ATTR_CONDITION;

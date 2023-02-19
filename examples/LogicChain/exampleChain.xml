@@ -37,8 +37,13 @@
 
     <invokeChains>
         <parent widget="volume">
-            <child widget="loudness"></child>
-            <child widget="duck"></child>
+            <pre>
+                <child widget="fade"></child>
+            </pre>
+            <post>
+                <child widget="loudness"></child>
+                <child widget="duck"></child>
+            </post>
         </parent>
     </invokeChains>
 

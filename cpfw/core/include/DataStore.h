@@ -60,8 +60,11 @@ class DataStore : public std::enable_shared_from_this<DataStore>{
     std::optional<std::shared_ptr<Widget>> getWidget(const uint32_t widgetId);
     std::optional<std::shared_ptr<Widget>> getWidget(const std::string &widgetName);
 
-    const TINVOKE_CHAIN& getChain(const uint32_t parentId);
-    const TINVOKE_CHAIN& getChain(const std::string &parentName);
+    const TINVOKE_CHAIN& getPreChain(const uint32_t parentId);
+    const TINVOKE_CHAIN& getPreChain(const std::string &parentName);
+
+    const TINVOKE_CHAIN& getPostChain(const uint32_t parentId);
+    const TINVOKE_CHAIN& getPostChain(const std::string &parentName);
 
     Profile& getProfile(const uint32_t widgetId);
     Profile& getProfile(const std::string &widgetName);
@@ -102,14 +105,24 @@ class DataStore : public std::enable_shared_from_this<DataStore>{
     void addWidget(std::shared_ptr<Widget> widget);
 
     /**
-     * @brief add invoke chain.
+     * @brief add pre invoke chain.
      * every parent can have multiple children.
      * such as: when set volume, we can then set effect and deal duck logic.
      *
      * @param parent parent widget id
      * @param children children widget id follow the parent
      */
-    void addInvokeChain(const uint32_t parent, const TINVOKE_CHAIN children);
+    void addPreChain(const uint32_t parent, const TINVOKE_CHAIN children);
+
+    /**
+     * @brief add post invoke chain.
+     * every parent can have multiple children.
+     * such as: when set volume, we can then set effect and deal duck logic.
+     *
+     * @param parent parent widget id
+     * @param children children widget id follow the parent
+     */
+    void addPostChain(const uint32_t parent, const TINVOKE_CHAIN children);
 
     /**
      * @brief add profile which binds to it's unique wifget
@@ -147,7 +160,9 @@ class DataStore : public std::enable_shared_from_this<DataStore>{
     // every widget binds to a unique name
     std::map<uint32_t/*widget id*/, std::shared_ptr<Widget>> mWidgetTable;
     // every invoker can invoke multiple invokers
-    std::map<uint32_t/*parent id*/, TINVOKE_CHAIN> mInvokeChainTable;
+    std::map<uint32_t/*parent id*/, TINVOKE_CHAIN> mPreChainTable;
+    // every invoker can invoke multiple invokers
+    std::map<uint32_t/*parent id*/, TINVOKE_CHAIN> mPostChainTable;
     // every widget binds to a profile, which have multi elements
     std::map<uint32_t/*widget id*/, Profile> mProfileTable;
     std::map<uint32_t/*widget id*/, uint32_t/*bind action*/> mBindTable;

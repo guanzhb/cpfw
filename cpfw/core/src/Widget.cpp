@@ -53,6 +53,24 @@ std::shared_ptr<DataStore> Widget::getDataStore() const {
     return mStore;
 }
 
+int32_t Widget::process() {
+    int32_t ret = 0;
+    if ((ret = check()) != 0) {
+        LOGE("check for name:%s, errno:%d", mName.c_str(), ret);
+        return ret;
+    }
+
+    if ((ret = action()) != 0) {
+        reset();
+        LOGE("action for name:%s, errno:%d", mName.c_str(), ret);
+        return ret;
+    }
+
+    swipe();
+
+    return ret;
+}
+
 int32_t Widget::check() {
     int32_t ret = 0;
     if (!mStore) {
