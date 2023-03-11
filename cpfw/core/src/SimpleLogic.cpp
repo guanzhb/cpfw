@@ -18,7 +18,6 @@
 #include "SimpleLogic.h"
 
 #include "Log.hpp"
-#include "Utils.h"
 
 namespace cpfw {
 

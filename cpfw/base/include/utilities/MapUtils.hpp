@@ -13,28 +13,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
-#ifndef CPFW_CORE_INCLUDE_UTILS_HPP_
-#define CPFW_CORE_INCLUDE_UTILS_HPP_
+#ifndef CPFW_BASE_INCLUDE_UTILITIES_MAP_UTILS_HPP_
+#define CPFW_BASE_INCLUDE_UTILITIES_MAP_UTILS_HPP_
 
 #include <algorithm>
-#include <any>
 #include <optional>
-#include <vector>
-
-#include "Base.h"
-#include "Bundle.hpp"
-#include "DataStore.h"
 
 namespace cpfw {
-
-std::vector<int32_t> parseProfile(const Profile &profile, uint32_t type,
-        uint32_t widgetId, std::shared_ptr<DataStore> store);
-
-uint64_t getCurrentTimeMs();
-
-void dumpBytes(const uint8_t *data, const std::size_t bytes,
-               const std::size_t dataInLine, const char *header);
 
 template<typename TTable, typename TKey>
 std::optional<typename TTable::mapped_type> getOptionalFromMap(
@@ -56,4 +41,4 @@ TValue& getOrDefaultFromMap(TTable &table, const TKey &key, TValue &value) {
 
 }  // namespace cpfw
 
-#endif  // CPFW_CORE_INCLUDE_UTILS_HPP_
+#endif  // CPFW_BASE_INCLUDE_UTILITIES_MAP_UTILS_HPP_

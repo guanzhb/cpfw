@@ -23,6 +23,7 @@
 #include "Bundle.hpp"
 #include "DataStore.h"
 #include "ExpressionPool.h"
+#include "StrategyCalculate.h"
 #include "StrategyLogic.h"
 
 namespace cpfw {
@@ -61,7 +62,6 @@ class Widget {
     virtual int32_t swipe();
 
     virtual int32_t reset();
-
 
     virtual const TCallback& getCallback() const;
 

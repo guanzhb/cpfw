@@ -25,6 +25,8 @@
 
 namespace cpfw {
 
+class DataStore;
+
 class IStrategyCalculate {
  public:
     virtual int32_t handle(const uint32_t widgetId, const int32_t origin,

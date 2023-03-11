@@ -156,7 +156,6 @@ class DataStore : public std::enable_shared_from_this<DataStore>{
     void addStrIdPair(const std::string &name, uint32_t id);
 
  private:
-
     // every widget binds to a unique name
     std::map<uint32_t/*widget id*/, std::shared_ptr<Widget>> mWidgetTable;
     // every invoker can invoke multiple invokers
@@ -179,5 +178,5 @@ class DataStore : public std::enable_shared_from_this<DataStore>{
 
 }  // namespace cpfw
 
-#endif  // CPFW_CORE_INCLUDE_DATASTORE_HPP_
+#endif  // CPFW_CORE_INCLUDE_DATASTORE_H_
 

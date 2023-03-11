@@ -13,57 +13,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+#include "DumpUtils.h"
 
-#define LOG_TAG "Utils"
-
-#include "Utils.h"
-
-#include <sys/time.h>
-
-#include <chrono>
-
-#include "Base.h"
 #include "Log.hpp"
-#include "StrategyCalculate.h"
 
 namespace cpfw {
-
-std::vector<int32_t> parseProfile(const Profile &profile, uint32_t type,
-        uint32_t widgetId, std::shared_ptr<DataStore> store) {
-    std::vector<int32_t> ret;
-    if (!store) {
-        return ret;
-    }
-    auto &elements = profile.elements;
-    uint32_t i = 0;
-    std::for_each(elements.begin(), elements.end(),
-        [&] (auto &data) -> void {
-            auto &d = data.second;
-            if (0 == (type & ElementType::PUBLIC) || (0 == (d.type & ElementType::PUBLIC))) {
-                return;
-            }
-            int32_t current = d.current;
-            if (0 != (d.type & ElementType::NEED_CONVERT)) {
-                current = store->getConvertedData(widgetId, current);
-                auto& converts = store->getConvertTable(widgetId);
-                for (auto &c : converts) {
-                    current = StrategyCalculatePool::getStrategy(c.expression)
-                                  ->handle(widgetId, current, c, store);
-                }
-            }
-            ret.push_back(current);
-            ++i;
-    });
-    return ret;
-}
-
-uint64_t getCurrentTimeMs() {
-    struct timespec stTimeSpec;
-    clock_gettime(CLOCK_MONOTONIC, &stTimeSpec);
-    using namespace std::chrono_literals;
-    return stTimeSpec.tv_sec * std::chrono::microseconds(1s).count()
-           + stTimeSpec.tv_nsec / std::chrono::nanoseconds(1s).count();
-}
 
 void dumpBytes(const uint8_t *data, const std::size_t bytes,
                const std::size_t dataInLine, const char *header) {
@@ -102,3 +56,4 @@ void dumpBytes(const uint8_t *data, const std::size_t bytes,
 }
 
 }  // namespace cpfw
+

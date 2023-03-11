@@ -20,7 +20,8 @@
 #include "Base.h"
 #include "Condition.h"
 #include "Log.hpp"
-#include "Utils.h"
+
+#include "StrategyCalculate.h"
 
 namespace cpfw {
 
@@ -95,6 +96,35 @@ int32_t Widget::check() {
         }
     }
 
+    return ret;
+}
+
+std::vector<int32_t> parseProfile(const Profile &profile, uint32_t type,
+        uint32_t widgetId, std::shared_ptr<DataStore> store) {
+    std::vector<int32_t> ret;
+    if (!store) {
+        return ret;
+    }
+    auto &elements = profile.elements;
+    uint32_t i = 0;
+    std::for_each(elements.begin(), elements.end(),
+        [&] (auto &data) -> void {
+            auto &d = data.second;
+            if (0 == (type & ElementType::PUBLIC) || (0 == (d.type & ElementType::PUBLIC))) {
+                return;
+            }
+            int32_t current = d.current;
+            if (0 != (d.type & ElementType::NEED_CONVERT)) {
+                current = store->getConvertedData(widgetId, current);
+                auto& converts = store->getConvertTable(widgetId);
+                for (auto &c : converts) {
+                    current = StrategyCalculatePool::getStrategy(c.expression)
+                                  ->handle(widgetId, current, c, store);
+                }
+            }
+            ret.push_back(current);
+            ++i;
+    });
     return ret;
 }
 

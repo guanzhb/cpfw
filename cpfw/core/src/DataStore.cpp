@@ -18,6 +18,7 @@
 #include "DataStore.h"
 
 #include "Log.hpp"
+#include "MapUtils.hpp"
 
 namespace cpfw {
 
