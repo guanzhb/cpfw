@@ -5,6 +5,7 @@ project(exampleSimpleLogic)
 set(CMAKE_CXX_STANDARD 20)
 
 include_directories("../../cpfw/base/include"
+                    "../../cpfw/base/include/utilities"
                     "../../cpfw/core/include"
                     "../../external/tinyxml2")
 

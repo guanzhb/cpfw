@@ -14,9 +14,8 @@
  * limitations under the License.
  */
 
-#ifndef CPFW_BASE_INCLUDE_BASE_H_
-#define CPFW_BASE_INCLUDE_BASE_H_
-
+#ifndef CPFW_CORE_INCLUDE_BASE_H_
+#define CPFW_CORE_INCLUDE_BASE_H_
 #include <functional>
 #include <map>
 #include <stdint.h>
@@ -64,5 +63,5 @@ const std::string KEY_VALUE = "value";
 
 }  // namespace cpfw
 
-#endif  // CPFW_BASE_INCLUDE_BASE_H_
+#endif  // CPFW_CORE_INCLUDE_BASE_H_
 

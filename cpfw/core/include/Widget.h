@@ -65,6 +65,10 @@ class Widget {
 
     virtual const TCallback& getCallback() const;
 
+ protected:
+    std::vector<int32_t> parseProfile(const Profile &profile, uint32_t type,
+           uint32_t widgetId, std::shared_ptr<DataStore> store);
+
  private:
     const std::string mName;
     const uint32_t mId;

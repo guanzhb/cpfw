@@ -99,7 +99,7 @@ int32_t Widget::check() {
     return ret;
 }
 
-std::vector<int32_t> parseProfile(const Profile &profile, uint32_t type,
+std::vector<int32_t> Widget::parseProfile(const Profile &profile, uint32_t type,
         uint32_t widgetId, std::shared_ptr<DataStore> store) {
     std::vector<int32_t> ret;
     if (!store) {

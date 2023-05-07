@@ -4,7 +4,8 @@ project(exampleStateMachine)
 
 set(CMAKE_CXX_STANDARD 20)
 
-include_directories("../../cpfw/base/include")
+include_directories("../../cpfw/base/include"
+                    "../../cpfw/base/include/utilities")
 
 FILE(GLOB BASE_SRCS "StateMachineExample.cpp")
 
